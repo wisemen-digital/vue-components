@@ -1,0 +1,62 @@
+.scale-bounce-transition {
+
+  &-enter-active,
+  &-leave-active {
+    transition:
+      cubic-bezier(.8, .16, 0, 1.3) 0.5s transform, 0.2s opacity;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    transform: scale(0);
+    opacity: 0 !important;
+  }
+}
+
+.snackbar-move,
+/* apply transition to moving elements */
+.snackbar-enter-active,
+.snackbar-leave-active {
+  transition: all 0.5s ease;
+}
+
+.snackbar-enter-from,
+.snackbar-leave-to {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.snackbar-leave-active {
+  position: absolute;
+}
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+
+.list-static-move,
+.list-static-enter-active,
+.list-static-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-static-enter-from,
+.list-static-leave-to {
+  opacity: 0;
+}
+
+.list-static-leave-active {
+  position: absolute;
+}
