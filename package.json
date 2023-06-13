@@ -2,6 +2,7 @@
   "name": "rename-me",
   "version": "0.0.0",
   "scripts": {
+    "build:components": "ts-node --esm --project ./tsconfig.scripts.json ./src/scripts/generateComponents.ts",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "ts-check": "vue-tsc --noEmit --skipLibCheck",
