@@ -6,13 +6,11 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
-import { buildParseEnv } from './src/plugins/env'
 
 export default ({ mode }): UserConfigExport => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
   return defineConfig({
     plugins: [
-      buildParseEnv(process.env),
       vue({
         script: {
           defineModel: true,
