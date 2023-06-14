@@ -86,6 +86,11 @@ export const components: Component[] = [
         folder: 'forms/errors',
       },
     ],
+    internalDependencies: [
+      ComponentName.FORM_INPUT_FIELD,
+      ComponentName.FORM_ERROR,
+      ComponentName.FORM_INPUT_GROUP_COMPOSABLE,
+    ],
   },
   {
     component: ComponentName.FORM_INPUT_GROUP_COMPOSABLE,
