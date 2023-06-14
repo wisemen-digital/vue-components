@@ -32,7 +32,7 @@ export const components = [
     name: 'Tooltip',
     files: [{
       type: 'component',
-      path: './src/modules/ui/components/app/buttons/tooltip/AppTooltip.vue',
+      path: './src/modules/ui/components/app/tooltip/AppTooltip.vue',
       folder: 'app/tooltip',
     }],
     dependencies: ['@floating-ui/dom', '@vueuse/core'],
