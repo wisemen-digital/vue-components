@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const model = ref()
-const model2 = ref()
+const model = ref<number>()
+const model2 = ref<number>()
 const model3 = ref()
 </script>
 
@@ -54,9 +54,9 @@ const model3 = ref()
     </Variant>
     <Variant title="Group">
       <FormInputGroup :total-value="500">
-        <FormInputField v-model="model" />
-        <FormInputField v-model="model2" />
-        <FormInputField v-model="model3" />
+        <FormInputField v-model="model" type="number" />
+        <FormInputField v-model="model2" type="number" />
+        <FormInputField v-model="model3" type="number" />
       </FormInputGroup>
     </Variant>
   </Story>

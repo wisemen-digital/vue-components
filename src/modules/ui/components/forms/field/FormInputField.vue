@@ -1,7 +1,6 @@
-<script setup lang="ts" generic="TModel = string | number | null">
+<script setup lang="ts" generic="TModel extends string | number | undefined">
 import { generateUuid } from '@/helpers/uuid/generateUuid'
-import type { Option } from '@/modules/ui/composables/forms/group/useFormInputGroupContext'
-import { useFormInputGroupContext } from '@/modules/ui/composables/forms/group/useFormInputGroupContext'
+import { useFormInputGroup } from '@/modules/ui/composables/forms/group/useFormInputGroup'
 
 interface Props {
   hasSuccess?: boolean
@@ -11,7 +10,7 @@ interface Props {
   isDirty?: boolean
   placeholder?: string
   unit?: string
-  type?: 'number' | 'text' | 'password' | 'email' | 'tel' | 'url' | 'number'
+  type?: TModel extends number ? 'number' : 'text' | 'password' | 'email' | 'tel' | 'url' | 'search'
   label?: string
   errors?: { _errors: string[] }
 }
@@ -22,19 +21,21 @@ const {
   isDisabled = false,
   isTouched = false,
   isDirty = false,
-  placeholder = undefined,
-  unit = undefined,
-  label = undefined,
+  placeholder,
+  unit,
+  label,
   errors = { _errors: [] },
   type = 'text',
 } = defineProps<Props>()
-
 const emits = defineEmits<{
   change: [value: TModel]
   blur: []
 }>()
 
-const modelValue = defineModel<TModel>() as Ref<TModel>
+const model = defineModel<TModel>()
+
+const uuid = generateUuid()
+const element = ref<HTMLElement>()
 
 const slots = defineSlots<{
   label?: (props: {}) => any
@@ -54,56 +55,27 @@ const borderColor = computed(() => {
   return 'border-primary-500'
 })
 
-// #region Group logic
-const element = ref<HTMLElement>()
-const uuid = generateUuid()
-
-if (typeof modelValue.value === 'number') {
-  const context = useFormInputGroupContext()
-  const propsRef = computed(() => ({
-    value: typeof modelValue.value === 'number' ? modelValue.value : 0,
-    disabled: isDisabled,
-  }))
-  const option: Option = ref({ id: uuid, element: element.value, propsRef: propsRef.value }) as Option
-
-  const change = (value: TModel): void => {
-    if (isDisabled || !context || typeof value !== 'number')
-      return
-    const newValue = context.change(option, value) as TModel
-    modelValue.value = newValue
-  }
-
-  watch(
-    () => modelValue.value, (value) => {
-      if (typeof value === 'number')
-        change(value)
-    },
-  )
-
-  onMounted(() => {
-    if (context)
-      context.registerOption(option)
-  })
-  onUnmounted(() => {
-    if (context)
-      context.unregisterOption(uuid)
-  })
-}
-// #endregion group logic
+// Adds grouping logic if a wrapped in FormGroup component
+if (type === 'number')
+  useFormInputGroup({ model: model as Ref<number>, element, uuid, isDisabled: computed(() => isDisabled) })
 </script>
 
 <template>
-  <div ref="element" class="relative">
+  <!-- eslint-disable vue/no-extra-parens -->
+  <div ref="element">
+    <!-- Label -->
     <FormLabel :for="uuid">
       <slot name="label">
         {{ label }}
       </slot>
     </FormLabel>
     <div class="flex ">
+      <!-- Content before the input -->
       <div v-if="slots['front-content']" class="flex rounded rounded-r-none border bg-gray-200 px-4" :class="borderColor">
         <slot name="front-content" />
       </div>
 
+      <!-- Input -->
       <div
         class="flex h-full rounded border"
         :class="[
@@ -115,7 +87,7 @@ if (typeof modelValue.value === 'number') {
         ]"
       >
         <input
-          :id="uuid" v-model="modelValue" :disabled="isDisabled" :type="type" min="0"
+          :id="uuid" v-model="model" :disabled="isDisabled" :type="(type as string)" min="0"
           class="relative w-full rounded px-4 py-2 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0"
           :placeholder="placeholder" :readonly="isReadOnly" @blur="emits('blur')"
         >
@@ -128,11 +100,14 @@ if (typeof modelValue.value === 'number') {
           {{ unit }}
         </div>
       </div>
+
+      <!-- Content after the input -->
       <div v-if="slots['back-content']" class="flex rounded rounded-l-none border bg-gray-200 px-4" :class="borderColor">
         <slot name="back-content" />
       </div>
     </div>
 
+    <!-- Error -->
     <TransitionExpand :duration="0.2">
       <p v-if="errorShown">
         <span class="text-sm text-danger-500">{{ errors._errors[0] }}</span>
