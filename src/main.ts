@@ -8,7 +8,7 @@ import router from './router/router'
 import i18n from './plugins/i18n'
 import App from './App.vue'
 
-import './assets/styles/tailwind.css'
+import './assets/styles/globals.css'
 import './assets/styles/transitions.scss'
 
 const pinia = createPinia()

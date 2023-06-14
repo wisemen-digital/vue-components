@@ -30,12 +30,20 @@ export const components: Component[] = [
   {
     component: ComponentName.APP_BUTTON,
     name: 'Button',
-    files: [{
-      type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButton.vue',
-      folder: 'app/buttons',
-    }],
-    dependencies: [],
+    files: [
+      {
+        type: ComponentType.COMPONENTS,
+        path: './src/modules/ui/components/app/buttons/app-button/AppButton.vue',
+        folder: 'app/buttons',
+      },
+      {
+        type: ComponentType.COMPONENTS,
+        path: './src/modules/ui/components/app/buttons/app-button/appButtonVariants.ts',
+        folder: 'app/buttons',
+      },
+
+    ],
+    dependencies: ['class-variance-authority'],
   },
   {
     component: ComponentName.APP_DROPDOWN_BUTTON,
