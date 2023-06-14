@@ -69,6 +69,7 @@ declare module 'vue' {
     FormCheckbox: typeof import('./src/modules/ui/components/forms/checkbox/FormCheckbox.vue')['default']
     'FormCheckbox.story': typeof import('./src/modules/ui/components/forms/checkbox/FormCheckbox.story.vue')['default']
     FormCheckboxGroup: typeof import('./src/modules/ui/components/forms/checkbox/FormCheckboxGroup.vue')['default']
+    FormError: typeof import('./src/modules/ui/components/forms/error/FormError.vue')['default']
     FormFileUpload: typeof import('./src/modules/ui/components/forms/file-upload/FormFileUpload.vue')['default']
     FormInputField: typeof import('./src/modules/ui/components/forms/field/FormInputField.vue')['default']
     'FormInputField.story': typeof import('./src/modules/ui/components/forms/field/FormInputField.story.vue')['default']

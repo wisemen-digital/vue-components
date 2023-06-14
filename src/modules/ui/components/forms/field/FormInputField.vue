@@ -27,8 +27,8 @@ const {
   errors = { _errors: [] },
   type = 'text',
 } = defineProps<Props>()
+
 const emits = defineEmits<{
-  change: [value: TModel]
   blur: []
 }>()
 
@@ -69,7 +69,8 @@ if (type === 'number')
         {{ label }}
       </slot>
     </FormLabel>
-    <div class="flex ">
+
+    <div class="flex">
       <!-- Content before the input -->
       <div v-if="slots['front-content']" class="flex rounded rounded-r-none border bg-gray-200 px-4" :class="borderColor">
         <slot name="front-content" />
@@ -109,9 +110,7 @@ if (type === 'number')
 
     <!-- Error -->
     <TransitionExpand :duration="0.2">
-      <p v-if="errorShown">
-        <span class="text-sm text-danger-500">{{ errors._errors[0] }}</span>
-      </p>
+      <FormError :error-message="errors._errors[0]" />
     </TransitionExpand>
   </div>
 </template>
