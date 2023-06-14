@@ -27,5 +27,14 @@ export const components = [
     ],
     dependencies: ['@headlessui-float/vue', '@headlessui/vue'],
   },
-
+    {
+    component: 'AppTooltip',
+    name: 'Tooltip',
+    files: [{
+      type: 'component',
+      path: './src/modules/ui/components/app/tooltip/AppTooltip.vue',
+      folder: 'app/tooltip',
+    }],
+    dependencies: ['@floating-ui/dom', '@vueuse/core'],
+  },
 ]
