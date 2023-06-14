@@ -82,7 +82,7 @@ export const components: Component[] = [
     files: [
       {
         type: ComponentType.COMPONENTS,
-        path: './src/modules/ui/components/forms/field/FormInputField.vue',
+        path: './src/modules/ui/components/forms/error/FormError.vue',
         folder: 'forms/errors',
       },
     ],
