@@ -1,4 +1,4 @@
-import { ComponentName, ComponentType } from '@/scripts/components'
+import { ComponentName, ComponentType } from '../../components'
 
 export const formInputField = {
   component: ComponentName.FORM_INPUT_FIELD,

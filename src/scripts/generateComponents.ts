@@ -3,8 +3,10 @@ import path, { basename, dirname } from 'node:path'
 
 import { components } from './components'
 
+console.log(components)
 const payload = components
   .map((component) => {
+    console.log(component)
     const files = component.files?.map((file) => {
       const content = fs.readFileSync(path.join(process.cwd(), file.path), 'utf8')
 

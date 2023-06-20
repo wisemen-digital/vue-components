@@ -1,20 +1,20 @@
-import { ComponentName, ComponentType } from '@/scripts/components'
+import componentInfo from '../../components'
 
 export const appButton = {
-  component: ComponentName.APP_BUTTON,
+  component: componentInfo.ComponentName.APP_BUTTON,
   name: 'Button',
   files: [
     {
-      type: ComponentType.COMPONENTS,
+      type: componentInfo.ComponentType.COMPONENTS,
       path: './src/modules/ui/components/app/buttons/app-button/AppButton.vue',
       folder: 'app/buttons',
     },
     {
-      type: ComponentType.COMPONENTS,
+      type: componentInfo.ComponentType.COMPONENTS,
       path: './src/modules/ui/components/app/buttons/app-button/appButtonVariants.ts',
       folder: 'app/buttons',
     },
   ],
-  internalDependencies: [ComponentName.TRANSITIONS],
+  internalDependencies: [componentInfo.ComponentName.TRANSITIONS],
   dependencies: ['class-variance-authority'],
 }

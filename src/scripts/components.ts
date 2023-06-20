@@ -48,3 +48,9 @@ export const components: Component[] = [
   transitionExpand,
   transitions,
 ]
+
+export default {
+  components,
+  ComponentName,
+  ComponentType,
+}
