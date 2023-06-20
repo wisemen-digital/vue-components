@@ -5,11 +5,14 @@ export enum ComponentName {
   FORM_INPUT_FIELD = 'FormInputField',
   FORM_ERROR = 'FormError',
   FORM_INPUT_GROUP_COMPOSABLE = 'FormInputGroupComposable',
+  TRANSITIONS = 'Transitions',
+  TRANSITION_EXPAND = 'TransitionExpand',
 }
 
 export enum ComponentType {
   COMPONENTS = 'components',
   COMPOSABLES = 'composables',
+  TRANSITIONS = 'transitions',
 }
 
 export interface ComponentFile {
@@ -28,6 +31,53 @@ export interface Component {
 
 export const components: Component[] = [
   {
+    component: ComponentName.TRANSITION_EXPAND,
+    name: 'TransitionExpand',
+    files: [
+      {
+        type: ComponentType.COMPONENTS,
+        path: './src/modules/ui/components/transitions/TransitionExpand.vue',
+        folder: 'transitions',
+      },
+    ],
+  },
+  {
+    component: ComponentName.TRANSITIONS,
+    name: 'Transitions',
+    files: [
+      {
+        type: ComponentType.TRANSITIONS,
+        path: './src/transitions/index.ts',
+        folder: 'transitions',
+      },
+      {
+        type: ComponentType.TRANSITIONS,
+        path: './src/transitions/fade.transition.ts',
+        folder: 'transitions',
+      },
+      {
+        type: ComponentType.TRANSITIONS,
+        path: './src/transitions/list.transition.ts',
+        folder: 'transitions',
+      },
+      {
+        type: ComponentType.TRANSITIONS,
+        path: './src/transitions/scaleBounce.transition.ts',
+        folder: 'transitions',
+      },
+      {
+        type: ComponentType.TRANSITIONS,
+        path: './src/transitions/snackbar.transition.ts',
+        folder: 'transitions',
+      },
+      {
+        type: ComponentType.TRANSITIONS,
+        path: './src/transitions/staticList.transition.ts',
+        folder: 'transitions',
+      },
+    ],
+  },
+  {
     component: ComponentName.APP_BUTTON,
     name: 'Button',
     files: [
@@ -41,8 +91,8 @@ export const components: Component[] = [
         path: './src/modules/ui/components/app/buttons/app-button/appButtonVariants.ts',
         folder: 'app/buttons',
       },
-
     ],
+    internalDependencies: [ComponentName.TRANSITIONS],
     dependencies: ['class-variance-authority'],
   },
   {
@@ -56,7 +106,7 @@ export const components: Component[] = [
       },
     ],
     dependencies: ['@headlessui-float/vue', '@headlessui/vue'],
-    internalDependencies: [ComponentName.APP_BUTTON],
+    internalDependencies: [ComponentName.APP_BUTTON, ComponentName.TRANSITIONS],
   },
   {
     component: ComponentName.APP_TOOLTIP,
@@ -66,6 +116,7 @@ export const components: Component[] = [
       path: './src/modules/ui/components/app/tooltip/AppTooltip.vue',
       folder: 'app/tooltip',
     }],
+    internalDependencies: [ComponentName.TRANSITIONS],
     dependencies: ['@floating-ui/dom', '@vueuse/core'],
   },
 
@@ -82,6 +133,7 @@ export const components: Component[] = [
     internalDependencies: [
       ComponentName.FORM_ERROR,
       ComponentName.FORM_INPUT_GROUP_COMPOSABLE,
+      ComponentName.TRANSITION_EXPAND,
     ],
   },
   {
