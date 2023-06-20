@@ -48,32 +48,32 @@ export const components: Component[] = [
       {
         type: ComponentType.TRANSITIONS,
         path: './src/transitions/index.ts',
-        folder: 'transitions',
+        folder: '',
       },
       {
         type: ComponentType.TRANSITIONS,
         path: './src/transitions/fade.transition.ts',
-        folder: 'transitions',
+        folder: '',
       },
       {
         type: ComponentType.TRANSITIONS,
         path: './src/transitions/list.transition.ts',
-        folder: 'transitions',
+        folder: '',
       },
       {
         type: ComponentType.TRANSITIONS,
         path: './src/transitions/scaleBounce.transition.ts',
-        folder: 'transitions',
+        folder: '',
       },
       {
         type: ComponentType.TRANSITIONS,
         path: './src/transitions/snackbar.transition.ts',
-        folder: 'transitions',
+        folder: '',
       },
       {
         type: ComponentType.TRANSITIONS,
         path: './src/transitions/staticList.transition.ts',
-        folder: 'transitions',
+        folder: '',
       },
     ],
   },
