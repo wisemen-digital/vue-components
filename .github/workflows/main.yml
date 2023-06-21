@@ -25,6 +25,9 @@ jobs:
 
       - name: Build project
         run: pnpm run build
+        
+      - name: Build histoire
+        run: pnpm run story:build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
