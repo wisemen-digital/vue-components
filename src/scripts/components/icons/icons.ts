@@ -5,7 +5,7 @@ export const transitions = {
   name: 'Transitions',
   files: [
     {
-      type: ComponentType.TRANSITIONS,
+      type: ComponentType.ICONS,
       path: './src/transitions/index.ts',
       folder: '',
     },

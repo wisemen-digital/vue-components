@@ -7,7 +7,7 @@
   >
     <Variant title="Default">
       <AppIconButton class="bg-danger-100 text-danger-500">
-        <CloseIcon />
+        <AppIcon icon="close" />
       </AppIconButton>
     </Variant>
   </Story>

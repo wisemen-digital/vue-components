@@ -1,4 +1,18 @@
 {
+  "ts-node": {
+    "esm": true,
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "CommonJS",
+      "esModuleInterop": true,
+      "isolatedModules": false,
+      "skipDefaultLibCheck": false,
+      "strict": false,
+      "useDefineForClassFields": false,
+      "moduleResolution": "Node",
+      "sourceMap": false,
+    }
+  },
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
@@ -6,7 +20,7 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
-    "sourceMap": true,
+    "sourceMap": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipDefaultLibCheck": true,

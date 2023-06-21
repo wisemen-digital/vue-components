@@ -1,4 +1,4 @@
-import './src/assets/styles/tailwind.css'
+import './src/assets/styles/globals.css'
 
 // Import global CSS
 import './src/assets/styles/transitions.scss' // Import global CSS

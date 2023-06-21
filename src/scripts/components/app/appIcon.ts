@@ -6,20 +6,19 @@ export const appButton = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButton.vue',
-      folder: 'app/buttons',
+      path: './src/modules/ui/components/app/icon/AppIcon.vue',
+      folder: 'app/icon',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/appButtonVariants.ts',
-      folder: 'app/buttons',
+      path: './src/modules/ui/components/app/icon/appIconVariants.ts',
+      folder: 'app/icon',
     },
     {
       type: ComponentType.COMPONENTS,
       path: './src/modules/ui/components/app/buttons/app-button/AppButtonLoader.vue',
-      folder: 'app/buttons',
+      folder: 'app/icon',
     },
   ],
-  internalDependencies: [ComponentName.TRANSITIONS, ComponentName.APP_ICON],
-  dependencies: ['class-variance-authority'],
+  internalDependencies: [ComponentName.TRANSITIONS],
 }

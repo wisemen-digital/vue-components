@@ -1,4 +1,4 @@
-import { ComponentName, ComponentType } from '../../components'
+import { ComponentName, ComponentType } from '../../componentsTypes'
 
 export const formError = {
   component: ComponentName.FORM_ERROR,

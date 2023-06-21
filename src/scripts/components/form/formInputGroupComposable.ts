@@ -1,4 +1,4 @@
-import { ComponentName, ComponentType } from '../../components'
+import { ComponentName, ComponentType } from '../../componentsTypes'
 
 export const formInputGroupComposable = {
   component: ComponentName.FORM_INPUT_GROUP_COMPOSABLE,

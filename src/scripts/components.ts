@@ -6,37 +6,7 @@ import { formInputField } from './components/form/formInputField'
 import { formInputGroupComposable } from './components/form/formInputGroupComposable'
 import { transitionExpand } from './components/transitions/transitionExpand'
 import { transitions } from './components/transitions/transtitions'
-
-export enum ComponentName {
-  APP_BUTTON = 'AppButton',
-  APP_DROPDOWN_BUTTON = 'AppDropdownButton',
-  APP_TOOLTIP = 'AppTooltip',
-  FORM_INPUT_FIELD = 'FormInputField',
-  FORM_ERROR = 'FormError',
-  FORM_INPUT_GROUP_COMPOSABLE = 'FormInputGroupComposable',
-  TRANSITIONS = 'Transitions',
-  TRANSITION_EXPAND = 'TransitionExpand',
-}
-
-export enum ComponentType {
-  COMPONENTS = 'components',
-  COMPOSABLES = 'composables',
-  TRANSITIONS = 'transitions',
-}
-
-export interface ComponentFile {
-  type: ComponentType
-  path: string
-  folder: string
-}
-
-export interface Component {
-  component: ComponentName
-  name: string
-  files: ComponentFile[]
-  dependencies?: string[]
-  internalDependencies?: ComponentName[]
-}
+import type { Component } from './componentsTypes'
 
 export const components: Component[] = [
   appButton,
@@ -48,9 +18,3 @@ export const components: Component[] = [
   transitionExpand,
   transitions,
 ]
-
-export default {
-  components,
-  ComponentName,
-  ComponentType,
-}

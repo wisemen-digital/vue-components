@@ -1,0 +1,189 @@
+[
+  {
+    "component": "AppButton",
+    "name": "Button",
+    "files": [
+      {
+        "name": "AppButton.vue",
+        "dir": "./src/modules/ui/components/app/buttons/app-button",
+        "placementDir": "app/buttons",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { buttonVariants } from './appButtonVariants'\nimport type { ButtonProps } from './appButtonVariants'\nimport type { Icon } from '@/icons'\n\ninterface Props {\n  isDisabled?: boolean\n  isLoading?: boolean\n  variant?: ButtonProps['variant']\n  size?: ButtonProps['size']\n  frontIcon?: Icon\n  backIcon?: Icon\n}\n\nconst {\n  variant = 'default',\n  size = 'default',\n  isDisabled = false,\n  isLoading = false,\n  frontIcon,\n  backIcon,\n} = defineProps<Props>()\n\nconst emits = defineEmits(['component:click'])\n\nconst handleClick = (): void => {\n  if (!isDisabled && !isLoading)\n    emits('component:click')\n}\n</script>\n\n<template>\n  <button\n    :class=\"buttonVariants({ variant, size })\" @click=\"handleClick\"\n  >\n    <div :class=\"{ 'opacity-30': isLoading }\" class=\"flex items-center gap-2 whitespace-nowrap transition-opacity\">\n      <slot name=\"front-icon\">\n        <AppIcon v-if=\"frontIcon\" :icon=\"frontIcon\" />\n      </slot>\n      <slot />\n      <slot name=\"back-icon\">\n        <AppIcon v-if=\"backIcon\" :icon=\"backIcon\" />\n      </slot>\n    </div>\n    <AppButtonLoader :variant=\"variant\" :is-loading=\"isLoading\" />\n  </button>\n</template>\n"
+      },
+      {
+        "name": "appButtonVariants.ts",
+        "dir": "./src/modules/ui/components/app/buttons/app-button",
+        "placementDir": "app/buttons",
+        "type": "components",
+        "content": "import type { VariantProps } from 'class-variance-authority'\nimport { cva } from 'class-variance-authority'\n\nexport const variantOptions = {\n  default: 'bg-primary text-primary-foreground hover:bg-primary/90',\n  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',\n  outline: 'border border-input hover:bg-accent hover:text-accent-foreground',\n  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',\n  ghost: 'hover:bg-accent hover:text-accent-foreground',\n  link: 'text-primary underline-offset-4 hover:underline',\n}\n\nexport const sizeOptions = {\n  icon: 'h-10 p-3 w-10',\n  default: 'h-10 px-4 py-2',\n  sm: 'h-9 rounded-md px-3',\n  lg: 'h-11 rounded-md px-8',\n}\n\nexport const loaderVariantOptions = {\n  white: 'bg-white',\n  primary: 'bg-primary',\n}\n\nexport const buttonLoaderVariants = cva(\n  'absolute top-[1px] h-2 w-2 rounded-full',\n  {\n    variants: {\n      variant: loaderVariantOptions,\n    },\n    defaultVariants: {\n      variant: 'primary',\n    },\n  },\n)\n\nexport const buttonVariants = cva(\n  'relative inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',\n  {\n    variants: {\n      variant: variantOptions,\n      size: sizeOptions,\n    },\n    defaultVariants: {\n      variant: 'default',\n      size: 'default',\n    },\n  },\n)\n\nexport type ButtonProps = VariantProps<typeof buttonVariants>\nexport type ButtonLoaderProps = VariantProps<typeof buttonLoaderVariants>\n\nexport const buttonVariantOptions = Object.keys(variantOptions)\nexport const buttonSizeOptions = Object.keys(sizeOptions)\nexport const buttonLoaderVariantOptions = Object.keys(loaderVariantOptions)\n"
+      },
+      {
+        "name": "AppButtonLoader.vue",
+        "dir": "./src/modules/ui/components/app/buttons/app-button",
+        "placementDir": "app/buttons",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { type ButtonLoaderProps, type ButtonProps, buttonLoaderVariants } from './appButtonVariants'\nimport { fadeTransition } from '@/transitions'\n\ninterface Props {\n  isLoading: boolean\n  variant: ButtonProps['variant']\n}\nconst {\n  isLoading,\n  variant,\n} = defineProps<Props>()\n\nconst loaderVariant = computed<ButtonLoaderProps['variant']>(() => {\n  if ((['primary', 'destructive', 'ghost', 'secondary', 'link', 'outline'] as ButtonProps['variant'][]).includes(variant))\n    return 'primary'\n  return 'white'\n})\n</script>\n\n<template>\n  <!-- eslint-disable tailwindcss/no-custom-classname -->\n\n  <Transition v-bind=\"fadeTransition\">\n    <div v-if=\"isLoading\" class=\"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2\">\n      <div class=\"relative inline-block h-2.5 w-10\">\n        <div\n          v-for=\"i in 4\" :key=\"i\" class=\"orb\" :class=\"buttonLoaderVariants({ variant: loaderVariant })\"\n        />\n      </div>\n    </div>\n  </Transition>\n</template>\n\n<style lang=\"scss\" scoped>\n.orb:nth-child(1) {\n  left: 4px;\n  animation: lds-ellipsis1 0.6s infinite;\n}\n\n.orb:nth-child(2) {\n  left: 4px;\n  animation: lds-ellipsis2 0.6s infinite;\n}\n\n.orb:nth-child(3) {\n  left: 16px;\n  animation: lds-ellipsis2 0.6s infinite;\n}\n\n.orb:nth-child(4) {\n  left: 28px;\n  animation: lds-ellipsis3 0.6s infinite;\n}\n\n@keyframes lds-ellipsis1 {\n  0% {\n    transform: scale(0);\n  }\n\n  100% {\n    transform: scale(1);\n  }\n}\n\n@keyframes lds-ellipsis3 {\n  0% {\n    transform: scale(1);\n  }\n\n  100% {\n    transform: scale(0);\n  }\n}\n\n@keyframes lds-ellipsis2 {\n  0% {\n    transform: translate(0, 0);\n  }\n\n  100% {\n    transform: translate(12px, 0);\n  }\n}\n</style>\n"
+      }
+    ],
+    "internalDependencies": [
+      "Transitions",
+      "AppIcon"
+    ],
+    "dependencies": [
+      "class-variance-authority"
+    ]
+  },
+  {
+    "component": "AppDropdownButton",
+    "name": "DropdownButton",
+    "files": [
+      {
+        "name": "AppDropdownButton.vue",
+        "dir": "./src/modules/ui/components/app/buttons/app-dropdown-button",
+        "placementDir": "app/buttons",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'\n\nimport { Float, FloatArrow } from '@headlessui-float/vue'\n\ninterface Props {\n  placement?: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'\n  transitionName?: string\n\n  hasArrow?: boolean\n  hasFlip?: boolean\n  hasShift?: boolean\n}\n\nwithDefaults(defineProps<Props>(), {\n  hasFlip: true,\n  hasShift: true,\n  placement: 'bottom-start',\n  transitionName: 'scale-bounce-transition',\n  hasArrow: false,\n})\n</script>\n\n<template>\n  <Popover>\n    <Float\n      :flip=\"hasFlip\"\n      :shift=\"hasShift\"\n      :placement=\"placement\"\n      :transition-name=\"transitionName\"\n      :arrow=\"hasArrow\"\n      :offset=\"hasArrow ? 15 : 4\"\n    >\n      <PopoverButton>\n        <slot name=\"button\" />\n      </PopoverButton>\n\n      <PopoverPanel v-slot=\"{ close }\">\n        <div v-if=\"hasArrow\" class=\"absolute -z-10 h-full w-full rounded bg-white shadow-main\" />\n\n        <FloatArrow v-if=\"hasArrow\" class=\"absolute -z-10 h-5 w-5 rotate-45 bg-white shadow-main\" />\n        <div class=\"z-50 flex flex-col gap-2 rounded bg-white p-2 shadow-main\">\n          <slot name=\"panel\" :close=\"close\" />\n        </div>\n      </PopoverPanel>\n    </Float>\n  </Popover>\n</template>\n"
+      }
+    ],
+    "dependencies": [
+      "@headlessui-float/vue",
+      "@headlessui/vue"
+    ],
+    "internalDependencies": [
+      "AppButton",
+      "Transitions"
+    ]
+  },
+  {
+    "component": "FormError",
+    "name": "FormError",
+    "files": [
+      {
+        "name": "FormError.vue",
+        "dir": "./src/modules/ui/components/forms/error",
+        "placementDir": "forms/errors",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\ninterface Props {\n  errorMessage?: string\n}\nconst { errorMessage } = defineProps<Props>()\n</script>\n\n<template>\n  <p class=\"text-danger-500 text-sm\">\n    <slot>\n      {{ errorMessage }}\n    </slot>\n  </p>\n</template>\n"
+      }
+    ]
+  },
+  {
+    "component": "FormInputField",
+    "name": "FormInputField",
+    "files": [
+      {
+        "name": "FormInputField.vue",
+        "dir": "./src/modules/ui/components/forms/field",
+        "placementDir": "forms/field",
+        "type": "components",
+        "content": "<script setup lang=\"ts\" generic=\"TModel extends string | number | undefined\">\nimport { generateUuid } from '@/helpers/uuid/generateUuid'\nimport { useFormInputGroup } from '@/modules/ui/composables/forms/group/useFormInputGroup'\n\ninterface Props {\n  hasSuccess?: boolean\n  isReadOnly?: boolean\n  isDisabled?: boolean\n  isTouched?: boolean\n  isDirty?: boolean\n  placeholder?: string\n  unit?: string\n  type?: TModel extends number ? 'number' : 'text' | 'password' | 'email' | 'tel' | 'url' | 'search'\n  label?: string\n  errors?: { _errors: string[] }\n}\n\nconst {\n  hasSuccess = false,\n  isReadOnly = false,\n  isDisabled = false,\n  isTouched = false,\n  isDirty = false,\n  placeholder,\n  unit,\n  label,\n  errors = { _errors: [] },\n  type = 'text',\n} = defineProps<Props>()\n\nconst emits = defineEmits<{\n  blur: []\n}>()\n\nconst model = defineModel<TModel>()\n\nconst uuid = generateUuid()\nconst element = ref<HTMLElement>()\n\nconst slots = defineSlots<{\n  label?: (props: {}) => any\n  'front-content'?: (props: {}) => any\n  'back-content'?: (props: {}) => any\n}>()\n\nconst errorShown = computed(() => errors._errors.length > 0 && (isTouched || isDirty))\n\nconst borderColor = computed(() => {\n  if (errorShown.value)\n    return 'border-danger-500'\n  if (hasSuccess)\n    return 'border-success-500'\n  if (isReadOnly)\n    return 'border-gray-300'\n  return 'border-primary-500'\n})\n\n// Adds grouping logic if a wrapped in FormGroup component\nif (type === 'number')\n  useFormInputGroup({ model: model as Ref<number>, element, uuid, isDisabled: computed(() => isDisabled) })\n</script>\n\n<template>\n  <!-- eslint-disable vue/no-extra-parens -->\n  <div ref=\"element\">\n    <!-- Label -->\n    <FormLabel :for=\"uuid\">\n      <slot name=\"label\">\n        {{ label }}\n      </slot>\n    </FormLabel>\n\n    <div class=\"flex\">\n      <!-- Content before the input -->\n      <div v-if=\"slots['front-content']\" class=\"flex rounded rounded-r-none border bg-gray-200 px-4\" :class=\"borderColor\">\n        <slot name=\"front-content\" />\n      </div>\n\n      <!-- Input -->\n      <div\n        class=\"flex h-full rounded border\"\n        :class=\"[\n          borderColor,\n          {\n            'rounded-l-none border-l-0': slots['front-content'],\n            'rounded-r-none border-r-0': slots['back-content'],\n          },\n        ]\"\n      >\n        <input\n          :id=\"uuid\" v-model=\"model\" :disabled=\"isDisabled\" :type=\"(type as string)\" min=\"0\"\n          class=\"relative w-full rounded px-4 py-2 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0\"\n          :placeholder=\"placeholder\" :readonly=\"isReadOnly\" @blur=\"emits('blur')\"\n        >\n\n        <div\n          v-if=\"unit\" :class=\"[borderColor, {\n            'rounded-r-none border-r-0': slots['back-content'],\n          }]\" class=\"flex min-w-max items-center rounded rounded-l-none border-l bg-white px-3 text-primary-500\"\n        >\n          {{ unit }}\n        </div>\n      </div>\n\n      <!-- Content after the input -->\n      <div v-if=\"slots['back-content']\" class=\"flex rounded rounded-l-none border bg-gray-200 px-4\" :class=\"borderColor\">\n        <slot name=\"back-content\" />\n      </div>\n    </div>\n\n    <!-- Error -->\n    <TransitionExpand :duration=\"0.2\">\n      <FormError :error-message=\"errors._errors[0]\" />\n    </TransitionExpand>\n  </div>\n</template>\n"
+      }
+    ],
+    "internalDependencies": [
+      "FormError",
+      "FormInputGroupComposable",
+      "TransitionExpand"
+    ]
+  },
+  {
+    "component": "FormInputGroupComposable",
+    "name": "FormInputGroupComposable",
+    "files": [
+      {
+        "name": "useFormInputGroup.ts",
+        "dir": "./src/modules/ui/composables/forms/group",
+        "placementDir": "forms/group",
+        "type": "composables",
+        "content": "import { useFormInputGroupContext } from '@/modules/ui/composables/forms/group/useFormInputGroupContext'\nimport type { Option } from '@/modules/ui/composables/forms/group/useFormInputGroupContext'\n\nexport interface UseFormInputGroupParams {\n  model: Ref<number | null>\n  isDisabled?: Ref<boolean>\n  uuid: string\n  element: Ref<HTMLElement | undefined>\n}\n\nexport const useFormInputGroup = ({ model, uuid, isDisabled, element }: UseFormInputGroupParams): void => {\n  const context = useFormInputGroupContext()\n  const propsRef = computed(() => ({\n    value: typeof model.value === 'number' ? model.value : 0,\n    disabled: isDisabled?.value,\n  }))\n  const option: Option = ref({ id: uuid, element: element.value, propsRef: propsRef.value }) as Option\n\n  const change = (value: number): void => {\n    if (isDisabled?.value || !context)\n      return\n\n    const newValue = context.change(option, value)\n    model.value = newValue\n  }\n\n  watch(\n    () => model.value, (value) => {\n      if (!value)\n        return\n      change(value)\n    },\n  )\n\n  onMounted(() => {\n    if (context)\n      context.registerOption(option)\n  })\n  onUnmounted(() => {\n    if (context)\n      context.unregisterOption(uuid)\n  })\n}\n"
+      },
+      {
+        "name": "useFormInputGroupContext.ts",
+        "dir": "./src/modules/ui/composables/forms/group",
+        "placementDir": "forms/group",
+        "type": "composables",
+        "content": "import { inject } from 'vue'\nimport type { ComputedRef, InjectionKey, Ref } from 'vue'\n\nexport type Option = Ref<{ id: string; element: HTMLElement | undefined; propsRef: { value: number; disabled: boolean } }>\n\nexport interface FormInputGroupStateDefinition {\n  // State\n  valueMeasurement?: ComputedRef<string>\n  percentProgress?: ComputedRef<boolean>\n  valueProgress?: ComputedRef<boolean>\n  maxLabel?: ComputedRef<boolean>\n\n  options: Ref<Option[]>\n  maxValue: ComputedRef<number | undefined>\n  valueUsed: ComputedRef<number>\n\n  disabled: Ref<boolean>\n  change(option: Option, newValue: number): number | null\n  registerOption(action: Option): void\n  unregisterOption(id: string): void\n}\n\nexport const FormInputGroupContext = Symbol('FormGroupContext') as InjectionKey<FormInputGroupStateDefinition>\n\nexport const useFormInputGroupContext = (): FormInputGroupStateDefinition | null => {\n  const context = inject(FormInputGroupContext, null)\n  return context\n}\n"
+      }
+    ]
+  },
+  {
+    "component": "AppTooltip",
+    "name": "Tooltip",
+    "files": [
+      {
+        "name": "AppTooltip.vue",
+        "dir": "./src/modules/ui/components/app/tooltip",
+        "placementDir": "app/tooltip",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport {\n  onMounted,\n  ref,\n} from 'vue'\n\nimport type { Middleware } from '@floating-ui/dom'\nimport {\n  computePosition,\n  flip,\n  offset,\n  shift,\n} from '@floating-ui/dom'\nimport { useMouseInElement, watchDebounced } from '@vueuse/core'\nimport { scaleBounceTransition } from '@/transitions'\n\ninterface SlotEvents {\n  onBlur: () => void\n  onFocus: () => void\n  onKeydown: (event: KeyboardEvent) => void\n}\n\ninterface Props {\n  offset: number\n  hasNoFlip: boolean\n  hasNoShift: boolean\n  placement: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  offset: 12,\n  hasNoFlip: false,\n  hasNoShift: false,\n  placement: 'bottom',\n})\n\ndefineSlots<{\n  element: (props: { events: SlotEvents }) => any\n  tooltip: (props: {}) => any\n}>()\n\nconst tooltipSlot = ref()\nconst element = ref<HTMLElement>()\nconst tooltip = ref<HTMLElement>()\nconst tooltipWrapper = ref<HTMLElement>()\n\nconst { isOutside: tooltipWrapperOutside } = useMouseInElement(tooltipWrapper)\nconst { isOutside: tooltipOutside } = useMouseInElement(tooltip)\n\nconst update = (): void => {\n  if (!element.value || !tooltip.value)\n    return\n\n  const middleware: Middleware[] = []\n\n  if (props.offset)\n    middleware.push(offset(props.offset))\n\n  if (!props.hasNoFlip)\n    middleware.push(flip())\n\n  if (!props.hasNoShift)\n    middleware.push(shift())\n\n  computePosition(element.value, tooltip.value, {\n    placement: props.placement,\n    middleware,\n  }).then(({ x, y }) => {\n    if (!tooltip.value)\n      return\n    Object.assign(tooltip.value.style, {\n      left: `${x}px`,\n      top: `${y}px`,\n    })\n  })\n}\nconst tooltipShow = ref(false)\nconst showTooltip = (): void => {\n  tooltipShow.value = true\n\n  nextTick(() => {\n    update()\n  })\n}\n\nconst hideTooltip = (): void => {\n  if (tooltipOutside.value && tooltipWrapperOutside.value)\n    tooltipShow.value = false\n}\n\nonMounted(() => {\n  hideTooltip();\n  ([\n    ['focus', showTooltip],\n    ['blur', hideTooltip],\n  ] as const).forEach(([event, listener]) => {\n    if (!element.value)\n      return\n    element.value.addEventListener(event, listener)\n  })\n})\n\nconst handleEscape = (event: KeyboardEvent): void => {\n  if (event.key === 'Escape')\n    hideTooltip()\n}\n\nwatchDebounced(() => [tooltipOutside.value, tooltipWrapperOutside.value], () => {\n  hideTooltip()\n}, { debounce: 200, maxWait: 1000 })\n\nwatch(() => [tooltipOutside.value, tooltipWrapperOutside.value], () => {\n  if (!tooltipOutside.value || !tooltipWrapperOutside.value)\n    showTooltip()\n})\n\nconst slotEvents = {\n  onBlur: hideTooltip,\n  onFocus: showTooltip,\n  onKeydown: handleEscape,\n}\n</script>\n\n<template>\n  <div ref=\"tooltipWrapper\" class=\"relative max-w-max\">\n    <div ref=\"element\" class=\"grid max-w-max place-items-center\">\n      <slot name=\"element\" :events=\"slotEvents\" />\n    </div>\n    <Teleport to=\"body\">\n      <Transition v-bind=\"scaleBounceTransition\">\n        <div v-if=\"tooltipShow\" id=\"tooltip\" ref=\"tooltip\" role=\"tooltip\"\n          :class=\"[tooltipSlot?.childElementCount === 0 ? 'opacity-0' : 'opacity-100']\"\n          class=\"absolute z-50 flex min-w-max rounded text-black shadow-main\">\n          <div ref=\"tooltipSlot\" class=\"flex w-full max-w-[60ch] flex-col items-center justify-center\">\n            <slot name=\"tooltip\" />\n          </div>\n        </div>\n      </Transition>\n    </Teleport>\n  </div>\n</template>\n"
+      }
+    ],
+    "internalDependencies": [
+      "Transitions"
+    ],
+    "dependencies": [
+      "@floating-ui/dom",
+      "@vueuse/core"
+    ]
+  },
+  {
+    "component": "TransitionExpand",
+    "name": "TransitionExpand",
+    "files": [
+      {
+        "name": "TransitionExpand.vue",
+        "dir": "./src/modules/ui/components/transitions",
+        "placementDir": "transitions",
+        "type": "components",
+        "content": "<script lang=\"ts\" setup>\ninterface Props {\n  duration?: number\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  duration: 0.5,\n})\n\nconst durationString = computed(() => `${props.duration}s`)\n\nconst enter = (element: Element): void => {\n  const htmlElement: HTMLElement = element as HTMLElement\n  const width = getComputedStyle(htmlElement).width\n\n  htmlElement.style.width = width\n  htmlElement.style.position = 'absolute'\n  htmlElement.style.visibility = 'hidden'\n  htmlElement.style.height = 'auto'\n\n  const height = getComputedStyle(htmlElement).height\n\n  htmlElement.style.width = ''\n  htmlElement.style.position = ''\n  htmlElement.style.visibility = ''\n  htmlElement.style.height = ''\n\n  getComputedStyle(htmlElement)\n\n  requestAnimationFrame(() => {\n    htmlElement.style.height = height\n  })\n}\n\nconst afterEnter = (element: Element): void => {\n  const htmlElement: HTMLElement = element as HTMLElement\n  htmlElement.style.height = 'auto'\n}\n\nconst leave = (element: Element): void => {\n  const htmlElement: HTMLElement = element as HTMLElement\n  const height = getComputedStyle(htmlElement).height\n\n  htmlElement.style.height = height\n  getComputedStyle(htmlElement)\n\n  requestAnimationFrame(() => {\n    htmlElement.style.height = '0'\n  })\n}\n</script>\n\n<template>\n  <transition\n    name=\"expand\"\n    @after-enter=\"afterEnter\"\n    @enter=\"enter\"\n    @leave=\"leave\"\n  >\n    <slot />\n  </transition>\n</template>\n\n<style scoped>\n.expand-enter-active,\n.expand-leave-active {\n  transition: height v-bind(durationString) cubic-bezier(0.645, 0.045, 0.355, 1), opacity v-bind(durationString);\n  overflow: hidden;\n}\n\n.expand-enter-from,\n.expand-leave-to {\n  opacity: 0;\n  height: 0;\n}\n\n* {\n  will-change: height;\n  transform: translateZ(0);\n  backface-visibility: hidden;\n}\n</style>\n"
+      }
+    ]
+  },
+  {
+    "component": "Transitions",
+    "name": "Transitions",
+    "files": [
+      {
+        "name": "index.ts",
+        "dir": "./src/transitions",
+        "placementDir": "",
+        "type": "transitions",
+        "content": "export interface TransitionClasses {\n  enterFromClass?: string\n  enterActiveClass?: string\n  enterToClass?: string\n  leaveFromClass?: string\n  leaveActiveClass?: string\n  leaveToClass?: string\n  moveClass?: string\n}\n\nexport * from './scaleBounce.transition'\nexport * from './snackbar.transition'\nexport * from './fade.transition'\nexport * from './list.transition'\nexport * from './staticList.transition'\n"
+      },
+      {
+        "name": "fade.transition.ts",
+        "dir": "./src/transitions",
+        "placementDir": "",
+        "type": "transitions",
+        "content": "import type { TransitionClasses } from '.'\n\nexport const fadeTransition: TransitionClasses = {\n  enterActiveClass: 'transition-opacity ease duration-300',\n  leaveActiveClass: 'transition-opacity ease duration-300',\n  enterFromClass: 'opacity-0',\n  leaveToClass: 'opacity-0',\n}\n\nexport const widthExpand: TransitionClasses = {\n  enterActiveClass: 'transition-all ease duration-500',\n  leaveActiveClass: 'transition-all ease duration-500',\n  enterFromClass: 'w-0 text-red-500',\n  leaveToClass: 'w-0 text-red-500',\n}\n"
+      },
+      {
+        "name": "list.transition.ts",
+        "dir": "./src/transitions",
+        "placementDir": "",
+        "type": "transitions",
+        "content": "import type { TransitionClasses } from '.'\n\nexport const listTransition: TransitionClasses = {\n  moveClass: 'transition-all ease duration-500',\n  enterActiveClass: 'transition-all ease duration-500',\n  leaveActiveClass: 'transition-all ease duration-500 absolute',\n\n  enterFromClass: 'opacity-0',\n  leaveToClass: 'opacity-0',\n}\n"
+      },
+      {
+        "name": "scaleBounce.transition.ts",
+        "dir": "./src/transitions",
+        "placementDir": "",
+        "type": "transitions",
+        "content": "import type { TransitionClasses } from '.'\n\nexport const scaleBounceTransition: TransitionClasses = {\n  enterFromClass: 'scale-0 opacity-0',\n  enterActiveClass: '[transition:cubic-bezier(.8,.16,0,1.3)_0.5s_transform,0.2s_opacity]',\n  enterToClass: '',\n  leaveFromClass: '',\n  leaveActiveClass: '[transition:cubic-bezier(.8,.16,0,1.3)_0.5s_transform,0.2s_opacity]',\n  leaveToClass: 'scale-0 opacity-0',\n}\n"
+      },
+      {
+        "name": "snackbar.transition.ts",
+        "dir": "./src/transitions",
+        "placementDir": "",
+        "type": "transitions",
+        "content": "import type { TransitionClasses } from '.'\n\nexport const snackbarTransition: TransitionClasses = {\n  moveClass: 'transition-all ease duration-500',\n  enterActiveClass: 'transition-all ease duration-500',\n  leaveActiveClass: 'transition-all ease duration-500 absolute',\n\n  enterFromClass: 'scale-0 opacity-0',\n  leaveToClass: 'scale-0 opacity-0',\n\n}\n"
+      },
+      {
+        "name": "staticList.transition.ts",
+        "dir": "./src/transitions",
+        "placementDir": "",
+        "type": "transitions",
+        "content": "import type { TransitionClasses } from '.'\n\nexport const staticList: TransitionClasses = {\n  moveClass: 'transition-all ease duration-500',\n  enterActiveClass: 'transition-all ease duration-500',\n  leaveActiveClass: 'transition-all ease duration-500 absolute',\n\n  enterFromClass: 'translate-x-8 opacity-0',\n  leaveToClass: 'translate-x-8 opacity-0',\n}\n"
+      }
+    ]
+  }
+]
