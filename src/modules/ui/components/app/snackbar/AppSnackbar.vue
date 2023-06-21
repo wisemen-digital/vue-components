@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CloseIcon from '@/components/icons/CloseIcon.vue'
+import CloseIcon from '@/icons/CloseIcon.vue'
 import type { Snackbar } from '@/modules/ui/composables/app/snackbar/useSnackbar'
 
 interface Props {

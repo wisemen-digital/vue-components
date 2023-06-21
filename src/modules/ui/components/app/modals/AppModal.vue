@@ -6,7 +6,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import CloseIcon from '@/components/icons/CloseIcon.vue'
+import CloseIcon from '@/icons/CloseIcon.vue'
 
 interface Props {
   isOpen: boolean
@@ -53,7 +53,7 @@ const emit = defineEmits<{
           >
             <DialogPanel
               :class="{
-                'relative rounded bg-white p-8 text-left shadow-main lg:px-24': !noStyling,
+                'shadow-main relative rounded bg-white p-8 text-left lg:px-24': !noStyling,
               }"
             >
               <DialogTitle
@@ -73,7 +73,7 @@ const emit = defineEmits<{
               <div class="mt-4">
                 <slot name="footer" />
               </div>
-              <AppIconButton v-if="!noStyling" class="absolute right-4 top-4 bg-danger-100 text-danger-500" @click="emit('close')">
+              <AppIconButton v-if="!noStyling" class="bg-danger-100 text-danger-500 absolute right-4 top-4" @click="emit('close')">
                 <CloseIcon />
               </AppIconButton>
             </DialogPanel>
