@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, useSlots } from 'vue'
 import { Switch } from '@headlessui/vue'
-import CheckmarkIcon from '@/components/icons/CheckmarkIcon.vue'
+import CheckmarkIcon from '@/icons/CheckmarkIcon.vue'
 import { useCheckboxContext } from '@/modules/ui/composables/forms/checkbox/useCheckboxContext'
 
 const props = withDefaults(defineProps<{
@@ -51,7 +51,7 @@ const handleClick = (): void => {
     @click="handleClick"
   >
     <div
-      class="rounded border border-primary-500 p-2 transition-colors"
+      class="border-primary-500 rounded border p-2 transition-colors"
       :class="{
         'bg-white': isSelected,
         'bg-primary-100': !isSelected,
