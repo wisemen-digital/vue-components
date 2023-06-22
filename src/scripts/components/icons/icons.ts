@@ -1,37 +1,22 @@
 import { ComponentName, ComponentType } from '../../componentsTypes'
 
 export const transitions = {
-  component: ComponentName.TRANSITIONS,
-  name: 'Transitions',
+  component: ComponentName.ICONS,
+  name: 'Icons',
   files: [
     {
       type: ComponentType.ICONS,
-      path: './src/transitions/index.ts',
+      path: './src/icons/index.ts',
       folder: '',
     },
     {
-      type: ComponentType.TRANSITIONS,
-      path: './src/transitions/fade.transition.ts',
+      type: ComponentType.ICONS,
+      path: './src/icons/icons.ts',
       folder: '',
     },
     {
-      type: ComponentType.TRANSITIONS,
-      path: './src/transitions/list.transition.ts',
-      folder: '',
-    },
-    {
-      type: ComponentType.TRANSITIONS,
-      path: './src/transitions/scaleBounce.transition.ts',
-      folder: '',
-    },
-    {
-      type: ComponentType.TRANSITIONS,
-      path: './src/transitions/snackbar.transition.ts',
-      folder: '',
-    },
-    {
-      type: ComponentType.TRANSITIONS,
-      path: './src/transitions/staticList.transition.ts',
+      type: ComponentType.ICONS,
+      path: './src/icons/AddIcon.vue',
       folder: '',
     },
   ],
