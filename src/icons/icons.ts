@@ -1,4 +1,4 @@
-import { AddIcon, ArrowDownIcon, CheckmarkIcon, ChevronDownIcon, ChevronRightIcon, CloseIcon, EditIcon } from '.'
+import { AddIcon, ArrowDownIcon, CheckmarkIcon, ChevronDownIcon, ChevronRightIcon, CloseIcon, EditIcon, EyeClosedIcon, EyeOpenIcon } from '.'
 
 export const icons = {
   add: AddIcon,
@@ -8,6 +8,8 @@ export const icons = {
   chevronRight: ChevronRightIcon,
   close: CloseIcon,
   edit: EditIcon,
+  eyeOpen: EyeOpenIcon,
+  eyeClosed: EyeClosedIcon,
 }
 
 export const iconNames = Object.keys(icons) as Icon[]

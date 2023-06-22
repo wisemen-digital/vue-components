@@ -1,28 +1,43 @@
 <script setup lang="ts" generic="TModel extends string | number | undefined">
+import { twMerge } from 'tailwind-merge'
+import { useClipboard } from '@vueuse/core'
+import type { InputFieldProps } from './formInputFieldVariants'
+import { inputFieldExtraContentVariants, inputFieldVariants } from './formInputFieldVariants'
 import { generateUuid } from '@/helpers/uuid/generateUuid'
 import { useFormInputGroup } from '@/modules/ui/composables/forms/group/useFormInputGroup'
+import type { Icon } from '@/icons'
 
 interface Props {
-  hasSuccess?: boolean
+  isSuccess?: boolean
   isReadOnly?: boolean
   isDisabled?: boolean
   isTouched?: boolean
   isDirty?: boolean
+  isCopyable?: boolean
+  isOptional?: boolean
+  hasExtraContentBorder: boolean
   placeholder?: string
-  unit?: string
   type?: TModel extends number ? 'number' : 'text' | 'password' | 'email' | 'tel' | 'url' | 'search'
   label?: string
   errors?: { _errors: string[] }
+  backContent?: string
+  frontContent?: string
+  backIcon?: Icon
+  frontIcon?: Icon
 }
 
 const {
-  hasSuccess = false,
+  isSuccess = false,
   isReadOnly = false,
   isDisabled = false,
   isTouched = false,
   isDirty = false,
+  isCopyable = false,
   placeholder,
-  unit,
+  backContent,
+  frontContent,
+  backIcon,
+  frontIcon,
   label,
   errors = { _errors: [] },
   type = 'text',
@@ -33,7 +48,6 @@ const emits = defineEmits<{
 }>()
 
 const model = defineModel<TModel>()
-
 const uuid = generateUuid()
 const element = ref<HTMLElement>()
 
@@ -45,72 +59,118 @@ const slots = defineSlots<{
 
 const errorShown = computed(() => errors._errors.length > 0 && (isTouched || isDirty))
 
-const borderColor = computed(() => {
-  if (errorShown.value)
-    return 'border-danger-500'
-  if (hasSuccess)
-    return 'border-success-500'
-  if (isReadOnly)
-    return 'border-gray-300'
-  return 'border-primary-500'
+// Extra content logic
+const hasFrontContent = computed(() => frontContent || slots['front-content'] || frontIcon)
+const hasBackContent = computed(() => backContent || slots['back-content'] || backIcon || isCopyable || type === 'password')
+const currentExtraContent = computed<InputFieldProps['extraContent']>(() => {
+  if (hasFrontContent.value && hasBackContent.value)
+    return 'both'
+  if (hasFrontContent.value)
+    return 'front'
+  if (hasBackContent.value)
+    return 'back'
+  return 'default'
 })
+
+// Input status logic
+const currentStatus = computed<InputFieldProps['status']>(() => {
+  if (errorShown.value)
+    return 'error'
+  if (isSuccess)
+    return 'success'
+  if (isReadOnly)
+    return 'readonly'
+  if (isDisabled)
+    return 'disabled'
+  return 'default'
+})
+
+// Copy logic
+const copyModel = computed(() => model.value?.toString() ?? '')
+const { copy } = useClipboard()
 
 // Adds grouping logic if a wrapped in FormGroup component
 if (type === 'number')
   useFormInputGroup({ model: model as Ref<number>, element, uuid, isDisabled: computed(() => isDisabled) })
+
+// Password logic
+const passwordShown = ref(false)
+const togglePasswordShown = (): void => {
+  passwordShown.value = !passwordShown.value
+}
+const inputType = computed<string>(() => (type === 'password' && passwordShown.value) ? 'text' : type)
 </script>
 
 <template>
-  <!-- eslint-disable vue/no-extra-parens -->
   <div ref="element">
     <!-- Label -->
-    <FormLabel :for="uuid">
-      <slot name="label">
-        {{ label }}
-      </slot>
-    </FormLabel>
+    <div class="flex items-center justify-between gap-4">
+      <FormLabel :for="uuid">
+        <slot name="label">
+          {{ label }}
+        </slot>
+      </FormLabel>
+      <p v-if="isOptional" class="text-xs text-muted-foreground">
+        Optional
+      </p>
+    </div>
 
     <div class="flex">
       <!-- Content before the input -->
-      <div v-if="slots['front-content']" class="flex rounded rounded-r-none border bg-gray-200 px-4" :class="borderColor">
-        <slot name="front-content" />
+      <div
+        v-if="hasFrontContent" :class="
+          twMerge(inputFieldExtraContentVariants(
+            {
+              extraContentType: 'front',
+              status: currentStatus,
+              extraContentBorder: hasExtraContentBorder,
+            },
+          ))"
+      >
+        <slot name="front-content">
+          <AppIcon v-if="frontIcon" :icon="frontIcon" />
+          <div v-else-if="frontContent">
+            {{ frontContent }}
+          </div>
+        </slot>
       </div>
 
       <!-- Input -->
-      <div
-        class="flex h-full rounded border"
-        :class="[
-          borderColor,
-          {
-            'rounded-l-none border-l-0': slots['front-content'],
-            'rounded-r-none border-r-0': slots['back-content'],
-          },
-        ]"
+      <input
+        :id="uuid" v-model="model" :disabled="isDisabled" :type="inputType" min="0"
+        :class="twMerge(inputFieldVariants({ status: currentStatus, extraContent: currentExtraContent }))"
+        :placeholder="placeholder" :readonly="isReadOnly" @blur="emits('blur')"
       >
-        <input
-          :id="uuid" v-model="model" :disabled="isDisabled" :type="(type as string)" min="0"
-          class="relative w-full rounded px-4 py-2 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0"
-          :placeholder="placeholder" :readonly="isReadOnly" @blur="emits('blur')"
-        >
-
-        <div
-          v-if="unit" :class="[borderColor, {
-            'rounded-r-none border-r-0': slots['back-content'],
-          }]" class="flex min-w-max items-center rounded rounded-l-none border-l bg-white px-3 text-primary-500"
-        >
-          {{ unit }}
-        </div>
-      </div>
 
       <!-- Content after the input -->
-      <div v-if="slots['back-content']" class="flex rounded rounded-l-none border bg-gray-200 px-4" :class="borderColor">
-        <slot name="back-content" />
+      <div
+        v-if="hasBackContent" :class="
+          twMerge(inputFieldExtraContentVariants(
+            {
+              extraContentType: 'back',
+              status: currentStatus,
+              extraContentBorder: hasExtraContentBorder,
+            },
+          ))"
+      >
+        <slot name="back-content">
+          <button v-if="type === 'password'" @click="togglePasswordShown">
+            <AppIcon v-if="passwordShown" icon="eyeClosed" />
+            <AppIcon v-else icon="eyeOpen" />
+          </button>
+          <button v-else-if="isCopyable" @click="copy(copyModel)">
+            Copy
+          </button>
+          <AppIcon v-else-if="backIcon" :icon="backIcon" />
+          <div v-else-if="backContent">
+            {{ backContent }}
+          </div>
+        </slot>
       </div>
     </div>
-
     <!-- Error -->
     <TransitionExpand :duration="0.2">
-      <FormError :error-message="errors._errors[0]" />
+      <FormError v-if="errorShown" :error-message="errors._errors[0]" />
     </TransitionExpand>
   </div>
 </template>

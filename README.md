@@ -3,8 +3,9 @@
 ## Finished components
 
 - [x] AppButton
-
-
+- [x] FormInputField
+- [ ] AppModal
+  
 ## Usage
 
 ### Add components to project using the following commands

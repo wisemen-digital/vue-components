@@ -40,9 +40,11 @@ const state: State = reactive({
         <HstText v-model="state.content" title="Text" />
       </template>
 
-      <AppButton v-bind="state">
-        {{ state.content }}
-      </AppButton>
+      <div class="grid h-20 w-20 place-items-center">
+        <AppButton v-bind="state">
+          {{ state.content }}
+        </AppButton>
+      </div>
     </Variant>
   </Story>
 </template>

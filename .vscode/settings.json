@@ -8,9 +8,8 @@
   ],
   "i18n-ally.keystyle": "nested",
   "tailwindCSS.experimental.classRegex": [
-    // "/\\*\\s*tw\\s*\\*/\\s*'([^']*)'",
-    // "/\\*\\s*tw\\s*\\*/\\s*\"([^\"]*)\"",
-    // "cva\\(([^)]*)\\)",
-    // "Options\\(([^)]*)\\)",
+    "cva\\(([^)]*)\\)",
+    // "Options = {([^}]*?)}",
+    // "{([^}]+?)}"
   ]
 }

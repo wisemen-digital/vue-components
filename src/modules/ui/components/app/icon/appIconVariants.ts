@@ -2,7 +2,7 @@ import type { VariantProps } from 'class-variance-authority'
 import { cva } from 'class-variance-authority'
 
 export const variantOptions = {
-  default: 'text-secondary',
+  default: 'text-current',
   destructive: 'text-secondary',
   black: 'text-black',
   white: 'text-white',

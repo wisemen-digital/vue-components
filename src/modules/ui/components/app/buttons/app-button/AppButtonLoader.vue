@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { twMerge } from 'tailwind-merge'
 import { type ButtonLoaderProps, type ButtonProps, buttonLoaderVariants } from './appButtonVariants'
 import { fadeTransition } from '@/transitions'
 
@@ -25,7 +26,7 @@ const loaderVariant = computed<ButtonLoaderProps['variant']>(() => {
     <div v-if="isLoading" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative inline-block h-2.5 w-10">
         <div
-          v-for="i in 4" :key="i" class="orb" :class="buttonLoaderVariants({ variant: loaderVariant })"
+          v-for="i in 4" :key="i" class="orb" :class="twMerge(buttonLoaderVariants({ variant: loaderVariant }))"
         />
       </div>
     </div>

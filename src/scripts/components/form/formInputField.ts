@@ -9,10 +9,18 @@ export const formInputField = {
       path: './src/modules/ui/components/forms/field/FormInputField.vue',
       folder: 'forms/field',
     },
+    {
+      type: ComponentType.COMPONENTS,
+      path: './src/modules/ui/components/forms/field/formInputFieldVariants.ts',
+      folder: 'forms/field',
+    },
   ],
   internalDependencies: [
     ComponentName.FORM_ERROR,
     ComponentName.FORM_INPUT_GROUP_COMPOSABLE,
     ComponentName.TRANSITION_EXPAND,
+  ],
+  dependencies: [
+    '@vueuse/core',
   ],
 }

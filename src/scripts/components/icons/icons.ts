@@ -19,5 +19,15 @@ export const transitions = {
       path: './src/icons/AddIcon.vue',
       folder: '',
     },
+    {
+      type: ComponentType.ICONS,
+      path: './src/icons/EyeClosedIcon.vue',
+      folder: '',
+    },
+    {
+      type: ComponentType.ICONS,
+      path: './src/icons/EyeOpenIcon.vue',
+      folder: '',
+    },
   ],
 }

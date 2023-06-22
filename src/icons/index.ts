@@ -5,6 +5,8 @@ export { default as ChevronDownIcon } from './ChevronDownIcon.vue'
 export { default as ChevronRightIcon } from './ChevronRightIcon.vue'
 export { default as CloseIcon } from './CloseIcon.vue'
 export { default as EditIcon } from './EditIcon.vue'
+export { default as EyeOpenIcon } from './EyeOpenIcon.vue'
+export { default as EyeClosedIcon } from './EyeClosedIcon.vue'
 
 export { icons, iconNames } from './icons'
 export type { Icon } from './icons'

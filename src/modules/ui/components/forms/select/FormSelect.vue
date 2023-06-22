@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T, TModel = T extends Array<any> ? T[] : T ">
 import { Float } from '@headlessui-float/vue'
-import { Combobox, ComboboxOptions } from '@headlessui/vue'
+import { Combobox, ComboboxButton, ComboboxOptions } from '@headlessui/vue'
 import type { SelectStateDefinition } from '@/modules/ui/composables/forms/select/useFormSelectContext'
 import { SelectGroupContext } from '@/modules/ui/composables/forms/select/useFormSelectContext'
 
@@ -87,10 +87,12 @@ provide(SelectGroupContext, setupApi)
     <Combobox v-model="(model as any)" :multiple="(hasMultiple as boolean)">
       <Float placement="bottom-start" adaptive-width :offset="4" flip>
         <div class="flex w-auto max-w-max text-gray-700">
-          <slot name="input" :selected-value="model" />
+          <ComboboxButton as="div">
+            <slot name="input" :selected-value="model" />
+          </ComboboxButton>
         </div>
         <ComboboxOptions>
-          <div class="min-w-min rounded border border-primary-500 bg-white">
+          <div class="border-primary-500 min-w-min rounded border bg-white">
             <div class="w-full rounded p-2">
               <TransitionExpand>
                 <div v-if="isLoading" class="flex w-full items-center justify-center">

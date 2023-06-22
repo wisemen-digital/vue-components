@@ -13,7 +13,13 @@ module.exports = {
       },
     },
     extend: {
-      colors: {
+      'box-shadow': {
+        focus: {
+          DEFAULT: '0px 0px 0px 4px #F4EBFF, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);',
+          destructive: '0px 0px 0px 4px #F4EBFF, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);',
+        },
+      },
+      'colors': {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -48,8 +54,9 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
-      borderRadius: {
-        lg: 'var(--radius)',
+      'border-radius': {
+        lg: 'calc(var(--radius) + 2px)',
+        DEFAULT: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },

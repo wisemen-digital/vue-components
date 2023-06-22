@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { twMerge } from 'tailwind-merge'
 import { buttonVariants } from './appButtonVariants'
 import type { ButtonProps } from './appButtonVariants'
 import type { Icon } from '@/icons'
@@ -31,7 +32,7 @@ const handleClick = (): void => {
 
 <template>
   <button
-    :class="buttonVariants({ variant, size })" @click="handleClick"
+    :class="twMerge(buttonVariants({ variant, size }))" @click="handleClick"
   >
     <div :class="{ 'opacity-30': isLoading }" class="flex items-center gap-2 whitespace-nowrap transition-opacity">
       <slot name="front-icon">
