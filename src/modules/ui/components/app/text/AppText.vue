@@ -1,50 +1,35 @@
 <script setup lang="ts">
+import { twMerge } from 'tailwind-merge'
+import { textVariants } from './appTextVariants'
+import type { TextProps } from './appTextVariants'
+
 interface Props {
-  variant: 'title' | 'subtitle' | 'text' | 'label' | 'link'
-  numberOfLines?: 1 | 2 | 3 | 4 | 5 | 6
+  variant: TextProps['variant']
+  boldness?: TextProps['boldness']
+  numberOfLines?: TextProps['truncate']
 }
 
-const props = defineProps<Props>()
+const {
+  variant = 'p',
+  numberOfLines,
+  boldness,
+} = defineProps<Props>()
 
 const htmlElement = computed(() => {
-  switch (props.variant) {
-    case 'title':
-      return 'h1'
-    case 'subtitle':
-      return 'h2'
-    case 'text':
+  switch (variant) {
+    case 'quote':
+    case 'large':
+    case 'small':
+    case 'subtle':
       return 'p'
-    case 'label':
-      return 'p'
-    case 'link':
-      return 'a'
+    default:
+      return variant ?? 'p'
   }
-})
-
-const textStyles = computed(() => {
-  switch (props.variant) {
-    case 'title':
-      return 'text-2xl font-bold'
-    case 'subtitle':
-      return 'text-xl font-bold'
-    case 'text':
-      return 'text-base'
-    case 'label':
-      return 'text-sm text-neutral-300'
-    case 'link':
-      return 'text-sm text-primary-500 underline'
-  }
-})
-
-const truncate = computed(() => {
-  if (props?.numberOfLines)
-    return `line-clamp-${props?.numberOfLines}`
 })
 </script>
 
 <template>
-  <!-- truncate text based on number of lines prop -->
-  <Component :is="htmlElement" :class="[textStyles, truncate]">
+  <Component :is="htmlElement" :class="twMerge(textVariants({ variant, boldness, truncate: numberOfLines }))">
     <slot />
   </Component>
 </template>

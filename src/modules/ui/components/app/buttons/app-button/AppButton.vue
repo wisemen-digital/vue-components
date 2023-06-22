@@ -7,6 +7,7 @@ import type { Icon } from '@/icons'
 interface Props {
   isDisabled?: boolean
   isLoading?: boolean
+  isRounded?: boolean
   variant?: ButtonProps['variant']
   size?: ButtonProps['size']
   frontIcon?: Icon
@@ -32,7 +33,7 @@ const handleClick = (): void => {
 
 <template>
   <button
-    :class="twMerge(buttonVariants({ variant, size }))" @click="handleClick"
+    :class="twMerge(buttonVariants({ variant, size, isRounded }))" @click="handleClick"
   >
     <div :class="{ 'opacity-30': isLoading }" class="flex items-center gap-2 whitespace-nowrap transition-opacity">
       <slot name="front-icon">

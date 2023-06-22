@@ -15,7 +15,7 @@ interface Props {
   isDirty?: boolean
   isCopyable?: boolean
   isOptional?: boolean
-  hasExtraContentBorder: boolean
+  hasExtraContentBorder?: boolean
   placeholder?: string
   type?: TModel extends number ? 'number' : 'text' | 'password' | 'email' | 'tel' | 'url' | 'search'
   label?: string

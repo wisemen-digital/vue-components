@@ -8,6 +8,6 @@ export const appTooltip = {
     path: './src/modules/ui/components/app/tooltip/AppTooltip.vue',
     folder: 'app/tooltip',
   }],
-  internalDependencies: [ComponentName.TRANSITIONS],
+  internalDependencies: [],
   dependencies: ['@floating-ui/dom', '@vueuse/core'],
 }

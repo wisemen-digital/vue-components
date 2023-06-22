@@ -20,5 +20,5 @@ export const appButton = {
       folder: 'app/icon',
     },
   ],
-  internalDependencies: [ComponentName.TRANSITIONS],
+  internalDependencies: [],
 }

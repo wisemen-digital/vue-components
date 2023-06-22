@@ -3,9 +3,13 @@ export enum ComponentName {
   APP_DROPDOWN_BUTTON = 'AppDropdownButton',
   APP_TOOLTIP = 'AppTooltip',
   APP_ICON = 'AppIcon',
+  APP_TEXT = 'AppText',
+  APP_MODAL = 'AppModal',
+
   FORM_INPUT_FIELD = 'FormInputField',
   FORM_ERROR = 'FormError',
   FORM_INPUT_GROUP_COMPOSABLE = 'FormInputGroupComposable',
+
   TRANSITIONS = 'Transitions',
   TRANSITION_EXPAND = 'TransitionExpand',
   ICONS = 'Icons',

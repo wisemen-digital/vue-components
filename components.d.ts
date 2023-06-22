@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppButton: typeof import('./src/modules/ui/components/app/buttons/app-button/AppButton.vue')['default']
     'AppButton.story': typeof import('./src/modules/ui/components/app/buttons/app-button/AppButton.story.vue')['default']
+    AppButtonGroup: typeof import('./src/modules/ui/components/app/buttons/app-button-group/AppButtonGroup.vue')['default']
     AppButtonLoader: typeof import('./src/modules/ui/components/app/buttons/app-button/AppButtonLoader.vue')['default']
     AppCollapse: typeof import('./src/modules/ui/components/app/collapse/AppCollapse.vue')['default']
     'AppCollapse.story': typeof import('./src/modules/ui/components/app/collapse/AppCollapse.story.vue')['default']
@@ -27,8 +28,8 @@ declare module 'vue' {
     'AppImage.story': typeof import('./src/modules/ui/components/app/image/AppImage.story.vue')['default']
     AppLoader: typeof import('./src/modules/ui/components/app/loaders/AppLoader.vue')['default']
     'AppLoader.story': typeof import('./src/modules/ui/components/app/loaders/AppLoader.story.vue')['default']
-    AppModal: typeof import('./src/modules/ui/components/app/modals/AppModal.vue')['default']
-    'AppModal.story': typeof import('./src/modules/ui/components/app/modals/AppModal.story.vue')['default']
+    AppModal: typeof import('./src/modules/ui/components/app/modal/AppModal.vue')['default']
+    'AppModal.story': typeof import('./src/modules/ui/components/app/modal/AppModal.story.vue')['default']
     AppPagination: typeof import('./src/modules/ui/components/app/pagination/AppPagination.vue')['default']
     'AppPagination.story': typeof import('./src/modules/ui/components/app/pagination/AppPagination.story.vue')['default']
     AppPaginationItem: typeof import('./src/modules/ui/components/app/pagination/AppPaginationItem.vue')['default']

@@ -20,6 +20,6 @@ export const appButton = {
       folder: 'app/buttons',
     },
   ],
-  internalDependencies: [ComponentName.TRANSITIONS, ComponentName.APP_ICON],
+  internalDependencies: [],
   dependencies: ['class-variance-authority'],
 }

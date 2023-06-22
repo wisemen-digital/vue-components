@@ -28,6 +28,10 @@ export const buttonVariants = cva(
     variants: {
       variant: variantOptions,
       size: sizeOptions,
+      isRounded: {
+        true: 'rounded-full',
+        false: '',
+      },
     },
     defaultVariants: {
       variant: 'default',

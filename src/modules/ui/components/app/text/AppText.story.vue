@@ -1,30 +1,39 @@
 <script setup lang="ts">
 import AppText from './AppText.vue'
+
+import type { TextProps } from './appTextVariants'
+import { textBoldnessOptions, textTruncateOptions, textVariantOptions } from './appTextVariants'
+
+interface State {
+  variant: TextProps['variant']
+  boldness: TextProps['boldness']
+  numberOfLines?: TextProps['truncate']
+  text: string
+}
+
+const state = reactive<State>({
+  variant: 'p',
+  boldness: undefined,
+  numberOfLines: undefined,
+  text: 'Text',
+})
 </script>
 
 <template>
   <Story
     title="App/Text/AppText"
   >
-    <AppText variant="title">
-      Title
-    </AppText>
-    <AppText variant="subtitle">
-      Subtitle
-    </AppText>
-    <AppText variant="text">
-      Text
-    </AppText>
-    <AppText variant="label">
-      Label
-    </AppText>
-    <AppText variant="link">
-      Link
-    </AppText>
+    <Variant title="Default" auto-props-disabled>
+      <template #controls>
+        <HstSelect v-model="state.variant" title="Variant" :options="textVariantOptions" />
+        <HstSelect v-model="state.boldness" title="Boldness" :options="['none', ...textBoldnessOptions]" />
+        <HstSelect v-model="state.numberOfLines" title="Number of lines" :options="['none', ...textTruncateOptions]" />
+        <HstTextarea v-model="state.text" title="Text" />
+      </template>
 
-    <AppText variant="text" class="w-80" :number-of-lines="2">
-      2 lines of text.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit animi, iure eos omnis aliquid incidunt optio placeat ipsam, ad praesentium assumenda, odit veritatis fugit id beatae quam dolorem consequuntur aut.
-    </AppText>
+      <AppText v-bind="state">
+        {{ state.text }}
+      </AppText>
+    </Variant>
   </Story>
 </template>

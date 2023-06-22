@@ -11,5 +11,5 @@ export const appButtonDropdown = {
     },
   ],
   dependencies: ['@headlessui-float/vue', '@headlessui/vue'],
-  internalDependencies: [ComponentName.APP_BUTTON, ComponentName.TRANSITIONS],
+  internalDependencies: [ComponentName.APP_BUTTON],
 }

@@ -1,33 +1,24 @@
+import fs from 'node:fs'
+import type { Component } from '../../componentsTypes'
 import { ComponentName, ComponentType } from '../../componentsTypes'
 
-export const transitions = {
+const generateIconsFiles = (): Component['files'] => {
+  const iconsFiles: Component['files'] = []
+
+  const files = fs.readdirSync('./src/icons')
+
+  files.forEach((file) => {
+    iconsFiles.push({
+      type: ComponentType.ICONS,
+      path: `./src/icons/${file}`,
+      folder: '',
+    })
+  })
+  return iconsFiles
+}
+
+export const icons: Component = {
   component: ComponentName.ICONS,
   name: 'Icons',
-  files: [
-    {
-      type: ComponentType.ICONS,
-      path: './src/icons/index.ts',
-      folder: '',
-    },
-    {
-      type: ComponentType.ICONS,
-      path: './src/icons/icons.ts',
-      folder: '',
-    },
-    {
-      type: ComponentType.ICONS,
-      path: './src/icons/AddIcon.vue',
-      folder: '',
-    },
-    {
-      type: ComponentType.ICONS,
-      path: './src/icons/EyeClosedIcon.vue',
-      folder: '',
-    },
-    {
-      type: ComponentType.ICONS,
-      path: './src/icons/EyeOpenIcon.vue',
-      folder: '',
-    },
-  ],
+  files: generateIconsFiles(),
 }
