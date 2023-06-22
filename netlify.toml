@@ -4,7 +4,7 @@
 
 [build]
   publish = ".histoire/dist"
-  command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run story:build"
+  command = "npx pnpm@latest i --store=node_modules/.pnpm-store && npx pnpm@latest run story:build"
 
 [[redirects]]
   from = "/*"
