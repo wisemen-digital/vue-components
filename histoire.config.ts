@@ -34,7 +34,6 @@ export default defineConfig({
     }),
 
   ],
-  outDir: 'dist/docs',
   setupFile: './histoire.setup.ts',
   theme: {
     title: 'Wisemen',
