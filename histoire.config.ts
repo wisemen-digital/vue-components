@@ -5,6 +5,19 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
 export default defineConfig({
+  tree: {
+    groups: [
+      {
+        id: 'top',
+        title: '', // No toggle
+      },
+      {
+        title: 'Components',
+        include: (file): boolean => !file.title.includes('Serialize'),
+      },
+    ],
+  },
+
   plugins: [
     HstVue(),
     Components({
