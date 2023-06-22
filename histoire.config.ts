@@ -35,6 +35,12 @@ export default defineConfig({
 
   ],
   outDir: 'dist/docs',
+  vite: {
+    build: {
+      outDir: 'dist/docs',
+      assetsDir: 'dist/docs/assets',
+    },
+  },
   setupFile: './histoire.setup.ts',
   theme: {
     title: 'Wisemen',

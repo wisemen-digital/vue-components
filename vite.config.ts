@@ -55,9 +55,5 @@ export default ({ mode }): UserConfigExport => {
         '@': path.resolve(__dirname, './src'),
       },
     },
-    build: {
-      outDir: 'dist/web',
-    },
-
   })
 }
