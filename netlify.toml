@@ -1,10 +1,9 @@
 [build.environment]
-  NPM_FLAGS = "--prefix=/dev/null"
-  NODE_VERSION = "20"
+  NODE_VERSION = "16"
 
 [build]
   publish = ".histoire/dist"
-  command = "npx pnpm@latest i --store=node_modules/.pnpm-store && npx pnpm@latest run story:build"
+  command = "pnpm run story:build"
 
 [[redirects]]
   from = "/*"
