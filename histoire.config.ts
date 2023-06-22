@@ -35,14 +35,6 @@ export default defineConfig({
 
   ],
   outDir: 'dist/docs',
-  vite: {
-    server: {
-      base: 'wisemen-components/docs/',
-    },
-    build: {
-      outDir: 'dist/docs',
-    },
-  },
   setupFile: './histoire.setup.ts',
   theme: {
     title: 'Wisemen',
