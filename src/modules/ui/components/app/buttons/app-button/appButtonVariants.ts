@@ -22,18 +22,6 @@ export const loaderVariantOptions = {
   primary: 'bg-primary',
 }
 
-export const buttonLoaderVariants = cva(
-  'shadow-focus absolute top-[1px] h-2 w-2 rounded-full',
-  {
-    variants: {
-      variant: loaderVariantOptions,
-    },
-    defaultVariants: {
-      variant: 'primary',
-    },
-  },
-)
-
 export const buttonVariants = cva(
   'relative inline-flex items-center justify-center rounded text-sm font-medium text-destructive-foreground transition-colors disabled:pointer-events-none disabled:opacity-50',
   {
@@ -49,8 +37,6 @@ export const buttonVariants = cva(
 )
 
 export type ButtonProps = VariantProps<typeof buttonVariants>
-export type ButtonLoaderProps = VariantProps<typeof buttonLoaderVariants>
 
 export const buttonVariantOptions = Object.keys(variantOptions)
 export const buttonSizeOptions = Object.keys(sizeOptions)
-export const buttonLoaderVariantOptions = Object.keys(loaderVariantOptions)

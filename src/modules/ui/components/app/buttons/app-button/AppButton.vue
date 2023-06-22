@@ -43,6 +43,6 @@ const handleClick = (): void => {
         <AppIcon v-if="backIcon" :icon="backIcon" />
       </slot>
     </div>
-    <AppButtonLoader :variant="variant" :is-loading="isLoading" />
+    <AppButtonLoader :is-loading="isLoading" />
   </button>
 </template>

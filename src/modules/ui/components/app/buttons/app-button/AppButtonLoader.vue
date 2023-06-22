@@ -1,32 +1,21 @@
 <script setup lang="ts">
-import { twMerge } from 'tailwind-merge'
-import { type ButtonLoaderProps, type ButtonProps, buttonLoaderVariants } from './appButtonVariants'
 import { fadeTransition } from '@/transitions'
 
 interface Props {
   isLoading: boolean
-  variant: ButtonProps['variant']
 }
 const {
   isLoading,
-  variant,
 } = defineProps<Props>()
-
-const loaderVariant = computed<ButtonLoaderProps['variant']>(() => {
-  if ((['primary', 'destructive', 'ghost', 'secondary', 'link', 'outline'] as ButtonProps['variant'][]).includes(variant))
-    return 'primary'
-  return 'white'
-})
 </script>
 
 <template>
   <!-- eslint-disable tailwindcss/no-custom-classname -->
-
   <Transition v-bind="fadeTransition">
     <div v-if="isLoading" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative inline-block h-2.5 w-10">
         <div
-          v-for="i in 4" :key="i" class="orb" :class="twMerge(buttonLoaderVariants({ variant: loaderVariant }))"
+          v-for="i in 4" :key="i" class="orb shadow-focus absolute top-[1px] h-2 w-2 rounded-full bg-current"
         />
       </div>
     </div>
