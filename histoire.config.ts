@@ -36,9 +36,11 @@ export default defineConfig({
   ],
   outDir: 'dist/docs',
   vite: {
+    server: {
+      base: 'wisemen-components/docs/',
+    },
     build: {
       outDir: 'dist/docs',
-      assetsDir: 'dist/docs/assets',
     },
   },
   setupFile: './histoire.setup.ts',
