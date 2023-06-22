@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: production-files
-          path: ./histoire
+          path: ./histoire/dist
 
   deploy:
     name: Deploy
@@ -46,10 +46,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: production-files
-          path: ./histoire
+          path: ./histoire/dist
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./histoire
+          publish_dir: ./histoire/dist
