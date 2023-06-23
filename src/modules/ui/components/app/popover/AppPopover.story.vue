@@ -1,18 +1,41 @@
 <script setup lang="ts">
-const list = [
-  {
-    value: '1',
-    label: 'Item 1',
-  },
-  {
-    value: '2',
-    label: 'Item 2',
-  },
-  {
-    value: '3',
-    label: 'Item 3',
-  },
+import type { Placement } from '@floating-ui/dom'
+
+const placementOptions: Placement[] = [
+  'bottom-start',
+  'bottom-end',
+
+  'top-start',
+  'top-end',
+
+  'left-start',
+  'left-end',
+
+  'right-start',
+  'right-end',
+
+  'bottom',
+  'top',
+  'left',
+  'right',
+
 ]
+
+interface State {
+  arrow: number
+  flip: number
+  shift: number
+  offset: number
+  placement: Placement
+}
+
+const state = reactive<State>({
+  arrow: 0,
+  flip: 0,
+  shift: 0,
+  offset: 4,
+  placement: 'bottom-start',
+})
 </script>
 
 <template>
@@ -20,7 +43,16 @@ const list = [
     title="App/Popover/AppPopover"
   >
     <Variant title="Default">
-      <AppPopover>
+      <template #controls>
+        <HstNumber v-model="state.arrow" title="Arrow" />
+        <HstNumber v-model="state.flip" title="Flip" />
+        <HstNumber v-model="state.shift" title="Shift" />
+        <HstNumber v-model="state.offset" title="Offset" />
+
+        <HstSelect v-model="state.placement" :options="placementOptions" title="Placement" />
+      </template>
+
+      <AppPopover v-bind="state">
         <template #element>
           <AppButton>
             Dropdown

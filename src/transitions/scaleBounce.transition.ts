@@ -2,9 +2,16 @@ import type { TransitionClasses } from '.'
 
 export const scaleBounceTransition: TransitionClasses = {
   enterFromClass: 'scale-0 opacity-0',
-  enterActiveClass: '[transition:cubic-bezier(.8,.16,0,1.3)_0.5s_transform,0.2s_opacity]',
-  enterToClass: '',
-  leaveFromClass: '',
-  leaveActiveClass: '[transition:cubic-bezier(.8,.16,0,1.3)_0.5s_transform,0.2s_opacity]',
+  enterActiveClass: 'transition-scale-bounce',
+  enterToClass: 'scale-100 opacity-100',
+  leaveFromClass: 'scale-100 opacity-100',
+  leaveActiveClass: 'transition-scale-bounce',
   leaveToClass: 'scale-0 opacity-0',
+
+  enterFrom: 'scale-0 opacity-0',
+  enter: 'transition-scale-bounce',
+  enterTo: 'scale-100 opacity-100',
+  leaveFrom: 'scale-100 opacity-100',
+  leave: 'transition-scale-bounce',
+  leaveTo: 'scale-0 opacity-0',
 }

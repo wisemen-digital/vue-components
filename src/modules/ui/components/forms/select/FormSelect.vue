@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T, TModel = T extends Array<any> ? T[] : T ">
+<script setup lang="ts" generic="T, TModel extends T | T[] ">
 import { Float } from '@headlessui-float/vue'
 import { Combobox, ComboboxButton, ComboboxOptions } from '@headlessui/vue'
 import type { SelectStateDefinition } from '@/modules/ui/composables/forms/select/useFormSelectContext'
@@ -82,9 +82,7 @@ provide(SelectGroupContext, setupApi)
 
 <template>
   <div class="w-full">
-    <!-- eslint-disable vue/valid-v-model -->
-    <!-- eslint-disable vue/no-extra-parens -->
-    <Combobox v-model="(model as any)" :multiple="(hasMultiple as boolean)">
+    <Combobox v-model="(model as any)" :multiple="hasMultiple as boolean">
       <Float placement="bottom-start" adaptive-width :offset="4" flip>
         <div class="flex w-auto max-w-max text-gray-700">
           <ComboboxButton as="div">

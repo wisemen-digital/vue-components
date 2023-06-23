@@ -17,7 +17,13 @@ export default defineConfig({
       },
     ],
   },
-
+  defaultStoryProps: {
+    layout: {
+      type: 'grid',
+      width: '100%',
+    },
+    autoPropsDisabled: true,
+  },
   plugins: [
     HstVue(),
     Components({

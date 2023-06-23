@@ -6,6 +6,15 @@ export interface TransitionClasses {
   leaveActiveClass?: string
   leaveToClass?: string
   moveClass?: string
+
+  enterFrom?: string
+  enter?: string
+  enterTo?: string
+  leaveFrom?: string
+  leave?: string
+  leaveTo?: string
+  move?: string
+
 }
 
 export * from './scaleBounce.transition'

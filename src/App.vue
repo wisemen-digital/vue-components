@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import CookiesConsent from './components/cookies/CookiesConsent.vue'
-import { hasChoosenCookies, hasCookiesOpened } from './composables/cookies/useCookiesConsent'
-import { scaleBounceTransition } from './transitions'
-
 const options1 = ['one', 'two', 'three', 'four', 'five']
 const selectedOption1 = ref<string>('one')
 const search1 = ref<string>('')
@@ -30,29 +26,11 @@ const displayFunction = (value: Option | Option[]): string => {
 </script>
 
 <template>
-  <RouterView />
-  <AppTooltip placement="left">
-    <template #element="{ events }">
-      <AppButton v-bind="events">
-        Left
-      </AppButton>
-    </template>
-    <template #tooltip>
-      <div class="rounded bg-white p-2 shadow">
-        <p class="text-sm text-gray-800">
-          Left
-        </p>
-      </div>
-    </template>
-  </AppTooltip>
-
-  <AppButton @click="hasCookiesOpened = true">
-    open cookies
-  </AppButton>
-  <Transition v-bind="scaleBounceTransition">
-    <CookiesConsent v-if="!hasChoosenCookies || hasCookiesOpened" />
-  </Transition>
-  <!-- <FormSelect v-model="selectedMultiple" :display-function="(value: Option) => value" has-multiple key-value="value"> -->
+  <FormSelect2
+    v-model="selectedMultiple"
+    :items="options2"
+    :display-function="value => value.label"
+  />
 </template>
 
 <style></style>
