@@ -84,6 +84,7 @@ declare module 'vue' {
     'FormSelect2.story': typeof import('./src/modules/ui/components/forms/select/FormSelect2.story.vue')['default']
     FormSelectInput: typeof import('./src/modules/ui/components/forms/select/FormSelectInput.vue')['default']
     FormSelectOption: typeof import('./src/modules/ui/components/forms/select/FormSelectOption.vue')['default']
+    FormSelectOption2: typeof import('./src/modules/ui/components/forms/select/FormSelectOption2.vue')['default']
     FormSlider: typeof import('./src/modules/ui/components/forms/slider/FormSlider.vue')['default']
     'FormSlider.story': typeof import('./src/modules/ui/components/forms/slider/FormSlider.story.vue')['default']
     LoginForm: typeof import('./src/modules/auth/components/LoginForm.vue')['default']
