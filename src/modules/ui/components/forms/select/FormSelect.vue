@@ -1,121 +1,155 @@
-<script setup lang="ts" generic="T, TModel extends T | T[] ">
+<script setup lang="ts" generic="T, TModel extends T[] | T | undefined">
+import { computed, ref } from 'vue'
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+} from '@headlessui/vue'
 import { Float } from '@headlessui-float/vue'
-import { Combobox, ComboboxButton, ComboboxOptions } from '@headlessui/vue'
-import type { SelectStateDefinition } from '@/modules/ui/composables/forms/select/useFormSelectContext'
-import { SelectGroupContext } from '@/modules/ui/composables/forms/select/useFormSelectContext'
+import { scaleBounceTransition } from '@/transitions'
 
 interface Props {
-  modelValue: TModel
-  hasMultiple?: TModel extends Array<any> ? true : false
   hasSearch?: boolean
-  hasPills?: boolean
   isDisabled?: boolean
-  isSearching?: boolean
-  isEmpty?: boolean
   isLoading?: boolean
-  displayFunction?: (value: T | T[]) => string
+  displayFunction?: (value: T) => string
   keyValue?: keyof T
   items: T[]
 }
 
 const {
-  modelValue,
   items,
-  hasMultiple = false,
   hasSearch = false,
-  hasPills = false,
   isDisabled = false,
-  isSearching = false,
-  isEmpty = false,
   isLoading = false,
   keyValue,
-  displayFunction = (value: T | T[]): string => {
-    if (Array.isArray(value))
-      return value.map(value => String(value)).join(', ')
+  displayFunction = (value: T): string => {
     return String(value)
   },
 } = defineProps<Props>()
 
-const emit = defineEmits<{
-  'update:modelValue': [value: TModel]
-}>()
+const { t } = useI18n()
+const model = defineModel<TModel>('modelValue', { required: true })
+const isMultiple = computed<boolean>(() => Array.isArray(model.value))
+const search = ref<string>('')
 
-// const model = defineModel<TModel>('modelValue', { required: true })
-const model = computed({
-  get: () => modelValue,
-  set: (value: TModel) => {
-    emit('update:modelValue', value)
-  },
+const getKeyValue = (value: T): string => {
+  if (keyValue)
+    return String(value[keyValue])
+  else
+    return String(value)
+}
+
+const hasValue = computed<boolean>(() => {
+  if (Array.isArray(model.value))
+    return model.value.length > 0
+  else
+    return model.value !== null && model.value !== undefined && model.value !== ''
 })
 
-const { t } = useI18n()
-
-const compareFunction = (a: T, b: T): boolean => {
-  if (keyValue)
-    return a[keyValue] === b[keyValue]
+const getDisplayValue = (value: T | T[] | undefined): string => {
+  if (value === undefined)
+    return ''
   else
-    return a === b
+  if (Array.isArray(value))
+    return value.map(value => displayFunction(value)).join(', ')
+  else
+    return displayFunction(value)
 }
 
-const removeValue = (value: T): void => {
-  if (hasMultiple && Array.isArray(model.value))
-    model.value = model.value.filter((singleValue: T) => !compareFunction(singleValue, value)) as TModel
+const filteredItems = computed(() => {
+  return items.filter((item) => {
+    return getDisplayValue(item)?.toLowerCase().includes(search.value.toLowerCase())
+  })
+})
+
+const handleSearchChange = (event: Event): void => {
+  search.value = (event.target as HTMLInputElement).value
 }
 
-const setupApi: SelectStateDefinition<T> = {
-  selectedValue: model as Ref<T | T[]>,
-  keyValue: computed(() => keyValue),
-  displayFunction: computed(() => displayFunction),
-
-  isDisabled: computed(() => isDisabled),
-  isSearching: computed(() => isSearching),
-  isEmpty: computed(() => isEmpty),
-  isLoading: computed(() => isLoading),
-
-  hasSearch: computed(() => hasSearch),
-  hasMultiple: computed(() => hasMultiple as boolean),
-  searchValue: ref(''),
-}
-
-provide(SelectGroupContext, setupApi)
+const isEmpty = computed<boolean>(() => {
+  return filteredItems.value.length === 0
+})
 </script>
 
 <template>
-  <div class="w-full">
-    <Combobox v-model="(model as any)" :multiple="hasMultiple as boolean">
-      <Float placement="bottom-start" adaptive-width :offset="4" flip>
-        <div class="flex w-auto max-w-max text-gray-700">
-          <ComboboxButton as="div">
-            <slot name="input" :selected-value="model" />
+  <!-- eslint-disable vue/no-extra-parens -->
+  <!-- eslint-disable vue/valid-v-model -->
+
+  <div class="text-left">
+    <Combobox
+      v-model="(model as any)"
+      :multiple="isMultiple"
+    >
+      <Float placement="bottom-start" adaptive-width :offset="4" flip v-bind="scaleBounceTransition">
+        <slot
+          name="input"
+          :display-function="getDisplayValue"
+          :placeholder="hasValue ? getDisplayValue(model) : 'select'"
+          :value="model"
+        >
+          <ComboboxButton v-if="hasSearch" key="input" as="template" :disabled="isDisabled">
+            <ComboboxInput
+              class="relative w-full rounded border border-border bg-input px-4 py-2 text-left placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0"
+              :display-value="(item) => getDisplayValue(item as any)"
+              :placeholder="hasValue ? getDisplayValue(model) : t('labels.select') "
+              :disabled="isDisabled"
+              @change="handleSearchChange"
+            />
           </ComboboxButton>
-        </div>
-        <ComboboxOptions>
-          <div class="border-primary-500 min-w-min rounded border bg-white">
-            <div class="w-full rounded p-2">
-              <TransitionExpand>
-                <div v-if="isLoading" class="flex w-full items-center justify-center">
-                  <AppLoader class="h-16 w-16" />
-                </div>
-                <div v-else-if="isEmpty" class="w-full whitespace-nowrap">
-                  {{ t('labels.no_results') }}
-                </div>
-                <div v-else class="flex w-full flex-col gap-1">
-                  <template v-for="item in items" :key="keyValue ? item[keyValue] : item">
-                    <slot name="item" :item="item" />
-                  </template>
-                </div>
-              </TransitionExpand>
-            </div>
-          </div>
+          <ComboboxButton
+            v-else
+            key="button"
+            :disabled="isDisabled"
+            class="relative w-full overflow-hidden truncate whitespace-nowrap rounded border border-border bg-input px-4 py-2 text-left placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0"
+          >
+            {{ hasValue ? getDisplayValue(model) : t('labels.select') }}
+          </ComboboxButton>
+        </slot>
+
+        <ComboboxOptions class="rounded bg-card p-2">
+          <slot :items="items" :is-empty="isEmpty">
+            <TransitionExpand>
+              <div v-if="isLoading">
+                {{ t('labels.loading') }}
+              </div>
+              <div v-else-if="isEmpty">
+                {{ t('labels.no_results') }}
+              </div>
+
+              <div v-else>
+                <ComboboxOption
+                  v-for="item in filteredItems"
+                  v-slot="{ active, selected, disabled }"
+                  :key="getKeyValue(item)"
+                  :value="(item as any)"
+                >
+                  <slot
+                    name="item"
+                    :item="item"
+                    :display-function="getDisplayValue"
+                    :active="active"
+                    :selected="selected"
+                    :disabled="disabled"
+                  >
+                    <FormSelectOption
+                      v-bind="{
+                        value: item,
+                        isActive: active,
+                        isSelected: selected,
+                        isDisabled: disabled,
+                        displayFunction: getDisplayValue,
+                      }"
+                    />
+                  </slot>
+                </ComboboxOption>
+              </div>
+            </TransitionExpand>
+          </slot>
         </ComboboxOptions>
       </Float>
     </Combobox>
-    <div v-if="hasMultiple && hasPills && Array.isArray(model)" class="mt-1 flex flex-wrap gap-1">
-      <div v-for="singleValue in model" :key="keyValue ? (singleValue as any)[keyValue] : singleValue">
-        <AppPill :key="singleValue" is-active class="max-w-max" has-close @component:remove="removeValue(singleValue)">
-          {{ displayFunction(singleValue) }}
-        </AppPill>
-      </div>
-    </div>
   </div>
 </template>

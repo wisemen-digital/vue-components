@@ -1,93 +1,47 @@
 <script setup lang="ts">
-const options1 = ['one', 'two', 'three', 'four', 'five']
-const selectedOption1 = ref<string>('one')
-interface Option {
-  label: string
-  value: string
-}
-
-const selectedMultiple = ref<string[]>([])
-
-const options2: Option[] = [
-  { label: 'one', value: 'one123' },
-  { label: 'two', value: 'two12312312' },
-  { label: 'three', value: 'thre3123e' },
-  { label: 'four', value: 'four3123' },
-  { label: 'five', value: 'f123123ve' },
+const people = [
+  'Durward Reynolds',
+  'Kenton Towne',
+  'Therese Wunsch',
+  'Benedict Kessler',
+  'Katelyn Rohan',
 ]
 
-const displayFunction = (value: Option | Option[]): string => {
-  if (Array.isArray(value))
-    return value.map(value => value.label).join(', ')
+const selectedPerson = ref<string>()
+const selectedPeople = ref<string[]>([])
 
-  return value.label
+interface State {
+  hasSearch?: boolean
+  isDisabled?: boolean
+  isLoading?: boolean
+}
+
+const state: State = {
+  hasSearch: true,
+  isDisabled: false,
+  isLoading: false,
 }
 </script>
 
 <template>
   <Story title="Forms/Input/Select">
     <Variant title="Default">
-      <FormSelect v-model="selectedOption1" :items="options1">
-        <template #input="{ selectedValue }">
-          <FormSelectInput placeholder="Select" :selected-value="selectedValue" />
-        </template>
-        <template #item="{ item }">
-          <FormSelectOption :key="item" :value="item" />
-        </template>
-      </FormSelect>
-    </Variant>
-    <Variant title="Loading">
-      <FormSelect v-model="selectedOption1" is-loading :items="options1">
-        <template #input="{ selectedValue }">
-          <FormSelectInput placeholder="Select" :selected-value="selectedValue" />
-        </template>
-        <template #item="{ item }">
-          <FormSelectOption :key="item" :value="item" />
-        </template>
-      </FormSelect>
-    </Variant>
-    <Variant title="Empty">
-      <FormSelect v-model="selectedOption1" is-empty :items="options1">
-        <template #input="{ selectedValue }">
-          <FormSelectInput placeholder="Select" :selected-value="selectedValue" />
-        </template>
-        <template #item="{ item }">
-          <FormSelectOption :key="item" :value="item" />
-        </template>
-      </FormSelect>
-    </Variant>
-    <Variant title="Multiple">
-      <FormSelect v-model="selectedMultiple" has-multiple :items="options1">
-        <template #input="{ selectedValue }">
-          <FormSelectInput placeholder="Select" :selected-value="selectedValue" />
-        </template>
-        <template #item="{ item }">
-          <FormSelectOption :key="item" :value="item" />
-        </template>
-      </FormSelect>
-    </Variant>
-    <Variant title="Search">
-      <FormSelect v-model="selectedMultiple" has-search :items="options1">
-        <template #input="{ selectedValue }">
-          <FormSelectInput placeholder="Select" :selected-value="selectedValue" />
-        </template>
-        <template #item="{ item }">
-          <FormSelectOption :key="item" :value="item" />
-        </template>
-      </FormSelect>
-    </Variant>
-    <Variant title="Search with objects">
-      <FormSelect
-        v-model="selectedMultiple" has-search :has-multiple="true" :display-function="displayFunction"
-        key-value="value" :items="options2"
-      >
-        <template #input="{ selectedValue }">
-          <FormSelectInput placeholder="Select" :selected-value="selectedValue" />
-        </template>
-        <template #item="{ item }">
-          <FormSelectOption :key="item.value" :value="item" />
-        </template>
-      </FormSelect>
+      <template #controls>
+        <HstCheckbox v-model="state.hasSearch" title="Search" />
+        <HstCheckbox v-model="state.isDisabled" title="Disabled" />
+        <HstCheckbox v-model="state.isLoading" title="Loading" />
+      </template>
+
+      <div class="flex flex-col justify-start gap-20 py-20">
+        <!-- <FormSelect2 v-model="selectedPerson" :items="people" class="w-80" v-bind="state" /> -->
+        <FormSelect
+          v-bind="state"
+          v-model="selectedPeople"
+          class="w-80"
+          :items="people"
+          :display-function="value => value"
+        />
+      </div>
     </Variant>
   </Story>
 </template>

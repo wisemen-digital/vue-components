@@ -2,10 +2,18 @@ import type { VariantProps } from 'class-variance-authority'
 import { cva } from 'class-variance-authority'
 
 export const variantOptions = {
-  default: 'bg-background text-foreground hover:bg-primary/90',
+  default: 'bg-background text-foreground',
   disabled: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-focus-destructive',
-  active: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-  selected: 'text-primary underline-offset-4 underline hover:bg-secondary/80',
+}
+
+export const active = {
+  true: 'bg-secondary text-secondary-foreground bg-secondary/80',
+  false: '',
+}
+
+export const selected = {
+  true: 'text-primary underline-offset-4 underline hover:bg-secondary/80',
+  false: '',
 }
 
 export const formSelectOptionVariants = cva(
@@ -13,9 +21,14 @@ export const formSelectOptionVariants = cva(
   {
     variants: {
       variant: variantOptions,
+      active,
+      selected,
+
     },
     defaultVariants: {
       variant: 'default',
+      active: undefined,
+      selected: undefined,
     },
   },
 )
