@@ -6,8 +6,8 @@ export const formError = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/forms/error/FormError.vue',
-      folder: 'forms/errors',
+      path: './src/components/form/error/FormError.vue',
+      folder: 'form/errors',
     },
   ],
 }

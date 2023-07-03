@@ -6,7 +6,7 @@ export const transitionExpand = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/transitions/TransitionExpand.vue',
+      path: './src/components/app/transitions/TransitionExpand.vue',
       folder: 'transitions',
     },
   ],

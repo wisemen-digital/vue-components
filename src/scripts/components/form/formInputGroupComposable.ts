@@ -6,13 +6,13 @@ export const formInputGroupComposable = {
   files: [
     {
       type: ComponentType.COMPOSABLES,
-      path: './src/modules/ui/composables/forms/group/useFormInputGroup.ts',
-      folder: 'forms/group',
+      path: './src/composables/form/group/useFormInputGroup.ts',
+      folder: 'form/group',
     },
     {
       type: ComponentType.COMPOSABLES,
-      path: './src/modules/ui/composables/forms/group/useFormInputGroupContext.ts',
-      folder: 'forms/group',
+      path: './src/composables/form/group/useFormInputGroupContext.ts',
+      folder: 'form/group',
     },
   ],
 }

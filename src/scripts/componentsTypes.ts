@@ -13,6 +13,7 @@ export enum ComponentName {
   TRANSITIONS = 'Transitions',
   TRANSITION_EXPAND = 'TransitionExpand',
   ICONS = 'Icons',
+  UTILS_GENERATE_UUID = 'UtilsGenerateUuid',
 }
 
 export enum ComponentType {
@@ -20,6 +21,7 @@ export enum ComponentType {
   COMPOSABLES = 'composables',
   TRANSITIONS = 'transitions',
   ICONS = 'icons',
+  UTILS = 'utils',
 }
 
 export interface ComponentFile {

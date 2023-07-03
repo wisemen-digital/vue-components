@@ -6,18 +6,18 @@ export const appButton = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButton.vue',
-      folder: 'app/buttons',
+      path: './src/components/app/button/AppButton.vue',
+      folder: 'app/button',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/appButtonVariants.ts',
-      folder: 'app/buttons',
+      path: './src/components/app/button/appButtonVariants.ts',
+      folder: 'app/button',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButtonLoader.vue',
-      folder: 'app/buttons',
+      path: './src/components/app/button/AppButtonLoader.vue',
+      folder: 'app/button',
     },
   ],
   internalDependencies: [],

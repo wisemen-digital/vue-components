@@ -39,7 +39,6 @@
     "vue": "^3.3.4",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.2",
-    "vue3-google-login": "^2.0.15",
     "zod": "^3.21.4"
   },
   "devDependencies": {

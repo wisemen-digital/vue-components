@@ -24,7 +24,6 @@ export default ({ mode }): UserConfigExport => {
         dts: true,
         deep: true,
         dirs: ['./src/components', './src/modules'],
-
       }),
       AutoImport({
         dts: true,

@@ -6,12 +6,12 @@ export const appModal = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/modal/AppModal.vue',
+      path: './src/components/app/modal/AppModal.vue',
       folder: 'app/modal',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/modal/appModalVariants.ts',
+      path: './src/components/app/modal/appModalVariants.ts',
       folder: 'app/modal',
     },
   ],

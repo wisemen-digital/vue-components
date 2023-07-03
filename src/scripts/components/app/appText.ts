@@ -6,12 +6,12 @@ export const appText = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/text/AppText.vue',
+      path: './src/components/app/text/AppText.vue',
       folder: 'app/text',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/text/appTextVariants.ts',
+      path: './src/components/app/text/appTextVariants.ts',
       folder: 'app/text',
     },
   ],

@@ -6,13 +6,13 @@ export const formInputField = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/forms/field/FormInputField.vue',
-      folder: 'forms/field',
+      path: './src/components/form/field/FormInputField.vue',
+      folder: 'form/field',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/forms/field/formInputFieldVariants.ts',
-      folder: 'forms/field',
+      path: './src/components/form/field/formInputFieldVariants.ts',
+      folder: 'form/field',
     },
   ],
   internalDependencies: [
