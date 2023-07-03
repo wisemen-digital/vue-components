@@ -28,9 +28,9 @@ https://github.com/Robbe95/wisemen-components/
 
 ### Add components to project using the following commands
 ```
-npx wisemen-frontend-cli init
-npx wisemen-frontend-cli add
-npx wisemen-frontend-cli add all
+npx wisemen-ui init
+npx wisemen-ui add
+npx wisemen-ui add all
 ```
 
 Init installs global dependencies and components such as your tailwind config, transitions and icons.\
@@ -39,8 +39,8 @@ Use add all to install all possible components.
 
 ### Check changes against the repository
 ```
-npx wisemen-frontend-cli changes
-npx wisemen-frontend-cli diff
+npx wisemen-ui changes
+npx wisemen-ui diff
 ```
 
 ## Adding components
