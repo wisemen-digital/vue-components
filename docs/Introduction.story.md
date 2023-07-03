@@ -37,11 +37,18 @@ Init installs global dependencies and components such as your tailwind config, t
 With the add command you can install specific components, which will install all their relevant dependencies.\
 Use add all to install all possible components.
 
+### Check changes against the repository
+```
+npx wisemen-frontend-cli changes
+npx wisemen-frontend-cli diff
+```
+
 ## Adding components
 
 ### Making component
 
-Inside the ```modules/ui``` folder, add your relevant components / composables / other dependencies.
+Inside the ```root``` folder, add your relevant components / composables / other dependencies.
+Important! All imports should use the ```@``` alias, since that is used to replace the import names.
 
 ### Registering components
 
@@ -76,17 +83,17 @@ export const appButton = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButton.vue',
+      path: './src/components/app/buttons/app-button/AppButton.vue',
       folder: 'app/buttons',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/appButtonVariants.ts',
+      path: './src/components/app/buttons/app-button/appButtonVariants.ts',
       folder: 'app/buttons',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButtonLoader.vue',
+      path: './src/components/app/buttons/app-button/AppButtonLoader.vue',
       folder: 'app/buttons',
     },
   ],
