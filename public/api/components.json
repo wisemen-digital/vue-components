@@ -65,7 +65,8 @@
     "internalDependencies": [
       "FormError",
       "FormInputGroupComposable",
-      "TransitionExpand"
+      "TransitionExpand",
+      "UtilsGenerateUuid"
     ],
     "dependencies": [
       "@vueuse/core"
@@ -88,6 +89,19 @@
         "placementDir": "form/group",
         "type": "composables",
         "content": "import { inject } from 'vue'\nimport type { ComputedRef, InjectionKey, Ref } from 'vue'\n\nexport type Option = Ref<{ id: string; element: HTMLElement | undefined; propsRef: { value: number; disabled: boolean } }>\n\nexport interface FormInputGroupStateDefinition {\n  // State\n  valueMeasurement?: ComputedRef<string>\n  percentProgress?: ComputedRef<boolean>\n  valueProgress?: ComputedRef<boolean>\n  maxLabel?: ComputedRef<boolean>\n\n  options: Ref<Option[]>\n  maxValue: ComputedRef<number | undefined>\n  valueUsed: ComputedRef<number>\n\n  disabled: Ref<boolean>\n  change(option: Option, newValue: number): number | null\n  registerOption(action: Option): void\n  unregisterOption(id: string): void\n}\n\nexport const FormInputGroupContext = Symbol('FormGroupContext') as InjectionKey<FormInputGroupStateDefinition>\n\nexport const useFormInputGroupContext = (): FormInputGroupStateDefinition | null => {\n  const context = inject(FormInputGroupContext, null)\n  return context\n}\n"
+      }
+    ]
+  },
+  {
+    "component": "UtilsGenerateUuid",
+    "name": "GenerateUuid",
+    "files": [
+      {
+        "name": "generateUuid.ts",
+        "dir": "./src/utils/uuid",
+        "placementDir": "uuid",
+        "type": "utils",
+        "content": "export function generateUuid(): string { // Public Domain/MIT\n  let d = new Date().getTime()// Timestamp\n  let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0// Time in microseconds since page-load or 0 if unsupported\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {\n    let r = Math.random() * 16// random number between 0 and 16\n    if (d > 0) { // Use timestamp until depleted\n      r = (d + r) % 16 | 0\n      d = Math.floor(d / 16)\n    }\n    else { // Use microseconds since page-load if supported\n      r = (d2 + r) % 16 | 0\n      d2 = Math.floor(d2 / 16)\n    }\n    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16)\n  })\n}\n"
       }
     ]
   },

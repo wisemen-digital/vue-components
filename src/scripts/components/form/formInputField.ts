@@ -19,6 +19,7 @@ export const formInputField = {
     ComponentName.FORM_ERROR,
     ComponentName.FORM_INPUT_GROUP_COMPOSABLE,
     ComponentName.TRANSITION_EXPAND,
+    ComponentName.UTILS_GENERATE_UUID,
   ],
   dependencies: [
     '@vueuse/core',

@@ -1,6 +1,6 @@
 import { ComponentName, ComponentType } from '../../componentsTypes'
 
-export const generateUuid = {
+export const utilsGenerateUuid = {
   component: ComponentName.UTILS_GENERATE_UUID,
   name: 'GenerateUuid',
   files: [

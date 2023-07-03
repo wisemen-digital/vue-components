@@ -9,6 +9,7 @@ import { icons } from './components/icons/icons'
 import { transitionExpand } from './components/transitions/transitionExpand'
 import { transitions } from './components/transitions/transtitions'
 import type { Component } from './componentsTypes'
+import { utilsGenerateUuid } from './components/utils/utilsGenerateUuid'
 
 export const components: Component[] = [
   appButton,
@@ -22,4 +23,6 @@ export const components: Component[] = [
   transitionExpand,
   transitions,
   icons,
+
+  utilsGenerateUuid,
 ]
