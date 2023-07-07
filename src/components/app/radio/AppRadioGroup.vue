@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T, TValue extends keyof T">
 import AppRadio from './AppRadio.vue'
 
 interface Props {
   isDisabled?: boolean
-  options: Array<unknown>
-  optionLabel: string
-  optionValue: string
+  options: Array<T>
+  optionLabel?: keyof T
+  optionValue?: TValue
 }
 
 const {
@@ -15,7 +15,7 @@ const {
   optionValue = 'value',
 } = defineProps<Props>()
 
-const model = defineModel<unknown>()
+const model = defineModel<T[keyof T]>()
 </script>
 
 <template>
@@ -25,7 +25,6 @@ const model = defineModel<unknown>()
       :key="`${index}`"
     >
       <AppRadio
-        :id="`radio_${index}`"
         v-model="model"
         :is-disabled="isDisabled"
         :option="option"

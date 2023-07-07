@@ -4,12 +4,15 @@ import AppRadioGroup from './AppRadioGroup.vue'
 
 interface State {
   isDisabled?: boolean
-  options: Array<unknown>
+  options: {
+    label: string
+    value: number
+  }[]
   optionLabel: string
   optionValue: string
 }
 
-const model = ref<unknown>()
+const model = ref<number>(0)
 
 const state: State = reactive({
   isDisabled: false,

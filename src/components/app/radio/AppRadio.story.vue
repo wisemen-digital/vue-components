@@ -4,13 +4,15 @@ import AppRadio from './AppRadio.vue'
 
 interface State {
   isDisabled?: boolean
-  option: unknown
+  option: {
+    label: string
+    value: number
+  }
   optionLabel: string
   optionValue: string
-  id: string
 }
 
-const model = ref<unknown>()
+const model = ref<number>(0)
 
 const state1: State = reactive({
   isDisabled: false,
@@ -20,7 +22,6 @@ const state1: State = reactive({
   },
   optionLabel: 'label',
   optionValue: 'value',
-  id: 'radio_0',
 })
 
 const state2: State = reactive({
@@ -31,7 +32,6 @@ const state2: State = reactive({
   },
   optionLabel: 'label',
   optionValue: 'value',
-  id: 'radio_1',
 })
 </script>
 
