@@ -17,6 +17,8 @@ declare module 'vue' {
     FormError: typeof import('./src/components/form/error/FormError.vue')['default']
     FormInputField: typeof import('./src/components/form/field/FormInputField.vue')['default']
     'FormInputField.story': typeof import('./src/components/form/field/FormInputField.story.vue')['default']
+    FormPhoneInput: typeof import('./src/components/form/phone-input/FormPhoneInput.vue')['default']
+    'FormPhoneInput.story': typeof import('./src/components/form/phone-input/FormPhoneInput.story.vue')['default']
     FormSelect: typeof import('./src/components/form/select/FormSelect.vue')['default']
     'FormSelect.story': typeof import('./src/components/form/select/FormSelect.story.vue')['default']
     FormSelectOption: typeof import('./src/components/form/select/FormSelectOption.vue')['default']
