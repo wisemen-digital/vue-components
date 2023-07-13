@@ -56,18 +56,7 @@ const handleClick = (): void => {
             {{ state.content }}
           </AppText>
         </template>
-        <template #footer>
-          <AppButtonGroup>
-            <template #default="{ bindings }">
-              <AppButton variant="outline" v-bind="bindings" @component:click="handleClick">
-                Cancel
-              </AppButton>
-              <AppButton v-bind="bindings" @component:click="handleClick">
-                Confirm
-              </AppButton>
-            </template>
-          </AppButtonGroup>
-        </template>
+        <template #footer />
       </AppModal>
     </Variant>
   </Story>
