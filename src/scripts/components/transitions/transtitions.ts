@@ -34,5 +34,10 @@ export const transitions = {
       path: './src/transitions/staticList.transition.ts',
       folder: '',
     },
+    {
+      type: ComponentType.TRANSITIONS,
+      path: './src/transitions/modal.transition.ts',
+      folder: '',
+    },
   ],
 }
