@@ -19,36 +19,36 @@ module.exports = {
     },
     fontSize: {
       hero: ['var(--font-size-hero)', {
-        lineHeight: 'var(--font-line-height-hero',
+        lineHeight: 'var(--font-line-height-hero)',
       }],
       title: ['var(--font-size-title)', {
-        lineHeight: 'var(--font-line-height-title',
+        lineHeight: 'var(--font-line-height-title)',
       }],
       subtitle: ['var(--font-size-subtitle)', {
-        lineHeight: 'var(--font-line-height-subtitle',
+        lineHeight: 'var(--font-line-height-subtitle)',
       }],
       heading: ['var(--font-size-heading)', {
-        lineHeight: 'var(--font-line-height-heading',
+        lineHeight: 'var(--font-line-height-heading)',
       }],
       body: ['var(--font-size-body)', {
-        lineHeight: 'var(--font-line-height-body',
+        lineHeight: 'var(--font-line-height-body)',
       }],
       subtext: ['var(--font-size-subtext)', {
-        lineHeight: 'var(--font-line-height-subtext',
+        lineHeight: 'var(--font-line-height-subtext)',
       }],
       caption: ['var(--font-size-caption)', {
-        lineHeight: 'var(--font-line-height-caption',
+        lineHeight: 'var(--font-line-height-caption)',
       }],
     },
 
     boxShadow: {
-      DEFAULT: 'var(--shadow)',
-      cardShadow: 'var(--shadow-card);',
-      cardHoverShadow: 'var(--shadow-card-hover);',
-      buttonShadow: 'var(--shadow-button);',
-      buttonHoverShadow: 'var(--shadow-button-hover);',
-      popoverShadow: 'var(--shadow-popover);',
-      modalShadow: 'var(--shadow-modal);',
+      'DEFAULT': 'var(--shadow)',
+      'card-shadow': 'var(--shadow-card);',
+      'card-hover-shadow': 'var(--shadow-card-hover);',
+      'button-shadow': 'var(--shadow-button);',
+      'button-hover-shadow': 'var(--shadow-button-hover);',
+      'popover-shadow': 'var(--shadow-popover);',
+      'modal-shadow': 'var(--shadow-modal);',
     },
 
     borderRadius: {
@@ -127,6 +127,12 @@ module.exports = {
         300: 'hsl(var(--neutral-300))',
         200: 'hsl(var(--neutral-200))',
         100: 'hsl(var(--neutral-100))',
+      },
+    },
+    extend: {
+      transitionTimingFunction: {
+        'out-back': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'native': 'ease',
       },
     },
   },
