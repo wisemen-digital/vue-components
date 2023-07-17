@@ -32,9 +32,7 @@ const handleClick = (): void => {
 </script>
 
 <template>
-  <button
-    :class="twMerge(buttonVariants({ variant, size, isRounded }))" @click="handleClick"
-  >
+  <button :class="twMerge(buttonVariants({ variant, size, isRounded }))" @click="handleClick">
     <div :class="{ 'opacity-30': isLoading }" class="flex items-center gap-2 whitespace-nowrap transition-opacity">
       <slot name="prefix">
         <AppIcon v-if="prefixIcon" :icon="prefixIcon" />
