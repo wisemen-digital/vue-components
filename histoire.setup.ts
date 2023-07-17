@@ -9,7 +9,9 @@ export const setupVue3 = defineSetupVue3(async ({ app }) => {
   const isIframe = window.self !== window.top
 
   if (isIframe || process.env.NODE_ENV === 'development') {
+    // @ts-expect-error - this is a hack to make the iframe work
     await import('./src/assets/styles/globals.css')
+    // @ts-expect-error - this is a hack to make the iframe work
     await import('./src/assets/styles/transitions.scss')
   }
 
