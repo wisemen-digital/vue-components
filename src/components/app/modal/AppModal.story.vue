@@ -6,8 +6,8 @@ import { iconNames } from '@/icons'
 
 interface State {
   isOpen: boolean
-  hasNoCloseButton?: boolean
-  hasNoCloseOutside?: boolean
+  hasHiddenCloseButton?: boolean
+  isNotDismissable?: boolean
   title?: string
   content?: string
   icon?: Icon
@@ -16,8 +16,8 @@ interface State {
 
 const state = reactive<State>({
   isOpen: false,
-  hasNoCloseButton: false,
-  hasNoCloseOutside: false,
+  hasHiddenCloseButton: false,
+  isNotDismissable: false,
   title: 'Modal title',
   icon: undefined,
   content: 'Content here Lorem ipsum dolor sit amet consectetur adipisicing elit. Error temporibus nulla ab eius enim similique atque officia? Porro consectetur, ea iusto perspiciatis ullam nisi minus, inventore iste quisquam placeat nemo?Lorem ipsum dolor sit amet consectetur adipisicing elit. In quidem ullam ipsam minima, vitae commodi expedita corporis aliquid illum quis laudantium adipisci laboriosam est maxime quae enim aliquam sed ipsa.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam iste, adipisci sapiente odit beatae architecto aspernatur perferendis quis. Esse dicta, minima non aperiam sunt ad veniam ab velit officiis magni.',
@@ -35,8 +35,8 @@ const handleClick = (): void => {
     <Variant title="Default" auto-props-disabled>
       <template #controls>
         <HstCheckbox v-model="state.isOpen" title="Open" />
-        <HstCheckbox v-model="state.hasNoCloseButton" title="No close button" />
-        <HstCheckbox v-model="state.hasNoCloseOutside" title="No close outside" />
+        <HstCheckbox v-model="state.hasHiddenCloseButton" title="No close button" />
+        <HstCheckbox v-model="state.isNotDismissable" title="Not dismissable" />
         <HstSelect v-model="state.icon" title="Icon" :options="['none', ...iconNames]" />
         <HstSelect v-model="state.size" title="Size" :options="modalSizeOptions" />
 
