@@ -1,12 +1,22 @@
-export { default as AddIcon } from './AddIcon.vue'
-export { default as ArrowDownIcon } from './ArrowDownIcon.vue'
-export { default as CheckmarkIcon } from './CheckmarkIcon.vue'
-export { default as ChevronDownIcon } from './ChevronDownIcon.vue'
-export { default as ChevronRightIcon } from './ChevronRightIcon.vue'
-export { default as CloseIcon } from './CloseIcon.vue'
-export { default as EditIcon } from './EditIcon.vue'
-export { default as EyeOpenIcon } from './EyeOpenIcon.vue'
-export { default as EyeClosedIcon } from './EyeClosedIcon.vue'
+import * as allIcons from './icons'
 
-export { icons, iconNames } from './icons'
-export type { Icon } from './icons'
+const convertIconName = (iconName: string): Icon => {
+  const name = iconName.replace('Icon', '')
+  return name.charAt(0).toLowerCase() + name.slice(1) as Icon
+}
+
+export const iconNames = Object.keys(allIcons)
+  .map(convertIconName)
+
+export const iconComponents = Object.keys(allIcons).reduce((acc, key) => {
+  const iconComponent = allIcons[key as keyof typeof allIcons]
+  return {
+    ...acc,
+    [convertIconName(key)]: iconComponent,
+  }
+}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)
+
+export type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never
+export type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>
+
+export const icons = iconComponents

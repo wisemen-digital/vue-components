@@ -23,7 +23,7 @@ export const loaderVariantOptions = {
 }
 
 export const buttonVariants = cva(
-  'relative inline-flex items-center justify-center rounded text-sm font-medium text-destructive-foreground transition-colors disabled:pointer-events-none disabled:opacity-50',
+  'relative inline-flex items-center justify-center rounded text-subtext font-medium text-destructive-foreground transition-colors disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: variantOptions,

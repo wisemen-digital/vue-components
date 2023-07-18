@@ -110,7 +110,7 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
           {{ label }}
         </slot>
       </FormLabel>
-      <p v-if="isOptional" class="text-xs text-muted-foreground">
+      <p v-if="isOptional" class="text-caption text-muted-foreground">
         Optional
       </p>
     </div>

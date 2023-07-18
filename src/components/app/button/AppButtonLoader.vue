@@ -15,7 +15,7 @@ const {
     <div v-if="isLoading" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative inline-block h-2.5 w-10">
         <div
-          v-for="i in 4" :key="i" class="orb absolute top-[1px] h-2 w-2 rounded-full bg-current shadow-focus"
+          v-for="i in 4" :key="i" class="orb bg-current shadow-focus absolute top-[1px] h-2 w-2 rounded-full"
         />
       </div>
     </div>
