@@ -13,26 +13,26 @@ import type { Icon } from '@/icons'
 import { modalBackgroundTransition, modalTransition } from '@/transitions'
 
 interface Props {
-  hasNoCloseButton?: boolean
-  hasNoCloseOutside?: boolean
+  hasHiddenCloseButton?: boolean
+  isNotDismissable?: boolean
   size?: ModalProps['size']
   title?: string
   icon?: Icon
 }
 
 const {
-  hasNoCloseButton = false,
-  hasNoCloseOutside = false,
+  hasHiddenCloseButton = false,
+  isNotDismissable = false,
   title,
   icon,
   size = 'default',
 } = defineProps<Props>()
 
 const slots = defineSlots<{
-  icon?: (props: {}) => any
-  title?: (props: {}) => any
-  content?: (props: {}) => any
-  footer?: (props: {}) => any
+  icon?: () => any
+  title?: () => any
+  content?: () => any
+  footer?: () => any
 }>()
 
 const isOpen = defineModel<boolean>('isOpen', {
@@ -40,12 +40,12 @@ const isOpen = defineModel<boolean>('isOpen', {
 })
 
 const handleClickOutside = (): void => {
-  if (!hasNoCloseOutside)
+  if (!isNotDismissable)
     isOpen.value = false
 }
 
 const handleClickCloseButton = (): void => {
-  if (!hasNoCloseButton)
+  if (!hasHiddenCloseButton)
     isOpen.value = false
 }
 
@@ -79,7 +79,7 @@ const hasHeader = computed<boolean>(() => !!(slots.icon || slots.title || title 
                   </AppText>
                 </slot>
               </DialogTitle>
-              <button v-if="!hasNoCloseButton" class="flex" @click="handleClickCloseButton">
+              <button v-if="!hasHiddenCloseButton" class="flex" @click="handleClickCloseButton">
                 <AppIcon icon="close" />
               </button>
             </div>
