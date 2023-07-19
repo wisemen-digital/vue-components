@@ -11,7 +11,7 @@ interface State {
 }
 
 const state = reactive<State>({
-  variant: 'p',
+  variant: 'body',
   boldness: undefined,
   numberOfLines: undefined,
   text: 'Text',

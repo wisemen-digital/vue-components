@@ -74,7 +74,7 @@ const handleClickCloseButton = (): void => {
                   <AppButton v-if="icon" :front-icon="icon" size="icon" variant="outline" is-rounded />
                 </slot>
                 <slot name="title">
-                  <AppText variant="large">
+                  <AppText variant="heading">
                     {{ title }}
                   </AppText>
                 </slot>
