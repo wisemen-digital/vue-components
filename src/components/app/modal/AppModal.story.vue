@@ -52,7 +52,7 @@ const handleClick = (): void => {
         v-model:is-open="state.isOpen"
       >
         <template #content>
-          <AppText variant="small">
+          <AppText variant="subtext">
             {{ state.content }}
           </AppText>
         </template>
