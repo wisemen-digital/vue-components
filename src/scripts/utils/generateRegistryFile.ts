@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path, { basename, dirname } from 'node:path'
+import process from 'node:process'
 
 import type { Component } from '../componentsTypes'
 

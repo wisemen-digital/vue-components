@@ -1,8 +1,8 @@
 <script setup lang="ts" generic="TModel extends string | number | undefined">
 import { twMerge } from 'tailwind-merge'
 import { useClipboard } from '@vueuse/core'
-import type { InputFieldProps } from '@/components/form/field/formInputFieldVariants'
-import { inputFieldExtraContentVariants, inputFieldVariants } from '@/components/form/field/formInputFieldVariants'
+import type { InputFieldProps } from '@/components/form/field/formInputField.style'
+import { inputFieldExtraContentVariants, inputFieldVariants } from '@/components/form/field/formInputField.style'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 import { useFormInputGroup } from '@/composables/form/group/useFormInputGroup'
 import type { Icon } from '@/icons'

@@ -11,7 +11,7 @@ export const appModal = {
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/components/app/modal/appModalVariants.ts',
+      path: './src/components/app/modal/appModal.style.ts',
       folder: 'app/modal',
     },
   ],

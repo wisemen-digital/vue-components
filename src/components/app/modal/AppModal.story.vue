@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { ModalProps } from '@/components/app/modal/appModalVariants'
-import { modalSizeOptions } from '@/components/app/modal/appModalVariants'
+import type { ModalProps } from '@/components/app/modal/appModal.style'
+import { modalSizeOptions } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
 import { iconNames } from '@/icons'
 

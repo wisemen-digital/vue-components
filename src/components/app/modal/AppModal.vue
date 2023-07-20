@@ -7,8 +7,8 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { twMerge } from 'tailwind-merge'
-import type { ModalProps } from '@/components/app/modal/appModalVariants'
-import { modalVariants } from '@/components/app/modal/appModalVariants'
+import type { ModalProps } from '@/components/app/modal/appModal.style'
+import { modalVariants } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
 
 interface Props {

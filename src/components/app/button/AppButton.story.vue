@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { buttonSizeOptions, buttonVariantOptions } from '@/components/app/button/appButtonVariants'
-import type { ButtonProps } from '@/components/app/button/appButtonVariants'
+import { buttonSizeOptions, buttonVariantOptions } from '@/components/app/button/appButton.style'
+import type { ButtonProps } from '@/components/app/button/appButton.style'
 import { iconNames } from '@/icons'
 import type { Icon } from '@/icons'
 
