@@ -85,7 +85,7 @@
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "<svg xmlns=\"http://www.w3.org/2000/svg\"  viewBox=\"0 0 24 24\">\n<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z\" />\n</svg>\n"
+        "content": "<template>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n    <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z\" />\n  </svg>\n</template>\n"
       },
       {
         "name": "MinusIcon.vue",
@@ -155,7 +155,7 @@
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "import * as allIcons from './icons'\n\nexport const iconNames = Object.keys(allIcons)\n  .map(key => key.charAt(0).toLowerCase() + key.slice(1))\n  .map(key => key.replace('Icon', '')) as Icon[]\n\nexport const iconComponents = Object.keys(allIcons).reduce((acc, key) => {\n  const iconName = key.charAt(0).toLowerCase() + key.slice(1)\n  const iconComponent = allIcons[key as keyof typeof allIcons]\n  return {\n    ...acc,\n    [iconName]: iconComponent,\n  }\n}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)\n\nexport type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never\nexport type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>\n\nexport const icons = iconComponents\n"
+        "content": "import * as allIcons from './icons'\n\nconst convertIconName = (iconName: string): Icon => {\n  const name = iconName.replace('Icon', '')\n  return name.charAt(0).toLowerCase() + name.slice(1) as Icon\n}\n\nexport const iconNames = Object.keys(allIcons)\n  .map(convertIconName)\n\nexport const iconComponents = Object.keys(allIcons).reduce((acc, key) => {\n  const iconComponent = allIcons[key as keyof typeof allIcons]\n  return {\n    ...acc,\n    [convertIconName(key)]: iconComponent,\n  }\n}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)\n\nexport type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never\nexport type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>\n\nexport const icons = iconComponents\n"
       }
     ]
   },
