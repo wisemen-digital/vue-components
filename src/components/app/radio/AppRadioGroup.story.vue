@@ -1,41 +1,54 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import AppRadioGroup from './AppRadioGroup.vue'
+import { type RadioProps, radioVariantOptions } from './appRadio.style'
 
 interface State {
   isDisabled?: boolean
+  groupLabel?: string
   options: {
     label: string
+    description: string
     value: number
+    isDisabled: boolean
   }[]
   optionLabel: string
   optionValue: string
+  optionDescription: string
+  optionDisabled: string
+  variant?: RadioProps['variant']
 }
 
 const model = ref<number>(0)
 
 const state: State = reactive({
   isDisabled: false,
+  groupLabel: 'Options',
   options: [
     {
-      label: '1',
+      label: 'Option n°1',
+      description: 'Description regarding option n°1. Best option to choose.',
       value: 1,
+      isDisabled: false,
     },
     {
-      label: '2',
+      label: 'Option n°2',
+      description: 'Description regarding option n°2. Second best option to choose.',
       value: 2,
+      isDisabled: false,
     },
     {
-      label: '3',
+      label: 'Option n°3',
+      description: 'Description regarding option n°3',
       value: 3,
-    },
-    {
-      label: '4',
-      value: 4,
+      isDisabled: true,
     },
   ],
   optionLabel: 'label',
   optionValue: 'value',
+  optionDescription: 'description',
+  optionDisabled: 'isDisabled',
+  variant: 'default',
 })
 </script>
 
@@ -45,10 +58,13 @@ const state: State = reactive({
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>
-        <HstCheckbox v-model="state.isDisabled" title="Group Disabled" />
+        <HstCheckbox v-model="state.isDisabled" title="Disabled" />
+        <HstText v-model="state.groupLabel" title="Group label" />
+        <HstSelect v-model="state.variant" title="Variant" :options="radioVariantOptions" />
+        <HstJson v-model="state.options" title="Options object" />
       </template>
 
-      <div class="grid h-20 w-20 place-items-center">
+      <div class="mb-4 grid place-items-start">
         <AppRadioGroup v-bind="state" v-model="model" />
       </div>
       <p>
