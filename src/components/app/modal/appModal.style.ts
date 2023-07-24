@@ -14,7 +14,7 @@ export const loaderVariantOptions = {
 }
 
 export const modalVariants = cva(
-  'flex flex-col gap-4 rounded-lg bg-white p-6 text-left',
+  'flex flex-col gap-4 rounded-modal bg-white p-6 text-left',
   {
     variants: {
       size: sizeOptions,

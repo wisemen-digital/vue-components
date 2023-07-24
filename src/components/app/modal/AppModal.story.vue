@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { ModalProps } from '@/components/app/modal/appModalVariants'
-import { modalSizeOptions } from '@/components/app/modal/appModalVariants'
+import type { ModalProps } from '@/components/app/modal/appModal.style'
+import { modalSizeOptions } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
 import { iconNames } from '@/icons'
 
@@ -52,7 +52,7 @@ const handleClick = (): void => {
         v-model:is-open="state.isOpen"
       >
         <template #content>
-          <AppText variant="small">
+          <AppText variant="subtext">
             {{ state.content }}
           </AppText>
         </template>

@@ -14,6 +14,9 @@ export enum ComponentName {
   TRANSITION_EXPAND = 'TransitionExpand',
   ICONS = 'Icons',
   UTILS_GENERATE_UUID = 'UtilsGenerateUuid',
+
+  CONFIG_TAILWIND = 'TailwindConfig',
+  CONFIG_PACKAGES = 'GlobalPackages',
 }
 
 export enum ComponentType {
@@ -22,6 +25,8 @@ export enum ComponentType {
   TRANSITIONS = 'transitions',
   ICONS = 'icons',
   UTILS = 'utils',
+  CONFIG = 'config',
+  STYLES = 'styles',
 }
 
 export interface ComponentFile {
