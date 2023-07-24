@@ -8,11 +8,13 @@ import { formInputGroupComposable } from './components/form/formInputGroupCompos
 import { transitionExpand } from './components/transitions/transitionExpand'
 import type { Component } from './componentsTypes'
 import { utilsGenerateUuid } from './components/utils/utilsGenerateUuid'
+import { appRadio } from './components/app/appRadioGroup'
 
 export const components: Component[] = [
   appButton,
   appModal,
   appText,
+  appRadio,
 
   formError,
   formInputField,
