@@ -3,19 +3,21 @@ import { reactive, ref } from 'vue'
 import AppRadioGroup from './AppRadioGroup.vue'
 import { type RadioProps, radioVariantOptions } from './appRadio.style'
 
+interface Option {
+  label: string
+  description: string
+  value: number
+  isDisabled: boolean
+}
+
 interface State {
   isDisabled?: boolean
   groupLabel?: string
-  options: {
-    label: string
-    description: string
-    value: number
-    isDisabled: boolean
-  }[]
-  optionLabel: string
-  optionValue: string
-  optionDescription: string
-  optionDisabled: string
+  options: Option[]
+  optionLabel?: keyof Option
+  optionValue?: keyof Option
+  optionDescription?: keyof Option
+  optionDisabled?: keyof Option
   variant?: RadioProps['variant']
 }
 
@@ -65,7 +67,14 @@ const state: State = reactive({
       </template>
 
       <div class="mb-4 grid place-items-start">
-        <AppRadioGroup v-bind="state" v-model="model" />
+        <AppRadioGroup
+          v-model="model"
+          v-bind="state"
+        >
+          <template #label>
+            <span class="text-heading">{{ state.groupLabel }}</span>
+          </template>
+        </AppRadioGroup>
       </div>
       <p>
         Model: {{ model }}
