@@ -25,6 +25,15 @@ const {
   size = 'default',
 } = defineProps<Props>()
 
+defineEmits<{
+  close: []
+}>()
+defineSlots<{
+  icon: () => null
+  title: () => null
+  default: () => null
+  footer: () => null
+}>()
 const isOpen = defineModel<boolean>('isOpen', {
   required: true,
 })
@@ -79,17 +88,13 @@ const handleClickCloseButton = (): void => {
                   </AppText>
                 </slot>
               </DialogTitle>
-              <button class="flex ">
-                <AppIcon v-if="!hasNoCloseButton" icon="close" @click="handleClickCloseButton" />
+              <button v-if="!hasNoCloseButton" class="flex " @click="handleClickCloseButton">
+                X
               </button>
             </div>
 
             <div>
-              <slot name="content" />
-            </div>
-
-            <div class="mt-4">
-              <slot name="footer" />
+              <slot />
             </div>
           </DialogPanel>
         </TransitionChild>
