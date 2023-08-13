@@ -22,7 +22,7 @@ export default (): UserConfigExport => {
       Components({
         dts: true,
         deep: true,
-        dirs: ['./src/components', './src/modules'],
+        dirs: ['./src/components', './src/modules', './src/color-generator'],
       }),
       AutoImport({
         dts: true,

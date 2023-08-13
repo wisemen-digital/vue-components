@@ -15,7 +15,8 @@
     "story:build": "histoire build",
     "story:preview": "histoire preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "color-generator:dev": "vite color-generator"
   },
   "dependencies": {
     "@appwise/forms": "^0.0.19",
