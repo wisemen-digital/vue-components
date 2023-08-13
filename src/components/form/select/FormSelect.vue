@@ -53,10 +53,10 @@ const getDisplayValue = (value: T | T[] | undefined): string => {
   if (value === undefined)
     return ''
   else
-    if (Array.isArray(value))
-      return value.map(value => displayFunction(value)).join(', ')
-    else
-      return displayFunction(value)
+  if (Array.isArray(value))
+    return value.map(value => displayFunction(value)).join(', ')
+  else
+    return displayFunction(value)
 }
 
 const filteredItems = computed(() => {
