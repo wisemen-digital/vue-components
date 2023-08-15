@@ -7,8 +7,8 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { twMerge } from 'tailwind-merge'
-import type { ModalProps } from '@/components/app/modal/appModalVariants'
-import { modalVariants } from '@/components/app/modal/appModalVariants'
+import type { ModalProps } from '@/components/app/modal/appModal.style'
+import { modalVariants } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
 import { modalBackgroundTransition, modalTransition } from '@/transitions'
 
@@ -31,7 +31,7 @@ const {
 const slots = defineSlots<{
   icon?: () => any
   title?: () => any
-  content?: () => any
+  default?: () => any
   footer?: () => any
 }>()
 
@@ -74,7 +74,7 @@ const hasHeader = computed<boolean>(() => !!(slots.icon || slots.title || title 
                   <AppButton v-if="icon" :prefix-icon="icon" size="icon" variant="outline" is-rounded />
                 </slot>
                 <slot name="title">
-                  <AppText variant="large">
+                  <AppText variant="heading">
                     {{ title }}
                   </AppText>
                 </slot>
@@ -85,11 +85,7 @@ const hasHeader = computed<boolean>(() => !!(slots.icon || slots.title || title 
             </div>
 
             <div>
-              <slot name="content" />
-            </div>
-
-            <div class="mt-4">
-              <slot name="footer" />
+              <slot />
             </div>
           </DialogPanel>
         </TransitionChild>

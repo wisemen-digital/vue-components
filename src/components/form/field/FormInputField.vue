@@ -1,8 +1,8 @@
 <script setup lang="ts" generic="TModel extends string | number | undefined">
 import { twMerge } from 'tailwind-merge'
 import { useClipboard } from '@vueuse/core'
-import type { InputFieldProps } from '@/components/form/field/formInputFieldVariants'
-import { inputFieldExtraContentVariants, inputFieldVariants } from '@/components/form/field/formInputFieldVariants'
+import type { InputFieldProps } from '@/components/form/field/formInputField.style'
+import { inputFieldExtraContentVariants, inputFieldVariants } from '@/components/form/field/formInputField.style'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 import { useFormInputGroup } from '@/composables/form/group/useFormInputGroup'
 import type { Icon } from '@/icons'
@@ -47,21 +47,20 @@ const emits = defineEmits<{
   blur: []
 }>()
 
+const slots = defineSlots<{
+  label?: () => any
+  frontContent?: () => any
+  backContent?: () => any
+}>()
 const model = defineModel<TModel>()
 const uuid = generateUuid()
 const element = ref<HTMLElement>()
 
-const slots = defineSlots<{
-  label?: (props: {}) => any
-  'front-content'?: (props: {}) => any
-  'back-content'?: (props: {}) => any
-}>()
-
 const errorShown = computed(() => errors._errors.length > 0 && (isTouched || isDirty))
 
 // Extra content logic
-const hasFrontContent = computed(() => frontContent || slots['front-content'] || frontIcon)
-const hasBackContent = computed(() => backContent || slots['back-content'] || backIcon || isCopyable || type === 'password')
+const hasFrontContent = computed(() => frontContent || slots.frontContent || frontIcon)
+const hasBackContent = computed(() => backContent || slots.backContent || backIcon || isCopyable || type === 'password')
 const currentExtraContent = computed<InputFieldProps['extraContent']>(() => {
   if (hasFrontContent.value && hasBackContent.value)
     return 'both'
@@ -127,7 +126,7 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
             },
           ))"
       >
-        <slot name="front-content">
+        <slot name="frontContent">
           <AppIcon v-if="frontIcon" :icon="frontIcon" />
           <div v-else-if="frontContent">
             {{ frontContent }}
@@ -153,7 +152,7 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
             },
           ))"
       >
-        <slot name="back-content">
+        <slot name="backContent">
           <button v-if="type === 'password'" @click="togglePasswordShown">
             <AppIcon v-if="passwordShown" icon="eyeClosed" />
             <AppIcon v-else icon="eyeOpen" />
@@ -174,4 +173,3 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
     </TransitionExpand>
   </div>
 </template>
-@/utils/uuid/generateUuid

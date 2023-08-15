@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { twMerge } from 'tailwind-merge'
-import { buttonVariants } from '@/components/app/button/appButtonVariants'
-import type { ButtonProps } from '@/components/app/button/appButtonVariants'
+import { buttonVariants } from '@/components/app/button/appButton.style'
+import type { ButtonProps } from '@/components/app/button/appButton.style'
 import type { Icon } from '@/icons'
 
 interface Props {

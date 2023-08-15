@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { textBoldnessOptions, textTruncateOptions, textVariantOptions } from '@/components/app/text/appTextVariants'
-import type { TextProps } from '@/components/app/text/appTextVariants'
+import { textBoldnessOptions, textTruncateOptions, textVariantOptions } from '@/components/app/text/appText.style'
+import type { TextProps } from '@/components/app/text/appText.style'
 import AppText from '@/components/app/text/AppText.vue'
 
 interface State {
@@ -11,7 +11,7 @@ interface State {
 }
 
 const state = reactive<State>({
-  variant: 'p',
+  variant: 'body',
   boldness: undefined,
   numberOfLines: undefined,
   text: 'Text',

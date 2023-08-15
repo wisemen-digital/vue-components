@@ -11,7 +11,7 @@ export const appText = {
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/components/app/text/appTextVariants.ts',
+      path: './src/components/app/text/appText.style.ts',
       folder: 'app/text',
     },
   ],

@@ -2,15 +2,13 @@ import type { VariantProps } from 'class-variance-authority'
 import { cva } from 'class-variance-authority'
 
 export const variantOptions = {
-  p: 'text-base',
-  h1: 'font-bold text-5xl',
-  h2: 'font-semibold text-3xl',
-  h3: 'font-semibold text-2xl',
-  h4: 'font-semibold text-xl',
-  quote: 'italic',
-  large: 'text-lg font-semibold',
-  small: 'text-sm',
-  subtle: 'text-sm text-muted-foreground',
+  hero: 'text-hero',
+  title: 'text-title',
+  subtitle: 'text-subtitle',
+  heading: 'text-heading',
+  body: 'text-body',
+  subtext: 'text-subtext',
+  caption: 'text-caption',
 }
 
 export const boldnessOptions = {
@@ -30,7 +28,6 @@ export const truncateOptions = {
   4: 'line-clamp-4',
   5: 'line-clamp-5',
   6: 'line-clamp-6',
-
 }
 
 export const textVariants = cva(
@@ -42,7 +39,7 @@ export const textVariants = cva(
       truncate: truncateOptions,
     },
     defaultVariants: {
-      variant: 'p',
+      variant: 'body',
       boldness: 'none',
       truncate: undefined,
     },

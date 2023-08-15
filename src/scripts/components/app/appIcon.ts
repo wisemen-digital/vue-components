@@ -11,7 +11,7 @@ export const appButton = {
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/icon/appIconVariants.ts',
+      path: './src/modules/ui/components/app/icon/appIcon.style.ts',
       folder: 'app/icon',
     },
     {
