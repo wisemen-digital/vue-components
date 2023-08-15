@@ -8,7 +8,10 @@ export interface RandomData {
   email: string
   country: string
   address: string
-  otherStuff?: string
+  otherStuff?: {
+    other: string
+    stuff: string
+  }
 }
 
 export const dataFactory = (amount: number): RandomData[] => {
