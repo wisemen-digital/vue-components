@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
 import { iconNames } from '@/icons'
 import type { Icon } from '@/icons'
 import { iconSizeOptions } from '@/components/app/icon/appIcon.style'
 import type { IconProps } from '@/components/app/icon/appIcon.style'
+import AppIcon from '@/components/app/icon/AppIcon.vue'
 
 interface State {
   size: IconProps['size']

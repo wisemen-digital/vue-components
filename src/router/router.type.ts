@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { ColorGeneratorRoutes } from '../color-generator/router/colorGenerator.routes.type'
+import { ColorGeneratorRoutes } from '@/color-generator/router/colorGenerator.routes.type'
 
 export enum GlobalRoutes {
 }

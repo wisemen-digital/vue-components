@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { convertCssIntoVariables } from '../utils/convertCssIntoVariables'
 import { hexToCssVar } from '../utils/colors'
+
+// @ts-expect-error // TODO fix this with an api call
 import GlobalConfigJson from '@/../public/api/globalConfig.json'
+import FormInputField from '@/components/form/field/FormInputField.vue'
+import AppButton from '@/components/app/button/AppButton.vue'
 
 const globalsCss = GlobalConfigJson
   ?.find((item: any) => item.name === 'TailwindConfig')

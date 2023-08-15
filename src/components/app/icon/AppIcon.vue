@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { twMerge } from 'tailwind-merge'
+import { computed, useAttrs } from 'vue'
 import { icons } from '@/icons'
 import type { Icon } from '@/icons'
 import type { IconProps } from '@/components/app/icon/appIcon.style'
