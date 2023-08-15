@@ -10,6 +10,8 @@ declare module 'vue' {
     AppButton: typeof import('./src/components/app/button/AppButton.vue')['default']
     'AppButton.story': typeof import('./src/components/app/button/AppButton.story.vue')['default']
     AppButtonLoader: typeof import('./src/components/app/button/AppButtonLoader.vue')['default']
+    AppIcon: typeof import('./src/components/app/icon/AppIcon.vue')['default']
+    'AppIcon.story': typeof import('./src/components/app/icon/AppIcon.story.vue')['default']
     AppModal: typeof import('./src/components/app/modal/AppModal.vue')['default']
     'AppModal.story': typeof import('./src/components/app/modal/AppModal.story.vue')['default']
     AppText: typeof import('./src/components/app/text/AppText.vue')['default']

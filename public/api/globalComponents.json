@@ -85,7 +85,7 @@
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "export { default as CheckmarkIcon } from '@/icons/CheckmarkIcon.vue'\r\nexport { default as ChevronDownIcon } from '@/icons/ChevronDownIcon.vue'\r\nexport { default as ChevronLeftIcon } from '@/icons/ChevronLeftIcon.vue'\r\nexport { default as ChevronRightIcon } from '@/icons/ChevronRightIcon.vue'\r\nexport { default as ChevronUpIcon } from '@/icons/ChevronUpIcon.vue'\r\nexport { default as CloseIcon } from '@/icons/CloseIcon.vue'\r\nexport { default as DownloadIcon } from '@/icons/DownloadIcon.vue'\r\nexport { default as EditIcon } from '@/icons/EditIcon.vue'\r\nexport { default as EyeIcon } from '@/icons/EyeIcon.vue'\r\nexport { default as EyeSlashIcon } from '@/icons/EyeSlashIcon.vue'\r\nexport { default as FilterIcon } from '@/icons/FilterIcon.vue'\r\nexport { default as InfoIcon } from '@/icons/InfoIcon.vue'\r\nexport { default as MinusIcon } from '@/icons/MinusIcon.vue'\r\nexport { default as PlusIcon } from '@/icons/PlusIcon.vue'\r\nexport { default as SearchIcon } from '@/icons/SearchIcon.vue'\r\nexport { default as SortIcon } from '@/icons/SortIcon.vue'\r\nexport { default as SortAscendingIcon } from '@/icons/SortAscendingIcon.vue'\r\nexport { default as SortDescendingIcon } from '@/icons/SortDescendingIcon.vue'\r\nexport { default as ThreeDotsIcon } from '@/icons/ThreeDotsIcon.vue'\r\nexport { default as UploadIcon } from '@/icons/UploadIcon.vue'\r\n"
+        "content": "<template>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n    <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z\" />\n  </svg>\n</template>\n"
       },
       {
         "name": "index.ts",
@@ -155,7 +155,7 @@
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "<template>\r\n  <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\r\n    <path\r\n      fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\"\r\n      d=\"m15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z\"\r\n    />\r\n  </svg>\r\n</template>\r\n"
+        "content": "import * as allIcons from './icons'\n\nconst convertIconName = (iconName: string): Icon => {\n  const name = iconName.replace('Icon', '')\n  return name.charAt(0).toLowerCase() + name.slice(1) as Icon\n}\n\nexport const iconNames = Object.keys(allIcons)\n  .map(convertIconName)\n\nexport const iconComponents = Object.keys(allIcons).reduce((acc, key) => {\n  const iconComponent = allIcons[key as keyof typeof allIcons]\n  return {\n    ...acc,\n    [convertIconName(key)]: iconComponent,\n  }\n}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)\n\nexport type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never\nexport type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>\n\nexport const icons = iconComponents\n"
       }
     ]
   },
