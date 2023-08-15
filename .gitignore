@@ -3,7 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
-/histoire
-public/api/components.json
-public/api/globalComponents.json
-public/api/globalConfig.json
+.histoire
+public
