@@ -52,6 +52,7 @@ const hasValue = computed<boolean>(() => {
 const getDisplayValue = (value: T | T[] | undefined): string => {
   if (value === undefined)
     return ''
+
   else
     if (Array.isArray(value))
       return value.map(value => displayFunction(value)).join(', ')
