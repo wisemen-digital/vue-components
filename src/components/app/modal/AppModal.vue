@@ -7,6 +7,10 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { twMerge } from 'tailwind-merge'
+import { computed } from 'vue'
+import AppButton from '@/components/app/button/AppButton.vue'
+import AppText from '@/components/app/text/AppText.vue'
+import AppIcon from '@/components/app/icon/AppIcon.vue'
 import type { ModalProps } from '@/components/app/modal/appModal.style'
 import { modalVariants } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'

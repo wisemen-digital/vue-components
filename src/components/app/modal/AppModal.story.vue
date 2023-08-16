@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
+import AppModal from '@/components/app/modal/AppModal.vue'
+import AppText from '@/components/app/text/AppText.vue'
+import AppButton from '@/components/app/button/AppButton.vue'
 import type { ModalProps } from '@/components/app/modal/appModal.style'
 import { modalSizeOptions } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
@@ -56,7 +60,16 @@ const handleClick = (): void => {
             {{ state.content }}
           </AppText>
         </template>
-        <template #footer />
+        <template #footer>
+          <div class="flex gap-2">
+            <AppButton variant="outline" @component:click="handleClick">
+              Cancel
+            </AppButton>
+            <AppButton @component:click="handleClick">
+              Confirm
+            </AppButton>
+          </div>
+        </template>
       </AppModal>
     </Variant>
   </Story>

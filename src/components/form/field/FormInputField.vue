@@ -1,11 +1,16 @@
 <script setup lang="ts" generic="TModel extends string | number | undefined">
 import { twMerge } from 'tailwind-merge'
 import { useClipboard } from '@vueuse/core'
+import type { Ref } from 'vue'
+import { computed, ref } from 'vue'
+import FormError from '@/components/form/error/FormError.vue'
 import type { InputFieldProps } from '@/components/form/field/formInputField.style'
 import { inputFieldExtraContentVariants, inputFieldVariants } from '@/components/form/field/formInputField.style'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 import { useFormInputGroup } from '@/composables/form/group/useFormInputGroup'
 import type { Icon } from '@/icons'
+import AppIcon from '@/components/app/icon/AppIcon.vue'
+import TransitionExpand from '@/components/app/transitions/TransitionExpand.vue'
 
 interface Props {
   isSuccess?: boolean
@@ -104,11 +109,11 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
   <div ref="element">
     <!-- Label -->
     <div class="flex items-center justify-between gap-4">
-      <FormLabel :for="uuid">
+      <label :for="uuid">
         <slot name="label">
           {{ label }}
         </slot>
-      </FormLabel>
+      </label>
       <p v-if="isOptional" class="text-caption text-muted-foreground">
         Optional
       </p>
@@ -154,8 +159,8 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
       >
         <slot name="backContent">
           <button v-if="type === 'password'" @click="togglePasswordShown">
-            <AppIcon v-if="passwordShown" icon="eyeClosed" />
-            <AppIcon v-else icon="eyeOpen" />
+            <AppIcon v-if="passwordShown" icon="eyeSlash" />
+            <AppIcon v-else icon="eye" />
           </button>
           <button v-else-if="isCopyable" @click="copy(copyModel)">
             Copy

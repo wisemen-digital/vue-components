@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { twMerge } from 'tailwind-merge'
+import AppIcon from '@/components/app/icon/AppIcon.vue'
+import AppButtonLoader from '@/components/app/button/AppButtonLoader.vue'
 import { buttonVariants } from '@/components/app/button/appButton.style'
 import type { ButtonProps } from '@/components/app/button/appButton.style'
 import type { Icon } from '@/icons'

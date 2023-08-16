@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { twMerge } from 'tailwind-merge'
+import { useAttrs } from 'vue'
 import { textVariants } from '@/components/app/text/appText.style'
 import type { TextProps } from '@/components/app/text/appText.style'
 
