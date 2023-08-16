@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AppButton from '@/components/app/button/AppButton.vue'
+
 const { name } = defineProps<{ name: string }>()
 
 const emits = defineEmits<{

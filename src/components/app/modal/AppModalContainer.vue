@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { useModalContainer } from './useModal'
+import { onMounted, ref } from 'vue'
+import AppModal from '@/components/app/modal/AppModal.vue'
+import { useModalContainer } from '@/components/app/modal/useModal'
 
 const { modals } = useModalContainer()
 
