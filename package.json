@@ -4,7 +4,7 @@
   "scripts": {
     "build:components": "ts-node --experimental-specifier-resolution=node --project ./tsconfig.scripts.json ./src/scripts/generateRegistry.ts",
     "dev": "vite",
-    "build": "pnpm lint && pnpm ts-check && pnpm build:components && vite build",
+    "build": "pnpm lint && pnpm ts-check && pnpm build:components && vite build && pnpm story:build",
     "ts-check": "vue-tsc --noEmit --skipLibCheck",
     "serve": "vite preview",
     "lint": "eslint \"**/*.{vue,ts,js}\"",
