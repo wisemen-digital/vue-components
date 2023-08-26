@@ -25,10 +25,7 @@
         "content": "<script setup lang=\"ts\">\nimport { fadeTransition } from '@/transitions'\n\ninterface Props {\n  isLoading: boolean\n}\nconst {\n  isLoading,\n} = defineProps<Props>()\n</script>\n\n<template>\n  <!-- eslint-disable tailwindcss/no-custom-classname -->\n  <Transition v-bind=\"fadeTransition\">\n    <div v-if=\"isLoading\" class=\"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2\">\n      <div class=\"relative inline-block h-2.5 w-10\">\n        <div\n          v-for=\"i in 4\" :key=\"i\" class=\"orb bg-current shadow-focus absolute top-[1px] h-2 w-2 rounded-full\"\n        />\n      </div>\n    </div>\n  </Transition>\n</template>\n\n<style lang=\"scss\" scoped>\n.orb:nth-child(1) {\n  left: 4px;\n  animation: lds-ellipsis1 0.6s infinite;\n}\n\n.orb:nth-child(2) {\n  left: 4px;\n  animation: lds-ellipsis2 0.6s infinite;\n}\n\n.orb:nth-child(3) {\n  left: 16px;\n  animation: lds-ellipsis2 0.6s infinite;\n}\n\n.orb:nth-child(4) {\n  left: 28px;\n  animation: lds-ellipsis3 0.6s infinite;\n}\n\n@keyframes lds-ellipsis1 {\n  0% {\n    transform: scale(0);\n  }\n\n  100% {\n    transform: scale(1);\n  }\n}\n\n@keyframes lds-ellipsis3 {\n  0% {\n    transform: scale(1);\n  }\n\n  100% {\n    transform: scale(0);\n  }\n}\n\n@keyframes lds-ellipsis2 {\n  0% {\n    transform: translate(0, 0);\n  }\n\n  100% {\n    transform: translate(12px, 0);\n  }\n}\n</style>\n"
       }
     ],
-    "internalDependencies": [],
-    "dependencies": [
-      "class-variance-authority"
-    ]
+    "internalDependencies": []
   },
   {
     "component": "FormError",

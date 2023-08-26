@@ -5,10 +5,12 @@
     "files": [],
     "dependencies": [
       "tailwindcss",
-      "@appwise/forms",
+      "formango",
       "cva",
       "tailwind-merge",
-      "zod"
+      "zod",
+      "@headlessui/vue",
+      "@headlessui-float/vue"
     ]
   },
   {

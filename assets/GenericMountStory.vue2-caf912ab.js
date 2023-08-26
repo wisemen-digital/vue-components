@@ -39,12 +39,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-5ba59a02.js"), true ? ["assets/HomeView.vue-5ba59a02.js","assets/vendor-ee86d98a.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-52079d32.js"), true ? ["assets/HomeView.vue-52079d32.js","assets/vendor-ee86d98a.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-cc11b9b6.js"), true ? ["assets/StoryView.vue-cc11b9b6.js","assets/vendor-ee86d98a.js","assets/MobileOverlay.vue2-41b968cf.js","assets/BaseEmpty.vue-081e7b67.js","assets/state-1e15344f.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-c6daa6c7.js"), true ? ["assets/StoryView.vue-c6daa6c7.js","assets/vendor-ee86d98a.js","assets/MobileOverlay.vue2-25ebcb01.js","assets/BaseEmpty.vue-73b2808c.js","assets/state-6cebf722.js"] : void 0)
     }
   ]
 });
