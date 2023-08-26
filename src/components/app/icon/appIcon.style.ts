@@ -1,5 +1,5 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
+import type { VariantProps } from '@/utils/tailwind/cva'
+import { cva } from '@/utils/tailwind/cva'
 
 export const sizeOptions = {
   default: 'h-6',
@@ -8,8 +8,8 @@ export const sizeOptions = {
 }
 
 export const iconVariants = cva(
-  '',
   {
+    base: null,
     variants: {
       size: sizeOptions,
     },

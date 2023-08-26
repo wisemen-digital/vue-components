@@ -14,7 +14,9 @@ export enum ComponentName {
   TRANSITIONS = 'Transitions',
   TRANSITION_EXPAND = 'TransitionExpand',
   ICONS = 'Icons',
+
   UTILS_GENERATE_UUID = 'UtilsGenerateUuid',
+  UTILS_TAILWIND_HELPERS = 'UtilsTailwindHelpers',
 
   CONFIG_TAILWIND = 'TailwindConfig',
   CONFIG_PACKAGES = 'GlobalPackages',

@@ -1,5 +1,4 @@
 <script setup lang="ts" generic="TModel extends string | number | undefined">
-import { twMerge } from 'tailwind-merge'
 import { useClipboard } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
@@ -123,13 +122,13 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
       <!-- Content before the input -->
       <div
         v-if="hasFrontContent" :class="
-          twMerge(inputFieldExtraContentVariants(
+          inputFieldExtraContentVariants(
             {
               extraContentType: 'front',
               status: currentStatus,
               extraContentBorder: hasExtraContentBorder,
             },
-          ))"
+          )"
       >
         <slot name="frontContent">
           <AppIcon v-if="frontIcon" :icon="frontIcon" />
@@ -142,20 +141,20 @@ const inputType = computed<string>(() => (type === 'password' && passwordShown.v
       <!-- Input -->
       <input
         :id="uuid" v-model="model" :disabled="isDisabled" :type="inputType" min="0"
-        :class="twMerge(inputFieldVariants({ status: currentStatus, extraContent: currentExtraContent }))"
+        :class="inputFieldVariants({ status: currentStatus, extraContent: currentExtraContent })"
         :placeholder="placeholder" :readonly="isReadOnly" @blur="emits('blur')"
       >
 
       <!-- Content after the input -->
       <div
         v-if="hasBackContent" :class="
-          twMerge(inputFieldExtraContentVariants(
+          inputFieldExtraContentVariants(
             {
               extraContentType: 'back',
               status: currentStatus,
               extraContentBorder: hasExtraContentBorder,
             },
-          ))"
+          )"
       >
         <slot name="backContent">
           <button v-if="type === 'password'" @click="togglePasswordShown">

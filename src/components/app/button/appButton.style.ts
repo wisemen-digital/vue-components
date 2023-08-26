@@ -1,5 +1,5 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
+import type { VariantProps } from '@/utils/tailwind/cva'
+import { cva } from '@/utils/tailwind/cva'
 
 export const variantOptions = {
   default: 'bg-primary text-primary-foreground hover:bg-primary/90',
@@ -23,14 +23,14 @@ export const loaderVariantOptions = {
 }
 
 export const buttonVariants = cva(
-  'relative inline-flex items-center justify-center rounded text-subtext font-medium text-destructive-foreground transition-colors disabled:pointer-events-none disabled:opacity-50',
   {
+    base: 'relative inline-flex items-center justify-center rounded text-subtext font-medium text-destructive-foreground transition-colors disabled:pointer-events-none disabled:opacity-50',
     variants: {
       variant: variantOptions,
       size: sizeOptions,
       isRounded: {
         true: 'rounded-full',
-        false: '',
+        false: null,
       },
     },
     defaultVariants: {
