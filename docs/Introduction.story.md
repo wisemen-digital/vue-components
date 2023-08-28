@@ -98,7 +98,7 @@ export const appButton = {
     },
   ],
   internalDependencies: [ComponentName.TRANSITIONS, ComponentName.APP_ICON],
-  dependencies: ['class-variance-authority'],
+  dependencies: ['random-package'],
 }
 ```
 
