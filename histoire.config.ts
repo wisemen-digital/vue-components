@@ -25,6 +25,9 @@ export default defineConfig({
   plugins: [
     HstVue(),
   ],
+  vite: {
+    base: '/vue-components/',
+  },
   setupFile: './histoire.setup.ts',
   theme: {
     title: 'Wisemen',
