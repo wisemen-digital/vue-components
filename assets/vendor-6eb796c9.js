@@ -30,9 +30,9 @@ const isSet$1 = (val) => toTypeString$2(val) === "[object Set]";
 const isFunction$3 = (val) => typeof val === "function";
 const isString$3 = (val) => typeof val === "string";
 const isSymbol$1 = (val) => typeof val === "symbol";
-const isObject$2 = (val) => val !== null && typeof val === "object";
+const isObject$3 = (val) => val !== null && typeof val === "object";
 const isPromise$1 = (val) => {
-  return isObject$2(val) && isFunction$3(val.then) && isFunction$3(val.catch);
+  return isObject$3(val) && isFunction$3(val.then) && isFunction$3(val.catch);
 };
 const objectToString$2 = Object.prototype.toString;
 const toTypeString$2 = (value) => objectToString$2.call(value);
@@ -109,7 +109,7 @@ function normalizeStyle$1(value) {
     return res;
   } else if (isString$3(value)) {
     return value;
-  } else if (isObject$2(value)) {
+  } else if (isObject$3(value)) {
     return value;
   }
 }
@@ -137,7 +137,7 @@ function normalizeClass$1(value) {
         res += normalized + " ";
       }
     }
-  } else if (isObject$2(value)) {
+  } else if (isObject$3(value)) {
     for (const name in value) {
       if (value[name]) {
         res += name + " ";
@@ -168,7 +168,7 @@ function includeBooleanAttr$1(value) {
   return !!value || value === "";
 }
 const toDisplayString$2 = (val) => {
-  return isString$3(val) ? val : val == null ? "" : isArray$3(val) || isObject$2(val) && (val.toString === objectToString$2 || !isFunction$3(val.toString)) ? JSON.stringify(val, replacer$1, 2) : String(val);
+  return isString$3(val) ? val : val == null ? "" : isArray$3(val) || isObject$3(val) && (val.toString === objectToString$2 || !isFunction$3(val.toString)) ? JSON.stringify(val, replacer$1, 2) : String(val);
 };
 const replacer$1 = (_key, val) => {
   if (val && val.__v_isRef) {
@@ -184,7 +184,7 @@ const replacer$1 = (_key, val) => {
     return {
       [`Set(${val.size})`]: [...val.values()]
     };
-  } else if (isObject$2(val) && !isArray$3(val) && !isPlainObject$3(val)) {
+  } else if (isObject$3(val) && !isArray$3(val) && !isPlainObject$3(val)) {
     return String(val);
   }
   return val;
@@ -602,7 +602,7 @@ function createGetter$1(isReadonly2 = false, shallow = false) {
     if (isRef$1(res)) {
       return targetIsArray && isIntegerKey$1(key) ? res : res.value;
     }
-    if (isObject$2(res)) {
+    if (isObject$3(res)) {
       return isReadonly2 ? readonly$1(res) : reactive$1(res);
     }
     return res;
@@ -1048,7 +1048,7 @@ function shallowReadonly$1(target) {
   );
 }
 function createReactiveObject$1(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
-  if (!isObject$2(target)) {
+  if (!isObject$3(target)) {
     {
       console.warn(`value cannot be made reactive: ${String(target)}`);
     }
@@ -1095,8 +1095,8 @@ function markRaw$1(value) {
   def$1(value, "__v_skip", true);
   return value;
 }
-const toReactive$1 = (value) => isObject$2(value) ? reactive$1(value) : value;
-const toReadonly$1 = (value) => isObject$2(value) ? readonly$1(value) : value;
+const toReactive$1 = (value) => isObject$3(value) ? reactive$1(value) : value;
+const toReadonly$1 = (value) => isObject$3(value) ? readonly$1(value) : value;
 function trackRefValue$1(ref2) {
   if (shouldTrack$1 && activeEffect$1) {
     ref2 = toRaw$1(ref2);
@@ -1221,7 +1221,7 @@ function toRef$1(source, key, defaultValue) {
     return source;
   } else if (isFunction$3(source)) {
     return new GetterRefImpl$1(source);
-  } else if (isObject$2(source) && arguments.length > 1) {
+  } else if (isObject$3(source) && arguments.length > 1) {
     return propertyToRef$1(source, key, defaultValue);
   } else {
     return ref$1(source);
@@ -1990,7 +1990,7 @@ function normalizeEmitsOptions$1(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$2(comp)) {
+    if (isObject$3(comp)) {
       cache2.set(comp, null);
     }
     return null;
@@ -2000,7 +2000,7 @@ function normalizeEmitsOptions$1(comp, appContext, asMixin = false) {
   } else {
     extend$1(normalized, raw);
   }
-  if (isObject$2(comp)) {
+  if (isObject$3(comp)) {
     cache2.set(comp, normalized);
   }
   return normalized;
@@ -2549,7 +2549,7 @@ function createPathGetter$1(ctx, path) {
   };
 }
 function traverse$1(value, seen2) {
-  if (!isObject$2(value) || value["__v_skip"]) {
+  if (!isObject$3(value) || value["__v_skip"]) {
     return value;
   }
   seen2 = seen2 || /* @__PURE__ */ new Set();
@@ -3010,7 +3010,7 @@ function defineAsyncComponent$1(source) {
       if (comp && (comp.__esModule || comp[Symbol.toStringTag] === "Module")) {
         comp = comp.default;
       }
-      if (comp && !isObject$2(comp) && !isFunction$3(comp)) {
+      if (comp && !isObject$3(comp) && !isFunction$3(comp)) {
         throw new Error(`Invalid async component load result: ${comp}`);
       }
       resolvedComp = comp;
@@ -3256,7 +3256,7 @@ function renderList$1(source, renderItem, cache2, index) {
     for (let i2 = 0; i2 < source; i2++) {
       ret[i2] = renderItem(i2 + 1, i2, void 0, cached && cached[i2]);
     }
-  } else if (isObject$2(source)) {
+  } else if (isObject$3(source)) {
     if (source[Symbol.iterator]) {
       ret = Array.from(
         source,
@@ -3651,7 +3651,7 @@ function applyOptions$1(instance) {
         `data() returned a Promise - note data() cannot be async; If you intend to perform data fetching before component renders, use async setup() + <Suspense>.`
       );
     }
-    if (!isObject$2(data)) {
+    if (!isObject$3(data)) {
       warn$4(`data() should return an object.`);
     } else {
       instance.data = reactive$1(data);
@@ -3762,7 +3762,7 @@ function resolveInjections$1(injectOptions, ctx, checkDuplicateProperties = NOOP
   for (const key in injectOptions) {
     const opt = injectOptions[key];
     let injected;
-    if (isObject$2(opt)) {
+    if (isObject$3(opt)) {
       if ("default" in opt) {
         injected = inject$1(
           opt.from || key,
@@ -3809,7 +3809,7 @@ function createWatcher$1(raw, ctx, publicThis, key) {
     }
   } else if (isFunction$3(raw)) {
     watch$1(getter, raw.bind(publicThis));
-  } else if (isObject$2(raw)) {
+  } else if (isObject$3(raw)) {
     if (isArray$3(raw)) {
       raw.forEach((r2) => createWatcher$1(r2, ctx, publicThis, key));
     } else {
@@ -3849,7 +3849,7 @@ function resolveMergedOptions$1(instance) {
     }
     mergeOptions$2(resolved, base, optionMergeStrategies);
   }
-  if (isObject$2(base)) {
+  if (isObject$3(base)) {
     cache2.set(base, resolved);
   }
   return resolved;
@@ -3992,7 +3992,7 @@ function createAppAPI$1(render2, hydrate) {
     if (!isFunction$3(rootComponent)) {
       rootComponent = extend$1({}, rootComponent);
     }
-    if (rootProps != null && !isObject$2(rootProps)) {
+    if (rootProps != null && !isObject$3(rootProps)) {
       warn$4(`root props passed to app.mount() must be an object.`);
       rootProps = null;
     }
@@ -4422,7 +4422,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$2(comp)) {
+    if (isObject$3(comp)) {
       cache2.set(comp, EMPTY_ARR$1);
     }
     return EMPTY_ARR$1;
@@ -4438,7 +4438,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
       }
     }
   } else if (raw) {
-    if (!isObject$2(raw)) {
+    if (!isObject$3(raw)) {
       warn$4(`invalid props options`, raw);
     }
     for (const key in raw) {
@@ -4465,7 +4465,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
     }
   }
   const res = [normalized, needCastKeys];
-  if (isObject$2(comp)) {
+  if (isObject$3(comp)) {
     cache2.set(comp, res);
   }
   return res;
@@ -4548,7 +4548,7 @@ function assertType$1(value, type) {
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
-    valid = isObject$2(value);
+    valid = isObject$3(value);
   } else if (expectedType === "Array") {
     valid = isArray$3(value);
   } else if (expectedType === "null") {
@@ -6463,14 +6463,14 @@ function _createVNode$1(type, props = null, children = null, patchFlag = 0, dyna
     if (klass && !isString$3(klass)) {
       props.class = normalizeClass$1(klass);
     }
-    if (isObject$2(style2)) {
+    if (isObject$3(style2)) {
       if (isProxy$1(style2) && !isArray$3(style2)) {
         style2 = extend$1({}, style2);
       }
       props.style = normalizeStyle$1(style2);
     }
   }
-  const shapeFlag = isString$3(type) ? 1 : isSuspense$1(type) ? 128 : isTeleport$1(type) ? 64 : isObject$2(type) ? 4 : isFunction$3(type) ? 2 : 0;
+  const shapeFlag = isString$3(type) ? 1 : isSuspense$1(type) ? 128 : isTeleport$1(type) ? 64 : isObject$3(type) ? 4 : isFunction$3(type) ? 2 : 0;
   if (shapeFlag & 4 && isProxy$1(type)) {
     type = toRaw$1(type);
     warn$4(
@@ -6869,7 +6869,7 @@ function handleSetupResult$1(instance, setupResult, isSSR) {
     } else {
       instance.render = setupResult;
     }
-  } else if (isObject$2(setupResult)) {
+  } else if (isObject$3(setupResult)) {
     if (isVNode$2(setupResult)) {
       warn$4(
         `setup() should not return VNodes directly - return a render function instead.`
@@ -7057,7 +7057,7 @@ const computed$2 = (getterOrOptions, debugOptions) => {
 function h$5(type, propsOrChildren, children) {
   const l2 = arguments.length;
   if (l2 === 2) {
-    if (isObject$2(propsOrChildren) && !isArray$3(propsOrChildren)) {
+    if (isObject$3(propsOrChildren) && !isArray$3(propsOrChildren)) {
       if (isVNode$2(propsOrChildren)) {
         return createVNode$1(type, null, [propsOrChildren]);
       }
@@ -7099,7 +7099,7 @@ function initCustomFormatter$1() {
   const keywordStyle = { style: "color:#9d288c" };
   const formatter = {
     header(obj) {
-      if (!isObject$2(obj)) {
+      if (!isObject$3(obj)) {
         return null;
       }
       if (obj.__isVue) {
@@ -7218,7 +7218,7 @@ function initCustomFormatter$1() {
       return ["span", stringStyle, JSON.stringify(v2)];
     } else if (typeof v2 === "boolean") {
       return ["span", keywordStyle, v2];
-    } else if (isObject$2(v2)) {
+    } else if (isObject$3(v2)) {
       return ["object", { object: asRaw ? toRaw$1(v2) : v2 }];
     } else {
       return ["span", stringStyle, String(v2)];
@@ -7239,7 +7239,7 @@ function initCustomFormatter$1() {
   }
   function isKeyOfType(Comp, key, type) {
     const opts = Comp[type];
-    if (isArray$3(opts) && opts.includes(key) || isObject$2(opts) && key in opts) {
+    if (isArray$3(opts) && opts.includes(key) || isObject$3(opts) && key in opts) {
       return true;
     }
     if (Comp.extends && isKeyOfType(Comp.extends, key, type)) {
@@ -7818,7 +7818,7 @@ function resolveTransitionProps$1(rawProps) {
 function normalizeDuration$1(duration) {
   if (duration == null) {
     return null;
-  } else if (isObject$2(duration)) {
+  } else if (isObject$3(duration)) {
     return [NumberOf$1(duration.enter), NumberOf$1(duration.leave)];
   } else {
     const n2 = NumberOf$1(duration);
@@ -12712,9 +12712,9 @@ const isDate$1 = (val) => toTypeString$1(val) === "[object Date]";
 const isFunction$2 = (val) => typeof val === "function";
 const isString$2 = (val) => typeof val === "string";
 const isSymbol = (val) => typeof val === "symbol";
-const isObject$1 = (val) => val !== null && typeof val === "object";
+const isObject$2 = (val) => val !== null && typeof val === "object";
 const isPromise = (val) => {
-  return isObject$1(val) && isFunction$2(val.then) && isFunction$2(val.catch);
+  return isObject$2(val) && isFunction$2(val.then) && isFunction$2(val.catch);
 };
 const objectToString$1 = Object.prototype.toString;
 const toTypeString$1 = (value) => objectToString$1.call(value);
@@ -12791,7 +12791,7 @@ function normalizeStyle(value) {
     return res;
   } else if (isString$2(value)) {
     return value;
-  } else if (isObject$1(value)) {
+  } else if (isObject$2(value)) {
     return value;
   }
 }
@@ -12819,7 +12819,7 @@ function normalizeClass(value) {
         res += normalized + " ";
       }
     }
-  } else if (isObject$1(value)) {
+  } else if (isObject$2(value)) {
     for (const name in value) {
       if (value[name]) {
         res += name + " ";
@@ -12876,8 +12876,8 @@ function looseEqual(a2, b3) {
   if (aValidType || bValidType) {
     return aValidType && bValidType ? looseCompareArrays(a2, b3) : false;
   }
-  aValidType = isObject$1(a2);
-  bValidType = isObject$1(b3);
+  aValidType = isObject$2(a2);
+  bValidType = isObject$2(b3);
   if (aValidType || bValidType) {
     if (!aValidType || !bValidType) {
       return false;
@@ -12901,7 +12901,7 @@ function looseIndexOf(arr, val) {
   return arr.findIndex((item) => looseEqual(item, val));
 }
 const toDisplayString$1 = (val) => {
-  return isString$2(val) ? val : val == null ? "" : isArray$2(val) || isObject$1(val) && (val.toString === objectToString$1 || !isFunction$2(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
+  return isString$2(val) ? val : val == null ? "" : isArray$2(val) || isObject$2(val) && (val.toString === objectToString$1 || !isFunction$2(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
 };
 const replacer = (_key, val) => {
   if (val && val.__v_isRef) {
@@ -12917,7 +12917,7 @@ const replacer = (_key, val) => {
     return {
       [`Set(${val.size})`]: [...val.values()]
     };
-  } else if (isObject$1(val) && !isArray$2(val) && !isPlainObject$1(val)) {
+  } else if (isObject$2(val) && !isArray$2(val) && !isPlainObject$1(val)) {
     return String(val);
   }
   return val;
@@ -13335,7 +13335,7 @@ function createGetter(isReadonly2 = false, shallow = false) {
     if (isRef(res)) {
       return targetIsArray && isIntegerKey(key) ? res : res.value;
     }
-    if (isObject$1(res)) {
+    if (isObject$2(res)) {
       return isReadonly2 ? readonly(res) : reactive(res);
     }
     return res;
@@ -13781,7 +13781,7 @@ function shallowReadonly(target) {
   );
 }
 function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
-  if (!isObject$1(target)) {
+  if (!isObject$2(target)) {
     {
       console.warn(`value cannot be made reactive: ${String(target)}`);
     }
@@ -13828,8 +13828,8 @@ function markRaw(value) {
   def(value, "__v_skip", true);
   return value;
 }
-const toReactive = (value) => isObject$1(value) ? reactive(value) : value;
-const toReadonly = (value) => isObject$1(value) ? readonly(value) : value;
+const toReactive = (value) => isObject$2(value) ? reactive(value) : value;
+const toReadonly = (value) => isObject$2(value) ? readonly(value) : value;
 function trackRefValue(ref2) {
   if (shouldTrack && activeEffect) {
     ref2 = toRaw(ref2);
@@ -13944,7 +13944,7 @@ function toRef(source, key, defaultValue) {
     return source;
   } else if (isFunction$2(source)) {
     return new GetterRefImpl(source);
-  } else if (isObject$1(source) && arguments.length > 1) {
+  } else if (isObject$2(source) && arguments.length > 1) {
     return propertyToRef(source, key, defaultValue);
   } else {
     return ref(source);
@@ -14713,7 +14713,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$1(comp)) {
+    if (isObject$2(comp)) {
       cache2.set(comp, null);
     }
     return null;
@@ -14723,7 +14723,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
   } else {
     extend(normalized, raw);
   }
-  if (isObject$1(comp)) {
+  if (isObject$2(comp)) {
     cache2.set(comp, normalized);
   }
   return normalized;
@@ -15820,7 +15820,7 @@ function createPathGetter(ctx, path) {
   };
 }
 function traverse(value, seen2) {
-  if (!isObject$1(value) || value["__v_skip"]) {
+  if (!isObject$2(value) || value["__v_skip"]) {
     return value;
   }
   seen2 = seen2 || /* @__PURE__ */ new Set();
@@ -16281,7 +16281,7 @@ function defineAsyncComponent(source) {
       if (comp && (comp.__esModule || comp[Symbol.toStringTag] === "Module")) {
         comp = comp.default;
       }
-      if (comp && !isObject$1(comp) && !isFunction$2(comp)) {
+      if (comp && !isObject$2(comp) && !isFunction$2(comp)) {
         throw new Error(`Invalid async component load result: ${comp}`);
       }
       resolvedComp = comp;
@@ -16523,7 +16523,7 @@ function renderList(source, renderItem, cache2, index) {
     for (let i2 = 0; i2 < source; i2++) {
       ret[i2] = renderItem(i2 + 1, i2, void 0, cached && cached[i2]);
     }
-  } else if (isObject$1(source)) {
+  } else if (isObject$2(source)) {
     if (source[Symbol.iterator]) {
       ret = Array.from(
         source,
@@ -16972,7 +16972,7 @@ function applyOptions(instance) {
         `data() returned a Promise - note data() cannot be async; If you intend to perform data fetching before component renders, use async setup() + <Suspense>.`
       );
     }
-    if (!isObject$1(data)) {
+    if (!isObject$2(data)) {
       warn$2(`data() should return an object.`);
     } else {
       instance.data = reactive(data);
@@ -17083,7 +17083,7 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) 
   for (const key in injectOptions) {
     const opt = injectOptions[key];
     let injected;
-    if (isObject$1(opt)) {
+    if (isObject$2(opt)) {
       if ("default" in opt) {
         injected = inject(
           opt.from || key,
@@ -17130,7 +17130,7 @@ function createWatcher(raw, ctx, publicThis, key) {
     }
   } else if (isFunction$2(raw)) {
     watch(getter, raw.bind(publicThis));
-  } else if (isObject$1(raw)) {
+  } else if (isObject$2(raw)) {
     if (isArray$2(raw)) {
       raw.forEach((r2) => createWatcher(r2, ctx, publicThis, key));
     } else {
@@ -17170,7 +17170,7 @@ function resolveMergedOptions(instance) {
     }
     mergeOptions$1(resolved, base, optionMergeStrategies);
   }
-  if (isObject$1(base)) {
+  if (isObject$2(base)) {
     cache2.set(base, resolved);
   }
   return resolved;
@@ -17313,7 +17313,7 @@ function createAppAPI(render2, hydrate) {
     if (!isFunction$2(rootComponent)) {
       rootComponent = extend({}, rootComponent);
     }
-    if (rootProps != null && !isObject$1(rootProps)) {
+    if (rootProps != null && !isObject$2(rootProps)) {
       warn$2(`root props passed to app.mount() must be an object.`);
       rootProps = null;
     }
@@ -17740,7 +17740,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$1(comp)) {
+    if (isObject$2(comp)) {
       cache2.set(comp, EMPTY_ARR);
     }
     return EMPTY_ARR;
@@ -17756,7 +17756,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
       }
     }
   } else if (raw) {
-    if (!isObject$1(raw)) {
+    if (!isObject$2(raw)) {
       warn$2(`invalid props options`, raw);
     }
     for (const key in raw) {
@@ -17783,7 +17783,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   const res = [normalized, needCastKeys];
-  if (isObject$1(comp)) {
+  if (isObject$2(comp)) {
     cache2.set(comp, res);
   }
   return res;
@@ -17866,7 +17866,7 @@ function assertType(value, type) {
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
-    valid = isObject$1(value);
+    valid = isObject$2(value);
   } else if (expectedType === "Array") {
     valid = isArray$2(value);
   } else if (expectedType === "null") {
@@ -20040,14 +20040,14 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
     if (klass && !isString$2(klass)) {
       props.class = normalizeClass(klass);
     }
-    if (isObject$1(style2)) {
+    if (isObject$2(style2)) {
       if (isProxy(style2) && !isArray$2(style2)) {
         style2 = extend({}, style2);
       }
       props.style = normalizeStyle(style2);
     }
   }
-  const shapeFlag = isString$2(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$1(type) ? 4 : isFunction$2(type) ? 2 : 0;
+  const shapeFlag = isString$2(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$2(type) ? 4 : isFunction$2(type) ? 2 : 0;
   if (shapeFlag & 4 && isProxy(type)) {
     type = toRaw(type);
     warn$2(
@@ -20441,7 +20441,7 @@ function handleSetupResult(instance, setupResult, isSSR) {
     } else {
       instance.render = setupResult;
     }
-  } else if (isObject$1(setupResult)) {
+  } else if (isObject$2(setupResult)) {
     if (isVNode$1(setupResult)) {
       warn$2(
         `setup() should not return VNodes directly - return a render function instead.`
@@ -20629,7 +20629,7 @@ const computed = (getterOrOptions, debugOptions) => {
 function h$4(type, propsOrChildren, children) {
   const l2 = arguments.length;
   if (l2 === 2) {
-    if (isObject$1(propsOrChildren) && !isArray$2(propsOrChildren)) {
+    if (isObject$2(propsOrChildren) && !isArray$2(propsOrChildren)) {
       if (isVNode$1(propsOrChildren)) {
         return createVNode(type, null, [propsOrChildren]);
       }
@@ -20671,7 +20671,7 @@ function initCustomFormatter() {
   const keywordStyle = { style: "color:#9d288c" };
   const formatter = {
     header(obj) {
-      if (!isObject$1(obj)) {
+      if (!isObject$2(obj)) {
         return null;
       }
       if (obj.__isVue) {
@@ -20790,7 +20790,7 @@ function initCustomFormatter() {
       return ["span", stringStyle, JSON.stringify(v2)];
     } else if (typeof v2 === "boolean") {
       return ["span", keywordStyle, v2];
-    } else if (isObject$1(v2)) {
+    } else if (isObject$2(v2)) {
       return ["object", { object: asRaw ? toRaw(v2) : v2 }];
     } else {
       return ["span", stringStyle, String(v2)];
@@ -20811,7 +20811,7 @@ function initCustomFormatter() {
   }
   function isKeyOfType(Comp, key, type) {
     const opts = Comp[type];
-    if (isArray$2(opts) && opts.includes(key) || isObject$1(opts) && key in opts) {
+    if (isArray$2(opts) && opts.includes(key) || isObject$2(opts) && key in opts) {
       return true;
     }
     if (Comp.extends && isKeyOfType(Comp.extends, key, type)) {
@@ -21390,7 +21390,7 @@ function resolveTransitionProps(rawProps) {
 function normalizeDuration(duration) {
   if (duration == null) {
     return null;
-  } else if (isObject$1(duration)) {
+  } else if (isObject$2(duration)) {
     return [NumberOf(duration.enter), NumberOf(duration.leave)];
   } else {
     const n2 = NumberOf(duration);
@@ -55598,6 +55598,8 @@ function toValue(r2) {
   return typeof r2 === "function" ? r2() : unref(r2);
 }
 const isClient = typeof window !== "undefined" && typeof document !== "undefined";
+const toString = Object.prototype.toString;
+const isObject$1 = (val) => toString.call(val) === "[object Object]";
 const noop = () => {
 };
 function useTimeoutFn(cb, interval, options = {}) {
@@ -55638,8 +55640,9 @@ function useTimeoutFn(cb, interval, options = {}) {
   };
 }
 function unrefElement(elRef) {
+  var _a2;
   const plain = toValue(elRef);
-  return (plain == null ? void 0 : plain.$el) ?? plain;
+  return (_a2 = plain == null ? void 0 : plain.$el) != null ? _a2 : plain;
 }
 const defaultWindow = isClient ? window : void 0;
 const defaultNavigator = isClient ? window.navigator : void 0;
@@ -55675,9 +55678,10 @@ function useEventListener(...args) {
       cleanup();
       if (!el2)
         return;
+      const optionsClone = isObject$1(options2) ? { ...options2 } : options2;
       cleanups.push(
         ...events.flatMap((event) => {
-          return listeners.map((listener) => register(el2, event, listener, options2));
+          return listeners.map((listener) => register(el2, event, listener, optionsClone));
         })
       );
     },
@@ -55743,7 +55747,7 @@ function useClipboard(options = {}) {
   }
   function legacyCopy(value) {
     const ta2 = document.createElement("textarea");
-    ta2.value = value ?? "";
+    ta2.value = value != null ? value : "";
     ta2.style.position = "absolute";
     ta2.style.opacity = "0";
     document.body.appendChild(ta2);
@@ -55752,8 +55756,8 @@ function useClipboard(options = {}) {
     ta2.remove();
   }
   function legacyRead() {
-    var _a2, _b;
-    return ((_b = (_a2 = document == null ? void 0 : document.getSelection) == null ? void 0 : _a2.call(document)) == null ? void 0 : _b.toString()) ?? "";
+    var _a2, _b, _c2;
+    return (_c2 = (_b = (_a2 = document == null ? void 0 : document.getSelection) == null ? void 0 : _a2.call(document)) == null ? void 0 : _b.toString()) != null ? _c2 : "";
   }
   return {
     isSupported: isSupported2,

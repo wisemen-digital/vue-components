@@ -1,4 +1,4 @@
-import { bf as extendTailwindMerge, bg as defineConfig } from "./vendor-ee86d98a.js";
+import { bf as extendTailwindMerge, bg as defineConfig } from "./vendor-6eb796c9.js";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
