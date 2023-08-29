@@ -183,7 +183,7 @@
         "type": "single",
         "iframe": true
       },
-      "icon": "carbon:bookmark",
+      "icon": "carbon:information",
       "docsOnly": true,
       "variants": [],
       "autoPropsDisabled": true,
@@ -199,7 +199,94 @@
         "isRelatedToStory": false,
         "frontmatter": {
           "group": "top",
-          "icon": "carbon:bookmark"
+          "icon": "carbon:information"
+        }
+      }
+    },
+    {
+      "id": "docs-contributing-changeset-story-js",
+      "title": "Changeset",
+      "group": "contributing",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "icon": "carbon:commit",
+      "docsOnly": true,
+      "variants": [],
+      "autoPropsDisabled": true,
+      "relativePath": "docs/contributing/Changeset.story.js",
+      "supportPluginId": "vanilla",
+      "treePath": [
+        "Changeset"
+      ],
+      "virtual": true,
+      "markdownFile": {
+        "id": "docs-contributing-changeset-story-md",
+        "relativePath": "docs/contributing/Changeset.story.md",
+        "isRelatedToStory": false,
+        "frontmatter": {
+          "group": "contributing",
+          "icon": "carbon:commit",
+          "title": "Changeset"
+        }
+      }
+    },
+    {
+      "id": "docs-contributing-components-story-js",
+      "title": "Making Components",
+      "group": "contributing",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "icon": "carbon:document-add",
+      "docsOnly": true,
+      "variants": [],
+      "autoPropsDisabled": true,
+      "relativePath": "docs/contributing/Components.story.js",
+      "supportPluginId": "vanilla",
+      "treePath": [
+        "Making Components"
+      ],
+      "virtual": true,
+      "markdownFile": {
+        "id": "docs-contributing-components-story-md",
+        "relativePath": "docs/contributing/Components.story.md",
+        "isRelatedToStory": false,
+        "frontmatter": {
+          "group": "contributing",
+          "icon": "carbon:document-add",
+          "title": "Making Components"
+        }
+      }
+    },
+    {
+      "id": "docs-contributing-registering-story-js",
+      "title": "Registering Components",
+      "group": "contributing",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "icon": "carbon:task-add",
+      "docsOnly": true,
+      "variants": [],
+      "autoPropsDisabled": true,
+      "relativePath": "docs/contributing/Registering.story.js",
+      "supportPluginId": "vanilla",
+      "treePath": [
+        "Registering Components"
+      ],
+      "virtual": true,
+      "markdownFile": {
+        "id": "docs-contributing-registering-story-md",
+        "relativePath": "docs/contributing/Registering.story.md",
+        "isRelatedToStory": false,
+        "frontmatter": {
+          "group": "contributing",
+          "icon": "carbon:task-add",
+          "title": "Registering Components"
         }
       }
     },
@@ -312,7 +399,37 @@
       "isRelatedToStory": false,
       "frontmatter": {
         "group": "top",
-        "icon": "carbon:bookmark"
+        "icon": "carbon:information"
+      }
+    },
+    {
+      "id": "docs-contributing-changeset-story-md",
+      "relativePath": "docs/contributing/Changeset.story.md",
+      "isRelatedToStory": false,
+      "frontmatter": {
+        "group": "contributing",
+        "icon": "carbon:commit",
+        "title": "Changeset"
+      }
+    },
+    {
+      "id": "docs-contributing-components-story-md",
+      "relativePath": "docs/contributing/Components.story.md",
+      "isRelatedToStory": false,
+      "frontmatter": {
+        "group": "contributing",
+        "icon": "carbon:document-add",
+        "title": "Making Components"
+      }
+    },
+    {
+      "id": "docs-contributing-registering-story-md",
+      "relativePath": "docs/contributing/Registering.story.md",
+      "isRelatedToStory": false,
+      "frontmatter": {
+        "group": "contributing",
+        "icon": "carbon:task-add",
+        "title": "Registering Components"
       }
     }
   ]

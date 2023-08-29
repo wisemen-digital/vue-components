@@ -46233,7 +46233,7 @@ function mountApp({ el: el2, state, onUnmount }, render2) {
     app.unmount();
   });
 }
-const Comp8 = {
+const Comp11 = {
   id: "tailwind",
   title: "Tailwind",
   group: "design-system",
@@ -66932,7 +66932,7 @@ export {
   parseQuery as N,
   h$5 as O,
   applyState as P,
-  Comp8 as Q,
+  Comp11 as Q,
   defineAsyncComponent as R,
   createRouter as S,
   Transition$1 as T,
