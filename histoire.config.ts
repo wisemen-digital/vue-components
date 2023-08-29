@@ -10,6 +10,10 @@ export default defineConfig({
         title: '', // No toggle
       },
       {
+        id: 'contributing',
+        title: 'Contributing',
+      },
+      {
         title: 'Components',
         include: (file): boolean => !file.title.includes('Serialize'),
       },
