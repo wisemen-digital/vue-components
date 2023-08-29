@@ -10,6 +10,10 @@ title: 'Making Components'
 
 ### Guidelines
 
+#### Base component
+
+Whenver possible, try to use [Headless UI](https://headlessui.com/) as a base for the component.
+If it is not present in that package, try to find an implementation on the [Radix Vue](https://www.radix-vue.com/) package. If neither has an implementation, you will have to write it fully from scratch.
 #### Location
 Inside the ```root``` folder, add your relevant components / composables / other dependencies.\
 <b>Important!</b> All imports should use the ```@``` alias, since that is used to replace the import names.
