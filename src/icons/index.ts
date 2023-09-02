@@ -1,4 +1,4 @@
-import * as allIcons from './icons'
+import * as allIcons from '@/icons/icons'
 
 const convertIconName = (iconName: string): Icon => {
   const name = iconName.replace('Icon', '')

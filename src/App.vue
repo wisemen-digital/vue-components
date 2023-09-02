@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import ModalUserExample from '@/examples/modal/ModalUserExample.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div>
-    <div>
-      <AppModalContainer />
-    </div>
-    <ModalUserExample />
-  </div>
+  <RouterView />
 </template>

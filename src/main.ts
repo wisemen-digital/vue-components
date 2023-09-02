@@ -7,10 +7,15 @@ import App from './App.vue'
 
 import './assets/styles/globals.css'
 
-const pinia = createPinia()
+import '@/assets/styles/globals.css'
+import '@/assets/styles/transitions.scss'
+import router from '@/router/router'
+
 const app = createApp(App)
-app.use(pinia)
+app
   .use(createHead())
   .use(i18n)
+  .use(router)
+  .use(createHead())
   .use(VueQueryPlugin)
   .mount('#app')

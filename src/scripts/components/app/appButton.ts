@@ -21,5 +21,4 @@ export const appButton = {
     },
   ],
   internalDependencies: [],
-  dependencies: ['class-variance-authority'],
 }

@@ -1,5 +1,5 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
+import type { VariantProps } from '@/utils/tailwind/cva'
+import { cva } from '@/utils/tailwind/cva'
 
 export const statusOptions = {
   default: 'border-border',
@@ -17,8 +17,8 @@ export const extraContentOptions = {
 }
 
 export const inputFieldVariants = cva(
-  'relative w-full rounded border border-border bg-input px-4 py-2 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0',
   {
+    base: 'relative w-full rounded border border-border bg-input px-4 py-2 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0',
     variants: {
       status: statusOptions,
       extraContent: extraContentOptions,
@@ -41,8 +41,8 @@ export const extraContentBorderOptions = {
 }
 
 export const inputFieldExtraContentVariants = cva(
-  'flex items-center justify-center rounded border border-border bg-input px-4',
   {
+    base: 'flex items-center justify-center rounded border border-border bg-input px-4',
     variants: {
       status: statusOptions,
       extraContentType: extraContentTypes,
