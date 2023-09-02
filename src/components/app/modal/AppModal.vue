@@ -13,24 +13,23 @@ import type { Icon } from '@/icons'
 import { modalBackgroundTransition, modalTransition } from '@/transitions'
 
 interface Props {
-  hasHiddenCloseButton?: boolean
-  isNotDismissable?: boolean
+  hideCloseButton?: boolean
+  hasIrremovableMask?: boolean
   size?: ModalProps['size']
-  title?: string
+  title: string
   icon?: Icon
 }
 
 const {
-  hasHiddenCloseButton = false,
-  isNotDismissable = false,
+  hideCloseButton = false,
+  hasIrremovableMask = false,
   title,
   icon,
   size = 'default',
 } = defineProps<Props>()
 
-const slots = defineSlots<{
+defineSlots<{
   icon?: () => any
-  title?: () => any
   default?: () => any
   footer?: () => any
 }>()
@@ -39,17 +38,19 @@ const isOpen = defineModel<boolean>('isOpen', {
   required: true,
 })
 
-const handleClickOutside = (): void => {
-  if (!isNotDismissable)
-    isOpen.value = false
+function handleCloseModal(): void {
+  isOpen.value = false
 }
 
-const handleClickCloseButton = (): void => {
-  if (!hasHiddenCloseButton)
-    isOpen.value = false
+function handleClickOutside(): void {
+  if (!hasIrremovableMask)
+    handleCloseModal()
 }
 
-const hasHeader = computed<boolean>(() => !!(slots.icon || slots.title || title || icon))
+function handleClickCloseButton(): void {
+  if (!hideCloseButton)
+    handleCloseModal()
+}
 </script>
 
 <template>
@@ -67,19 +68,17 @@ const hasHeader = computed<boolean>(() => !!(slots.icon || slots.title || title 
           as="template"
           v-bind="modalTransition"
         >
-          <DialogPanel :class="twMerge(modalVariants({ size }))">
-            <div v-if="hasHeader" class="flex justify-between gap-4">
+          <DialogPanel :class="modalVariants({ size })">
+            <div class="flex justify-between gap-4">
               <DialogTitle class="flex flex-col items-start justify-start gap-8">
                 <slot name="icon">
                   <AppButton v-if="icon" :prefix-icon="icon" size="icon" variant="outline" is-rounded />
                 </slot>
-                <slot name="title">
-                  <AppText variant="heading">
-                    {{ title }}
-                  </AppText>
-                </slot>
+                <AppText variant="heading">
+                  {{ title }}
+                </AppText>
               </DialogTitle>
-              <button v-if="!hasHiddenCloseButton" class="flex" @click="handleClickCloseButton">
+              <button v-if="!hideCloseButton" class="flex" @click="handleClickCloseButton">
                 <AppIcon icon="close" />
               </button>
             </div>
