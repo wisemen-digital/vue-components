@@ -14,6 +14,17 @@ export const appModal = {
       path: './src/components/app/modal/appModal.style.ts',
       folder: 'app/modal',
     },
+    {
+      type: ComponentType.COMPOSABLES,
+      path: './src/composables/app/modal/useModal.ts',
+      folder: 'app/modal',
+    },
+    {
+      type: ComponentType.COMPOSABLES,
+      path: './src/composables/app/modal/useModal.type.ts',
+      folder: 'app/modal',
+    },
+
   ],
   dependencies: ['@headlessui/vue'],
   internalDependencies: [
