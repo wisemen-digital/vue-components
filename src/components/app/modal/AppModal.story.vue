@@ -12,7 +12,7 @@ interface State {
   isOpen: boolean
   hideCloseButton?: boolean
   hasIrremovableMask?: boolean
-  title: string
+  title?: string
   content?: string
   icon?: Icon
   size?: ModalProps['size']
@@ -55,11 +55,9 @@ const handleClick = (): void => {
         v-bind="state"
         v-model:is-open="state.isOpen"
       >
-        <template #content>
-          <AppText variant="subtext">
-            {{ state.content }}
-          </AppText>
-        </template>
+        <AppText variant="subtext">
+          {{ state.content }}
+        </AppText>
         <template #footer>
           <div class="flex gap-2">
             <AppButton variant="outline" @component:click="handleClick">

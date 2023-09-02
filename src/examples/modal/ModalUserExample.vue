@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RenderedExample from '@/examples/modal/RenderedExample.vue'
-import { useModal } from '@/components/app/modal/useModal'
+import { useModal } from '@/composables/app/modal/useModal'
 
 const { open, close, onClose, onOpen } = useModal({
   // any Component

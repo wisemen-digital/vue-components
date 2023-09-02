@@ -18,7 +18,7 @@ interface Props {
   hideCloseButton?: boolean
   hasIrremovableMask?: boolean
   size?: ModalProps['size']
-  title: string
+  title?: string
   icon?: Icon
 }
 
@@ -31,9 +31,8 @@ const {
 } = defineProps<Props>()
 
 defineSlots<{
-  icon?: () => any
-  default?: () => any
-  footer?: () => any
+  default?: (props: { close: () => void }) => any
+  footer?: (props: { close: () => void }) => any
 }>()
 
 const isOpen = defineModel<boolean>('isOpen', {
@@ -71,11 +70,9 @@ function handleClickCloseButton(): void {
           v-bind="modalTransition"
         >
           <DialogPanel :class="modalVariants({ size })">
-            <div class="flex justify-between gap-4">
+            <div v-if="title || icon" class="flex justify-between gap-4">
               <DialogTitle class="flex flex-col items-start justify-start gap-8">
-                <slot name="icon">
-                  <AppButton v-if="icon" :prefix-icon="icon" size="icon" variant="outline" is-rounded />
-                </slot>
+                <AppButton v-if="icon" :prefix-icon="icon" size="icon" variant="outline" is-rounded />
                 <AppText variant="heading">
                   {{ title }}
                 </AppText>
@@ -85,9 +82,8 @@ function handleClickCloseButton(): void {
               </button>
             </div>
 
-            <div>
-              <slot />
-            </div>
+            <slot :close="handleCloseModal" />
+            <slot name="footer" :close="handleCloseModal" />
           </DialogPanel>
         </TransitionChild>
       </div>

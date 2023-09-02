@@ -1,7 +1,6 @@
 import type { Ref } from 'vue'
 import { onUnmounted, ref, watch } from 'vue'
-import AppModal from './AppModal.vue'
-import type { RenderedModal, UseModalOptions, UseModalReturnType } from '@/components/app/modal/useModal.type'
+import type { RenderedModal, UseModalOptions, UseModalReturnType } from '@/composables/app/modal/useModal.type'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 
 const renderedModals = ref<RenderedModal[]>([])
@@ -12,7 +11,7 @@ export const useModalContainer = (): {
   return { modals: renderedModals }
 }
 
-export const useModal = <P>({ component, attrs, modalTitle, modalComponent = AppModal }: UseModalOptions<P>): UseModalReturnType => {
+export const useModal = <P>({ component, attrs, modalTitle }: UseModalOptions<P>): UseModalReturnType => {
   const id = generateUuid()
   let onOpenCb: (() => void) | null = null
   let onCloseCb: (() => void) | null = null
@@ -27,7 +26,6 @@ export const useModal = <P>({ component, attrs, modalTitle, modalComponent = App
 
   const modal = ref<RenderedModal>({
     id,
-    modalComponent,
     title: modalTitle,
     component,
     attrs,
