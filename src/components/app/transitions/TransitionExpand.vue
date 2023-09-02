@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const durationString = computed(() => `${props.duration}s`)
 
-const enter = (element: Element): void => {
+function enter(element: Element): void {
   const htmlElement: HTMLElement = element as HTMLElement
   const width = getComputedStyle(htmlElement).width
 
@@ -34,12 +34,12 @@ const enter = (element: Element): void => {
   })
 }
 
-const afterEnter = (element: Element): void => {
+function afterEnter(element: Element): void {
   const htmlElement: HTMLElement = element as HTMLElement
   htmlElement.style.height = 'auto'
 }
 
-const leave = (element: Element): void => {
+function leave(element: Element): void {
   const htmlElement: HTMLElement = element as HTMLElement
   const height = getComputedStyle(htmlElement).height
 

@@ -26,7 +26,7 @@ const {
 
 const emits = defineEmits(['component:click'])
 
-const handleClick = (): void => {
+function handleClick(): void {
   if (!isDisabled && !isLoading)
     emits('component:click')
 }

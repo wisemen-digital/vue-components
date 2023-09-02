@@ -27,7 +27,7 @@ const otherValues = ref<{
 }[]>(defaultValues.otherValues)
 const useColorInput = ref(false)
 
-const generateCss = (): string => {
+function generateCss(): string {
   const cssVariables = [...hslCssVariables.value.map(hsl => ({
     name: hsl.name,
     value: hexToCssVar(hsl.value),
@@ -38,7 +38,7 @@ const generateCss = (): string => {
   }, '')
 }
 
-const handleDownloadCss = (): void => {
+function handleDownloadCss(): void {
   const css = generateCss()
   const element = document.createElement('a')
   element.setAttribute('href', `data:text/css;charset=utf-8,${encodeURIComponent(css)}`)
@@ -52,7 +52,7 @@ const handleDownloadCss = (): void => {
   document.body.removeChild(element)
 }
 
-const handleCssUpload = (event: Event): void => {
+function handleCssUpload(event: Event): void {
   const file = (event?.target as HTMLInputElement)?.files?.[0]
   const reader = new FileReader()
   reader.onload = (event): void => {

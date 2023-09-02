@@ -1,7 +1,7 @@
-export const mapCssVariablesIntoArray = (globalsCss: string): {
+export function mapCssVariablesIntoArray(globalsCss: string): {
   name: string
   value: string
-}[] => {
+}[] {
   const globalsCssArray = globalsCss.split('\n')
   const globalsCssArrayFiltered = globalsCssArray
     .filter((item: string) => item.includes('--'))

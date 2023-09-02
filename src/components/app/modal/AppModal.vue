@@ -31,12 +31,12 @@ const isOpen = defineModel<boolean>('isOpen', {
   required: true,
 })
 
-const handleClickOutside = (): void => {
+function handleClickOutside(): void {
   if (!hasNoCloseOutside)
     isOpen.value = false
 }
 
-const handleClickCloseButton = (): void => {
+function handleClickCloseButton(): void {
   if (!hasNoCloseButton)
     isOpen.value = false
 }
