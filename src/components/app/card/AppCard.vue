@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import AppText from '@/components/app/text/AppText.vue'
+
 interface Props {
-  content?: string
   title?: string
   subtitle?: string
-  footer?: string
-  headerImage?: string
+  headerImageSrc?: string
 }
 
 defineProps<Props>()
@@ -22,7 +22,7 @@ defineSlots<{
   <section
     class="
     flex flex-col overflow-hidden
-    rounded-card border bg-card
+    rounded-card border border-border bg-card
     text-card-foreground shadow-card-shadow
     transition-shadow duration-300
     hover:shadow-card-hover-shadow
@@ -31,39 +31,29 @@ defineSlots<{
     <slot>
       <slot name="headerImage">
         <img
-          v-if="headerImage"
-          :src="headerImage"
+          v-if="headerImageSrc"
+          :src="headerImageSrc"
           class="h-48 w-full object-cover"
         >
       </slot>
       <div class="flex flex-col gap-4 p-4">
-        <slot name="header">
-          <div v-if="title || subtitle">
-            <AppText
-              v-if="title"
-              boldness="semibold"
-              variant="heading"
-            >
-              {{ title }}
-            </AppText>
-            <AppText
-              v-if="subtitle"
-              class="text-muted-foreground"
-            >
-              {{ subtitle }}
-            </AppText>
-          </div>
-        </slot>
-        <slot name="content">
-          <AppText v-if="content">
-            {{ content }}
+        <div v-if="title || subtitle">
+          <AppText
+            v-if="title"
+            boldness="semibold"
+            variant="heading"
+          >
+            {{ title }}
           </AppText>
-        </slot>
-        <slot name="footer">
-          <AppText v-if="footer">
-            {{ footer }}
+          <AppText
+            v-if="subtitle"
+            class="text-muted-foreground"
+          >
+            {{ subtitle }}
           </AppText>
-        </slot>
+        </div>
+        <slot name="content" />
+        <slot name="footer" />
       </div>
     </slot>
   </section>

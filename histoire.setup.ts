@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { createPinia } from 'pinia'
 import { defineSetupVue3 } from '@histoire/plugin-vue'
 import { createI18n } from 'vue-i18n'

@@ -6,7 +6,7 @@ export const tailwindConfig = {
   files: [
     {
       type: ComponentType.CONFIG,
-      path: './tailwind.config.js',
+      path: './tailwind.config.ts',
       folder: '',
     },
     {

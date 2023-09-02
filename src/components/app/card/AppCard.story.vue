@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
 import Image from '@/assets/test-image.jpg'
+import AppCard from '@/components/app/card/AppCard.vue'
+import AppButton from '@/components/app/button/AppButton.vue'
 
 interface State {
   title?: string
@@ -20,10 +23,7 @@ const state = reactive<State>({
   title: 'Modal title',
   subtitle: 'Modal subtitle',
   content: 'Modal content',
-  footer: 'Modal footer',
   headerImage: Image,
-
-  hasFooterButton: true,
   hasHeaderImage: true,
   hasContent: true,
   hasFooter: true,
@@ -47,19 +47,19 @@ const state = reactive<State>({
         <HstCheckbox v-model="state.hasHeaderImage" title="Has header image" />
         <HstCheckbox v-model="state.hasContent" title="Has content" />
         <HstCheckbox v-model="state.hasFooter" title="Has footer" />
-        <HstCheckbox v-model="state.hasFooterButton" title="Has footer button" />
         <HstCheckbox v-model="state.isCustom" title="Is custom" />
       </template>
 
       <div class="w-96 p-12">
         <AppCard
-          :header-image="state.hasHeaderImage ? state.headerImage : undefined"
+          :header-image-src="state.hasHeaderImage ? state.headerImage : undefined"
           :title="state.hasHeader ? state.title : undefined"
           :subtitle="state.hasHeader ? state.subtitle : undefined"
-          :footer="state.hasFooter ? state.footer : undefined"
-          :content="state.hasContent ? state.content : undefined"
         >
-          <template v-if="state.hasFooterButton" #footer>
+          <template v-if="state.hasContent" #content>
+            {{ state.content }}
+          </template>
+          <template v-if="state.hasFooter" #footer>
             <AppButton class="w-full">
               Button
             </AppButton>

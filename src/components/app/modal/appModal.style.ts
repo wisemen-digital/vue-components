@@ -1,5 +1,5 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
+import type { VariantProps } from '@/utils/tailwind/cva'
+import { cva } from '@/utils/tailwind/cva'
 
 export const sizeOptions = {
   default: 'w-[80ch] ',
@@ -14,8 +14,8 @@ export const loaderVariantOptions = {
 }
 
 export const modalVariants = cva(
-  'flex flex-col gap-4 rounded-modal bg-white p-6 text-left',
   {
+    base: 'flex flex-col gap-4 rounded-modal bg-white p-6 text-left',
     variants: {
       size: sizeOptions,
     },

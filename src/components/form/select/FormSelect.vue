@@ -8,7 +8,10 @@ import {
   ComboboxOptions,
 } from '@headlessui/vue'
 import { Float } from '@headlessui-float/vue'
+import { useI18n } from 'vue-i18n'
+import FormSelectOption from '@/components/form/select/FormSelectOption.vue'
 import { scaleBounceTransition } from '@/transitions'
+import TransitionExpand from '@/components/app/transitions/TransitionExpand.vue'
 
 interface Props {
   hasSearch?: boolean
@@ -52,11 +55,12 @@ const hasValue = computed<boolean>(() => {
 const getDisplayValue = (value: T | T[] | undefined): string => {
   if (value === undefined)
     return ''
+
   else
-  if (Array.isArray(value))
-    return value.map(value => displayFunction(value)).join(', ')
-  else
-    return displayFunction(value)
+    if (Array.isArray(value))
+      return value.map(value => displayFunction(value)).join(', ')
+    else
+      return displayFunction(value)
 }
 
 const filteredItems = computed(() => {
