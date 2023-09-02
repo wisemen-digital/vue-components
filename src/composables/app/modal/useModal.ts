@@ -5,13 +5,13 @@ import { generateUuid } from '@/utils/uuid/generateUuid'
 
 const renderedModals = ref<RenderedModal[]>([])
 
-export const useModalContainer = (): {
+export function useModalContainer(): {
   modals: Ref<RenderedModal[]>
-} => {
+} {
   return { modals: renderedModals }
 }
 
-export const useModal = <P>({ component, attrs, modalTitle }: UseModalOptions<P>): UseModalReturnType => {
+export function useModal<P>({ component, attrs, modalTitle }: UseModalOptions<P>): UseModalReturnType {
   const id = generateUuid()
   let onOpenCb: (() => void) | null = null
   let onCloseCb: (() => void) | null = null
