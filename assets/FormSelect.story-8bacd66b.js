@@ -1,6 +1,6 @@
 import { as as defineComponent, a_ as computed, av as openBlock, aT as createElementBlock, aD as toDisplayString, aM as normalizeClass, aF as mergeModels, b8 as useI18n, aG as useModel, a$ as ref, b9 as Je, ba as Ge, bb as Qe, bc as Ye, bd as Xe, aP as Ie, aO as createCommentVNode, az as createBaseVNode, ay as createVNode, ax as withCtx, aE as mergeProps, aN as renderSlot, aw as createBlock, aC as createTextVNode, aU as Fragment, aV as renderList, aA as normalizeProps, aB as guardReactiveProps, au as resolveComponent } from "./vendor-3589f703.js";
 import { c as cva, _ as _export_sfc } from "./cva-94ab58b2.js";
-import { T as TransitionExpand } from "./TransitionExpand-287a5d79.js";
+import { T as TransitionExpand } from "./TransitionExpand-cc0485f9.js";
 const scaleBounceTransition = {
   enterFromClass: "scale-0 opacity-0",
   enterActiveClass: "transition-scale-bounce",
@@ -100,35 +100,35 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     const model = useModel(__props, "modelValue");
     const isMultiple = computed(() => Array.isArray(model.value));
     const search = ref("");
-    const getKeyValue = (value) => {
+    function getKeyValue(value) {
       if (__props.keyValue)
         return String(value[__props.keyValue]);
       else
         return String(value);
-    };
+    }
     const hasValue = computed(() => {
       if (Array.isArray(model.value))
         return model.value.length > 0;
       else
         return model.value !== null && model.value !== void 0 && model.value !== "";
     });
-    const getDisplayValue = (value) => {
+    function getDisplayValue(value) {
       if (value === void 0)
         return "";
       else if (Array.isArray(value))
         return value.map((value2) => __props.displayFunction(value2)).join(", ");
       else
         return __props.displayFunction(value);
-    };
+    }
     const filteredItems = computed(() => {
       return __props.items.filter((item) => {
         var _a;
         return (_a = getDisplayValue(item)) == null ? void 0 : _a.toLowerCase().includes(search.value.toLowerCase());
       });
     });
-    const handleSearchChange = (event) => {
+    function handleSearchChange(event) {
       search.value = event.target.value;
-    };
+    }
     const isEmpty = computed(() => {
       return filteredItems.value.length === 0;
     });

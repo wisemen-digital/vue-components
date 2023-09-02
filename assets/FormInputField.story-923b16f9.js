@@ -1,7 +1,7 @@
 import { as as defineComponent, av as openBlock, aT as createElementBlock, aN as renderSlot, aC as createTextVNode, aD as toDisplayString, aZ as inject, a_ as computed, a$ as ref, b0 as watch, b1 as onMounted, b2 as onUnmounted, aF as mergeModels, b3 as useSlots, aG as useModel, b4 as useClipboard, aO as createCommentVNode, az as createBaseVNode, aM as normalizeClass, b5 as withDirectives, b6 as vModelDynamic, ay as createVNode, ax as withCtx, aw as createBlock, at as reactive, au as resolveComponent, aE as mergeProps } from "./vendor-3589f703.js";
 import { _ as _export_sfc, c as cva } from "./cva-94ab58b2.js";
-import { A as AppIcon, i as iconNames } from "./AppIcon-48a17fc8.js";
-import { T as TransitionExpand } from "./TransitionExpand-287a5d79.js";
+import { A as AppIcon, i as iconNames } from "./AppIcon-773d861c.js";
+import { T as TransitionExpand } from "./TransitionExpand-cc0485f9.js";
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "FormError",
   props: {
@@ -103,11 +103,11 @@ function generateUuid() {
   });
 }
 const FormInputGroupContext = Symbol("FormGroupContext");
-const useFormInputGroupContext = () => {
+function useFormInputGroupContext() {
   const context = inject(FormInputGroupContext, null);
   return context;
-};
-const useFormInputGroup = ({ model, uuid, isDisabled, element }) => {
+}
+function useFormInputGroup({ model, uuid, isDisabled, element }) {
   const context = useFormInputGroupContext();
   const propsRef = computed(() => ({
     value: typeof model.value === "number" ? model.value : 0,
@@ -136,7 +136,7 @@ const useFormInputGroup = ({ model, uuid, isDisabled, element }) => {
     if (context)
       context.unregisterOption(uuid);
   });
-};
+}
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "FormInputField",
   props: mergeModels({
@@ -197,9 +197,9 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     if (__props.type === "number")
       useFormInputGroup({ model, element, uuid, isDisabled: computed(() => __props.isDisabled) });
     const passwordShown = ref(false);
-    const togglePasswordShown = () => {
+    function togglePasswordShown() {
       passwordShown.value = !passwordShown.value;
-    };
+    }
     const inputType = computed(() => __props.type === "password" && passwordShown.value ? "text" : __props.type);
     const __returned__ = { emits, slots, model, uuid, element, errorShown, hasFrontContent, hasBackContent, currentExtraContent, currentStatus, copyModel, copy, passwordShown, togglePasswordShown, inputType, FormError, get inputFieldExtraContentVariants() {
       return inputFieldExtraContentVariants;

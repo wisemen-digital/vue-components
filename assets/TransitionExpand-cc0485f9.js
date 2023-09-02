@@ -13,7 +13,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       "a5b2af37-durationString": durationString.value
     }));
     const durationString = computed(() => `${props.duration}s`);
-    const enter = (element) => {
+    function enter(element) {
       const htmlElement = element;
       const width = getComputedStyle(htmlElement).width;
       htmlElement.style.width = width;
@@ -29,12 +29,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       requestAnimationFrame(() => {
         htmlElement.style.height = height;
       });
-    };
-    const afterEnter = (element) => {
+    }
+    function afterEnter(element) {
       const htmlElement = element;
       htmlElement.style.height = "auto";
-    };
-    const leave = (element) => {
+    }
+    function leave(element) {
       const htmlElement = element;
       const height = getComputedStyle(htmlElement).height;
       htmlElement.style.height = height;
@@ -42,7 +42,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       requestAnimationFrame(() => {
         htmlElement.style.height = "0";
       });
-    };
+    }
     const __returned__ = { props, durationString, enter, afterEnter, leave };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;

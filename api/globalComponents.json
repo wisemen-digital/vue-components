@@ -155,7 +155,7 @@
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "import * as allIcons from '@/icons/icons'\n\nconst convertIconName = (iconName: string): Icon => {\n  const name = iconName.replace('Icon', '')\n  return name.charAt(0).toLowerCase() + name.slice(1) as Icon\n}\n\nexport const iconNames = Object.keys(allIcons)\n  .map(convertIconName)\n\nexport const iconComponents = Object.keys(allIcons).reduce((acc, key) => {\n  const iconComponent = allIcons[key as keyof typeof allIcons]\n  return {\n    ...acc,\n    [convertIconName(key)]: iconComponent,\n  }\n}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)\n\nexport type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never\nexport type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>\n\nexport const icons = iconComponents\n"
+        "content": "import * as allIcons from '@/icons/icons'\n\nfunction convertIconName(iconName: string): Icon {\n  const name = iconName.replace('Icon', '')\n  return name.charAt(0).toLowerCase() + name.slice(1) as Icon\n}\n\nexport const iconNames = Object.keys(allIcons)\n  .map(convertIconName)\n\nexport const iconComponents = Object.keys(allIcons).reduce((acc, key) => {\n  const iconComponent = allIcons[key as keyof typeof allIcons]\n  return {\n    ...acc,\n    [convertIconName(key)]: iconComponent,\n  }\n}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)\n\nexport type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never\nexport type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>\n\nexport const icons = iconComponents\n"
       }
     ]
   },

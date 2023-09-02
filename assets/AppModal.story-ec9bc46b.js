@@ -1,7 +1,7 @@
 import { as as defineComponent, aF as mergeModels, aG as useModel, aH as Ue, aI as Ge, aJ as Ve, aK as he, aL as Se, av as openBlock, aw as createBlock, ax as withCtx, ay as createVNode, az as createBaseVNode, aM as normalizeClass, aN as renderSlot, aO as createCommentVNode, aC as createTextVNode, aD as toDisplayString, at as reactive, au as resolveComponent, aE as mergeProps } from "./vendor-3589f703.js";
-import { A as AppButton } from "./AppButton-c18b25a7.js";
+import { A as AppButton } from "./AppButton-ec4ed1ea.js";
 import { A as AppText } from "./AppText-e4378662.js";
-import { A as AppIcon, i as iconNames } from "./AppIcon-48a17fc8.js";
+import { A as AppIcon, i as iconNames } from "./AppIcon-773d861c.js";
 import { c as cva, _ as _export_sfc } from "./cva-94ab58b2.js";
 const sizeOptions = {
   default: "w-[80ch] ",
@@ -38,14 +38,14 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose }) {
     __expose();
     const isOpen = useModel(__props, "isOpen");
-    const handleClickOutside = () => {
+    function handleClickOutside() {
       if (!__props.hasNoCloseOutside)
         isOpen.value = false;
-    };
-    const handleClickCloseButton = () => {
+    }
+    function handleClickCloseButton() {
       if (!__props.hasNoCloseButton)
         isOpen.value = false;
-    };
+    }
     const __returned__ = { isOpen, handleClickOutside, handleClickCloseButton, get Dialog() {
       return Ue;
     }, get DialogPanel() {
@@ -194,9 +194,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       icon: void 0,
       content: "Content here Lorem ipsum dolor sit amet consectetur adipisicing elit. Error temporibus nulla ab eius enim similique atque officia? Porro consectetur, ea iusto perspiciatis ullam nisi minus, inventore iste quisquam placeat nemo?Lorem ipsum dolor sit amet consectetur adipisicing elit. In quidem ullam ipsam minima, vitae commodi expedita corporis aliquid illum quis laudantium adipisci laboriosam est maxime quae enim aliquam sed ipsa.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam iste, adipisci sapiente odit beatae architecto aspernatur perferendis quis. Esse dicta, minima non aperiam sunt ad veniam ab velit officiis magni."
     });
-    const handleClick = () => {
+    function handleClick() {
       state.isOpen = true;
-    };
+    }
     const __returned__ = { state, handleClick, AppModal, AppText, AppButton, get modalSizeOptions() {
       return modalSizeOptions;
     }, get iconNames() {

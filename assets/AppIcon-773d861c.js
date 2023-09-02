@@ -565,10 +565,10 @@ const allIcons = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProp
   ThreeDotsIcon,
   UploadIcon
 }, Symbol.toStringTag, { value: "Module" }));
-const convertIconName = (iconName) => {
+function convertIconName(iconName) {
   const name = iconName.replace("Icon", "");
   return name.charAt(0).toLowerCase() + name.slice(1);
-};
+}
 const iconNames = Object.keys(allIcons).map(convertIconName);
 const iconComponents = Object.keys(allIcons).reduce((acc, key) => {
   const iconComponent = allIcons[key];

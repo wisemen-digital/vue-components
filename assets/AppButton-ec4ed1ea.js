@@ -1,5 +1,5 @@
 import { as as defineComponent, av as openBlock, aT as createElementBlock, aO as createCommentVNode, ay as createVNode, ax as withCtx, az as createBaseVNode, aU as Fragment, aV as renderList, aA as normalizeProps, aB as guardReactiveProps, aW as Transition, aN as renderSlot, aM as normalizeClass, aw as createBlock } from "./vendor-3589f703.js";
-import { A as AppIcon } from "./AppIcon-48a17fc8.js";
+import { A as AppIcon } from "./AppIcon-773d861c.js";
 import { _ as _export_sfc, c as cva } from "./cva-94ab58b2.js";
 const fadeTransition = {
   enterActiveClass: "transition-opacity ease duration-300",
@@ -115,10 +115,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["component:click"],
   setup(__props, { expose: __expose, emit: emits }) {
     __expose();
-    const handleClick = () => {
+    function handleClick() {
       if (!__props.isDisabled && !__props.isLoading)
         emits("component:click");
-    };
+    }
     const __returned__ = { emits, handleClick, AppIcon, AppButtonLoader, get buttonVariants() {
       return buttonVariants;
     } };
