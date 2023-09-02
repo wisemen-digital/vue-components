@@ -98,7 +98,7 @@ if (type === 'number')
 
 // Password logic
 const passwordShown = ref(false)
-const togglePasswordShown = (): void => {
+function togglePasswordShown(): void {
   passwordShown.value = !passwordShown.value
 }
 const inputType = computed<string>(() => (type === 'password' && passwordShown.value) ? 'text' : type)

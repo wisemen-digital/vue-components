@@ -4,7 +4,6 @@
         "plugin:tailwindcss/recommended"
     ],
     "rules": {
-        "antfu/top-level-function": "off",
         "vue/no-undef-components": [
             "error",
             {

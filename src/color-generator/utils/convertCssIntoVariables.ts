@@ -1,7 +1,7 @@
 import { mapCssVariableToHsl, mapHslToHex } from './colors'
 import { mapCssVariablesIntoArray } from './mapCssVariablesIntoArray'
 
-export const convertCssIntoVariables = (globalsCss: any): {
+export function convertCssIntoVariables(globalsCss: any): {
   hslCssVariables: {
     name: string
     value: string
@@ -10,7 +10,7 @@ export const convertCssIntoVariables = (globalsCss: any): {
     name: string
     value: string
   }[]
-} => {
+} {
   const keyValueCssVariables = mapCssVariablesIntoArray(globalsCss ?? '')
 
   const colorValues = keyValueCssVariables.filter(item => item.value.includes('%'))

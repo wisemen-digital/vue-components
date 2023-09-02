@@ -14,7 +14,7 @@ export interface RandomData {
   }
 }
 
-export const dataFactory = (amount: number): RandomData[] => {
+export function dataFactory(amount: number): RandomData[] {
   const data: RandomData[] = []
   for (let i = 0; i < amount; i++) {
     data.push({
