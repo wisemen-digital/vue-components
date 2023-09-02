@@ -17,6 +17,7 @@ export interface TransitionClasses {
 
 }
 
+export * from '@/transitions/scaleBounce.transition'
 export * from '@/transitions/snackbar.transition'
 export * from '@/transitions/fade.transition'
 export * from '@/transitions/list.transition'

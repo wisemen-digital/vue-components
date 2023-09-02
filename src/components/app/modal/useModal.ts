@@ -1,5 +1,7 @@
+import type { Ref } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 import AppModal from './AppModal.vue'
-import type { RenderedModal, UseModalOptions, UseModalReturnType } from './useModal.type'
+import type { RenderedModal, UseModalOptions, UseModalReturnType } from '@/components/app/modal/useModal.type'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 
 const renderedModals = ref<RenderedModal[]>([])

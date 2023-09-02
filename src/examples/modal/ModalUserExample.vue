@@ -9,7 +9,7 @@ const { open, close, onClose, onOpen } = useModal({
   // Props and emits typed
   attrs: {
     name: 'John Doe',
-    onClickedName: (name) => {
+    onClickedName: (name: string) => {
       console.error(name)
     },
     onCancel: () => {
