@@ -11,10 +11,8 @@ defineProps<Props>()
 
 defineSlots<{
   content?: () => any
-  header?: () => any
   default?: () => any
   footer?: () => any
-  headerImage?: () => any
 }>()
 </script>
 
@@ -29,13 +27,11 @@ defineSlots<{
     focus:shadow-card-hover-shadow"
   >
     <slot>
-      <slot name="headerImage">
-        <img
-          v-if="headerImageSrc"
-          :src="headerImageSrc"
-          class="h-48 w-full object-cover"
-        >
-      </slot>
+      <img
+        v-if="headerImageSrc"
+        :src="headerImageSrc"
+        class="h-48 w-full object-cover"
+      >
       <div class="flex flex-col gap-4 p-4">
         <div v-if="title || subtitle">
           <AppText
