@@ -3,9 +3,6 @@ import { ref } from 'vue'
 import { convertCssIntoVariables } from '../utils/convertCssIntoVariables'
 import { hexToCssVar } from '../utils/colors'
 
-// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
-// @ts-ignore // TODO fix this with an api call
-import GlobalConfigJson from '@/../public/api/globalConfig.json'
 import FormInputField from '@/components/form/field/FormInputField.vue'
 import AppButton from '@/components/app/button/AppButton.vue'
 
