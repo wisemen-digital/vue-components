@@ -66008,7 +66008,7 @@ const resource = {
 const setupVue3 = defineSetupVue3(async ({ app }) => {
   const isIframe = window.self !== window.top;
   if (isIframe || true) {
-    await __vitePreload(() => import("./globals-c0b7f557.js"), true ? [] : void 0);
+    await __vitePreload(() => import("./globals-516b0c6c.js"), true ? [] : void 0);
     await __vitePreload(() => import("./transitions-898f1213.js"), true ? [] : void 0);
   }
   const pinia = createPinia();
