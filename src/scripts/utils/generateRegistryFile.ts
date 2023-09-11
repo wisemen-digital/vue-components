@@ -1,10 +1,10 @@
-import fs from 'node:fs'
+import fs, { existsSync } from 'node:fs'
 import path, { basename, dirname } from 'node:path'
 import process from 'node:process'
 
 import type { Component } from '../componentsTypes'
 
-export const generateRegistryFile = (components: Component[], fileName: string): void => {
+export async function generateRegistryFile(components: Component[], fileName: string): Promise<void> {
   const payload = components
     .map((component) => {
       const files = component.files?.map((file) => {
@@ -33,6 +33,10 @@ export const generateRegistryFile = (components: Component[], fileName: string):
 
       return 0
     })
+
+  const writeDir = path.join(process.cwd(), 'public/api')
+  if (!existsSync(path.resolve(writeDir)))
+    fs.mkdirSync(path.resolve(writeDir), { recursive: true })
 
   fs.writeFileSync(
     path.join(process.cwd(), `public/api/${fileName}.json`),

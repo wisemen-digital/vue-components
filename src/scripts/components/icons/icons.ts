@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import type { Component } from '../../componentsTypes'
 import { ComponentName, ComponentType } from '../../componentsTypes'
 
-const generateIconsFiles = (): Component['files'] => {
+function generateIconsFiles(): Component['files'] {
   const iconsFiles: Component['files'] = []
 
   const files = fs.readdirSync('./src/icons')

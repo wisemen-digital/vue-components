@@ -4,7 +4,20 @@
         "plugin:tailwindcss/recommended"
     ],
     "rules": {
-        "antfu/top-level-function": "off",
+        "vue/no-undef-components": [
+            "error",
+            {
+                "ignorePatterns": [
+                    "HstText",
+                    "HstButton",
+                    "HstInput",
+                    "HstSelect",
+                    "HstCheckbox",
+                    "Story",
+                    "Variant"
+                ]
+            }
+        ],
         "@typescript-eslint/explicit-function-return-type": "error",
         "tailwindcss/migration-from-tailwind-2": "off",
         "vue/custom-event-name-casing": [

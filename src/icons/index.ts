@@ -1,6 +1,6 @@
-import * as allIcons from './icons'
+import * as allIcons from '@/icons/icons'
 
-const convertIconName = (iconName: string): Icon => {
+function convertIconName(iconName: string): Icon {
   const name = iconName.replace('Icon', '')
   return name.charAt(0).toLowerCase() + name.slice(1) as Icon
 }

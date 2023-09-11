@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
 import { textBoldnessOptions, textTruncateOptions, textVariantOptions } from '@/components/app/text/appText.style'
 import type { TextProps } from '@/components/app/text/appText.style'
 import AppText from '@/components/app/text/AppText.vue'

@@ -1,3 +1,5 @@
+import type { Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useFormInputGroupContext } from '@/composables/form/group/useFormInputGroupContext'
 import type { Option } from '@/composables/form/group/useFormInputGroupContext'
 
@@ -8,7 +10,7 @@ export interface UseFormInputGroupParams {
   element: Ref<HTMLElement | undefined>
 }
 
-export const useFormInputGroup = ({ model, uuid, isDisabled, element }: UseFormInputGroupParams): void => {
+export function useFormInputGroup({ model, uuid, isDisabled, element }: UseFormInputGroupParams): void {
   const context = useFormInputGroupContext()
   const propsRef = computed(() => ({
     value: typeof model.value === 'number' ? model.value : 0,

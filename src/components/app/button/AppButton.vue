@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { twMerge } from 'tailwind-merge'
+import AppIcon from '@/components/app/icon/AppIcon.vue'
+import AppButtonLoader from '@/components/app/button/AppButtonLoader.vue'
 import { buttonVariants } from '@/components/app/button/appButton.style'
 import type { ButtonProps } from '@/components/app/button/appButton.style'
 import type { Icon } from '@/icons'
@@ -25,14 +26,14 @@ const {
 
 const emits = defineEmits(['component:click'])
 
-const handleClick = (): void => {
+function handleClick(): void {
   if (!isDisabled && !isLoading)
     emits('component:click')
 }
 </script>
 
 <template>
-  <button :class="twMerge(buttonVariants({ variant, size, isRounded }))" @click="handleClick">
+  <button :class="buttonVariants({ variant, size, isRounded })" @click="handleClick">
     <div :class="{ 'opacity-30': isLoading }" class="flex items-center gap-2 whitespace-nowrap transition-opacity">
       <slot name="prefix">
         <AppIcon v-if="prefixIcon" :icon="prefixIcon" />

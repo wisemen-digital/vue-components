@@ -17,8 +17,9 @@ export interface TransitionClasses {
 
 }
 
-export * from './scaleBounce.transition'
-export * from './snackbar.transition'
-export * from './fade.transition'
-export * from './list.transition'
-export * from './staticList.transition'
+export * from '@/transitions/scaleBounce.transition'
+export * from '@/transitions/snackbar.transition'
+export * from '@/transitions/fade.transition'
+export * from '@/transitions/list.transition'
+export * from '@/transitions/staticList.transition'
+export * from '@/transitions/popover.transition'

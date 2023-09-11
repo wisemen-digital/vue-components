@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { twMerge } from 'tailwind-merge'
+import { useAttrs } from 'vue'
 import { textVariants } from '@/components/app/text/appText.style'
 import type { TextProps } from '@/components/app/text/appText.style'
 
@@ -23,7 +23,7 @@ const attrs = useAttrs()
 </script>
 
 <template>
-  <Component :is="as" :class="twMerge(textVariants({ variant, boldness, truncate: numberOfLines }), attrs?.class as string)">
+  <Component :is="as" :class="textVariants({ variant, boldness, truncate: numberOfLines, class: attrs?.class as string })">
     <slot />
   </Component>
 </template>

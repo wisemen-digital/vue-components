@@ -8,7 +8,10 @@ import {
   ComboboxOptions,
 } from '@headlessui/vue'
 import { Float } from '@headlessui-float/vue'
+import { useI18n } from 'vue-i18n'
+import FormSelectOption from '@/components/form/select/FormSelectOption.vue'
 import { scaleBounceTransition } from '@/transitions'
+import TransitionExpand from '@/components/app/transitions/TransitionExpand.vue'
 
 interface Props {
   hasSearch?: boolean
@@ -35,7 +38,7 @@ const model = defineModel<TModel>('modelValue', { required: true })
 const isMultiple = computed<boolean>(() => Array.isArray(model.value))
 const search = ref<string>('')
 
-const getKeyValue = (value: T): string => {
+function getKeyValue(value: T): string {
   if (keyValue)
     return String(value[keyValue])
   else
@@ -49,9 +52,10 @@ const hasValue = computed<boolean>(() => {
     return model.value !== null && model.value !== undefined && model.value !== ''
 })
 
-const getDisplayValue = (value: T | T[] | undefined): string => {
+function getDisplayValue(value: T | T[] | undefined): string {
   if (value === undefined)
     return ''
+
   else
     if (Array.isArray(value))
       return value.map(value => displayFunction(value)).join(', ')
@@ -65,7 +69,7 @@ const filteredItems = computed(() => {
   })
 })
 
-const handleSearchChange = (event: Event): void => {
+function handleSearchChange(event: Event): void {
   search.value = (event.target as HTMLInputElement).value
 }
 

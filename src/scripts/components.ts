@@ -1,6 +1,8 @@
 import { appButton } from './components/app/appButton'
 import { appModal } from './components/app/appModal'
 import { appText } from './components/app/appText'
+import { appPopover } from './components/app/appPopover'
+import { appIcon } from './components/app/appIcon'
 
 import { formError } from './components/form/formError'
 import { formInputField } from './components/form/formInputField'
@@ -15,6 +17,8 @@ export const components: Component[] = [
   appModal,
   appText,
   appRadio,
+  appPopover,
+  appIcon,
 
   formError,
   formInputField,

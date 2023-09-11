@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
+import AppModal from '@/components/app/modal/AppModal.vue'
+import AppText from '@/components/app/text/AppText.vue'
+import AppButton from '@/components/app/button/AppButton.vue'
 import type { ModalProps } from '@/components/app/modal/appModal.style'
 import { modalSizeOptions } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
@@ -23,7 +27,7 @@ const state = reactive<State>({
   content: 'Content here Lorem ipsum dolor sit amet consectetur adipisicing elit. Error temporibus nulla ab eius enim similique atque officia? Porro consectetur, ea iusto perspiciatis ullam nisi minus, inventore iste quisquam placeat nemo?Lorem ipsum dolor sit amet consectetur adipisicing elit. In quidem ullam ipsam minima, vitae commodi expedita corporis aliquid illum quis laudantium adipisci laboriosam est maxime quae enim aliquam sed ipsa.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam iste, adipisci sapiente odit beatae architecto aspernatur perferendis quis. Esse dicta, minima non aperiam sunt ad veniam ab velit officiis magni.',
 })
 
-const handleClick = (): void => {
+function handleClick(): void {
   state.isOpen = true
 }
 </script>
@@ -57,16 +61,14 @@ const handleClick = (): void => {
           </AppText>
         </template>
         <template #footer>
-          <AppButtonGroup>
-            <template #default="{ bindings }">
-              <AppButton variant="outline" v-bind="bindings" @component:click="handleClick">
-                Cancel
-              </AppButton>
-              <AppButton v-bind="bindings" @component:click="handleClick">
-                Confirm
-              </AppButton>
-            </template>
-          </AppButtonGroup>
+          <div class="flex gap-2">
+            <AppButton variant="outline" @component:click="handleClick">
+              Cancel
+            </AppButton>
+            <AppButton @component:click="handleClick">
+              Confirm
+            </AppButton>
+          </div>
         </template>
       </AppModal>
     </Variant>

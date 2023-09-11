@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-import { twMerge } from 'tailwind-merge'
+import { computed } from 'vue'
 import { formSelectOptionVariants } from '@/components/form/select/formSelect.style'
 import type { FormSelectOptionProps } from '@/components/form/select/formSelect.style'
 
@@ -28,7 +28,7 @@ const optionStatus = computed<FormSelectOptionProps['variant']>(() => {
 </script>
 
 <template>
-  <button :class="twMerge(formSelectOptionVariants({ variant: optionStatus, selected: isSelected, active: isActive }))">
+  <button :class="formSelectOptionVariants({ variant: optionStatus, selected: isSelected, active: isActive })">
     {{ displayFunction(value as T) }}
   </button>
 </template>

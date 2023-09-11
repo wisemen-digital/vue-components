@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+import { tailwindcssOriginSafelist } from '@headlessui-float/vue'
+import type { Config } from 'tailwindcss'
 
-const { tailwindcssOriginSafelist } = require('@headlessui-float/vue')
-
-module.exports = {
+export default {
   content: [
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
@@ -136,4 +136,4 @@ module.exports = {
       },
     },
   },
-}
+} satisfies Config
