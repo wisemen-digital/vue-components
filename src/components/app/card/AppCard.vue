@@ -1,56 +1,18 @@
 <script setup lang="ts">
-import AppText from '@/components/app/text/AppText.vue'
+import { twMerge } from '@/utils//tailwind/twMerge'
 
-interface Props {
-  title?: string
-  subtitle?: string
-  headerImageSrc?: string
-}
-
-defineProps<Props>()
-
-defineSlots<{
-  content?: () => any
-  default?: () => any
-  footer?: () => any
+const props = defineProps<{
+  class?: string
 }>()
 </script>
 
 <template>
   <section
-    class="
-    flex flex-col overflow-hidden
-    rounded-card border border-border bg-card
-    text-card-foreground shadow-card-shadow
-    transition-shadow duration-300
-    hover:shadow-card-hover-shadow
-    focus:shadow-card-hover-shadow"
+    :class="twMerge(
+      'overflow-hidden rounded-card border border-border bg-card text-card-foreground shadow-card-shadow transition-shadow duration-300 hover:shadow-card-hover-shadow focus:shadow-card-hover-shadow',
+      props.class,
+    )"
   >
-    <slot>
-      <img
-        v-if="headerImageSrc"
-        :src="headerImageSrc"
-        class="h-48 w-full object-cover"
-      >
-      <div class="flex flex-col gap-4 p-4">
-        <div v-if="title || subtitle">
-          <AppText
-            v-if="title"
-            boldness="semibold"
-            variant="heading"
-          >
-            {{ title }}
-          </AppText>
-          <AppText
-            v-if="subtitle"
-            class="text-muted-foreground"
-          >
-            {{ subtitle }}
-          </AppText>
-        </div>
-        <slot name="content" />
-        <slot name="footer" />
-      </div>
-    </slot>
+    <slot />
   </section>
 </template>

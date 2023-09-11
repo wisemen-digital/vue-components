@@ -15,9 +15,10 @@
     "story:dev": "histoire dev",
     "story:build": "pnpm build:components && histoire build",
     "story:preview": "histoire preview",
-    "test": "vitest",
+    "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "color-generator:dev": "vite color-generator"
+    "color-generator:dev": "vite color-generator",
+    "prerelease": "pnpm typecheck && pnpm lint && pnpm test && pnpm build:components && pnpm story:build && pnpm production"
   },
   "dependencies": {
     "@changesets/cli": "^2.26.2",
