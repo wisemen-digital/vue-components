@@ -1,6 +1,6 @@
-import { as as defineComponent, a_ as computed, av as openBlock, aT as createElementBlock, aD as toDisplayString, aM as normalizeClass, aF as mergeModels, b8 as useI18n, aG as useModel, a$ as ref, b9 as Je, ba as Ge, bb as Qe, bc as Ye, bd as Xe, aP as Ie, aO as createCommentVNode, az as createBaseVNode, ay as createVNode, ax as withCtx, aE as mergeProps, aN as renderSlot, aw as createBlock, aC as createTextVNode, aU as Fragment, aV as renderList, aA as normalizeProps, aB as guardReactiveProps, au as resolveComponent } from "./vendor-ec9417f5.js";
-import { c as cva, _ as _export_sfc } from "./cva-b5c074fa.js";
-import { T as TransitionExpand } from "./TransitionExpand-61619a12.js";
+import { as as defineComponent, a_ as computed, av as openBlock, aT as createElementBlock, aD as toDisplayString, aM as normalizeClass, aF as mergeModels, b8 as useI18n, aG as useModel, a$ as ref, b9 as Je, ba as Ge, bb as Qe, bc as Ye, bd as Xe, aP as ze, aO as createCommentVNode, az as createBaseVNode, ay as createVNode, ax as withCtx, aE as mergeProps, aN as renderSlot, aw as createBlock, aC as createTextVNode, aU as Fragment, aV as renderList, aA as normalizeProps, aB as guardReactiveProps, au as resolveComponent } from "./vendor-d13bc8dc.js";
+import { c as cva, _ as _export_sfc } from "./cva-cc64827e.js";
+import { T as TransitionExpand } from "./TransitionExpand-65d49bc4.js";
 const scaleBounceTransition = {
   enterFromClass: "scale-0 opacity-0",
   enterActiveClass: "transition-scale-bounce",
@@ -143,7 +143,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     }, get ComboboxOptions() {
       return Xe;
     }, get Float() {
-      return Ie;
+      return ze;
     }, FormSelectOption, get scaleBounceTransition() {
       return scaleBounceTransition;
     }, TransitionExpand };
@@ -316,13 +316,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       "Katelyn Rohan"
     ];
     const selectedPerson = ref();
-    const selectedPeople = ref([]);
     const state = {
       hasSearch: true,
       isDisabled: false,
       isLoading: false
     };
-    const __returned__ = { people, selectedPerson, selectedPeople, state, FormSelect };
+    const __returned__ = { people, selectedPerson, state, FormSelect };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -359,14 +358,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.selectedPerson = $event),
               items: $setup.people,
               class: "w-80"
-            }, $setup.state), null, 16, ["modelValue"]),
-            createVNode($setup["FormSelect"], mergeProps($setup.state, {
-              modelValue: $setup.selectedPeople,
-              "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.selectedPeople = $event),
-              class: "w-80",
-              items: $setup.people,
-              "display-function": (value) => value
-            }), null, 16, ["modelValue", "display-function"])
+            }, $setup.state), null, 16, ["modelValue"])
           ])
         ]),
         _: 1

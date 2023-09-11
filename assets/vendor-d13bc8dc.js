@@ -30,9 +30,9 @@ const isSet$1 = (val) => toTypeString$2(val) === "[object Set]";
 const isFunction$3 = (val) => typeof val === "function";
 const isString$3 = (val) => typeof val === "string";
 const isSymbol$1 = (val) => typeof val === "symbol";
-const isObject$3 = (val) => val !== null && typeof val === "object";
+const isObject$4 = (val) => val !== null && typeof val === "object";
 const isPromise$1 = (val) => {
-  return isObject$3(val) && isFunction$3(val.then) && isFunction$3(val.catch);
+  return isObject$4(val) && isFunction$3(val.then) && isFunction$3(val.catch);
 };
 const objectToString$2 = Object.prototype.toString;
 const toTypeString$2 = (value) => objectToString$2.call(value);
@@ -109,7 +109,7 @@ function normalizeStyle$1(value) {
     return res;
   } else if (isString$3(value)) {
     return value;
-  } else if (isObject$3(value)) {
+  } else if (isObject$4(value)) {
     return value;
   }
 }
@@ -137,7 +137,7 @@ function normalizeClass$1(value) {
         res += normalized + " ";
       }
     }
-  } else if (isObject$3(value)) {
+  } else if (isObject$4(value)) {
     for (const name in value) {
       if (value[name]) {
         res += name + " ";
@@ -168,7 +168,7 @@ function includeBooleanAttr$1(value) {
   return !!value || value === "";
 }
 const toDisplayString$2 = (val) => {
-  return isString$3(val) ? val : val == null ? "" : isArray$3(val) || isObject$3(val) && (val.toString === objectToString$2 || !isFunction$3(val.toString)) ? JSON.stringify(val, replacer$1, 2) : String(val);
+  return isString$3(val) ? val : val == null ? "" : isArray$3(val) || isObject$4(val) && (val.toString === objectToString$2 || !isFunction$3(val.toString)) ? JSON.stringify(val, replacer$1, 2) : String(val);
 };
 const replacer$1 = (_key, val) => {
   if (val && val.__v_isRef) {
@@ -184,7 +184,7 @@ const replacer$1 = (_key, val) => {
     return {
       [`Set(${val.size})`]: [...val.values()]
     };
-  } else if (isObject$3(val) && !isArray$3(val) && !isPlainObject$3(val)) {
+  } else if (isObject$4(val) && !isArray$3(val) && !isPlainObject$3(val)) {
     return String(val);
   }
   return val;
@@ -602,7 +602,7 @@ function createGetter$1(isReadonly2 = false, shallow = false) {
     if (isRef$1(res)) {
       return targetIsArray && isIntegerKey$1(key) ? res : res.value;
     }
-    if (isObject$3(res)) {
+    if (isObject$4(res)) {
       return isReadonly2 ? readonly$1(res) : reactive$1(res);
     }
     return res;
@@ -1048,7 +1048,7 @@ function shallowReadonly$1(target) {
   );
 }
 function createReactiveObject$1(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
-  if (!isObject$3(target)) {
+  if (!isObject$4(target)) {
     {
       console.warn(`value cannot be made reactive: ${String(target)}`);
     }
@@ -1095,8 +1095,8 @@ function markRaw$1(value) {
   def$1(value, "__v_skip", true);
   return value;
 }
-const toReactive$1 = (value) => isObject$3(value) ? reactive$1(value) : value;
-const toReadonly$1 = (value) => isObject$3(value) ? readonly$1(value) : value;
+const toReactive$1 = (value) => isObject$4(value) ? reactive$1(value) : value;
+const toReadonly$1 = (value) => isObject$4(value) ? readonly$1(value) : value;
 function trackRefValue$1(ref2) {
   if (shouldTrack$1 && activeEffect$1) {
     ref2 = toRaw$1(ref2);
@@ -1221,7 +1221,7 @@ function toRef$1(source, key, defaultValue) {
     return source;
   } else if (isFunction$3(source)) {
     return new GetterRefImpl$1(source);
-  } else if (isObject$3(source) && arguments.length > 1) {
+  } else if (isObject$4(source) && arguments.length > 1) {
     return propertyToRef$1(source, key, defaultValue);
   } else {
     return ref$1(source);
@@ -1990,7 +1990,7 @@ function normalizeEmitsOptions$1(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$3(comp)) {
+    if (isObject$4(comp)) {
       cache2.set(comp, null);
     }
     return null;
@@ -2000,7 +2000,7 @@ function normalizeEmitsOptions$1(comp, appContext, asMixin = false) {
   } else {
     extend$1(normalized, raw);
   }
-  if (isObject$3(comp)) {
+  if (isObject$4(comp)) {
     cache2.set(comp, normalized);
   }
   return normalized;
@@ -2549,7 +2549,7 @@ function createPathGetter$1(ctx, path) {
   };
 }
 function traverse$1(value, seen2) {
-  if (!isObject$3(value) || value["__v_skip"]) {
+  if (!isObject$4(value) || value["__v_skip"]) {
     return value;
   }
   seen2 = seen2 || /* @__PURE__ */ new Set();
@@ -3010,7 +3010,7 @@ function defineAsyncComponent$1(source) {
       if (comp && (comp.__esModule || comp[Symbol.toStringTag] === "Module")) {
         comp = comp.default;
       }
-      if (comp && !isObject$3(comp) && !isFunction$3(comp)) {
+      if (comp && !isObject$4(comp) && !isFunction$3(comp)) {
         throw new Error(`Invalid async component load result: ${comp}`);
       }
       resolvedComp = comp;
@@ -3256,7 +3256,7 @@ function renderList$1(source, renderItem, cache2, index) {
     for (let i2 = 0; i2 < source; i2++) {
       ret[i2] = renderItem(i2 + 1, i2, void 0, cached && cached[i2]);
     }
-  } else if (isObject$3(source)) {
+  } else if (isObject$4(source)) {
     if (source[Symbol.iterator]) {
       ret = Array.from(
         source,
@@ -3651,7 +3651,7 @@ function applyOptions$1(instance) {
         `data() returned a Promise - note data() cannot be async; If you intend to perform data fetching before component renders, use async setup() + <Suspense>.`
       );
     }
-    if (!isObject$3(data)) {
+    if (!isObject$4(data)) {
       warn$4(`data() should return an object.`);
     } else {
       instance.data = reactive$1(data);
@@ -3762,7 +3762,7 @@ function resolveInjections$1(injectOptions, ctx, checkDuplicateProperties = NOOP
   for (const key in injectOptions) {
     const opt = injectOptions[key];
     let injected;
-    if (isObject$3(opt)) {
+    if (isObject$4(opt)) {
       if ("default" in opt) {
         injected = inject$1(
           opt.from || key,
@@ -3809,7 +3809,7 @@ function createWatcher$1(raw, ctx, publicThis, key) {
     }
   } else if (isFunction$3(raw)) {
     watch$1(getter, raw.bind(publicThis));
-  } else if (isObject$3(raw)) {
+  } else if (isObject$4(raw)) {
     if (isArray$3(raw)) {
       raw.forEach((r2) => createWatcher$1(r2, ctx, publicThis, key));
     } else {
@@ -3849,7 +3849,7 @@ function resolveMergedOptions$1(instance) {
     }
     mergeOptions$2(resolved, base, optionMergeStrategies);
   }
-  if (isObject$3(base)) {
+  if (isObject$4(base)) {
     cache2.set(base, resolved);
   }
   return resolved;
@@ -3992,7 +3992,7 @@ function createAppAPI$1(render2, hydrate) {
     if (!isFunction$3(rootComponent)) {
       rootComponent = extend$1({}, rootComponent);
     }
-    if (rootProps != null && !isObject$3(rootProps)) {
+    if (rootProps != null && !isObject$4(rootProps)) {
       warn$4(`root props passed to app.mount() must be an object.`);
       rootProps = null;
     }
@@ -4422,7 +4422,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$3(comp)) {
+    if (isObject$4(comp)) {
       cache2.set(comp, EMPTY_ARR$1);
     }
     return EMPTY_ARR$1;
@@ -4438,7 +4438,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
       }
     }
   } else if (raw) {
-    if (!isObject$3(raw)) {
+    if (!isObject$4(raw)) {
       warn$4(`invalid props options`, raw);
     }
     for (const key in raw) {
@@ -4465,7 +4465,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
     }
   }
   const res = [normalized, needCastKeys];
-  if (isObject$3(comp)) {
+  if (isObject$4(comp)) {
     cache2.set(comp, res);
   }
   return res;
@@ -4548,7 +4548,7 @@ function assertType$1(value, type) {
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
-    valid = isObject$3(value);
+    valid = isObject$4(value);
   } else if (expectedType === "Array") {
     valid = isArray$3(value);
   } else if (expectedType === "null") {
@@ -4820,7 +4820,7 @@ function isSupported$1() {
   }
   return supported$3;
 }
-function initFeatureFlags$2() {
+function initFeatureFlags$3() {
   const needWarn = [];
   if (needWarn.length) {
     const multi = needWarn.length > 1;
@@ -4837,7 +4837,7 @@ function createRenderer$1(options) {
 }
 function baseCreateRenderer$1(options, createHydrationFns) {
   {
-    initFeatureFlags$2();
+    initFeatureFlags$3();
   }
   const target = getGlobalThis$2();
   target.__VUE__ = true;
@@ -6463,14 +6463,14 @@ function _createVNode$1(type, props = null, children = null, patchFlag = 0, dyna
     if (klass && !isString$3(klass)) {
       props.class = normalizeClass$1(klass);
     }
-    if (isObject$3(style2)) {
+    if (isObject$4(style2)) {
       if (isProxy$1(style2) && !isArray$3(style2)) {
         style2 = extend$1({}, style2);
       }
       props.style = normalizeStyle$1(style2);
     }
   }
-  const shapeFlag = isString$3(type) ? 1 : isSuspense$1(type) ? 128 : isTeleport$1(type) ? 64 : isObject$3(type) ? 4 : isFunction$3(type) ? 2 : 0;
+  const shapeFlag = isString$3(type) ? 1 : isSuspense$1(type) ? 128 : isTeleport$1(type) ? 64 : isObject$4(type) ? 4 : isFunction$3(type) ? 2 : 0;
   if (shapeFlag & 4 && isProxy$1(type)) {
     type = toRaw$1(type);
     warn$4(
@@ -6869,7 +6869,7 @@ function handleSetupResult$1(instance, setupResult, isSSR) {
     } else {
       instance.render = setupResult;
     }
-  } else if (isObject$3(setupResult)) {
+  } else if (isObject$4(setupResult)) {
     if (isVNode$2(setupResult)) {
       warn$4(
         `setup() should not return VNodes directly - return a render function instead.`
@@ -7057,7 +7057,7 @@ const computed$2 = (getterOrOptions, debugOptions) => {
 function h$5(type, propsOrChildren, children) {
   const l2 = arguments.length;
   if (l2 === 2) {
-    if (isObject$3(propsOrChildren) && !isArray$3(propsOrChildren)) {
+    if (isObject$4(propsOrChildren) && !isArray$3(propsOrChildren)) {
       if (isVNode$2(propsOrChildren)) {
         return createVNode$1(type, null, [propsOrChildren]);
       }
@@ -7099,7 +7099,7 @@ function initCustomFormatter$1() {
   const keywordStyle = { style: "color:#9d288c" };
   const formatter = {
     header(obj) {
-      if (!isObject$3(obj)) {
+      if (!isObject$4(obj)) {
         return null;
       }
       if (obj.__isVue) {
@@ -7218,7 +7218,7 @@ function initCustomFormatter$1() {
       return ["span", stringStyle, JSON.stringify(v2)];
     } else if (typeof v2 === "boolean") {
       return ["span", keywordStyle, v2];
-    } else if (isObject$3(v2)) {
+    } else if (isObject$4(v2)) {
       return ["object", { object: asRaw ? toRaw$1(v2) : v2 }];
     } else {
       return ["span", stringStyle, String(v2)];
@@ -7239,7 +7239,7 @@ function initCustomFormatter$1() {
   }
   function isKeyOfType(Comp, key, type) {
     const opts = Comp[type];
-    if (isArray$3(opts) && opts.includes(key) || isObject$3(opts) && key in opts) {
+    if (isArray$3(opts) && opts.includes(key) || isObject$4(opts) && key in opts) {
       return true;
     }
     if (Comp.extends && isKeyOfType(Comp.extends, key, type)) {
@@ -7818,7 +7818,7 @@ function resolveTransitionProps$1(rawProps) {
 function normalizeDuration$1(duration) {
   if (duration == null) {
     return null;
-  } else if (isObject$3(duration)) {
+  } else if (isObject$4(duration)) {
     return [NumberOf$1(duration.enter), NumberOf$1(duration.leave)];
   } else {
     const n2 = NumberOf$1(duration);
@@ -12712,9 +12712,9 @@ const isDate$1 = (val) => toTypeString$1(val) === "[object Date]";
 const isFunction$2 = (val) => typeof val === "function";
 const isString$2 = (val) => typeof val === "string";
 const isSymbol = (val) => typeof val === "symbol";
-const isObject$2 = (val) => val !== null && typeof val === "object";
+const isObject$3 = (val) => val !== null && typeof val === "object";
 const isPromise = (val) => {
-  return isObject$2(val) && isFunction$2(val.then) && isFunction$2(val.catch);
+  return isObject$3(val) && isFunction$2(val.then) && isFunction$2(val.catch);
 };
 const objectToString$1 = Object.prototype.toString;
 const toTypeString$1 = (value) => objectToString$1.call(value);
@@ -12791,7 +12791,7 @@ function normalizeStyle(value) {
     return res;
   } else if (isString$2(value)) {
     return value;
-  } else if (isObject$2(value)) {
+  } else if (isObject$3(value)) {
     return value;
   }
 }
@@ -12819,7 +12819,7 @@ function normalizeClass(value) {
         res += normalized + " ";
       }
     }
-  } else if (isObject$2(value)) {
+  } else if (isObject$3(value)) {
     for (const name in value) {
       if (value[name]) {
         res += name + " ";
@@ -12876,8 +12876,8 @@ function looseEqual(a2, b3) {
   if (aValidType || bValidType) {
     return aValidType && bValidType ? looseCompareArrays(a2, b3) : false;
   }
-  aValidType = isObject$2(a2);
-  bValidType = isObject$2(b3);
+  aValidType = isObject$3(a2);
+  bValidType = isObject$3(b3);
   if (aValidType || bValidType) {
     if (!aValidType || !bValidType) {
       return false;
@@ -12901,7 +12901,7 @@ function looseIndexOf(arr, val) {
   return arr.findIndex((item) => looseEqual(item, val));
 }
 const toDisplayString$1 = (val) => {
-  return isString$2(val) ? val : val == null ? "" : isArray$2(val) || isObject$2(val) && (val.toString === objectToString$1 || !isFunction$2(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
+  return isString$2(val) ? val : val == null ? "" : isArray$2(val) || isObject$3(val) && (val.toString === objectToString$1 || !isFunction$2(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
 };
 const replacer = (_key, val) => {
   if (val && val.__v_isRef) {
@@ -12917,7 +12917,7 @@ const replacer = (_key, val) => {
     return {
       [`Set(${val.size})`]: [...val.values()]
     };
-  } else if (isObject$2(val) && !isArray$2(val) && !isPlainObject$1(val)) {
+  } else if (isObject$3(val) && !isArray$2(val) && !isPlainObject$1(val)) {
     return String(val);
   }
   return val;
@@ -13335,7 +13335,7 @@ function createGetter(isReadonly2 = false, shallow = false) {
     if (isRef(res)) {
       return targetIsArray && isIntegerKey(key) ? res : res.value;
     }
-    if (isObject$2(res)) {
+    if (isObject$3(res)) {
       return isReadonly2 ? readonly(res) : reactive(res);
     }
     return res;
@@ -13781,7 +13781,7 @@ function shallowReadonly(target) {
   );
 }
 function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
-  if (!isObject$2(target)) {
+  if (!isObject$3(target)) {
     {
       console.warn(`value cannot be made reactive: ${String(target)}`);
     }
@@ -13828,8 +13828,8 @@ function markRaw(value) {
   def(value, "__v_skip", true);
   return value;
 }
-const toReactive = (value) => isObject$2(value) ? reactive(value) : value;
-const toReadonly = (value) => isObject$2(value) ? readonly(value) : value;
+const toReactive = (value) => isObject$3(value) ? reactive(value) : value;
+const toReadonly = (value) => isObject$3(value) ? readonly(value) : value;
 function trackRefValue(ref2) {
   if (shouldTrack && activeEffect) {
     ref2 = toRaw(ref2);
@@ -13944,7 +13944,7 @@ function toRef(source, key, defaultValue) {
     return source;
   } else if (isFunction$2(source)) {
     return new GetterRefImpl(source);
-  } else if (isObject$2(source) && arguments.length > 1) {
+  } else if (isObject$3(source) && arguments.length > 1) {
     return propertyToRef(source, key, defaultValue);
   } else {
     return ref(source);
@@ -14713,7 +14713,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$2(comp)) {
+    if (isObject$3(comp)) {
       cache2.set(comp, null);
     }
     return null;
@@ -14723,7 +14723,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
   } else {
     extend(normalized, raw);
   }
-  if (isObject$2(comp)) {
+  if (isObject$3(comp)) {
     cache2.set(comp, normalized);
   }
   return normalized;
@@ -15287,10 +15287,10 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, isSVG, slotSc
     }
   }
 }
-let hasWarned = false;
+let hasWarned$1 = false;
 function createSuspenseBoundary(vnode, parentSuspense, parentComponent, container, hiddenContainer, anchor, isSVG, slotScopeIds, optimized, rendererInternals, isHydrating = false) {
-  if (!hasWarned) {
-    hasWarned = true;
+  if (!hasWarned$1) {
+    hasWarned$1 = true;
     console[console.info ? "info" : "log"](
       `<Suspense> is an experimental feature and its API will likely change.`
     );
@@ -15820,7 +15820,7 @@ function createPathGetter(ctx, path) {
   };
 }
 function traverse(value, seen2) {
-  if (!isObject$2(value) || value["__v_skip"]) {
+  if (!isObject$3(value) || value["__v_skip"]) {
     return value;
   }
   seen2 = seen2 || /* @__PURE__ */ new Set();
@@ -16281,7 +16281,7 @@ function defineAsyncComponent(source) {
       if (comp && (comp.__esModule || comp[Symbol.toStringTag] === "Module")) {
         comp = comp.default;
       }
-      if (comp && !isObject$2(comp) && !isFunction$2(comp)) {
+      if (comp && !isObject$3(comp) && !isFunction$2(comp)) {
         throw new Error(`Invalid async component load result: ${comp}`);
       }
       resolvedComp = comp;
@@ -16523,7 +16523,7 @@ function renderList(source, renderItem, cache2, index) {
     for (let i2 = 0; i2 < source; i2++) {
       ret[i2] = renderItem(i2 + 1, i2, void 0, cached && cached[i2]);
     }
-  } else if (isObject$2(source)) {
+  } else if (isObject$3(source)) {
     if (source[Symbol.iterator]) {
       ret = Array.from(
         source,
@@ -16972,7 +16972,7 @@ function applyOptions(instance) {
         `data() returned a Promise - note data() cannot be async; If you intend to perform data fetching before component renders, use async setup() + <Suspense>.`
       );
     }
-    if (!isObject$2(data)) {
+    if (!isObject$3(data)) {
       warn$2(`data() should return an object.`);
     } else {
       instance.data = reactive(data);
@@ -17083,7 +17083,7 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP) 
   for (const key in injectOptions) {
     const opt = injectOptions[key];
     let injected;
-    if (isObject$2(opt)) {
+    if (isObject$3(opt)) {
       if ("default" in opt) {
         injected = inject(
           opt.from || key,
@@ -17130,7 +17130,7 @@ function createWatcher(raw, ctx, publicThis, key) {
     }
   } else if (isFunction$2(raw)) {
     watch(getter, raw.bind(publicThis));
-  } else if (isObject$2(raw)) {
+  } else if (isObject$3(raw)) {
     if (isArray$2(raw)) {
       raw.forEach((r2) => createWatcher(r2, ctx, publicThis, key));
     } else {
@@ -17170,7 +17170,7 @@ function resolveMergedOptions(instance) {
     }
     mergeOptions$1(resolved, base, optionMergeStrategies);
   }
-  if (isObject$2(base)) {
+  if (isObject$3(base)) {
     cache2.set(base, resolved);
   }
   return resolved;
@@ -17313,7 +17313,7 @@ function createAppAPI(render2, hydrate) {
     if (!isFunction$2(rootComponent)) {
       rootComponent = extend({}, rootComponent);
     }
-    if (rootProps != null && !isObject$2(rootProps)) {
+    if (rootProps != null && !isObject$3(rootProps)) {
       warn$2(`root props passed to app.mount() must be an object.`);
       rootProps = null;
     }
@@ -17740,7 +17740,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   if (!raw && !hasExtends) {
-    if (isObject$2(comp)) {
+    if (isObject$3(comp)) {
       cache2.set(comp, EMPTY_ARR);
     }
     return EMPTY_ARR;
@@ -17756,7 +17756,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
       }
     }
   } else if (raw) {
-    if (!isObject$2(raw)) {
+    if (!isObject$3(raw)) {
       warn$2(`invalid props options`, raw);
     }
     for (const key in raw) {
@@ -17783,7 +17783,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
     }
   }
   const res = [normalized, needCastKeys];
-  if (isObject$2(comp)) {
+  if (isObject$3(comp)) {
     cache2.set(comp, res);
   }
   return res;
@@ -17866,7 +17866,7 @@ function assertType(value, type) {
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
-    valid = isObject$2(value);
+    valid = isObject$3(value);
   } else if (expectedType === "Array") {
     valid = isArray$2(value);
   } else if (expectedType === "null") {
@@ -18138,7 +18138,7 @@ function isSupported() {
   }
   return supported$1;
 }
-function initFeatureFlags$1() {
+function initFeatureFlags$2() {
   const needWarn = [];
   if (needWarn.length) {
     const multi = needWarn.length > 1;
@@ -18155,7 +18155,7 @@ function createRenderer(options) {
 }
 function baseCreateRenderer(options, createHydrationFns) {
   {
-    initFeatureFlags$1();
+    initFeatureFlags$2();
   }
   const target = getGlobalThis$1();
   target.__VUE__ = true;
@@ -20040,14 +20040,14 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
     if (klass && !isString$2(klass)) {
       props.class = normalizeClass(klass);
     }
-    if (isObject$2(style2)) {
+    if (isObject$3(style2)) {
       if (isProxy(style2) && !isArray$2(style2)) {
         style2 = extend({}, style2);
       }
       props.style = normalizeStyle(style2);
     }
   }
-  const shapeFlag = isString$2(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$2(type) ? 4 : isFunction$2(type) ? 2 : 0;
+  const shapeFlag = isString$2(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$3(type) ? 4 : isFunction$2(type) ? 2 : 0;
   if (shapeFlag & 4 && isProxy(type)) {
     type = toRaw(type);
     warn$2(
@@ -20441,7 +20441,7 @@ function handleSetupResult(instance, setupResult, isSSR) {
     } else {
       instance.render = setupResult;
     }
-  } else if (isObject$2(setupResult)) {
+  } else if (isObject$3(setupResult)) {
     if (isVNode$1(setupResult)) {
       warn$2(
         `setup() should not return VNodes directly - return a render function instead.`
@@ -20629,7 +20629,7 @@ const computed = (getterOrOptions, debugOptions) => {
 function h$4(type, propsOrChildren, children) {
   const l2 = arguments.length;
   if (l2 === 2) {
-    if (isObject$2(propsOrChildren) && !isArray$2(propsOrChildren)) {
+    if (isObject$3(propsOrChildren) && !isArray$2(propsOrChildren)) {
       if (isVNode$1(propsOrChildren)) {
         return createVNode(type, null, [propsOrChildren]);
       }
@@ -20671,7 +20671,7 @@ function initCustomFormatter() {
   const keywordStyle = { style: "color:#9d288c" };
   const formatter = {
     header(obj) {
-      if (!isObject$2(obj)) {
+      if (!isObject$3(obj)) {
         return null;
       }
       if (obj.__isVue) {
@@ -20790,7 +20790,7 @@ function initCustomFormatter() {
       return ["span", stringStyle, JSON.stringify(v2)];
     } else if (typeof v2 === "boolean") {
       return ["span", keywordStyle, v2];
-    } else if (isObject$2(v2)) {
+    } else if (isObject$3(v2)) {
       return ["object", { object: asRaw ? toRaw(v2) : v2 }];
     } else {
       return ["span", stringStyle, String(v2)];
@@ -20811,7 +20811,7 @@ function initCustomFormatter() {
   }
   function isKeyOfType(Comp, key, type) {
     const opts = Comp[type];
-    if (isArray$2(opts) && opts.includes(key) || isObject$2(opts) && key in opts) {
+    if (isArray$2(opts) && opts.includes(key) || isObject$3(opts) && key in opts) {
       return true;
     }
     if (Comp.extends && isKeyOfType(Comp.extends, key, type)) {
@@ -21390,7 +21390,7 @@ function resolveTransitionProps(rawProps) {
 function normalizeDuration(duration) {
   if (duration == null) {
     return null;
-  } else if (isObject$2(duration)) {
+  } else if (isObject$3(duration)) {
     return [NumberOf(duration.enter), NumberOf(duration.leave)];
   } else {
     const n2 = NumberOf(duration);
@@ -25772,13 +25772,13 @@ class Dc {
     return this.to - this.from;
   }
 }
-let $e = /* @__PURE__ */ "lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,2,,4,z,,u,r,2j,b,1m,9,9,,o,4,,9,,3,,5,17,3,3b,f,,w,1j,,,,4,8,4,,3,7,a,2,t,,1m,,,,2,4,8,,9,,a,2,q,,2,2,1l,,4,2,4,2,2,3,3,,u,2,3,,b,2,1l,,4,5,,2,4,,k,2,m,6,,,1m,,,2,,4,8,,7,3,a,2,u,,1n,,,,c,,9,,14,,3,,1l,3,5,3,,4,7,2,b,2,t,,1m,,2,,2,,3,,5,2,7,2,b,2,s,2,1l,2,,,2,4,8,,9,,a,2,t,,20,,4,,2,3,,,8,,29,,2,7,c,8,2q,,2,9,b,6,22,2,r,,,,,,1j,e,,5,,2,5,b,,10,9,,2u,4,,6,,2,2,2,p,2,4,3,g,4,d,,2,2,6,,f,,jj,3,qa,3,t,3,t,2,u,2,1s,2,,7,8,,2,b,9,,19,3,3b,2,y,,3a,3,4,2,9,,6,3,63,2,2,,1m,,,7,,,,,2,8,6,a,2,,1c,h,1r,4,1c,7,,,5,,14,9,c,2,w,4,2,2,,3,1k,,,2,3,,,3,1m,8,2,2,48,3,,d,,7,4,,6,,3,2,5i,1m,,5,ek,,5f,x,2da,3,3x,,2o,w,fe,6,2x,2,n9w,4,,a,w,2,28,2,7k,,3,,4,,p,2,5,,47,2,q,i,d,,12,8,p,b,1a,3,1c,,2,4,2,2,13,,1v,6,2,2,2,2,c,,8,,1b,,1f,,,3,2,2,5,2,,,16,2,8,,6m,,2,,4,,fn4,,kh,g,g,g,a6,2,gt,,6a,,45,5,1ae,3,,2,5,4,14,3,4,,4l,2,fx,4,ar,2,49,b,4w,,1i,f,1k,3,1d,4,2,2,1x,3,10,5,,8,1q,,c,2,1g,9,a,4,2,,2n,3,2,,,2,6,,4g,,3,8,l,2,1l,2,,,,,m,,e,7,3,5,5f,8,2,3,,,n,,29,,2,6,,,2,,,2,,2,6j,,2,4,6,2,,2,r,2,2d,8,2,,,2,2y,,,,2,6,,,2t,3,2,4,,5,77,9,,2,6t,,a,2,,,4,,40,4,2,2,4,,w,a,14,6,2,4,8,,9,6,2,3,1a,d,,2,ba,7,,6,,,2a,m,2,7,,2,,2,3e,6,3,,,2,,7,,,20,2,3,,,,9n,2,f0b,5,1n,7,t4,,1r,4,29,,f5k,2,43q,,,3,4,5,8,8,2,7,u,4,44,3,1iz,1j,4,1e,8,,e,,m,5,,f,11s,7,,h,2,7,,2,,5,79,7,c5,4,15s,7,31,7,240,5,gx7k,2o,3k,6o".split(",").map((n2) => n2 ? parseInt(n2, 36) : 1);
-for (let n2 = 1; n2 < $e.length; n2++)
-  $e[n2] += $e[n2 - 1];
+let $e$1 = /* @__PURE__ */ "lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,2,,4,z,,u,r,2j,b,1m,9,9,,o,4,,9,,3,,5,17,3,3b,f,,w,1j,,,,4,8,4,,3,7,a,2,t,,1m,,,,2,4,8,,9,,a,2,q,,2,2,1l,,4,2,4,2,2,3,3,,u,2,3,,b,2,1l,,4,5,,2,4,,k,2,m,6,,,1m,,,2,,4,8,,7,3,a,2,u,,1n,,,,c,,9,,14,,3,,1l,3,5,3,,4,7,2,b,2,t,,1m,,2,,2,,3,,5,2,7,2,b,2,s,2,1l,2,,,2,4,8,,9,,a,2,t,,20,,4,,2,3,,,8,,29,,2,7,c,8,2q,,2,9,b,6,22,2,r,,,,,,1j,e,,5,,2,5,b,,10,9,,2u,4,,6,,2,2,2,p,2,4,3,g,4,d,,2,2,6,,f,,jj,3,qa,3,t,3,t,2,u,2,1s,2,,7,8,,2,b,9,,19,3,3b,2,y,,3a,3,4,2,9,,6,3,63,2,2,,1m,,,7,,,,,2,8,6,a,2,,1c,h,1r,4,1c,7,,,5,,14,9,c,2,w,4,2,2,,3,1k,,,2,3,,,3,1m,8,2,2,48,3,,d,,7,4,,6,,3,2,5i,1m,,5,ek,,5f,x,2da,3,3x,,2o,w,fe,6,2x,2,n9w,4,,a,w,2,28,2,7k,,3,,4,,p,2,5,,47,2,q,i,d,,12,8,p,b,1a,3,1c,,2,4,2,2,13,,1v,6,2,2,2,2,c,,8,,1b,,1f,,,3,2,2,5,2,,,16,2,8,,6m,,2,,4,,fn4,,kh,g,g,g,a6,2,gt,,6a,,45,5,1ae,3,,2,5,4,14,3,4,,4l,2,fx,4,ar,2,49,b,4w,,1i,f,1k,3,1d,4,2,2,1x,3,10,5,,8,1q,,c,2,1g,9,a,4,2,,2n,3,2,,,2,6,,4g,,3,8,l,2,1l,2,,,,,m,,e,7,3,5,5f,8,2,3,,,n,,29,,2,6,,,2,,,2,,2,6j,,2,4,6,2,,2,r,2,2d,8,2,,,2,2y,,,,2,6,,,2t,3,2,4,,5,77,9,,2,6t,,a,2,,,4,,40,4,2,2,4,,w,a,14,6,2,4,8,,9,6,2,3,1a,d,,2,ba,7,,6,,,2a,m,2,7,,2,,2,3e,6,3,,,2,,7,,,20,2,3,,,,9n,2,f0b,5,1n,7,t4,,1r,4,29,,f5k,2,43q,,,3,4,5,8,8,2,7,u,4,44,3,1iz,1j,4,1e,8,,e,,m,5,,f,11s,7,,h,2,7,,2,,5,79,7,c5,4,15s,7,31,7,240,5,gx7k,2o,3k,6o".split(",").map((n2) => n2 ? parseInt(n2, 36) : 1);
+for (let n2 = 1; n2 < $e$1.length; n2++)
+  $e$1[n2] += $e$1[n2 - 1];
 function Tc(n2) {
-  for (let t2 = 1; t2 < $e.length; t2 += 2)
-    if ($e[t2] > n2)
-      return $e[t2 - 1] <= n2;
+  for (let t2 = 1; t2 < $e$1.length; t2 += 2)
+    if ($e$1[t2] > n2)
+      return $e$1[t2 - 1] <= n2;
   return false;
 }
 function pr(n2) {
@@ -26897,10 +26897,10 @@ class Ec {
   type.
   */
   of(t2) {
-    return new _$2(this, t2);
+    return new _$3(this, t2);
   }
 }
-let _$2 = class _2 {
+let _$3 = class _2 {
   /**
   @internal
   */
@@ -26946,8 +26946,8 @@ let _$2 = class _2 {
     return i2;
   }
 };
-_$2.reconfigure = /* @__PURE__ */ _$2.define();
-_$2.appendConfig = /* @__PURE__ */ _$2.define();
+_$3.reconfigure = /* @__PURE__ */ _$3.define();
+_$3.appendConfig = /* @__PURE__ */ _$3.define();
 class ht {
   constructor(t2, e2, i2, s2, r2, o2) {
     this.startState = t2, this.changes = e2, this.selection = i2, this.effects = s2, this.annotations = r2, this.scrollIntoView = o2, this._doc = null, this._state = null, i2 && il(i2, e2.newLength), r2.some((l2) => l2.type == ht.time) || (this.annotations = r2.concat(ht.time.of(Date.now())));
@@ -27045,7 +27045,7 @@ function fl(n2, t2, e2) {
   return e2 ? (s2 = t2.changes, r2 = Z.empty(t2.changes.length), o2 = n2.changes.compose(t2.changes)) : (s2 = t2.changes.map(n2.changes), r2 = n2.changes.mapDesc(t2.changes, true), o2 = n2.changes.compose(s2)), {
     changes: o2,
     selection: t2.selection ? t2.selection.map(r2) : (i2 = n2.selection) === null || i2 === void 0 ? void 0 : i2.map(s2),
-    effects: _$2.mapEffects(n2.effects, s2).concat(_$2.mapEffects(t2.effects, r2)),
+    effects: _$3.mapEffects(n2.effects, s2).concat(_$3.mapEffects(t2.effects, r2)),
     annotations: n2.annotations.length ? n2.annotations.concat(t2.annotations) : t2.annotations,
     scrollIntoView: n2.scrollIntoView || t2.scrollIntoView
   };
@@ -27089,7 +27089,7 @@ function Ic(n2) {
       let o2 = n2.changes.filter(e2);
       s2 = o2.changes, r2 = o2.filtered.mapDesc(o2.changes).invertedDesc;
     }
-    n2 = ht.create(t2, s2, n2.selection && n2.selection.map(r2), _$2.mapEffects(n2.effects, r2), n2.annotations, n2.scrollIntoView);
+    n2 = ht.create(t2, s2, n2.selection && n2.selection.map(r2), _$3.mapEffects(n2.effects, r2), n2.annotations, n2.scrollIntoView);
   }
   let i2 = t2.facet(hl);
   for (let s2 = i2.length - 1; s2 >= 0; s2--) {
@@ -27181,7 +27181,7 @@ let N$4 = class N2 {
   applyTransaction(t2) {
     let e2 = this.config, { base: i2, compartments: s2 } = e2;
     for (let o2 of t2.effects)
-      o2.is(yi.reconfigure) ? (e2 && (s2 = /* @__PURE__ */ new Map(), e2.compartments.forEach((l2, h2) => s2.set(h2, l2)), e2 = null), s2.set(o2.value.compartment, o2.value.extension)) : o2.is(_$2.reconfigure) ? (e2 = null, i2 = o2.value) : o2.is(_$2.appendConfig) && (e2 = null, i2 = Fe(i2).concat(o2.value));
+      o2.is(yi.reconfigure) ? (e2 && (s2 = /* @__PURE__ */ new Map(), e2.compartments.forEach((l2, h2) => s2.set(h2, l2)), e2 = null), s2.set(o2.value.compartment, o2.value.extension)) : o2.is(_$3.reconfigure) ? (e2 = null, i2 = o2.value) : o2.is(_$3.appendConfig) && (e2 = null, i2 = Fe(i2).concat(o2.value));
     let r2;
     e2 ? r2 = t2.startState.values.slice() : (e2 = es.resolve(i2, s2, this), r2 = new N2(e2, this.doc, this.selection, e2.dynamicSlots.map(() => null), (l2, h2) => h2.reconfigure(l2, this), null).values), new N2(e2, t2.newDoc, t2.newSelection, r2, (o2, l2) => l2.update(o2, t2), t2);
   }
@@ -27213,7 +27213,7 @@ let N$4 = class N2 {
       for (let u2 = 0; u2 < l2; u2++)
         r2[u2] = r2[u2].map(c2);
       let f2 = s2.mapDesc(a2, true);
-      r2.push(h2.range.map(f2)), s2 = s2.compose(c2), o2 = _$2.mapEffects(o2, c2).concat(_$2.mapEffects(Fe(h2.effects), f2));
+      r2.push(h2.range.map(f2)), s2 = s2.compose(c2), o2 = _$3.mapEffects(o2, c2).concat(_$3.mapEffects(Fe(h2.effects), f2));
     }
     return {
       changes: s2,
@@ -27421,7 +27421,7 @@ N$4.languageData = nl;
 N$4.changeFilter = ll;
 N$4.transactionFilter = hl;
 N$4.transactionExtender = al;
-yi.reconfigure = /* @__PURE__ */ _$2.define();
+yi.reconfigure = /* @__PURE__ */ _$3.define();
 function Cs(n2, t2, e2 = {}) {
   let i2 = {};
   for (let s2 of n2)
@@ -28370,7 +28370,7 @@ function Te$1(n2, t2, e2 = t2) {
   let i2 = Ar || (Ar = document.createRange());
   return i2.setEnd(n2, e2), i2.setStart(n2, t2), i2;
 }
-function ze(n2, t2, e2) {
+function ze$1(n2, t2, e2) {
   let i2 = { key: t2, code: t2, keyCode: e2, which: e2, cancelable: true }, s2 = new KeyboardEvent("keydown", i2);
   s2.synthetic = true, n2.dispatchEvent(s2);
   let r2 = new KeyboardEvent("keyup", i2);
@@ -28763,7 +28763,7 @@ class Kt extends $$1 {
     return sf(this.dom, t2, e2);
   }
 }
-let ie$1 = class ie2 extends $$1 {
+class ie extends $$1 {
   constructor(t2, e2 = [], i2 = 0) {
     super(), this.mark = t2, this.children = e2, this.length = i2;
     for (let s2 of e2)
@@ -28785,7 +28785,7 @@ let ie$1 = class ie2 extends $$1 {
     this.dom ? this.flags & 4 && this.setAttrs(this.dom) : this.setDOM(this.setAttrs(document.createElement(this.mark.tagName))), super.sync(t2, e2);
   }
   merge(t2, e2, i2, s2, r2, o2) {
-    return i2 && (!(i2 instanceof ie2 && i2.mark.eq(this.mark)) || t2 && r2 <= 0 || e2 < this.length && o2 <= 0) ? false : (kl(this, t2, e2, i2 ? i2.children : [], r2 - 1, o2 - 1), this.markDirty(), true);
+    return i2 && (!(i2 instanceof ie && i2.mark.eq(this.mark)) || t2 && r2 <= 0 || e2 < this.length && o2 <= 0) ? false : (kl(this, t2, e2, i2 ? i2.children : [], r2 - 1, o2 - 1), this.markDirty(), true);
   }
   split(t2) {
     let e2 = [], i2 = 0, s2 = -1, r2 = 0;
@@ -28794,7 +28794,7 @@ let ie$1 = class ie2 extends $$1 {
       h2 > t2 && e2.push(i2 < t2 ? l2.split(t2 - i2) : l2), s2 < 0 && i2 >= t2 && (s2 = r2), i2 = h2, r2++;
     }
     let o2 = this.length - t2;
-    return this.length = t2, s2 > -1 && (this.children.length = s2, this.markDirty()), new ie2(this.mark, e2, o2);
+    return this.length = t2, s2 > -1 && (this.children.length = s2, this.markDirty()), new ie(this.mark, e2, o2);
   }
   domAtPos(t2) {
     return Cl(this, t2);
@@ -28802,7 +28802,7 @@ let ie$1 = class ie2 extends $$1 {
   coordsAt(t2, e2) {
     return Ol(this, t2, e2);
   }
-};
+}
 function sf(n2, t2, e2) {
   let i2 = n2.nodeValue.length;
   t2 > i2 && (t2 = i2);
@@ -28954,7 +28954,7 @@ function Cl(n2, t2) {
 }
 function Al(n2, t2, e2) {
   let i2, { children: s2 } = n2;
-  e2 > 0 && t2 instanceof ie$1 && s2.length && (i2 = s2[s2.length - 1]) instanceof ie$1 && i2.mark.eq(t2.mark) ? Al(i2, t2.children[0], e2 - 1) : (s2.push(t2), t2.setParent(n2)), n2.length += t2.length;
+  e2 > 0 && t2 instanceof ie && s2.length && (i2 = s2[s2.length - 1]) instanceof ie && i2.mark.eq(t2.mark) ? Al(i2, t2.children[0], e2 - 1) : (s2.push(t2), t2.setParent(n2)), n2.length += t2.length;
 }
 function Ol(n2, t2, e2) {
   let i2 = null, s2 = -1, r2 = null, o2 = -1;
@@ -29273,7 +29273,7 @@ class ct extends $$1 {
     var i2;
     this.dom ? this.flags & 4 && (ml(this.dom), this.dom.className = "cm-line", this.prevAttrs = this.attrs ? null : void 0) : (this.setDOM(document.createElement("div")), this.dom.className = "cm-line", this.prevAttrs = this.attrs ? null : void 0), this.prevAttrs !== void 0 && (bn(this.dom, this.prevAttrs, this.attrs), this.dom.classList.add("cm-line"), this.prevAttrs = void 0), super.sync(t2, e2);
     let s2 = this.dom.lastChild;
-    for (; s2 && $$1.get(s2) instanceof ie$1; )
+    for (; s2 && $$1.get(s2) instanceof ie; )
       s2 = s2.lastChild;
     if (!s2 || !this.length || s2.nodeName != "BR" && ((i2 = $$1.get(s2)) === null || i2 === void 0 ? void 0 : i2.isEditable) == false && (!v$4.ios || !this.children.some((r2) => r2 instanceof Kt))) {
       let r2 = document.createElement("BR");
@@ -29452,7 +29452,7 @@ class fi {
 }
 function Oi(n2, t2) {
   for (let e2 of t2)
-    n2 = new ie$1(e2, [n2], n2.length);
+    n2 = new ie(e2, [n2], n2.length);
   return n2;
 }
 class Lr extends Le {
@@ -29485,7 +29485,7 @@ class os {
     return t2.empty ? this : new os(this.range.map(t2), this.y, this.x, this.yMargin, this.xMargin);
   }
 }
-const Er = /* @__PURE__ */ _$2.define({ map: (n2, t2) => n2.map(t2) });
+const Er = /* @__PURE__ */ _$3.define({ map: (n2, t2) => n2.map(t2) });
 function Zt(n2, t2, e2) {
   let i2 = n2.facet(Bl);
   i2.length ? i2[0](t2) : window.onerror ? window.onerror(String(t2), e2, void 0, void 0, t2) : e2 ? console.error(e2 + ":", t2) : console.error(t2);
@@ -29903,7 +29903,7 @@ class Nr extends $$1 {
     let e2 = new Kt(t2.text.nodeValue);
     e2.flags |= 8;
     for (let { deco: s2 } of t2.marks)
-      e2 = new ie$1(s2, [e2], e2.length);
+      e2 = new ie(s2, [e2], e2.length);
     let i2 = new ct();
     return i2.append(e2, 0), i2;
   }
@@ -30197,7 +30197,7 @@ function wf(n2, t2) {
   let c2 = [], f2 = new Ct(i2, s2, o2, l2);
   for (let u2 = r2.parentNode; ; u2 = u2.parentNode) {
     let d2 = $$1.get(u2);
-    if (d2 instanceof ie$1)
+    if (d2 instanceof ie)
       c2.push({ node: u2, deco: d2.mark });
     else {
       if (d2 instanceof ct || u2.nodeName == "DIV" && u2.parentNode == n2.contentDOM)
@@ -30582,7 +30582,7 @@ class Bf {
   }
   flushIOSKey(t2) {
     let e2 = this.pendingIOSKey;
-    return e2 ? (this.pendingIOSKey = void 0, ze(t2.contentDOM, e2.key, e2.keyCode)) : false;
+    return e2 ? (this.pendingIOSKey = void 0, ze$1(t2.contentDOM, e2.key, e2.keyCode)) : false;
   }
   ignoreDuringComposition(t2) {
     return /^key/.test(t2.type) ? this.composing > 0 ? true : v$4.safari && !v$4.ios && this.compositionPendingKey && Date.now() - this.compositionEndedAt < 100 ? (this.compositionPendingKey = false, true) : false : false;
@@ -32047,7 +32047,7 @@ function sh(n2, t2) {
   } : (v$4.mac || v$4.android) && e2 && e2.from == e2.to && e2.from == s2.head - 1 && /^\. ?$/.test(e2.insert.toString()) && n2.contentDOM.getAttribute("autocorrect") == "off" ? (i2 && e2.insert.length == 2 && (i2 = b$2.single(i2.main.anchor - 1, i2.main.head - 1)), e2 = { from: s2.from, to: s2.to, insert: L$4.of([" "]) }) : v$4.chrome && e2 && e2.from == e2.to && e2.from == s2.head && e2.insert.toString() == `
  ` && n2.lineWrapping && (i2 && (i2 = b$2.single(i2.main.anchor - 1, i2.main.head - 1)), e2 = { from: s2.from, to: s2.to, insert: L$4.of([" "]) }), e2) {
     let o2 = n2.state;
-    if (v$4.ios && n2.inputState.flushIOSKey(n2) || v$4.android && (e2.from == s2.from && e2.to == s2.to && e2.insert.length == 1 && e2.insert.lines == 2 && ze(n2.contentDOM, "Enter", 13) || (e2.from == s2.from - 1 && e2.to == s2.to && e2.insert.length == 0 || r2 == 8 && e2.insert.length < e2.to - e2.from) && ze(n2.contentDOM, "Backspace", 8) || e2.from == s2.from && e2.to == s2.to + 1 && e2.insert.length == 0 && ze(n2.contentDOM, "Delete", 46)))
+    if (v$4.ios && n2.inputState.flushIOSKey(n2) || v$4.android && (e2.from == s2.from && e2.to == s2.to && e2.insert.length == 1 && e2.insert.lines == 2 && ze$1(n2.contentDOM, "Enter", 13) || (e2.from == s2.from - 1 && e2.to == s2.to && e2.insert.length == 0 || r2 == 8 && e2.insert.length < e2.to - e2.from) && ze$1(n2.contentDOM, "Backspace", 8) || e2.from == s2.from && e2.to == s2.to + 1 && e2.insert.length == 0 && ze$1(n2.contentDOM, "Delete", 46)))
       return true;
     let l2 = e2.insert.toString();
     if (n2.state.facet(Rl).some((c2) => c2(n2, e2.from, e2.to, l2)))
@@ -32255,7 +32255,7 @@ class au {
     if (!this.delayedAndroidKey) {
       let s2 = () => {
         let r2 = this.delayedAndroidKey;
-        r2 && (this.clearDelayedAndroidKey(), this.view.inputState.lastKeyCode = r2.keyCode, this.view.inputState.lastKeyTime = Date.now(), !this.flush() && r2.force && ze(this.dom, r2.key, r2.keyCode));
+        r2 && (this.clearDelayedAndroidKey(), this.view.inputState.lastKeyCode = r2.keyCode, this.view.inputState.lastKeyTime = Date.now(), !this.flush() && r2.force && ze$1(this.dom, r2.key, r2.keyCode));
       };
       this.flushingAndroidKey = this.view.win.requestAnimationFrame(s2);
     }
@@ -32486,7 +32486,7 @@ let T$2 = class T2 {
       for (let u2 of this.state.facet(xn))
         u2(s2);
     (h2 || c2) && Promise.resolve().then(() => {
-      h2 && this.state == h2.startState && this.dispatch(h2), c2 && !sh(this, c2) && a2.force && ze(this.contentDOM, a2.key, a2.keyCode);
+      h2 && this.state == h2.startState && this.dispatch(h2), c2 && !sh(this, c2) && a2.force && ze$1(this.contentDOM, a2.key, a2.keyCode);
     });
   }
   /**
@@ -33018,7 +33018,7 @@ T$2.darkTheme = Mn;
 T$2.contentAttributes = Jn;
 T$2.editorAttributes = Nl;
 T$2.lineWrapping = /* @__PURE__ */ T$2.contentAttributes.of({ class: "cm-lineWrapping" });
-T$2.announce = /* @__PURE__ */ _$2.define();
+T$2.announce = /* @__PURE__ */ _$3.define();
 const fu = 4096, eo = {};
 class hs {
   constructor(t2, e2, i2, s2) {
@@ -33697,7 +33697,7 @@ function Fu(n2, t2, e2, i2, s2, r2) {
   return false;
 }
 function zu(n2, t2 = {}) {
-  let e2 = _$2.define(), i2 = Et.define({
+  let e2 = _$3.define(), i2 = Et.define({
     create() {
       return null;
     },
@@ -33730,7 +33730,7 @@ function zu(n2, t2 = {}) {
     _u
   ];
 }
-const Wu = /* @__PURE__ */ _$2.define(), ho = /* @__PURE__ */ A$3.define({
+const Wu = /* @__PURE__ */ _$3.define(), ho = /* @__PURE__ */ A$3.define({
   combine(n2) {
     let t2, e2;
     for (let i2 of n2)
@@ -33825,7 +33825,7 @@ function ao(n2) {
 const Bn = /* @__PURE__ */ A$3.define({
   enables: lh
 });
-let me$1 = class me2 extends Ge$2 {
+let me$2 = class me2 extends Ge$2 {
   /**
   @internal
   */
@@ -33845,11 +33845,11 @@ let me$1 = class me2 extends Ge$2 {
   destroy(t2) {
   }
 };
-me$1.prototype.elementClass = "";
-me$1.prototype.toDOM = void 0;
-me$1.prototype.mapMode = gt.TrackBefore;
-me$1.prototype.startSide = me$1.prototype.endSide = -1;
-me$1.prototype.point = true;
+me$2.prototype.elementClass = "";
+me$2.prototype.toDOM = void 0;
+me$2.prototype.mapMode = gt.TrackBefore;
+me$2.prototype.startSide = me$2.prototype.endSide = -1;
+me$2.prototype.point = true;
 const Qi = /* @__PURE__ */ A$3.define(), Ku = {
   class: "",
   renderEmptyElements: false,
@@ -34063,7 +34063,7 @@ function Ju(n2, t2) {
       return false;
   return true;
 }
-const Yu = /* @__PURE__ */ new class extends me$1 {
+const Yu = /* @__PURE__ */ new class extends me$2 {
   constructor() {
     super(...arguments), this.elementClass = "cm-activeLineGutter";
   }
@@ -35024,25 +35024,25 @@ function sd(n2) {
         return;
       } else
         throw new RangeError(`Unrecognized record size: ${pt}`);
-    let Ne2 = h2[V2], se, Gt, fr = R2 - x2;
+    let Ne2 = h2[V2], se2, Gt, fr = R2 - x2;
     if (K2 - R2 <= s2 && (Gt = w2(l2.pos - M2, st))) {
       let ne2 = new Uint16Array(Gt.size - Gt.skip), Tt = l2.pos - Gt.size, Ut = ne2.length;
       for (; l2.pos > Tt; )
         Ut = g2(Gt.start, ne2, Ut);
-      se = new Ee(ne2, K2 - Gt.start, i2), fr = Gt.start - x2;
+      se2 = new Ee(ne2, K2 - Gt.start, i2), fr = Gt.start - x2;
     } else {
       let ne2 = l2.pos - pt;
       l2.next();
-      let Tt = [], Ut = [], be = V2 >= o2 ? V2 : -1, Ie2 = 0, Si = K2;
+      let Tt = [], Ut = [], be = V2 >= o2 ? V2 : -1, Ie = 0, Si = K2;
       for (; l2.pos > ne2; )
-        be >= 0 && l2.id == be && l2.size >= 0 ? (l2.end <= Si - s2 && (d2(Tt, Ut, R2, Ie2, l2.end, Si, be, Dt), Ie2 = Tt.length, Si = l2.end), l2.next()) : f2(R2, ne2, Tt, Ut, be);
-      if (be >= 0 && Ie2 > 0 && Ie2 < Tt.length && d2(Tt, Ut, R2, Ie2, R2, Si, be, Dt), Tt.reverse(), Ut.reverse(), be > -1 && Ie2 > 0) {
+        be >= 0 && l2.id == be && l2.size >= 0 ? (l2.end <= Si - s2 && (d2(Tt, Ut, R2, Ie, l2.end, Si, be, Dt), Ie = Tt.length, Si = l2.end), l2.next()) : f2(R2, ne2, Tt, Ut, be);
+      if (be >= 0 && Ie > 0 && Ie < Tt.length && d2(Tt, Ut, R2, Ie, R2, Si, be, Dt), Tt.reverse(), Ut.reverse(), be > -1 && Ie > 0) {
         let ur = u2(Ne2);
-        se = sr(Ne2, Tt, Ut, 0, Tt.length, 0, K2 - R2, ur, ur);
+        se2 = sr(Ne2, Tt, Ut, 0, Tt.length, 0, K2 - R2, ur, ur);
       } else
-        se = p2(Ne2, Tt, Ut, K2 - R2, Dt - K2);
+        se2 = p2(Ne2, Tt, Ut, K2 - R2, Dt - K2);
     }
-    C2.push(se), I2.push(fr);
+    C2.push(se2), I2.push(fr);
   }
   function u2(x2) {
     return (M2, C2, I2) => {
@@ -35084,18 +35084,18 @@ function sd(n2) {
         let Ne2 = C2.pos - Dt;
         if (Dt < 0 || Ne2 < pt || C2.start < R2)
           break;
-        let se = C2.id >= o2 ? 4 : 0, Gt = C2.start;
+        let se2 = C2.id >= o2 ? 4 : 0, Gt = C2.start;
         for (C2.next(); C2.pos > Ne2; ) {
           if (C2.size < 0)
             if (C2.size == -3)
-              se += 4;
+              se2 += 4;
             else
               break t;
           else
-            C2.id >= o2 && (se += 4);
+            C2.id >= o2 && (se2 += 4);
           C2.next();
         }
-        st = Gt, I2 += Dt, V2 += se;
+        st = Gt, I2 += Dt, V2 += se2;
       }
     return (M2 < 0 || I2 == x2) && (K2.size = I2, K2.start = st, K2.skip = V2), K2.size > 4 ? K2 : void 0;
   }
@@ -35170,7 +35170,7 @@ function sr(n2, t2, e2, i2, s2, r2, o2, l2, h2) {
   }
   return d2(t2, e2, i2, s2, 0), (l2 || h2)(f2, u2, o2);
 }
-let Oe$3 = class Oe2 {
+let Oe$2 = class Oe2 {
   /// Construct a tree fragment. You'll usually want to use
   /// [`addTree`](#common.TreeFragment^addTree) and
   /// [`applyChanges`](#common.TreeFragment^applyChanges) instead of
@@ -35484,7 +35484,7 @@ function ud(n2) {
     t2 = t2.next;
   return t2 || null;
 }
-const k$2 = $t.define, Vi = k$2(), re$1 = k$2(), go = k$2(re$1), mo = k$2(re$1), oe = k$2(), Hi = k$2(oe), qs = k$2(oe), _t = k$2(), ke = k$2(_t), Vt = k$2(), Ht = k$2(), En = k$2(), ii = k$2(En), _i = k$2(), m$7 = {
+const k$2 = $t.define, Vi = k$2(), re$2 = k$2(), go = k$2(re$2), mo = k$2(re$2), oe = k$2(), Hi = k$2(oe), qs = k$2(oe), _t = k$2(), ke = k$2(_t), Vt = k$2(), Ht = k$2(), En = k$2(), ii = k$2(En), _i = k$2(), m$7 = {
   /**
   A comment.
   */
@@ -35504,11 +35504,11 @@ const k$2 = $t.define, Vi = k$2(), re$1 = k$2(), go = k$2(re$1), mo = k$2(re$1),
   /**
   Any kind of identifier.
   */
-  name: re$1,
+  name: re$2,
   /**
   The [name](#highlight.tags.name) of a variable.
   */
-  variableName: k$2(re$1),
+  variableName: k$2(re$2),
   /**
   A type [name](#highlight.tags.name).
   */
@@ -35528,19 +35528,19 @@ const k$2 = $t.define, Vi = k$2(), re$1 = k$2(), go = k$2(re$1), mo = k$2(re$1),
   /**
   The [name](#highlight.tags.name) of a class.
   */
-  className: k$2(re$1),
+  className: k$2(re$2),
   /**
   A label [name](#highlight.tags.name).
   */
-  labelName: k$2(re$1),
+  labelName: k$2(re$2),
   /**
   A namespace [name](#highlight.tags.name).
   */
-  namespace: k$2(re$1),
+  namespace: k$2(re$2),
   /**
   The [name](#highlight.tags.name) of a macro.
   */
-  macroName: k$2(re$1),
+  macroName: k$2(re$2),
   /**
   A literal value.
   */
@@ -35972,7 +35972,7 @@ class Bt {
     return true;
   }
 }
-Bt.setState = /* @__PURE__ */ _$2.define();
+Bt.setState = /* @__PURE__ */ _$3.define();
 function wo(n2, t2, e2) {
   let i2 = n2.facet(we), s2 = St(n2).topNode;
   if (!i2 || i2.allowsNesting)
@@ -36059,7 +36059,7 @@ class ms {
       for (this.parse || (this.parse = this.startParse()), e2 != null && (this.parse.stoppedAt == null || this.parse.stoppedAt > e2) && e2 < this.state.doc.length && this.parse.stopAt(e2); ; ) {
         let s2 = this.parse.advance();
         if (s2)
-          if (this.fragments = this.withoutTempSkipped(Oe$3.addTree(s2, this.fragments, this.parse.stoppedAt != null)), this.treeLen = (i2 = this.parse.stoppedAt) !== null && i2 !== void 0 ? i2 : this.state.doc.length, this.tree = s2, this.parse = null, this.treeLen < (e2 ?? this.state.doc.length))
+          if (this.fragments = this.withoutTempSkipped(Oe$2.addTree(s2, this.fragments, this.parse.stoppedAt != null)), this.treeLen = (i2 = this.parse.stoppedAt) !== null && i2 !== void 0 ? i2 : this.state.doc.length, this.tree = s2, this.parse = null, this.treeLen < (e2 ?? this.state.doc.length))
             this.parse = this.startParse();
           else
             return true;
@@ -36076,7 +36076,7 @@ class ms {
     this.parse && (t2 = this.parse.parsedPos) >= this.treeLen && ((this.parse.stoppedAt == null || this.parse.stoppedAt > t2) && this.parse.stopAt(t2), this.withContext(() => {
       for (; !(e2 = this.parse.advance()); )
         ;
-    }), this.treeLen = t2, this.tree = e2, this.fragments = this.withoutTempSkipped(Oe$3.addTree(this.tree, this.fragments, true)), this.parse = null);
+    }), this.treeLen = t2, this.tree = e2, this.fragments = this.withoutTempSkipped(Oe$2.addTree(this.tree, this.fragments, true)), this.parse = null);
   }
   withContext(t2) {
     let e2 = si;
@@ -36099,7 +36099,7 @@ class ms {
     let { fragments: i2, tree: s2, treeLen: r2, viewport: o2, skipped: l2 } = this;
     if (this.takeTree(), !t2.empty) {
       let h2 = [];
-      if (t2.iterChangedRanges((a2, c2, f2, u2) => h2.push({ fromA: a2, toA: c2, fromB: f2, toB: u2 })), i2 = Oe$3.applyChanges(i2, h2), s2 = Q$3.empty, r2 = 0, o2 = { from: t2.mapPos(o2.from, -1), to: t2.mapPos(o2.to, 1) }, this.skipped.length) {
+      if (t2.iterChangedRanges((a2, c2, f2, u2) => h2.push({ fromA: a2, toA: c2, fromB: f2, toB: u2 })), i2 = Oe$2.applyChanges(i2, h2), s2 = Q$3.empty, r2 = 0, o2 = { from: t2.mapPos(o2.from, -1), to: t2.mapPos(o2.to, 1) }, this.skipped.length) {
         l2 = [];
         for (let a2 of this.skipped) {
           let c2 = t2.mapPos(a2.from, 1), f2 = t2.mapPos(a2.to, -1);
@@ -36185,7 +36185,7 @@ class ms {
   }
 }
 function yo(n2, t2, e2) {
-  return Oe$3.applyChanges(n2, [{ fromA: t2, toA: e2, fromB: t2, toB: e2 }]);
+  return Oe$2.applyChanges(n2, [{ fromA: t2, toA: e2, fromB: t2, toB: e2 }]);
 }
 let Je$1 = class Je2 {
   constructor(t2) {
@@ -36572,7 +36572,7 @@ function kh(n2, t2) {
   let e2 = t2.mapPos(n2.from, 1), i2 = t2.mapPos(n2.to, -1);
   return e2 >= i2 ? void 0 : { from: e2, to: i2 };
 }
-const Ts = /* @__PURE__ */ _$2.define({ map: kh }), xi = /* @__PURE__ */ _$2.define({ map: kh });
+const Ts = /* @__PURE__ */ _$3.define({ map: kh }), xi = /* @__PURE__ */ _$3.define({ map: kh });
 function xh(n2) {
   let t2 = [];
   for (let { head: e2 } of n2.state.selection.ranges)
@@ -36637,7 +36637,7 @@ function Rd(n2, t2, e2) {
   }), i2;
 }
 function vh(n2, t2) {
-  return n2.field(Pe, false) ? t2 : t2.concat(_$2.appendConfig.of(Ah()));
+  return n2.field(Pe, false) ? t2 : t2.concat(_$3.appendConfig.of(Ah()));
 }
 const Ld = (n2) => {
   for (let t2 of xh(n2)) {
@@ -36710,7 +36710,7 @@ const ko = /* @__PURE__ */ E$4.replace({ widget: /* @__PURE__ */ new class exten
   domEventHandlers: {},
   foldingChanged: () => false
 };
-class Qs extends me$1 {
+class Qs extends me$2 {
   constructor(t2, e2) {
     super(), this.config = t2, this.open = e2;
   }
@@ -38862,9 +38862,9 @@ function mg(n2, t2) {
   return !!(n2.effects.some((i2) => i2.is(sa)) || n2.changes.touchesRange(e2.from, e2.to));
 }
 function wg(n2, t2) {
-  return n2.field(kt, false) ? t2 : t2.concat(_$2.appendConfig.of(Mg));
+  return n2.field(kt, false) ? t2 : t2.concat(_$3.appendConfig.of(Mg));
 }
-const sa = /* @__PURE__ */ _$2.define(), cr = /* @__PURE__ */ _$2.define(), na = /* @__PURE__ */ _$2.define(), kt = /* @__PURE__ */ Et.define({
+const sa = /* @__PURE__ */ _$3.define(), cr = /* @__PURE__ */ _$3.define(), na = /* @__PURE__ */ _$3.define(), kt = /* @__PURE__ */ Et.define({
   create() {
     return new ve(E$4.none, null, null);
   },
@@ -49101,16 +49101,16 @@ var i$5 = function(e2, i2) {
     null != m2 && m2 === document.body && n$7(m2) && !n$7(document.documentElement) || null != m2 && n$7(m2, u2) && p2.push(m2);
   }
   for (var w2 = o2.visualViewport ? o2.visualViewport.width : innerWidth, v2 = o2.visualViewport ? o2.visualViewport.height : innerHeight, W2 = window.scrollX || pageXOffset, H3 = window.scrollY || pageYOffset, b3 = e2.getBoundingClientRect(), y2 = b3.height, E3 = b3.width, M2 = b3.top, V2 = b3.right, x2 = b3.bottom, I2 = b3.left, C2 = "start" === d2 || "nearest" === d2 ? M2 : "end" === d2 ? x2 : M2 + y2 / 2, R2 = "center" === f2 ? I2 + E3 / 2 : "end" === f2 ? V2 : I2, T3 = [], k2 = 0; k2 < p2.length; k2++) {
-    var B2 = p2[k2], D2 = B2.getBoundingClientRect(), O2 = D2.height, X = D2.width, Y2 = D2.top, L3 = D2.right, S2 = D2.bottom, j2 = D2.left;
+    var B2 = p2[k2], D2 = B2.getBoundingClientRect(), O2 = D2.height, X2 = D2.width, Y2 = D2.top, L3 = D2.right, S2 = D2.bottom, j2 = D2.left;
     if ("if-needed" === l2 && M2 >= 0 && I2 >= 0 && x2 <= v2 && V2 <= w2 && M2 >= Y2 && x2 <= S2 && I2 >= j2 && V2 <= L3)
       return T3;
-    var N3 = getComputedStyle(B2), q = parseInt(N3.borderLeftWidth, 10), z2 = parseInt(N3.borderTopWidth, 10), A3 = parseInt(N3.borderRightWidth, 10), F2 = parseInt(N3.borderBottomWidth, 10), G2 = 0, J2 = 0, K2 = "offsetWidth" in B2 ? B2.offsetWidth - B2.clientWidth - q - A3 : 0, P3 = "offsetHeight" in B2 ? B2.offsetHeight - B2.clientHeight - z2 - F2 : 0, Q3 = "offsetWidth" in B2 ? 0 === B2.offsetWidth ? 0 : X / B2.offsetWidth : 0, U2 = "offsetHeight" in B2 ? 0 === B2.offsetHeight ? 0 : O2 / B2.offsetHeight : 0;
+    var N3 = getComputedStyle(B2), q = parseInt(N3.borderLeftWidth, 10), z2 = parseInt(N3.borderTopWidth, 10), A3 = parseInt(N3.borderRightWidth, 10), F2 = parseInt(N3.borderBottomWidth, 10), G2 = 0, J2 = 0, K2 = "offsetWidth" in B2 ? B2.offsetWidth - B2.clientWidth - q - A3 : 0, P3 = "offsetHeight" in B2 ? B2.offsetHeight - B2.clientHeight - z2 - F2 : 0, Q3 = "offsetWidth" in B2 ? 0 === B2.offsetWidth ? 0 : X2 / B2.offsetWidth : 0, U2 = "offsetHeight" in B2 ? 0 === B2.offsetHeight ? 0 : O2 / B2.offsetHeight : 0;
     if (g2 === B2)
       G2 = "start" === d2 ? C2 : "end" === d2 ? C2 - v2 : "nearest" === d2 ? r$4(H3, H3 + v2, v2, z2, F2, H3 + C2, H3 + C2 + y2, y2) : C2 - v2 / 2, J2 = "start" === f2 ? R2 : "center" === f2 ? R2 - w2 / 2 : "end" === f2 ? R2 - w2 : r$4(W2, W2 + w2, w2, q, A3, W2 + R2, W2 + R2 + E3, E3), G2 = Math.max(0, G2 + H3), J2 = Math.max(0, J2 + W2);
     else {
-      G2 = "start" === d2 ? C2 - Y2 - z2 : "end" === d2 ? C2 - S2 + F2 + P3 : "nearest" === d2 ? r$4(Y2, S2, O2, z2, F2 + P3, C2, C2 + y2, y2) : C2 - (Y2 + O2 / 2) + P3 / 2, J2 = "start" === f2 ? R2 - j2 - q : "center" === f2 ? R2 - (j2 + X / 2) + K2 / 2 : "end" === f2 ? R2 - L3 + A3 + K2 : r$4(j2, L3, X, q, A3 + K2, R2, R2 + E3, E3);
+      G2 = "start" === d2 ? C2 - Y2 - z2 : "end" === d2 ? C2 - S2 + F2 + P3 : "nearest" === d2 ? r$4(Y2, S2, O2, z2, F2 + P3, C2, C2 + y2, y2) : C2 - (Y2 + O2 / 2) + P3 / 2, J2 = "start" === f2 ? R2 - j2 - q : "center" === f2 ? R2 - (j2 + X2 / 2) + K2 / 2 : "end" === f2 ? R2 - L3 + A3 + K2 : r$4(j2, L3, X2, q, A3 + K2, R2, R2 + E3, E3);
       var Z2 = B2.scrollLeft, $3 = B2.scrollTop;
-      C2 += $3 - (G2 = Math.max(0, Math.min($3 + G2 / U2, B2.scrollHeight - O2 / U2 + P3))), R2 += Z2 - (J2 = Math.max(0, Math.min(Z2 + J2 / Q3, B2.scrollWidth - X / Q3 + K2)));
+      C2 += $3 - (G2 = Math.max(0, Math.min($3 + G2 / U2, B2.scrollHeight - O2 / U2 + P3))), R2 += Z2 - (J2 = Math.max(0, Math.min(Z2 + J2 / Q3, B2.scrollWidth - X2 / Q3 + K2)));
     }
     T3.push({ el: B2, top: G2, left: J2 });
   }
@@ -52406,7 +52406,7 @@ function o$2() {
   } };
   return s2;
 }
-function Oe$2(l2, y2) {
+function Oe$1(l2, y2) {
   return l2 === y2;
 }
 var Se$2 = ((r2) => (r2[r2.Open = 0] = "Open", r2[r2.Closed = 1] = "Closed", r2))(Se$2 || {}), Ce = ((r2) => (r2[r2.Single = 0] = "Single", r2[r2.Multi = 1] = "Multi", r2))(Ce || {}), ge$2 = ((r2) => (r2[r2.Pointer = 0] = "Pointer", r2[r2.Other = 1] = "Other", r2))(ge$2 || {});
@@ -52419,7 +52419,7 @@ function $(l2) {
   }
   return y2;
 }
-let Je = defineComponent({ name: "Combobox", emits: { "update:modelValue": (l2) => true }, props: { as: { type: [Object, String], default: "template" }, disabled: { type: [Boolean], default: false }, by: { type: [String, Function], default: () => Oe$2 }, modelValue: { type: [Object, String, Number, Boolean], default: void 0 }, defaultValue: { type: [Object, String, Number, Boolean], default: void 0 }, form: { type: String, optional: true }, name: { type: String, optional: true }, nullable: { type: Boolean, default: false }, multiple: { type: [Boolean], default: false } }, inheritAttrs: false, setup(l2, { slots: y$12, attrs: r2, emit: w2 }) {
+let Je = defineComponent({ name: "Combobox", emits: { "update:modelValue": (l2) => true }, props: { as: { type: [Object, String], default: "template" }, disabled: { type: [Boolean], default: false }, by: { type: [String, Function], default: () => Oe$1 }, modelValue: { type: [Object, String, Number, Boolean], default: void 0 }, defaultValue: { type: [Object, String, Number, Boolean], default: void 0 }, form: { type: String, optional: true }, name: { type: String, optional: true }, nullable: { type: Boolean, default: false }, multiple: { type: [Boolean], default: false } }, inheritAttrs: false, setup(l2, { slots: y$12, attrs: r2, emit: w2 }) {
   let e2 = ref(1), t2 = ref(null), S2 = ref(null), p2 = ref(null), d2 = ref(null), b3 = ref({ static: false, hold: false }), v2 = ref([]), O$1 = ref(null), I2 = ref(1), P3 = ref(false);
   function j2(n2 = (u2) => u2) {
     let u2 = O$1.value !== null ? v2.value[O$1.value] : null, s2 = O(n2(v2.value.slice()), (f2) => o$4(f2.dataRef.domRef)), a2 = u2 ? s2.indexOf(u2) : null;
@@ -52750,7 +52750,7 @@ function B(e2) {
   return t2;
 }
 var A$2 = ((n2) => (n2[n2.None = 1] = "None", n2[n2.InitialFocus = 2] = "InitialFocus", n2[n2.TabLock = 4] = "TabLock", n2[n2.FocusLock = 8] = "FocusLock", n2[n2.RestoreFocus = 16] = "RestoreFocus", n2[n2.All = 30] = "All", n2))(A$2 || {});
-let ce$2 = Object.assign(defineComponent({ name: "FocusTrap", props: { as: { type: [Object, String], default: "div" }, initialFocus: { type: Object, default: null }, features: { type: Number, default: 30 }, containers: { type: [Object, Function], default: ref(/* @__PURE__ */ new Set()) } }, inheritAttrs: false, setup(e2, { attrs: t2, slots: l2, expose: o2 }) {
+let ce$1 = Object.assign(defineComponent({ name: "FocusTrap", props: { as: { type: [Object, String], default: "div" }, initialFocus: { type: Object, default: null }, features: { type: Number, default: 30 }, containers: { type: [Object, Function], default: ref(/* @__PURE__ */ new Set()) } }, inheritAttrs: false, setup(e2, { attrs: t2, slots: l2, expose: o2 }) {
   let r2 = ref(null);
   o2({ el: r2, $el: r2 });
   let i2 = computed(() => m$6(r2)), n2 = ref(false);
@@ -52785,7 +52785,7 @@ let ce$2 = Object.assign(defineComponent({ name: "FocusTrap", props: { as: { typ
     E3 instanceof HTMLElement && E3.dataset.headlessuiFocusGuard !== "true" && (N$1(d2, E3) || (s2.value ? P$2(o$4(r2), u$4(c2.value, { [d$3.Forwards]: () => N$2.Next, [d$3.Backwards]: () => N$2.Previous }) | N$2.WrapAround, { relativeTo: a2.target }) : a2.target instanceof HTMLElement && S$2(a2.target)));
   }
   return () => {
-    let a2 = {}, d2 = { ref: r2, onKeydown: H3, onFocusout: M2 }, { features: E3, initialFocus: g2, containers: X, ...O2 } = e2;
+    let a2 = {}, d2 = { ref: r2, onKeydown: H3, onFocusout: M2 }, { features: E3, initialFocus: g2, containers: X2, ...O2 } = e2;
     return h$4(Fragment, [Boolean(E3 & 4) && h$4(f$3, { as: "button", type: "button", "data-headlessui-focus-guard": true, onFocus: u2, features: a$3.Focusable }), H$2({ ourProps: d2, theirProps: { ...t2, ...O2 }, slot: a2, attrs: t2, slots: l2, name: "FocusTrap" }), Boolean(E3 & 4) && h$4(f$3, { as: "button", type: "button", "data-headlessui-focus-guard": true, onFocus: u2, features: a$3.Focusable })]);
   };
 } }), { features: A$2 }), L$3 = [];
@@ -52946,7 +52946,7 @@ function V$1() {
     };
   } })];
 }
-let h$2 = Symbol("PortalGroupContext"), _$1 = defineComponent({ name: "PortalGroup", props: { as: { type: [Object, String], default: "template" }, target: { type: Object, default: null } }, setup(t2, { attrs: e2, slots: u2 }) {
+let h$2 = Symbol("PortalGroupContext"), _$2 = defineComponent({ name: "PortalGroup", props: { as: { type: [Object, String], default: "template" }, target: { type: Object, default: null } }, setup(t2, { attrs: e2, slots: u2 }) {
   let r2 = reactive({ resolveTarget() {
     return t2.target;
   } });
@@ -53116,7 +53116,7 @@ function p({ defaultContainers: t2 = [], portals: o2, mainTreeNodeRef: s2 } = {}
     return s2 != null ? null : h$4(f$3, { features: a$3.Hidden, ref: i2 });
   } };
 }
-var Oe$1 = ((t2) => (t2[t2.Open = 0] = "Open", t2[t2.Closed = 1] = "Closed", t2))(Oe$1 || {});
+var Oe = ((t2) => (t2[t2.Open = 0] = "Open", t2[t2.Closed = 1] = "Closed", t2))(Oe || {});
 let F$2 = Symbol("DialogContext");
 function C$1(o2) {
   let n2 = inject(F$2, null);
@@ -53140,16 +53140,16 @@ let M$1 = "DC8F892D-2EBD-447C-A4C8-A03058436FF4", Ue = defineComponent({ name: "
   let c2 = computed(() => r2.value && m2.value ? 0 : 1), R2 = computed(() => c2.value === 0), E3 = computed(() => s2.value > 1), $3 = inject(F$2, null) !== null, [G2, V2] = V$1(), { resolveContainers: x2, mainTreeNodeRef: j2, MainTreeNode: W2 } = p({ portals: G2, defaultContainers: [computed(() => {
     var e2;
     return (e2 = y$12.panelRef.value) != null ? e2 : v2.value;
-  })] }), J2 = computed(() => E3.value ? "parent" : "leaf"), H3 = computed(() => p$12 !== null ? (p$12.value & l$2.Closing) === l$2.Closing : false), Q3 = computed(() => $3 || H3.value ? false : R2.value), X = computed(() => {
+  })] }), J2 = computed(() => E3.value ? "parent" : "leaf"), H3 = computed(() => p$12 !== null ? (p$12.value & l$2.Closing) === l$2.Closing : false), Q3 = computed(() => $3 || H3.value ? false : R2.value), X2 = computed(() => {
     var e2, l2, f2;
     return (f2 = Array.from((l2 = (e2 = T3.value) == null ? void 0 : e2.querySelectorAll("body > *")) != null ? l2 : []).find((d2) => d2.id === "headlessui-portal-root" ? false : d2.contains(o$4(j2)) && d2 instanceof HTMLElement)) != null ? f2 : null;
   });
-  E$1(X, Q3);
-  let Z2 = computed(() => E3.value ? true : R2.value), ee2 = computed(() => {
+  E$1(X2, Q3);
+  let Z2 = computed(() => E3.value ? true : R2.value), ee = computed(() => {
     var e2, l2, f2;
     return (f2 = Array.from((l2 = (e2 = T3.value) == null ? void 0 : e2.querySelectorAll("[data-headlessui-portal]")) != null ? l2 : []).find((d2) => d2.contains(o$4(j2)) && d2 instanceof HTMLElement)) != null ? f2 : null;
   });
-  E$1(ee2, Z2), S$1({ type: "Dialog", enabled: computed(() => c2.value === 0), element: v2, onUpdate: (e2, l2) => {
+  E$1(ee, Z2), S$1({ type: "Dialog", enabled: computed(() => c2.value === 0), element: v2, onUpdate: (e2, l2) => {
     if (l2 === "Dialog")
       return u$4(e2, { [p$2.Add]: () => s2.value += 1, [p$2.Remove]: () => s2.value -= 1 });
   } });
@@ -53186,7 +53186,7 @@ let M$1 = "DC8F892D-2EBD-447C-A4C8-A03058436FF4", Ue = defineComponent({ name: "
     f2.observe(l2), e2(() => f2.disconnect());
   }), () => {
     let { id: e2, open: l2, initialFocus: f2, ...d2 } = o2, A3 = { ...t2, ref: v2, id: e2, role: "dialog", "aria-modal": c2.value === 0 ? true : void 0, "aria-labelledby": k2.value, "aria-describedby": te3.value }, D2 = { open: c2.value === 0 };
-    return h$4(P$1, { force: true }, () => [h$4(U$1, () => h$4(_$1, { target: v2.value }, () => h$4(P$1, { force: false }, () => h$4(ce$2, { initialFocus: f2, containers: x2, features: R2.value ? u$4(J2.value, { parent: ce$2.features.RestoreFocus, leaf: ce$2.features.All & ~ce$2.features.FocusLock }) : ce$2.features.None }, () => h$4(V2, {}, () => H$2({ ourProps: A3, theirProps: { ...d2, ...t2 }, slot: D2, attrs: t2, slots: u2, visible: c2.value === 0, features: N$3.RenderStrategy | N$3.Static, name: "Dialog" })))))), h$4(W2)]);
+    return h$4(P$1, { force: true }, () => [h$4(U$1, () => h$4(_$2, { target: v2.value }, () => h$4(P$1, { force: false }, () => h$4(ce$1, { initialFocus: f2, containers: x2, features: R2.value ? u$4(J2.value, { parent: ce$1.features.RestoreFocus, leaf: ce$1.features.All & ~ce$1.features.FocusLock }) : ce$1.features.None }, () => h$4(V2, {}, () => H$2({ ourProps: A3, theirProps: { ...d2, ...t2 }, slot: D2, attrs: t2, slots: u2, visible: c2.value === 0, features: N$3.RenderStrategy | N$3.Static, name: "Dialog" })))))), h$4(W2)]);
   };
 } }), Ge = defineComponent({ name: "DialogPanel", props: { as: { type: [Object, String], default: "div" }, id: { type: String, default: () => `headlessui-dialog-panel-${t$4()}` } }, setup(o2, { attrs: n2, slots: t2, expose: u2 }) {
   let i2 = C$1("DialogPanel");
@@ -53208,9 +53208,9 @@ let M$1 = "DC8F892D-2EBD-447C-A4C8-A03058436FF4", Ue = defineComponent({ name: "
   };
 } });
 var Se$1 = ((p2) => (p2[p2.Open = 0] = "Open", p2[p2.Closed = 1] = "Closed", p2))(Se$1 || {});
-let re = Symbol("PopoverContext");
+let re$1 = Symbol("PopoverContext");
 function V(P3) {
-  let b3 = inject(re, null);
+  let b3 = inject(re$1, null);
   if (b3 === null) {
     let p2 = new Error(`<${P3} /> is missing a parent <${ye.name} /> component.`);
     throw Error.captureStackTrace && Error.captureStackTrace(p2, V), p2;
@@ -53247,7 +53247,7 @@ let ye = defineComponent({ name: "Popover", inheritAttrs: false, props: { as: { 
     let a2 = (() => o2 ? o2 instanceof HTMLElement ? o2 : o2.value instanceof HTMLElement ? o$4(o2) : o$4(l2.button) : o$4(l2.button))();
     a2 == null || a2.focus();
   } };
-  provide(re, l2), c$4(computed(() => u$4(e2.value, { [0]: l$2.Open, [1]: l$2.Closed })));
+  provide(re$1, l2), c$4(computed(() => u$4(e2.value, { [0]: l$2.Open, [1]: l$2.Closed })));
   let m2 = { buttonId: l2.buttonId, panelId: l2.panelId, close() {
     l2.closePopover();
   } }, S2 = ae(), I2 = S2 == null ? void 0 : S2.registerPopover, [s2, u2] = V$1(), i2 = p({ mainTreeNodeRef: S2 == null ? void 0 : S2.mainTreeNodeRef, portals: s2, defaultContainers: [d2, f2] });
@@ -53439,7 +53439,7 @@ function g(e2 = "") {
 }
 let R$1 = Symbol("TransitionContext");
 var pe = ((a2) => (a2.Visible = "visible", a2.Hidden = "hidden", a2))(pe || {});
-function me() {
+function me$1() {
   return inject(R$1, null) !== null;
 }
 function Te() {
@@ -53475,7 +53475,7 @@ function Q$1(e2) {
   }
   return { children: t2, register: h2, unregister: s2 };
 }
-let W$1 = N$3.RenderStrategy, he = defineComponent({ props: { as: { type: [Object, String], default: "div" }, show: { type: [Boolean], default: null }, unmount: { type: [Boolean], default: true }, appear: { type: [Boolean], default: false }, enter: { type: [String], default: "" }, enterFrom: { type: [String], default: "" }, enterTo: { type: [String], default: "" }, entered: { type: [String], default: "" }, leave: { type: [String], default: "" }, leaveFrom: { type: [String], default: "" }, leaveTo: { type: [String], default: "" } }, emits: { beforeEnter: () => true, afterEnter: () => true, beforeLeave: () => true, afterLeave: () => true }, setup(e2, { emit: t2, attrs: a2, slots: s2, expose: h2 }) {
+let W = N$3.RenderStrategy, he = defineComponent({ props: { as: { type: [Object, String], default: "div" }, show: { type: [Boolean], default: null }, unmount: { type: [Boolean], default: true }, appear: { type: [Boolean], default: false }, enter: { type: [String], default: "" }, enterFrom: { type: [String], default: "" }, enterTo: { type: [String], default: "" }, entered: { type: [String], default: "" }, leave: { type: [String], default: "" }, leaveFrom: { type: [String], default: "" }, leaveTo: { type: [String], default: "" } }, emits: { beforeEnter: () => true, afterEnter: () => true, beforeLeave: () => true, afterLeave: () => true }, setup(e2, { emit: t2, attrs: a2, slots: s2, expose: h2 }) {
   let n2 = ref(0);
   function r2() {
     n2.value |= l$2.Opening, t2("beforeEnter");
@@ -53489,7 +53489,7 @@ let W$1 = N$3.RenderStrategy, he = defineComponent({ props: { as: { type: [Objec
   function S2() {
     n2.value &= ~l$2.Closing, t2("afterLeave");
   }
-  if (!me() && C$2())
+  if (!me$1() && C$2())
     return () => h$4(Se, { ...e2, onBeforeEnter: r2, onAfterEnter: l2, onBeforeLeave: f2, onAfterLeave: S2 }, s2);
   let d2 = ref(null), b3 = computed(() => e2.unmount ? S$3.Unmount : S$3.Hidden);
   h2({ el: d2, $el: d2 });
@@ -53508,7 +53508,7 @@ let W$1 = N$3.RenderStrategy, he = defineComponent({ props: { as: { type: [Objec
       u$4(i2.value, { ["hidden"]: () => H3(c2), ["visible"]: () => D2(c2) });
     }
   });
-  let j2 = g(e2.enter), M2 = g(e2.enterFrom), X = g(e2.enterTo), _3 = g(e2.entered), Y2 = g(e2.leave), Z2 = g(e2.leaveFrom), ee2 = g(e2.leaveTo);
+  let j2 = g(e2.enter), M2 = g(e2.enterFrom), X2 = g(e2.enterTo), _3 = g(e2.entered), Y2 = g(e2.leave), Z2 = g(e2.leaveFrom), ee = g(e2.leaveTo);
   onMounted(() => {
     watchEffect(() => {
       if (i2.value === "visible") {
@@ -53520,9 +53520,9 @@ let W$1 = N$3.RenderStrategy, he = defineComponent({ props: { as: { type: [Objec
   });
   function te3(o2) {
     let E3 = I2.value && !A3.value, p2 = o$4(d2);
-    !p2 || !(p2 instanceof HTMLElement) || E3 || (y2.value = true, v2.value && r2(), v2.value || f2(), o2(v2.value ? L$2(p2, j2, M2, X, _3, (V2) => {
+    !p2 || !(p2 instanceof HTMLElement) || E3 || (y2.value = true, v2.value && r2(), v2.value || f2(), o2(v2.value ? L$2(p2, j2, M2, X2, _3, (V2) => {
       y2.value = false, V2 === g$1.Finished && l2();
-    }) : L$2(p2, Y2, Z2, ee2, _3, (V2) => {
+    }) : L$2(p2, Y2, Z2, ee, _3, (V2) => {
       y2.value = false, V2 === g$1.Finished && (L$1(P3) || (i2.value = "hidden", H3(c2), S2()));
     })));
   }
@@ -53532,9 +53532,9 @@ let W$1 = N$3.RenderStrategy, he = defineComponent({ props: { as: { type: [Objec
     }, { immediate: true });
   }), provide(N, P3), c$4(computed(() => u$4(i2.value, { ["visible"]: l$2.Open, ["hidden"]: l$2.Closed }) | n2.value)), () => {
     let { appear: o2, show: E3, enter: p2, enterFrom: V2, enterTo: Ce3, entered: be, leave: ye2, leaveFrom: Ee2, leaveTo: Ve2, ...U2 } = e2, ne2 = { ref: d2 }, re2 = { ...U2, ...A3.value && v2.value && c$3.isServer ? { class: normalizeClass([a2.class, U2.class, ...j2, ...M2]) } : {} };
-    return H$2({ theirProps: re2, ourProps: ne2, slot: {}, slots: s2, attrs: a2, features: W$1, visible: i2.value === "visible", name: "TransitionChild" });
+    return H$2({ theirProps: re2, ourProps: ne2, slot: {}, slots: s2, attrs: a2, features: W, visible: i2.value === "visible", name: "TransitionChild" });
   };
-} }), ce$1 = he, Se = defineComponent({ inheritAttrs: false, props: { as: { type: [Object, String], default: "div" }, show: { type: [Boolean], default: null }, unmount: { type: [Boolean], default: true }, appear: { type: [Boolean], default: false }, enter: { type: [String], default: "" }, enterFrom: { type: [String], default: "" }, enterTo: { type: [String], default: "" }, entered: { type: [String], default: "" }, leave: { type: [String], default: "" }, leaveFrom: { type: [String], default: "" }, leaveTo: { type: [String], default: "" } }, emits: { beforeEnter: () => true, afterEnter: () => true, beforeLeave: () => true, afterLeave: () => true }, setup(e2, { emit: t2, attrs: a2, slots: s2 }) {
+} }), ce = he, Se = defineComponent({ inheritAttrs: false, props: { as: { type: [Object, String], default: "div" }, show: { type: [Boolean], default: null }, unmount: { type: [Boolean], default: true }, appear: { type: [Boolean], default: false }, enter: { type: [String], default: "" }, enterFrom: { type: [String], default: "" }, enterTo: { type: [String], default: "" }, entered: { type: [String], default: "" }, leave: { type: [String], default: "" }, leaveFrom: { type: [String], default: "" }, leaveTo: { type: [String], default: "" } }, emits: { beforeEnter: () => true, afterEnter: () => true, beforeLeave: () => true, afterLeave: () => true }, setup(e2, { emit: t2, attrs: a2, slots: s2 }) {
   let h2 = p$4(), n2 = computed(() => e2.show === null && h2 !== null ? (h2.value & l$2.Open) === l$2.Open : e2.show);
   watchEffect(() => {
     if (![true, false].includes(n2.value))
@@ -53549,7 +53549,7 @@ let W$1 = N$3.RenderStrategy, he = defineComponent({ props: { as: { type: [Objec
     });
   }), provide(N, l2), provide(R$1, S2), () => {
     let d2 = T$1(e2, ["show", "appear", "unmount", "onBeforeEnter", "onBeforeLeave", "onAfterEnter", "onAfterLeave"]), b3 = { unmount: e2.unmount };
-    return H$2({ ourProps: { ...b3, as: "template" }, theirProps: {}, slot: {}, slots: { ...s2, default: () => [h$4(ce$1, { onBeforeEnter: () => t2("beforeEnter"), onAfterEnter: () => t2("afterEnter"), onBeforeLeave: () => t2("beforeLeave"), onAfterLeave: () => t2("afterLeave"), ...a2, ...b3, ...d2 }, s2.default)] }, attrs: {}, features: W$1, visible: r2.value === "visible", name: "Transition" });
+    return H$2({ ourProps: { ...b3, as: "template" }, theirProps: {}, slot: {}, slots: { ...s2, default: () => [h$4(ce, { onBeforeEnter: () => t2("beforeEnter"), onAfterEnter: () => t2("afterEnter"), onBeforeLeave: () => t2("beforeLeave"), onAfterLeave: () => t2("afterLeave"), ...a2, ...b3, ...d2 }, s2.default)] }, attrs: {}, features: W, visible: r2.value === "visible", name: "Transition" });
   };
 } });
 const sides = ["top", "right", "bottom", "left"];
@@ -55050,18 +55050,18 @@ function useFloating(reference, floating, options) {
     update
   };
 }
-var ce = Object.defineProperty;
-var de = (e2, r2, o2) => r2 in e2 ? ce(e2, r2, { enumerable: true, configurable: true, writable: true, value: o2 }) : e2[r2] = o2;
-var H = (e2, r2, o2) => (de(e2, typeof r2 != "symbol" ? r2 + "" : r2, o2), o2);
+var de = Object.defineProperty;
+var me = (e2, r2, o2) => r2 in e2 ? de(e2, r2, { enumerable: true, configurable: true, writable: true, value: o2 }) : e2[r2] = o2;
+var X = (e2, r2, o2) => (me(e2, typeof r2 != "symbol" ? r2 + "" : r2, o2), o2);
 function j(e2) {
   if (e2 == null || e2.value == null)
     return null;
   const r2 = e2.value.$el ?? e2.value;
   return r2.$el ? j(ref(r2)) : r2;
 }
-class Oe {
+class Ne {
   constructor() {
-    H(this, "current", this.detect());
+    X(this, "current", this.detect());
   }
   set(r2) {
     this.current !== r2 && (this.current = r2);
@@ -55079,17 +55079,17 @@ class Oe {
     return typeof window > "u" || typeof document > "u" ? "server" : "client";
   }
 }
-const z$1 = new Oe();
-function D(e2) {
-  return e2.reduce((r2, o2) => o2.type === Fragment ? r2.concat(D(o2.children)) : r2.concat(o2), []);
+const z$1 = new Ne();
+function L(e2) {
+  return e2.reduce((r2, o2) => o2.type === Fragment ? r2.concat(L(o2.children)) : r2.concat(o2), []);
 }
 function I(e2) {
   return e2 == null ? false : typeof e2.type == "string" || typeof e2.type == "object" || typeof e2.type == "function";
 }
-function W(e2) {
+function _$1(e2) {
   return e2 = unref(e2), e2 && (e2 == null ? void 0 : e2.nodeType) !== Node.COMMENT_NODE;
 }
-function Ne(e2, r2, o2, i2, t2) {
+function Re(e2, r2, o2, i2, t2) {
   watch([
     () => t2.offset,
     () => t2.flip,
@@ -55119,7 +55119,7 @@ function Ne(e2, r2, o2, i2, t2) {
     )), e2.value = a2;
   }, { immediate: true });
 }
-function Re(e2, r2, o2) {
+function Be(e2, r2, o2) {
   let i2 = () => {
   };
   onMounted(() => {
@@ -55135,7 +55135,7 @@ function Re(e2, r2, o2) {
     i2();
   });
 }
-const Be = (e2) => {
+const je = (e2) => {
   switch (e2) {
     case "top":
       return "origin-bottom";
@@ -55161,14 +55161,14 @@ const Be = (e2) => {
       return "";
   }
 };
-function je(e2, r2) {
+function $e(e2, r2) {
   const o2 = computed(() => {
     if (typeof e2.originClass == "function")
       return e2.originClass(r2.value);
     if (typeof e2.originClass == "string")
       return e2.originClass;
     if (e2.tailwindcssOriginClass)
-      return Be(r2.value);
+      return je(r2.value);
   }), i2 = computed(
     () => e2.enter || o2.value ? `${e2.enter || ""} ${o2.value || ""}` : void 0
   ), t2 = computed(
@@ -55176,7 +55176,7 @@ function je(e2, r2) {
   );
   return { originClassRef: o2, enterActiveClassRef: i2, leaveActiveClassRef: t2 };
 }
-const ee = Symbol("ReferenceContext"), te$1 = Symbol("FloatingContext"), ne = Symbol("ArrowContext");
+const te$1 = Symbol("ReferenceContext"), ne = Symbol("FloatingContext"), re = Symbol("ArrowContext");
 const n$1 = {
   as: {
     type: [String, Function],
@@ -55265,7 +55265,7 @@ const n$1 = {
     default: () => []
   }
 };
-function ie(e2, r2, o2, i2) {
+function le(e2, r2, o2, i2) {
   const { referenceRef: t2 } = i2, a2 = r2, c2 = mergeProps(o2, {
     ref: t2
   }), s2 = cloneVNode(
@@ -55274,11 +55274,11 @@ function ie(e2, r2, o2, i2) {
   );
   return a2.as === "template" ? s2 : typeof a2.as == "string" ? h$4(a2.as, c2, [s2]) : h$4(a2.as, c2, () => [s2]);
 }
-function L(e2, r2, o2, i2) {
-  const { floatingRef: t2, props: a2, mounted: c2, show: s2, x: u2, y: d2, placement: f2, strategy: h2, referenceElWidth: m2, updateFloating: y2 } = i2, l2 = mergeProps(
+function H(e2, r2, o2, i2) {
+  const { floatingRef: t2, props: a2, mounted: c2, show: s2, x: u2, y: d2, placement: f2, strategy: h2, referenceElWidth: m2, updateFloating: w2 } = i2, l2 = mergeProps(
     { ...a2, as: a2.floatingAs },
     r2
-  ), { enterActiveClassRef: v2, leaveActiveClassRef: C2 } = je(l2, f2), E3 = {
+  ), { enterActiveClassRef: v2, leaveActiveClassRef: C2 } = $e(l2, f2), E3 = {
     enterActiveClass: v2.value,
     enterFromClass: l2.enterFrom,
     enterToClass: l2.enterTo,
@@ -55325,36 +55325,36 @@ function L(e2, r2, o2, i2) {
       width: l2.adaptiveWidth && typeof m2.value == "number" ? `${m2.value}px` : void 0
     }
   };
-  function V2(w2) {
-    return l2.portal ? h$4(U$1, () => w2) : w2;
+  function V2(b3) {
+    return l2.portal ? h$4(U$1, () => b3) : b3;
   }
-  function P3(w2) {
-    const A3 = mergeProps(
+  function P3(b3) {
+    const S2 = mergeProps(
       $3,
       o2,
       l2.dialog ? {} : { ref: t2 }
     );
-    return l2.as === "template" ? w2 : typeof l2.as == "string" ? h$4(l2.as, A3, w2) : h$4(l2.as, A3, () => w2);
+    return l2.as === "template" ? b3 : typeof l2.as == "string" ? h$4(l2.as, S2, b3) : h$4(l2.as, S2, () => b3);
   }
   function B2() {
-    function w2() {
-      var b3;
-      const A3 = l2.as === "template" ? mergeProps(
+    function b3() {
+      var p2;
+      const S2 = l2.as === "template" ? mergeProps(
         $3,
         o2,
         l2.dialog ? {} : { ref: t2 }
-      ) : null, S2 = cloneVNode(e2, A3);
-      return ((b3 = S2.props) == null ? void 0 : b3.unmount) === false ? (y2(), S2) : typeof l2.show != "boolean" || l2.show ? S2 : createCommentVNode();
+      ) : null, O2 = cloneVNode(e2, S2);
+      return ((p2 = O2.props) == null ? void 0 : p2.unmount) === false ? (w2(), O2) : typeof l2.show != "boolean" || l2.show ? O2 : createCommentVNode();
     }
-    return z$1.isServer ? c2.value && l2.show ? w2() : createCommentVNode() : l2.transitionChild ? h$4(he, {
+    return z$1.isServer ? c2.value && l2.show ? b3() : createCommentVNode() : l2.transitionChild ? h$4(he, {
       key: `placement-${f2.value}`,
       ...l2.dialog ? { ref: t2 } : {},
       as: "template",
       ...R2
-    }, w2) : h$4(Transition, {
+    }, b3) : h$4(Transition, {
       ...l2.dialog ? { ref: t2 } : {},
       ...x2
-    }, w2);
+    }, b3);
   }
   return V2(
     P3(
@@ -55362,10 +55362,10 @@ function L(e2, r2, o2, i2) {
     )
   );
 }
-function le(e2, r2, o2, i2, t2) {
-  const a2 = ref(false), c2 = toRef(i2, "placement"), s2 = toRef(i2, "strategy"), u2 = shallowRef({}), d2 = ref(null), f2 = ref(void 0), h2 = ref(void 0), m2 = computed(() => j(r2)), y2 = computed(() => j(o2)), l2 = computed(
-    () => W(m2) && W(y2)
-  ), { x: v2, y: C2, placement: E3, strategy: x2, middlewareData: R2, update: $3 } = useFloating(m2, y2, {
+function se(e2, r2, o2, i2, t2) {
+  const a2 = ref(false), c2 = toRef(i2, "placement"), s2 = toRef(i2, "strategy"), u2 = shallowRef({}), d2 = ref(null), f2 = ref(void 0), h2 = ref(void 0), m2 = computed(() => j(r2)), w2 = computed(() => j(o2)), l2 = computed(
+    () => _$1(m2) && _$1(w2)
+  ), { x: v2, y: C2, placement: E3, strategy: x2, middlewareData: R2, update: $3 } = useFloating(m2, w2, {
     placement: c2,
     strategy: s2,
     middleware: u2,
@@ -55374,30 +55374,30 @@ function le(e2, r2, o2, i2, t2) {
   }), V2 = ref(null);
   onMounted(() => {
     a2.value = true;
-  });
+  }), watch(e2, (p2, U2) => {
+    p2 && !U2 ? t2("show") : !p2 && U2 && t2("hide");
+  }, { immediate: true });
   function P3() {
     l2.value && ($3(), t2("update"));
   }
-  watch([c2, s2, u2], P3, { flush: "sync" }), Ne(
+  watch([c2, s2, u2], P3, { flush: "sync" }), Re(
     u2,
     m2,
-    y2,
+    w2,
     d2,
     i2
   ), watch(R2, () => {
-    const b3 = R2.value.arrow;
-    f2.value = b3 == null ? void 0 : b3.x, h2.value = b3 == null ? void 0 : b3.y;
-  }), Re(i2.adaptiveWidth, m2, V2), watch(e2, async (b3, He2, ue3) => {
+    const p2 = R2.value.arrow;
+    f2.value = p2 == null ? void 0 : p2.x, h2.value = p2 == null ? void 0 : p2.y;
+  }), Be(i2.adaptiveWidth, m2, V2), watch(e2, async (p2, U2, fe) => {
     if (await nextTick(), e2.value && l2.value && i2.autoUpdate) {
-      const fe = autoUpdate(
+      const ce2 = autoUpdate(
         m2.value,
-        y2.value,
+        w2.value,
         P3,
         typeof i2.autoUpdate == "object" ? i2.autoUpdate : void 0
       );
-      t2("show"), ue3(() => {
-        fe(), e2.value || t2("hide");
-      });
+      fe(ce2);
     }
   }, { flush: "post", immediate: true });
   const B2 = ref(true);
@@ -55406,10 +55406,10 @@ function le(e2, r2, o2, i2, t2) {
       B2.value = true, P3();
     }));
   }, { flush: "sync" });
-  const w2 = {
+  const b3 = {
     referenceRef: r2,
     placement: E3
-  }, A3 = {
+  }, S2 = {
     floatingRef: o2,
     props: i2,
     mounted: a2,
@@ -55420,15 +55420,15 @@ function le(e2, r2, o2, i2, t2) {
     strategy: x2,
     referenceElWidth: V2,
     updateFloating: P3
-  }, S2 = {
+  }, O2 = {
     ref: d2,
     placement: E3,
     x: f2,
     y: h2
   };
-  return provide(ne, S2), { referenceApi: w2, floatingApi: A3, arrowApi: S2, x: v2, y: C2, placement: E3, strategy: x2, referenceEl: m2, floatingEl: y2, middlewareData: R2, update: P3 };
+  return provide(re, O2), { referenceApi: b3, floatingApi: S2, arrowApi: O2, x: v2, y: C2, placement: E3, strategy: x2, referenceEl: m2, floatingEl: w2, middlewareData: R2, update: P3 };
 }
-const Ie = {
+const ze = {
   name: "Float",
   inheritAttrs: false,
   props: n$1,
@@ -55438,29 +55438,29 @@ const Ie = {
       referenceApi: s2,
       floatingApi: u2,
       placement: d2
-    } = le(t2, a2, c2, e2, r2);
+    } = se(t2, a2, c2, e2, r2);
     function f2(m2) {
       return e2.as === "template" ? m2 : typeof e2.as == "string" ? h$4(e2.as, i2, m2) : h$4(e2.as, i2, () => m2);
     }
     const h2 = {
       placement: d2.value
     };
-    return e2.composable || e2.dialog ? (provide(ee, s2), provide(te$1, u2), () => {
+    return e2.composable || e2.dialog ? (provide(te$1, s2), provide(ne, u2), () => {
       if (o2.default)
         return f2(o2.default(h2));
     }) : () => {
       if (!o2.default)
         return;
-      const [m2, y2] = D(o2.default(h2)).filter(I);
+      const [m2, w2] = L(o2.default(h2)).filter(I);
       if (!I(m2))
         return;
-      const l2 = ie(
+      const l2 = le(
         m2,
         { as: "template" },
         {},
         s2
-      ), v2 = L(
-        y2,
+      ), v2 = H(
+        w2,
         { as: e2.floatingAs },
         {},
         u2
@@ -55599,7 +55599,7 @@ function toValue(r2) {
 }
 const isClient = typeof window !== "undefined" && typeof document !== "undefined";
 const toString = Object.prototype.toString;
-const isObject$1 = (val) => toString.call(val) === "[object Object]";
+const isObject$2 = (val) => toString.call(val) === "[object Object]";
 const noop = () => {
 };
 function useTimeoutFn(cb, interval, options = {}) {
@@ -55678,7 +55678,7 @@ function useEventListener(...args) {
       cleanup();
       if (!el2)
         return;
-      const optionsClone = isObject$1(options2) ? { ...options2 } : options2;
+      const optionsClone = isObject$2(options2) ? { ...options2 } : options2;
       cleanups.push(
         ...events.flatMap((event) => {
           return listeners.map((listener) => register(el2, event, listener, optionsClone));
@@ -55767,8 +55767,8 @@ function useClipboard(options = {}) {
   };
 }
 /*!
-  * shared v9.2.2
-  * (c) 2022 kazuya kawaguchi
+  * shared v9.3.0
+  * (c) 2023 kazuya kawaguchi
   * Released under the MIT License.
   */
 const inBrowser = typeof window !== "undefined";
@@ -55776,8 +55776,11 @@ let mark;
 let measure;
 {
   const perf2 = inBrowser && window.performance;
-  if (perf2 && perf2.mark && perf2.measure && perf2.clearMarks && perf2.clearMeasures) {
-    mark = (tag) => perf2.mark(tag);
+  if (perf2 && perf2.mark && perf2.measure && perf2.clearMarks && // @ts-ignore browser compat
+  perf2.clearMeasures) {
+    mark = (tag) => {
+      perf2.mark(tag);
+    };
     measure = (name, startTag, endTag) => {
       perf2.measure(name, startTag, endTag);
       perf2.clearMarks(startTag);
@@ -55785,34 +55788,25 @@ let measure;
     };
   }
 }
-const RE_ARGS = /\{([0-9a-zA-Z]+)\}/g;
-function format(message, ...args) {
-  if (args.length === 1 && isObject(args[0])) {
+const RE_ARGS$1 = /\{([0-9a-zA-Z]+)\}/g;
+function format$1(message, ...args) {
+  if (args.length === 1 && isObject$1(args[0])) {
     args = args[0];
   }
   if (!args || !args.hasOwnProperty) {
     args = {};
   }
-  return message.replace(RE_ARGS, (match, identifier) => {
+  return message.replace(RE_ARGS$1, (match, identifier) => {
     return args.hasOwnProperty(identifier) ? args[identifier] : "";
   });
 }
-const hasSymbol = typeof Symbol === "function" && typeof Symbol.toStringTag === "symbol";
-const makeSymbol = (name) => hasSymbol ? Symbol(name) : name;
+const makeSymbol = (name, shareable = false) => !shareable ? Symbol(name) : Symbol.for(name);
 const generateFormatCacheKey = (locale, key, source) => friendlyJSONstringify({ l: locale, k: key, s: source });
 const friendlyJSONstringify = (json) => JSON.stringify(json).replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029").replace(/\u0027/g, "\\u0027");
 const isNumber = (val) => typeof val === "number" && isFinite(val);
 const isDate = (val) => toTypeString(val) === "[object Date]";
 const isRegExp = (val) => toTypeString(val) === "[object RegExp]";
 const isEmptyObject = (val) => isPlainObject(val) && Object.keys(val).length === 0;
-function warn(msg, err) {
-  if (typeof console !== "undefined") {
-    console.warn(`[intlify] ` + msg);
-    if (err) {
-      console.warn(err.stack);
-    }
-  }
-}
 const assign = Object.assign;
 let _globalThis;
 const getGlobalThis = () => {
@@ -55829,16 +55823,21 @@ const isArray = Array.isArray;
 const isFunction = (val) => typeof val === "function";
 const isString = (val) => typeof val === "string";
 const isBoolean = (val) => typeof val === "boolean";
-const isObject = (val) => (
-  // eslint-disable-line
-  val !== null && typeof val === "object"
-);
+const isObject$1 = (val) => val !== null && typeof val === "object";
 const objectToString = Object.prototype.toString;
 const toTypeString = (value) => objectToString.call(value);
-const isPlainObject = (val) => toTypeString(val) === "[object Object]";
+const isPlainObject = (val) => {
+  if (!isObject$1(val))
+    return false;
+  const proto = Object.getPrototypeOf(val);
+  return proto === null || proto.constructor === Object;
+};
 const toDisplayString = (val) => {
   return val == null ? "" : isArray(val) || isPlainObject(val) && val.toString === objectToString ? JSON.stringify(val, null, 2) : String(val);
 };
+function join$1(items, separator2 = "") {
+  return items.reduce((str, item, index) => index === 0 ? str + item : str + separator2 + item, "");
+}
 const RANGE = 2;
 function generateCodeFrame(source, start = 0, end = source.length) {
   const lines = source.split(/\r?\n/);
@@ -55870,6 +55869,25 @@ function generateCodeFrame(source, start = 0, end = source.length) {
   }
   return res.join("\n");
 }
+function incrementer(code2) {
+  let current = code2;
+  return () => ++current;
+}
+function warn(msg, err) {
+  if (typeof console !== "undefined") {
+    console.warn(`[intlify] ` + msg);
+    if (err) {
+      console.warn(err.stack);
+    }
+  }
+}
+const hasWarned = {};
+function warnOnce(msg) {
+  if (!hasWarned[msg]) {
+    hasWarned[msg] = true;
+    warn(msg);
+  }
+}
 function createEmitter() {
   const events = /* @__PURE__ */ new Map();
   const emitter = {
@@ -55895,10 +55913,23 @@ function createEmitter() {
   return emitter;
 }
 /*!
-  * message-compiler v9.2.2
-  * (c) 2022 kazuya kawaguchi
+  * message-compiler v9.3.0
+  * (c) 2023 kazuya kawaguchi
   * Released under the MIT License.
   */
+const RE_ARGS = /\{([0-9a-zA-Z]+)\}/g;
+function format(message, ...args) {
+  if (args.length === 1 && isObject(args[0])) {
+    args = args[0];
+  }
+  if (!args || !args.hasOwnProperty) {
+    args = {};
+  }
+  return message.replace(RE_ARGS, (match, identifier) => {
+    return args.hasOwnProperty(identifier) ? args[identifier] : "";
+  });
+}
+const isObject = (val) => val !== null && typeof val === "object";
 const CompileErrorCodes = {
   // tokenizer error codes
   EXPECTED_TOKEN: 1,
@@ -55916,10 +55947,14 @@ const CompileErrorCodes = {
   UNEXPECTED_EMPTY_LINKED_MODIFIER: 12,
   UNEXPECTED_EMPTY_LINKED_KEY: 13,
   UNEXPECTED_LEXICAL_ANALYSIS: 14,
+  // generator error codes
+  UNHANDLED_CODEGEN_NODE_TYPE: 15,
+  // minifier error codes
+  UNHANDLED_MINIFIER_NODE_TYPE: 16,
   // Special value for higher-order compilers to pick up the last code
   // to avoid collision of error codes. This should always be kept as the last
   // item.
-  __EXTEND_POINT__: 15
+  __EXTEND_POINT__: 17
 };
 const errorMessages$2 = {
   // tokenizer error messages
@@ -55937,7 +55972,11 @@ const errorMessages$2 = {
   [CompileErrorCodes.MUST_HAVE_MESSAGES_IN_PLURAL]: `Plural must have messages`,
   [CompileErrorCodes.UNEXPECTED_EMPTY_LINKED_MODIFIER]: `Unexpected empty linked modifier`,
   [CompileErrorCodes.UNEXPECTED_EMPTY_LINKED_KEY]: `Unexpected empty linked key`,
-  [CompileErrorCodes.UNEXPECTED_LEXICAL_ANALYSIS]: `Unexpected lexical analysis in token: '{0}'`
+  [CompileErrorCodes.UNEXPECTED_LEXICAL_ANALYSIS]: `Unexpected lexical analysis in token: '{0}'`,
+  // generator error messages
+  [CompileErrorCodes.UNHANDLED_CODEGEN_NODE_TYPE]: `unhandled codegen node type: '{0}'`,
+  // minimizer error messages
+  [CompileErrorCodes.UNHANDLED_MINIFIER_NODE_TYPE]: `unhandled mimifier node type: '{0}'`
 };
 function createCompileError(code2, loc, options = {}) {
   const { domain, messages, args } = options;
@@ -55951,8 +55990,8 @@ function createCompileError(code2, loc, options = {}) {
   return error;
 }
 /*!
-  * devtools-if v9.2.2
-  * (c) 2022 kazuya kawaguchi
+  * devtools-if v9.3.0
+  * (c) 2023 kazuya kawaguchi
   * Released under the MIT License.
   */
 const IntlifyDevToolsHooks = {
@@ -55960,256 +55999,261 @@ const IntlifyDevToolsHooks = {
   FunctionTranslate: "function:translate"
 };
 /*!
-  * core-base v9.2.2
-  * (c) 2022 kazuya kawaguchi
+  * core-base v9.3.0
+  * (c) 2023 kazuya kawaguchi
   * Released under the MIT License.
   */
+function initFeatureFlags$1() {
+  if (typeof __INTLIFY_PROD_DEVTOOLS__ !== "boolean") {
+    getGlobalThis().__INTLIFY_PROD_DEVTOOLS__ = false;
+  }
+}
 const pathStateMachine = [];
 pathStateMachine[
   0
-  /* BEFORE_PATH */
+  /* States.BEFORE_PATH */
 ] = {
   [
     "w"
-    /* WORKSPACE */
+    /* PathCharTypes.WORKSPACE */
   ]: [
     0
-    /* BEFORE_PATH */
+    /* States.BEFORE_PATH */
   ],
   [
     "i"
-    /* IDENT */
+    /* PathCharTypes.IDENT */
   ]: [
     3,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     "["
-    /* LEFT_BRACKET */
+    /* PathCharTypes.LEFT_BRACKET */
   ]: [
     4
-    /* IN_SUB_PATH */
+    /* States.IN_SUB_PATH */
   ],
   [
     "o"
-    /* END_OF_FAIL */
+    /* PathCharTypes.END_OF_FAIL */
   ]: [
     7
-    /* AFTER_PATH */
+    /* States.AFTER_PATH */
   ]
 };
 pathStateMachine[
   1
-  /* IN_PATH */
+  /* States.IN_PATH */
 ] = {
   [
     "w"
-    /* WORKSPACE */
+    /* PathCharTypes.WORKSPACE */
   ]: [
     1
-    /* IN_PATH */
+    /* States.IN_PATH */
   ],
   [
     "."
-    /* DOT */
+    /* PathCharTypes.DOT */
   ]: [
     2
-    /* BEFORE_IDENT */
+    /* States.BEFORE_IDENT */
   ],
   [
     "["
-    /* LEFT_BRACKET */
+    /* PathCharTypes.LEFT_BRACKET */
   ]: [
     4
-    /* IN_SUB_PATH */
+    /* States.IN_SUB_PATH */
   ],
   [
     "o"
-    /* END_OF_FAIL */
+    /* PathCharTypes.END_OF_FAIL */
   ]: [
     7
-    /* AFTER_PATH */
+    /* States.AFTER_PATH */
   ]
 };
 pathStateMachine[
   2
-  /* BEFORE_IDENT */
+  /* States.BEFORE_IDENT */
 ] = {
   [
     "w"
-    /* WORKSPACE */
+    /* PathCharTypes.WORKSPACE */
   ]: [
     2
-    /* BEFORE_IDENT */
+    /* States.BEFORE_IDENT */
   ],
   [
     "i"
-    /* IDENT */
+    /* PathCharTypes.IDENT */
   ]: [
     3,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     "0"
-    /* ZERO */
+    /* PathCharTypes.ZERO */
   ]: [
     3,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ]
 };
 pathStateMachine[
   3
-  /* IN_IDENT */
+  /* States.IN_IDENT */
 ] = {
   [
     "i"
-    /* IDENT */
+    /* PathCharTypes.IDENT */
   ]: [
     3,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     "0"
-    /* ZERO */
+    /* PathCharTypes.ZERO */
   ]: [
     3,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     "w"
-    /* WORKSPACE */
+    /* PathCharTypes.WORKSPACE */
   ]: [
     1,
     1
-    /* PUSH */
+    /* Actions.PUSH */
   ],
   [
     "."
-    /* DOT */
+    /* PathCharTypes.DOT */
   ]: [
     2,
     1
-    /* PUSH */
+    /* Actions.PUSH */
   ],
   [
     "["
-    /* LEFT_BRACKET */
+    /* PathCharTypes.LEFT_BRACKET */
   ]: [
     4,
     1
-    /* PUSH */
+    /* Actions.PUSH */
   ],
   [
     "o"
-    /* END_OF_FAIL */
+    /* PathCharTypes.END_OF_FAIL */
   ]: [
     7,
     1
-    /* PUSH */
+    /* Actions.PUSH */
   ]
 };
 pathStateMachine[
   4
-  /* IN_SUB_PATH */
+  /* States.IN_SUB_PATH */
 ] = {
   [
     "'"
-    /* SINGLE_QUOTE */
+    /* PathCharTypes.SINGLE_QUOTE */
   ]: [
     5,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     '"'
-    /* DOUBLE_QUOTE */
+    /* PathCharTypes.DOUBLE_QUOTE */
   ]: [
     6,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     "["
-    /* LEFT_BRACKET */
+    /* PathCharTypes.LEFT_BRACKET */
   ]: [
     4,
     2
-    /* INC_SUB_PATH_DEPTH */
+    /* Actions.INC_SUB_PATH_DEPTH */
   ],
   [
     "]"
-    /* RIGHT_BRACKET */
+    /* PathCharTypes.RIGHT_BRACKET */
   ]: [
     1,
     3
-    /* PUSH_SUB_PATH */
+    /* Actions.PUSH_SUB_PATH */
   ],
   [
     "o"
-    /* END_OF_FAIL */
+    /* PathCharTypes.END_OF_FAIL */
   ]: 8,
   [
     "l"
-    /* ELSE */
+    /* PathCharTypes.ELSE */
   ]: [
     4,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ]
 };
 pathStateMachine[
   5
-  /* IN_SINGLE_QUOTE */
+  /* States.IN_SINGLE_QUOTE */
 ] = {
   [
     "'"
-    /* SINGLE_QUOTE */
+    /* PathCharTypes.SINGLE_QUOTE */
   ]: [
     4,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     "o"
-    /* END_OF_FAIL */
+    /* PathCharTypes.END_OF_FAIL */
   ]: 8,
   [
     "l"
-    /* ELSE */
+    /* PathCharTypes.ELSE */
   ]: [
     5,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ]
 };
 pathStateMachine[
   6
-  /* IN_DOUBLE_QUOTE */
+  /* States.IN_DOUBLE_QUOTE */
 ] = {
   [
     '"'
-    /* DOUBLE_QUOTE */
+    /* PathCharTypes.DOUBLE_QUOTE */
   ]: [
     4,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ],
   [
     "o"
-    /* END_OF_FAIL */
+    /* PathCharTypes.END_OF_FAIL */
   ]: 8,
   [
     "l"
-    /* ELSE */
+    /* PathCharTypes.ELSE */
   ]: [
     6,
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ]
 };
 const literalValueRE = /^\s?(?:true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/;
@@ -56270,7 +56314,7 @@ function parse$2(path) {
   const actions = [];
   actions[
     0
-    /* APPEND */
+    /* Actions.APPEND */
   ] = () => {
     if (key === void 0) {
       key = newChar;
@@ -56280,7 +56324,7 @@ function parse$2(path) {
   };
   actions[
     1
-    /* PUSH */
+    /* Actions.PUSH */
   ] = () => {
     if (key !== void 0) {
       keys.push(key);
@@ -56289,24 +56333,24 @@ function parse$2(path) {
   };
   actions[
     2
-    /* INC_SUB_PATH_DEPTH */
+    /* Actions.INC_SUB_PATH_DEPTH */
   ] = () => {
     actions[
       0
-      /* APPEND */
+      /* Actions.APPEND */
     ]();
     subPathDepth++;
   };
   actions[
     3
-    /* PUSH_SUB_PATH */
+    /* Actions.PUSH_SUB_PATH */
   ] = () => {
     if (subPathDepth > 0) {
       subPathDepth--;
       mode = 4;
       actions[
         0
-        /* APPEND */
+        /* Actions.APPEND */
       ]();
     } else {
       subPathDepth = 0;
@@ -56319,7 +56363,7 @@ function parse$2(path) {
       } else {
         actions[
           1
-          /* PUSH */
+          /* Actions.PUSH */
         ]();
       }
     }
@@ -56331,7 +56375,7 @@ function parse$2(path) {
       newChar = "\\" + nextChar;
       actions[
         0
-        /* APPEND */
+        /* Actions.APPEND */
       ]();
       return true;
     }
@@ -56346,7 +56390,7 @@ function parse$2(path) {
     typeMap = pathStateMachine[mode];
     transition = typeMap[type] || typeMap[
       "l"
-      /* ELSE */
+      /* PathCharTypes.ELSE */
     ] || 8;
     if (transition === 8) {
       return;
@@ -56368,10 +56412,10 @@ function parse$2(path) {
 }
 const cache = /* @__PURE__ */ new Map();
 function resolveWithKeyValue(obj, path) {
-  return isObject(obj) ? obj[path] : null;
+  return isObject$1(obj) ? obj[path] : null;
 }
 function resolveValue(obj, path) {
-  if (!isObject(obj)) {
+  if (!isObject$1(obj)) {
     return null;
   }
   let hit = cache.get(path);
@@ -56400,7 +56444,7 @@ function resolveValue(obj, path) {
 const DEFAULT_MODIFIER = (str) => str;
 const DEFAULT_MESSAGE = (ctx) => "";
 const DEFAULT_MESSAGE_DATA_TYPE = "text";
-const DEFAULT_NORMALIZE = (values) => values.length === 0 ? "" : values.join("");
+const DEFAULT_NORMALIZE = (values) => values.length === 0 ? "" : join$1(values);
 const DEFAULT_INTERPOLATE = toDisplayString;
 function pluralDefault(choice, choicesLength) {
   choice = Math.abs(choice);
@@ -56424,8 +56468,8 @@ function normalizeNamed(pluralIndex, props) {
 function createMessageContext(options = {}) {
   const locale = options.locale;
   const pluralIndex = getPluralIndex(options);
-  const pluralRule = isObject(options.pluralRules) && isString(locale) && isFunction(options.pluralRules[locale]) ? options.pluralRules[locale] : pluralDefault;
-  const orgPluralRule = isObject(options.pluralRules) && isString(locale) && isFunction(options.pluralRules[locale]) ? pluralDefault : void 0;
+  const pluralRule = isObject$1(options.pluralRules) && isString(locale) && isFunction(options.pluralRules[locale]) ? options.pluralRules[locale] : pluralDefault;
+  const orgPluralRule = isObject$1(options.pluralRules) && isString(locale) && isFunction(options.pluralRules[locale]) ? pluralDefault : void 0;
   const plural = (messages) => {
     return messages[pluralRule(pluralIndex, messages.length, orgPluralRule)];
   };
@@ -56435,7 +56479,7 @@ function createMessageContext(options = {}) {
   isNumber(options.pluralIndex) && normalizeNamed(pluralIndex, _named);
   const named = (key) => _named[key];
   function message(key) {
-    const msg = isFunction(options.messages) ? options.messages(key) : isObject(options.messages) ? options.messages[key] : false;
+    const msg = isFunction(options.messages) ? options.messages(key) : isObject$1(options.messages) ? options.messages[key] : false;
     return !msg ? options.parent ? options.parent.message(key) : DEFAULT_MESSAGE : msg;
   }
   const _modifier = (name) => options.modifiers ? options.modifiers[name] : DEFAULT_MODIFIER;
@@ -56447,7 +56491,7 @@ function createMessageContext(options = {}) {
     let type2 = "text";
     let modifier = "";
     if (args.length === 1) {
-      if (isObject(arg1)) {
+      if (isObject$1(arg1)) {
         modifier = arg1.modifier || modifier;
         type2 = arg1.type || type2;
       } else if (isString(arg1)) {
@@ -56461,45 +56505,50 @@ function createMessageContext(options = {}) {
         type2 = arg2 || type2;
       }
     }
-    let msg = message(key)(ctx);
-    if (type2 === "vnode" && isArray(msg) && modifier) {
-      msg = msg[0];
-    }
+    const ret = message(key)(ctx);
+    const msg = (
+      // The message in vnode resolved with linked are returned as an array by processor.nomalize
+      type2 === "vnode" && isArray(ret) && modifier ? ret[0] : ret
+    );
     return modifier ? _modifier(modifier)(msg, type2) : msg;
   };
   const ctx = {
     [
       "list"
-      /* LIST */
+      /* HelperNameMap.LIST */
     ]: list,
     [
       "named"
-      /* NAMED */
+      /* HelperNameMap.NAMED */
     ]: named,
     [
       "plural"
-      /* PLURAL */
+      /* HelperNameMap.PLURAL */
     ]: plural,
     [
       "linked"
-      /* LINKED */
+      /* HelperNameMap.LINKED */
     ]: linked,
     [
       "message"
-      /* MESSAGE */
+      /* HelperNameMap.MESSAGE */
     ]: message,
     [
       "type"
-      /* TYPE */
+      /* HelperNameMap.TYPE */
     ]: type,
     [
       "interpolate"
-      /* INTERPOLATE */
+      /* HelperNameMap.INTERPOLATE */
     ]: interpolate,
     [
       "normalize"
-      /* NORMALIZE */
-    ]: normalize
+      /* HelperNameMap.NORMALIZE */
+    ]: normalize,
+    [
+      "values"
+      /* HelperNameMap.VALUES */
+    ]: assign({}, _list, _named)
   };
   return ctx;
 }
@@ -56526,7 +56575,8 @@ const CoreWarnCodes = {
   FALLBACK_TO_NUMBER_FORMAT: 4,
   CANNOT_FORMAT_DATE: 5,
   FALLBACK_TO_DATE_FORMAT: 6,
-  __EXTEND_POINT__: 7
+  EXPERIMENTAL_CUSTOM_MESSAGE_COMPILER: 7,
+  __EXTEND_POINT__: 8
 };
 const warnMessages$1 = {
   [CoreWarnCodes.NOT_FOUND_KEY]: `Not found '{key}' key in '{locale}' locale messages.`,
@@ -56534,15 +56584,16 @@ const warnMessages$1 = {
   [CoreWarnCodes.CANNOT_FORMAT_NUMBER]: `Cannot format a number value due to not supported Intl.NumberFormat.`,
   [CoreWarnCodes.FALLBACK_TO_NUMBER_FORMAT]: `Fall back to number format '{key}' key with '{target}' locale.`,
   [CoreWarnCodes.CANNOT_FORMAT_DATE]: `Cannot format a date value due to not supported Intl.DateTimeFormat.`,
-  [CoreWarnCodes.FALLBACK_TO_DATE_FORMAT]: `Fall back to datetime format '{key}' key with '{target}' locale.`
+  [CoreWarnCodes.FALLBACK_TO_DATE_FORMAT]: `Fall back to datetime format '{key}' key with '{target}' locale.`,
+  [CoreWarnCodes.EXPERIMENTAL_CUSTOM_MESSAGE_COMPILER]: `This project is using Custom Message Compiler, which is an experimental feature. It may receive breaking changes or be removed in the future.`
 };
 function getWarnMessage$1(code2, ...args) {
-  return format(warnMessages$1[code2], ...args);
+  return format$1(warnMessages$1[code2], ...args);
 }
 function fallbackWithSimple(ctx, fallback, start) {
   return [.../* @__PURE__ */ new Set([
     start,
-    ...isArray(fallback) ? fallback : isObject(fallback) ? Object.keys(fallback) : isString(fallback) ? [fallback] : [start]
+    ...isArray(fallback) ? fallback : isObject$1(fallback) ? Object.keys(fallback) : isString(fallback) ? [fallback] : [start]
   ])];
 }
 function fallbackWithLocaleChain(ctx, fallback, start) {
@@ -56602,7 +56653,7 @@ function appendItemToChain(chain, target, blocks) {
   }
   return follow;
 }
-const VERSION$1 = "9.2.2";
+const VERSION$1 = "9.3.0";
 const NOT_REOSLVED = -1;
 const DEFAULT_LOCALE = "en-US";
 const MISSING_RESOLVE_VALUE = "";
@@ -56610,13 +56661,13 @@ const capitalize = (str) => `${str.charAt(0).toLocaleUpperCase()}${str.substr(1)
 function getDefaultLinkedModifiers() {
   return {
     upper: (val, type) => {
-      return type === "text" && isString(val) ? val.toUpperCase() : type === "vnode" && isObject(val) && "__v_isVNode" in val ? val.children.toUpperCase() : val;
+      return type === "text" && isString(val) ? val.toUpperCase() : type === "vnode" && isObject$1(val) && "__v_isVNode" in val ? val.children.toUpperCase() : val;
     },
     lower: (val, type) => {
-      return type === "text" && isString(val) ? val.toLowerCase() : type === "vnode" && isObject(val) && "__v_isVNode" in val ? val.children.toLowerCase() : val;
+      return type === "text" && isString(val) ? val.toLowerCase() : type === "vnode" && isObject$1(val) && "__v_isVNode" in val ? val.children.toLowerCase() : val;
     },
     capitalize: (val, type) => {
-      return type === "text" && isString(val) ? capitalize(val) : type === "vnode" && isObject(val) && "__v_isVNode" in val ? capitalize(val.children) : val;
+      return type === "text" && isString(val) ? capitalize(val) : type === "vnode" && isObject$1(val) && "__v_isVNode" in val ? capitalize(val.children) : val;
     }
   };
 }
@@ -56641,6 +56692,7 @@ const setFallbackContext = (context) => {
 const getFallbackContext = () => _fallbackContext;
 let _cid = 0;
 function createCoreContext(options = {}) {
+  const onWarn = isFunction(options.onWarn) ? options.onWarn : warn;
   const version2 = isString(options.version) ? options.version : VERSION$1;
   const locale = isString(options.locale) ? options.locale : DEFAULT_LOCALE;
   const fallbackLocale = isArray(options.fallbackLocale) || isPlainObject(options.fallbackLocale) || isString(options.fallbackLocale) || options.fallbackLocale === false ? options.fallbackLocale : locale;
@@ -56659,14 +56711,16 @@ function createCoreContext(options = {}) {
   const warnHtmlMessage = isBoolean(options.warnHtmlMessage) ? options.warnHtmlMessage : true;
   const escapeParameter = !!options.escapeParameter;
   const messageCompiler = isFunction(options.messageCompiler) ? options.messageCompiler : _compiler;
+  if (isFunction(options.messageCompiler)) {
+    warnOnce(getWarnMessage$1(CoreWarnCodes.EXPERIMENTAL_CUSTOM_MESSAGE_COMPILER));
+  }
   const messageResolver = isFunction(options.messageResolver) ? options.messageResolver : _resolver || resolveWithKeyValue;
   const localeFallbacker = isFunction(options.localeFallbacker) ? options.localeFallbacker : _fallbacker || fallbackWithSimple;
-  const fallbackContext = isObject(options.fallbackContext) ? options.fallbackContext : void 0;
-  const onWarn = isFunction(options.onWarn) ? options.onWarn : warn;
+  const fallbackContext = isObject$1(options.fallbackContext) ? options.fallbackContext : void 0;
   const internalOptions = options;
-  const __datetimeFormatters = isObject(internalOptions.__datetimeFormatters) ? internalOptions.__datetimeFormatters : /* @__PURE__ */ new Map();
-  const __numberFormatters = isObject(internalOptions.__numberFormatters) ? internalOptions.__numberFormatters : /* @__PURE__ */ new Map();
-  const __meta = isObject(internalOptions.__meta) ? internalOptions.__meta : {};
+  const __datetimeFormatters = isObject$1(internalOptions.__datetimeFormatters) ? internalOptions.__datetimeFormatters : /* @__PURE__ */ new Map();
+  const __numberFormatters = isObject$1(internalOptions.__numberFormatters) ? internalOptions.__numberFormatters : /* @__PURE__ */ new Map();
+  const __meta = isObject$1(internalOptions.__meta) ? internalOptions.__meta : {};
   _cid++;
   const context = {
     version: version2,
@@ -56740,14 +56794,15 @@ function updateFallbackLocale(ctx, locale, fallback) {
   context.__localeChainCache = /* @__PURE__ */ new Map();
   ctx.localeFallbacker(ctx, fallback, locale);
 }
-let code$2 = CompileErrorCodes.__EXTEND_POINT__;
-const inc$2 = () => ++code$2;
+const code$2 = CompileErrorCodes.__EXTEND_POINT__;
+const inc$2 = incrementer(code$2);
 const CoreErrorCodes = {
   INVALID_ARGUMENT: code$2,
   INVALID_DATE_ARGUMENT: inc$2(),
   INVALID_ISO_DATE_ARGUMENT: inc$2(),
+  NOT_SUPPORT_NON_STRING_MESSAGE: inc$2(),
   __EXTEND_POINT__: inc$2()
-  // 18
+  // 22
 };
 function createCoreError(code2) {
   return createCompileError(code2, null, { messages: errorMessages$1 });
@@ -56755,8 +56810,10 @@ function createCoreError(code2) {
 const errorMessages$1 = {
   [CoreErrorCodes.INVALID_ARGUMENT]: "Invalid arguments",
   [CoreErrorCodes.INVALID_DATE_ARGUMENT]: "The date provided is an invalid Date object.Make sure your Date represents a valid date.",
-  [CoreErrorCodes.INVALID_ISO_DATE_ARGUMENT]: "The argument provided is not a valid ISO date string"
+  [CoreErrorCodes.INVALID_ISO_DATE_ARGUMENT]: "The argument provided is not a valid ISO date string",
+  [CoreErrorCodes.NOT_SUPPORT_NON_STRING_MESSAGE]: "Not support non-string message"
 };
+const isMessageAST = (val) => isObject$1(val) && (val.t === 0 || val.type === 0) && ("b" in val || "body" in val);
 const NOOP_MESSAGE_FUNCTION = () => "";
 const isMessageFunction = (val) => isFunction(val);
 function translate(context, ...args) {
@@ -56777,13 +56834,13 @@ function translate(context, ...args) {
   ];
   let format2 = formatScope;
   let cacheBaseKey = key;
-  if (!resolvedMessage && !(isString(format2) || isMessageFunction(format2))) {
+  if (!resolvedMessage && !(isString(format2) || isMessageAST(format2) || isMessageFunction(format2))) {
     if (enableDefaultMsg) {
       format2 = defaultMsgOrKey;
       cacheBaseKey = format2;
     }
   }
-  if (!resolvedMessage && (!(isString(format2) || isMessageFunction(format2)) || !isString(targetLocale))) {
+  if (!resolvedMessage && (!(isString(format2) || isMessageAST(format2) || isMessageFunction(format2)) || !isString(targetLocale))) {
     return unresolving ? NOT_REOSLVED : key;
   }
   if (isString(format2) && context.messageCompiler == null) {
@@ -56791,10 +56848,10 @@ function translate(context, ...args) {
     return key;
   }
   let occurred = false;
-  const errorDetector = () => {
+  const onError = () => {
     occurred = true;
   };
-  const msg = !isMessageFunction(format2) ? compileMessageFormat(context, key, targetLocale, format2, cacheBaseKey, errorDetector) : format2;
+  const msg = !isMessageFunction(format2) ? compileMessageFormat(context, key, targetLocale, format2, cacheBaseKey, onError) : format2;
   if (occurred) {
     return format2;
   }
@@ -56818,7 +56875,7 @@ function translate(context, ...args) {
 function escapeParams(options) {
   if (isArray(options.list)) {
     options.list = options.list.map((item) => isString(item) ? escapeHtml$1(item) : item);
-  } else if (isObject(options.named)) {
+  } else if (isObject$1(options.named)) {
     Object.keys(options.named).forEach((key) => {
       if (isString(options.named[key])) {
         options.named[key] = escapeHtml$1(options.named[key]);
@@ -56885,8 +56942,9 @@ function resolveMessageFormat(context, key, locale, fallbackLocale, fallbackWarn
         measure("intlify message resolve", startTag, endTag);
       }
     }
-    if (isString(format2) || isFunction(format2))
+    if (isString(format2) || isMessageAST(format2) || isMessageFunction(format2)) {
       break;
+    }
     const missingRet = handleMissing(
       context,
       // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -56902,7 +56960,7 @@ function resolveMessageFormat(context, key, locale, fallbackLocale, fallbackWarn
   }
   return [format2, targetLocale, message];
 }
-function compileMessageFormat(context, key, targetLocale, format2, cacheBaseKey, errorDetector) {
+function compileMessageFormat(context, key, targetLocale, format2, cacheBaseKey, onError) {
   const { messageCompiler, warnHtmlMessage } = context;
   if (isMessageFunction(format2)) {
     const msg2 = format2;
@@ -56925,7 +56983,7 @@ function compileMessageFormat(context, key, targetLocale, format2, cacheBaseKey,
     endTag = "intlify-message-compilation-end";
     mark && mark(startTag);
   }
-  const msg = messageCompiler(format2, getCompileOptions(context, targetLocale, cacheBaseKey, format2, warnHtmlMessage, errorDetector));
+  const msg = messageCompiler(format2, getCompileContext(context, targetLocale, cacheBaseKey, format2, warnHtmlMessage, onError));
   if (inBrowser) {
     const end = window.performance.now();
     const emitter = context.__v_emitter;
@@ -56979,7 +57037,7 @@ function evaluateMessage(context, msg, msgCtx) {
 function parseTranslateArgs(...args) {
   const [arg1, arg2, arg3] = args;
   const options = {};
-  if (!isString(arg1) && !isNumber(arg1) && !isMessageFunction(arg1)) {
+  if (!isString(arg1) && !isNumber(arg1) && !isMessageFunction(arg1) && !isMessageAST(arg1)) {
     throw createCoreError(CoreErrorCodes.INVALID_ARGUMENT);
   }
   const key = isNumber(arg1) ? String(arg1) : isMessageFunction(arg1) ? arg1 : arg1;
@@ -57001,18 +57059,21 @@ function parseTranslateArgs(...args) {
   }
   return [key, options];
 }
-function getCompileOptions(context, locale, key, source, warnHtmlMessage, errorDetector) {
+function getCompileContext(context, locale, key, source, warnHtmlMessage, onError) {
   return {
+    locale,
+    key,
     warnHtmlMessage,
     onError: (err) => {
-      errorDetector && errorDetector(err);
+      onError && onError(err);
       {
+        const _source = getSourceForCodeFrame(source);
         const message = `Message compilation error: ${err.message}`;
-        const codeFrame = err.location && generateCodeFrame(source, err.location.start.offset, err.location.end.offset);
+        const codeFrame = err.location && _source && generateCodeFrame(_source, err.location.start.offset, err.location.end.offset);
         const emitter = context.__v_emitter;
-        if (emitter) {
+        if (emitter && _source) {
           emitter.emit("compile-error", {
-            message: source,
+            message: _source,
             error: err.message,
             start: err.location && err.location.start.offset,
             end: err.location && err.location.end.offset,
@@ -57026,6 +57087,16 @@ ${codeFrame}` : message);
     onCacheKey: (source2) => generateFormatCacheKey(locale, key, source2)
   };
 }
+function getSourceForCodeFrame(source) {
+  var _a2;
+  if (isString(source))
+    ;
+  else {
+    if ((_a2 = source.loc) == null ? void 0 : _a2.source) {
+      return source.loc.source;
+    }
+  }
+}
 function getMessageContextOptions(context, locale, message, options) {
   const { modifiers, pluralRules, messageResolver: resolveValue2, fallbackLocale, fallbackWarn, missingWarn, fallbackContext } = context;
   const resolveMessage = (key) => {
@@ -57034,12 +57105,12 @@ function getMessageContextOptions(context, locale, message, options) {
       const [, , message2] = resolveMessageFormat(fallbackContext, key, locale, fallbackLocale, fallbackWarn, missingWarn);
       val = resolveValue2(message2, key);
     }
-    if (isString(val)) {
+    if (isString(val) || isMessageAST(val)) {
       let occurred = false;
-      const errorDetector = () => {
+      const onError = () => {
         occurred = true;
       };
-      const msg = compileMessageFormat(context, key, locale, val, key, errorDetector);
+      const msg = compileMessageFormat(context, key, locale, val, key, onError);
       return !occurred ? msg : NOOP_MESSAGE_FUNCTION;
     } else if (isMessageFunction(val)) {
       return val;
@@ -57350,9 +57421,7 @@ function clearNumberFormat(ctx, locale, format2) {
   }
 }
 {
-  if (typeof __INTLIFY_PROD_DEVTOOLS__ !== "boolean") {
-    getGlobalThis().__INTLIFY_PROD_DEVTOOLS__ = false;
-  }
+  initFeatureFlags$1();
 }
 function getDevtoolsGlobalHook() {
   return getTarget().__VUE_DEVTOOLS_GLOBAL_HOOK__;
@@ -57502,49 +57571,49 @@ function setupDevtoolsPlugin(pluginDescriptor, setupFn) {
   }
 }
 /*!
-  * vue-devtools v9.2.2
-  * (c) 2022 kazuya kawaguchi
+  * vue-devtools v9.3.0
+  * (c) 2023 kazuya kawaguchi
   * Released under the MIT License.
   */
 const VueDevToolsLabels = {
   [
     "vue-devtools-plugin-vue-i18n"
-    /* PLUGIN */
+    /* VueDevToolsIDs.PLUGIN */
   ]: "Vue I18n devtools",
   [
     "vue-i18n-resource-inspector"
-    /* CUSTOM_INSPECTOR */
+    /* VueDevToolsIDs.CUSTOM_INSPECTOR */
   ]: "I18n Resources",
   [
     "vue-i18n-timeline"
-    /* TIMELINE */
+    /* VueDevToolsIDs.TIMELINE */
   ]: "Vue I18n"
 };
 const VueDevToolsPlaceholders = {
   [
     "vue-i18n-resource-inspector"
-    /* CUSTOM_INSPECTOR */
+    /* VueDevToolsIDs.CUSTOM_INSPECTOR */
   ]: "Search for scopes ..."
 };
 const VueDevToolsTimelineColors = {
   [
     "vue-i18n-timeline"
-    /* TIMELINE */
+    /* VueDevToolsIDs.TIMELINE */
   ]: 16764185
 };
 /*!
-  * vue-i18n v9.2.2
-  * (c) 2022 kazuya kawaguchi
+  * vue-i18n v9.3.0
+  * (c) 2023 kazuya kawaguchi
   * Released under the MIT License.
   */
-const VERSION = "9.2.2";
+const VERSION = "9.3.0";
 function initFeatureFlags() {
   if (typeof __INTLIFY_PROD_DEVTOOLS__ !== "boolean") {
     getGlobalThis().__INTLIFY_PROD_DEVTOOLS__ = false;
   }
 }
-let code$1 = CoreWarnCodes.__EXTEND_POINT__;
-const inc$1 = () => ++code$1;
+const code$1 = CoreWarnCodes.__EXTEND_POINT__;
+const inc$1 = incrementer(code$1);
 const I18nWarnCodes = {
   FALLBACK_TO_ROOT: code$1,
   NOT_SUPPORTED_PRESERVE: inc$1(),
@@ -57552,8 +57621,10 @@ const I18nWarnCodes = {
   NOT_SUPPORTED_PRESERVE_DIRECTIVE: inc$1(),
   NOT_SUPPORTED_GET_CHOICE_INDEX: inc$1(),
   COMPONENT_NAME_LEGACY_COMPATIBLE: inc$1(),
-  NOT_FOUND_PARENT_SCOPE: inc$1()
-  // 13
+  NOT_FOUND_PARENT_SCOPE: inc$1(),
+  IGNORE_OBJ_FLATTEN: inc$1(),
+  NOTICE_DROP_ALLOW_COMPOSITION: inc$1()
+  // 17
 };
 const warnMessages = {
   [I18nWarnCodes.FALLBACK_TO_ROOT]: `Fall back to {type} '{key}' with root locale.`,
@@ -57562,13 +57633,15 @@ const warnMessages = {
   [I18nWarnCodes.NOT_SUPPORTED_PRESERVE_DIRECTIVE]: `Not supported 'preserveDirectiveContent'.`,
   [I18nWarnCodes.NOT_SUPPORTED_GET_CHOICE_INDEX]: `Not supported 'getChoiceIndex'.`,
   [I18nWarnCodes.COMPONENT_NAME_LEGACY_COMPATIBLE]: `Component name legacy compatible: '{name}' -> 'i18n'`,
-  [I18nWarnCodes.NOT_FOUND_PARENT_SCOPE]: `Not found parent scope. use the global scope.`
+  [I18nWarnCodes.NOT_FOUND_PARENT_SCOPE]: `Not found parent scope. use the global scope.`,
+  [I18nWarnCodes.IGNORE_OBJ_FLATTEN]: `Ignore object flatten: '{key}' key has an string value`,
+  [I18nWarnCodes.NOTICE_DROP_ALLOW_COMPOSITION]: `'allowComposition' option will be dropped in the next major version. For more information, please see 👉 https://tinyurl.com/2p97mcze`
 };
 function getWarnMessage(code2, ...args) {
-  return format(warnMessages[code2], ...args);
+  return format$1(warnMessages[code2], ...args);
 }
-let code = CompileErrorCodes.__EXTEND_POINT__;
-const inc = () => ++code;
+const code = CoreErrorCodes.__EXTEND_POINT__;
+const inc = incrementer(code);
 const I18nErrorCodes = {
   // composer module errors
   UNEXPECTED_RETURN_TYPE: code,
@@ -57576,14 +57649,14 @@ const I18nErrorCodes = {
   INVALID_ARGUMENT: inc(),
   // i18n module errors
   MUST_BE_CALL_SETUP_TOP: inc(),
-  NOT_INSLALLED: inc(),
+  NOT_INSTALLED: inc(),
   NOT_AVAILABLE_IN_LEGACY_MODE: inc(),
   // directive module errors
   REQUIRED_VALUE: inc(),
   INVALID_VALUE: inc(),
   // vue-devtools errors
   CANNOT_SETUP_VUE_DEVTOOLS_PLUGIN: inc(),
-  NOT_INSLALLED_WITH_PROVIDE: inc(),
+  NOT_INSTALLED_WITH_PROVIDE: inc(),
   // unexpected error
   UNEXPECTED_ERROR: inc(),
   // not compatible legacy vue-i18n constructor
@@ -57596,7 +57669,7 @@ const I18nErrorCodes = {
   NOT_AVAILABLE_COMPOSITION_IN_LEGACY: inc(),
   // for enhancement
   __EXTEND_POINT__: inc()
-  // 29
+  // 37
 };
 function createI18nError(code2, ...args) {
   return createCompileError(code2, null, { messages: errorMessages, args });
@@ -57605,28 +57678,28 @@ const errorMessages = {
   [I18nErrorCodes.UNEXPECTED_RETURN_TYPE]: "Unexpected return type in composer",
   [I18nErrorCodes.INVALID_ARGUMENT]: "Invalid argument",
   [I18nErrorCodes.MUST_BE_CALL_SETUP_TOP]: "Must be called at the top of a `setup` function",
-  [I18nErrorCodes.NOT_INSLALLED]: "Need to install with `app.use` function",
+  [I18nErrorCodes.NOT_INSTALLED]: "Need to install with `app.use` function",
   [I18nErrorCodes.UNEXPECTED_ERROR]: "Unexpected error",
   [I18nErrorCodes.NOT_AVAILABLE_IN_LEGACY_MODE]: "Not available in legacy mode",
   [I18nErrorCodes.REQUIRED_VALUE]: `Required in value: {0}`,
   [I18nErrorCodes.INVALID_VALUE]: `Invalid value`,
   [I18nErrorCodes.CANNOT_SETUP_VUE_DEVTOOLS_PLUGIN]: `Cannot setup vue-devtools plugin`,
-  [I18nErrorCodes.NOT_INSLALLED_WITH_PROVIDE]: "Need to install with `provide` function",
+  [I18nErrorCodes.NOT_INSTALLED_WITH_PROVIDE]: "Need to install with `provide` function",
   [I18nErrorCodes.NOT_COMPATIBLE_LEGACY_VUE_I18N]: "Not compatible legacy VueI18n.",
   [I18nErrorCodes.BRIDGE_SUPPORT_VUE_2_ONLY]: "vue-i18n-bridge support Vue 2.x only",
   [I18nErrorCodes.MUST_DEFINE_I18N_OPTION_IN_ALLOW_COMPOSITION]: "Must define ‘i18n’ option or custom block in Composition API with using local scope in Legacy API mode",
   [I18nErrorCodes.NOT_AVAILABLE_COMPOSITION_IN_LEGACY]: "Not available Compostion API in Legacy API mode. Please make sure that the legacy API mode is working properly"
 };
-const TransrateVNodeSymbol = /* @__PURE__ */ makeSymbol("__transrateVNode");
+const TranslateVNodeSymbol = /* @__PURE__ */ makeSymbol("__translateVNode");
 const DatetimePartsSymbol = /* @__PURE__ */ makeSymbol("__datetimeParts");
 const NumberPartsSymbol = /* @__PURE__ */ makeSymbol("__numberParts");
 const EnableEmitter = /* @__PURE__ */ makeSymbol("__enableEmitter");
 const DisableEmitter = /* @__PURE__ */ makeSymbol("__disableEmitter");
 const SetPluralRulesSymbol = makeSymbol("__setPluralRules");
-makeSymbol("__intlifyMeta");
-const InejctWithOption = /* @__PURE__ */ makeSymbol("__injectWithOption");
+const InejctWithOptionSymbol = /* @__PURE__ */ makeSymbol("__injectWithOption");
+const DisposeSymbol = /* @__PURE__ */ makeSymbol("__dispose");
 function handleFlatJson(obj) {
-  if (!isObject(obj)) {
+  if (!isObject$1(obj)) {
     return obj;
   }
   for (const key in obj) {
@@ -57634,22 +57707,32 @@ function handleFlatJson(obj) {
       continue;
     }
     if (!key.includes(".")) {
-      if (isObject(obj[key])) {
+      if (isObject$1(obj[key])) {
         handleFlatJson(obj[key]);
       }
     } else {
       const subKeys = key.split(".");
       const lastIndex = subKeys.length - 1;
       let currentObj = obj;
+      let hasStringValue = false;
       for (let i2 = 0; i2 < lastIndex; i2++) {
         if (!(subKeys[i2] in currentObj)) {
           currentObj[subKeys[i2]] = {};
         }
+        if (!isObject$1(currentObj[subKeys[i2]])) {
+          warn(getWarnMessage(I18nWarnCodes.IGNORE_OBJ_FLATTEN, {
+            key: subKeys[i2]
+          }));
+          hasStringValue = true;
+          break;
+        }
         currentObj = currentObj[subKeys[i2]];
       }
-      currentObj[subKeys[lastIndex]] = obj[key];
-      delete obj[key];
-      if (isObject(currentObj[subKeys[lastIndex]])) {
+      if (!hasStringValue) {
+        currentObj[subKeys[lastIndex]] = obj[key];
+        delete obj[key];
+      }
+      if (isObject$1(currentObj[subKeys[lastIndex]])) {
         handleFlatJson(currentObj[subKeys[lastIndex]]);
       }
     }
@@ -57683,7 +57766,7 @@ function getLocaleMessages(locale, options) {
   }
   return ret;
 }
-const isNotObjectOrIsArray = (val) => !isObject(val) || isArray(val);
+const isNotObjectOrIsArray = (val) => !isObject$1(val) || isArray(val);
 function deepCopy(src, des) {
   if (isNotObjectOrIsArray(src) || isNotObjectOrIsArray(des)) {
     throw createI18nError(I18nErrorCodes.INVALID_VALUE);
@@ -57701,10 +57784,10 @@ function deepCopy(src, des) {
 function getComponentOptions(instance) {
   return instance.type;
 }
-function adjustI18nResources(global2, options, componentOptions) {
-  let messages = isObject(options.messages) ? options.messages : {};
+function adjustI18nResources(gl2, options, componentOptions) {
+  let messages = isObject$1(options.messages) ? options.messages : {};
   if ("__i18nGlobal" in componentOptions) {
-    messages = getLocaleMessages(global2.locale.value, {
+    messages = getLocaleMessages(gl2.locale.value, {
       messages,
       __i18n: componentOptions.__i18nGlobal
     });
@@ -57712,23 +57795,23 @@ function adjustI18nResources(global2, options, componentOptions) {
   const locales = Object.keys(messages);
   if (locales.length) {
     locales.forEach((locale) => {
-      global2.mergeLocaleMessage(locale, messages[locale]);
+      gl2.mergeLocaleMessage(locale, messages[locale]);
     });
   }
   {
-    if (isObject(options.datetimeFormats)) {
+    if (isObject$1(options.datetimeFormats)) {
       const locales2 = Object.keys(options.datetimeFormats);
       if (locales2.length) {
         locales2.forEach((locale) => {
-          global2.mergeDateTimeFormat(locale, options.datetimeFormats[locale]);
+          gl2.mergeDateTimeFormat(locale, options.datetimeFormats[locale]);
         });
       }
     }
-    if (isObject(options.numberFormats)) {
+    if (isObject$1(options.numberFormats)) {
       const locales2 = Object.keys(options.numberFormats);
       if (locales2.length) {
         locales2.forEach((locale) => {
-          global2.mergeNumberFormat(locale, options.numberFormats[locale]);
+          gl2.mergeNumberFormat(locale, options.numberFormats[locale]);
         });
       }
     }
@@ -57750,7 +57833,7 @@ const getMetaInfo = () => {
   return instance && (meta = getComponentOptions(instance)[DEVTOOLS_META]) ? { [DEVTOOLS_META]: meta } : null;
 };
 function createComposer(options = {}, VueI18nLegacy) {
-  const { __root } = options;
+  const { __root, __injectWithOption } = options;
   const _isGlobal = __root === void 0;
   let _inheritLocale = isBoolean(options.inheritLocale) ? options.inheritLocale : true;
   const _locale = ref(
@@ -57794,6 +57877,7 @@ function createComposer(options = {}, VueI18nLegacy) {
       warnHtmlMessage: _warnHtmlMessage,
       escapeParameter: _escapeParameter,
       messageResolver: options.messageResolver,
+      messageCompiler: options.messageCompiler,
       __meta: { framework: "vue" }
     };
     {
@@ -57861,18 +57945,20 @@ function createComposer(options = {}, VueI18nLegacy) {
   const wrapWithDeps = (fn2, argumentParser, warnType, fallbackSuccess, fallbackFail, successCondition) => {
     trackReactivityValues();
     let ret;
-    {
-      try {
+    try {
+      if (true) {
         setAdditionalMeta(getMetaInfo());
-        if (!_isGlobal) {
-          _context.fallbackContext = __root ? getFallbackContext() : void 0;
-        }
-        ret = fn2(_context);
-      } finally {
+      }
+      if (!_isGlobal) {
+        _context.fallbackContext = __root ? getFallbackContext() : void 0;
+      }
+      ret = fn2(_context);
+    } finally {
+      {
         setAdditionalMeta(null);
-        if (!_isGlobal) {
-          _context.fallbackContext = void 0;
-        }
+      }
+      if (!_isGlobal) {
+        _context.fallbackContext = void 0;
       }
     }
     if (isNumber(ret) && ret === NOT_REOSLVED) {
@@ -57908,7 +57994,7 @@ function createComposer(options = {}, VueI18nLegacy) {
   }
   function rt2(...args) {
     const [arg1, arg2, arg3] = args;
-    if (arg3 && !isObject(arg3)) {
+    if (arg3 && !isObject$1(arg3)) {
       throw createI18nError(I18nErrorCodes.INVALID_ARGUMENT);
     }
     return t2(...[arg1, arg2, assign({ resolvedMessage: true }, arg3 || {})]);
@@ -57928,7 +58014,7 @@ function createComposer(options = {}, VueI18nLegacy) {
     interpolate,
     type: "vnode"
   };
-  function transrateVNode(...args) {
+  function translateVNode(...args) {
     return wrapWithDeps(
       (context) => {
         let ret;
@@ -57944,7 +58030,7 @@ function createComposer(options = {}, VueI18nLegacy) {
       () => parseTranslateArgs(...args),
       "translate",
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (root) => root[TransrateVNodeSymbol](...args),
+      (root) => root[TranslateVNodeSymbol](...args),
       (key) => [createTextNode(key)],
       (val) => isArray(val)
     );
@@ -58145,8 +58231,8 @@ function createComposer(options = {}, VueI18nLegacy) {
     composer.getNumberFormat = getNumberFormat;
     composer.setNumberFormat = setNumberFormat;
     composer.mergeNumberFormat = mergeNumberFormat;
-    composer[InejctWithOption] = options.__injectWithOption;
-    composer[TransrateVNodeSymbol] = transrateVNode;
+    composer[InejctWithOptionSymbol] = __injectWithOption;
+    composer[TranslateVNodeSymbol] = translateVNode;
     composer[DatetimePartsSymbol] = datetimeParts;
     composer[NumberPartsSymbol] = numberParts;
   }
@@ -58172,7 +58258,7 @@ const baseFormatProps = {
     // NOTE: avoid https://github.com/microsoft/rushstack/issues/1050
     validator: (val) => val === "parent" || val === "global",
     default: "parent"
-    /* ComponetI18nScope */
+    /* ComponentI18nScope */
   },
   i18n: {
     type: Object
@@ -58182,9 +58268,10 @@ function getInterpolateArg({ slots }, keys) {
   if (keys.length === 1 && keys[0] === "default") {
     const ret = slots.default ? slots.default() : [];
     return ret.reduce((slot, current) => {
-      return slot = [
+      return [
         ...slot,
-        ...isArray(current.children) ? current.children : [current]
+        // prettier-ignore
+        ...current.type === Fragment ? current.children : [current]
       ];
     }, []);
   } else {
@@ -58200,48 +58287,46 @@ function getInterpolateArg({ slots }, keys) {
 function getFragmentableTag(tag) {
   return Fragment;
 }
-const Translation = (
-  /* defineComponent */
-  {
-    /* eslint-disable */
-    name: "i18n-t",
-    props: assign({
-      keypath: {
-        type: String,
-        required: true
-      },
-      plural: {
-        type: [Number, String],
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        validator: (val) => isNumber(val) || !isNaN(val)
-      }
-    }, baseFormatProps),
-    /* eslint-enable */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setup(props, context) {
-      const { slots, attrs } = context;
-      const i18n = props.i18n || useI18n({
-        useScope: props.scope,
-        __useComponent: true
-      });
-      return () => {
-        const keys = Object.keys(slots).filter((key) => key !== "_");
-        const options = {};
-        if (props.locale) {
-          options.locale = props.locale;
-        }
-        if (props.plural !== void 0) {
-          options.plural = isString(props.plural) ? +props.plural : props.plural;
-        }
-        const arg = getInterpolateArg(context, keys);
-        const children = i18n[TransrateVNodeSymbol](props.keypath, arg, options);
-        const assignedAttrs = assign({}, attrs);
-        const tag = isString(props.tag) || isObject(props.tag) ? props.tag : getFragmentableTag();
-        return h$4(tag, assignedAttrs, children);
-      };
+const TranslationImpl = /* @__PURE__ */ defineComponent({
+  /* eslint-disable */
+  name: "i18n-t",
+  props: assign({
+    keypath: {
+      type: String,
+      required: true
+    },
+    plural: {
+      type: [Number, String],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      validator: (val) => isNumber(val) || !isNaN(val)
     }
+  }, baseFormatProps),
+  /* eslint-enable */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setup(props, context) {
+    const { slots, attrs } = context;
+    const i18n = props.i18n || useI18n({
+      useScope: props.scope,
+      __useComponent: true
+    });
+    return () => {
+      const keys = Object.keys(slots).filter((key) => key !== "_");
+      const options = {};
+      if (props.locale) {
+        options.locale = props.locale;
+      }
+      if (props.plural !== void 0) {
+        options.plural = isString(props.plural) ? +props.plural : props.plural;
+      }
+      const arg = getInterpolateArg(context, keys);
+      const children = i18n[TranslateVNodeSymbol](props.keypath, arg, options);
+      const assignedAttrs = assign({}, attrs);
+      const tag = isString(props.tag) || isObject$1(props.tag) ? props.tag : getFragmentableTag();
+      return h$4(tag, assignedAttrs, children);
+    };
   }
-);
+});
+const Translation = TranslationImpl;
 function isVNode(target) {
   return isArray(target) && !isString(target[0]);
 }
@@ -58255,7 +58340,7 @@ function renderFormatter(props, context, slotKeys, partFormatter) {
     }
     if (isString(props.format)) {
       options.key = props.format;
-    } else if (isObject(props.format)) {
+    } else if (isObject$1(props.format)) {
       if (isString(props.format.key)) {
         options.key = props.format.key;
       }
@@ -58278,60 +58363,62 @@ function renderFormatter(props, context, slotKeys, partFormatter) {
       children = [parts];
     }
     const assignedAttrs = assign({}, attrs);
-    const tag = isString(props.tag) || isObject(props.tag) ? props.tag : getFragmentableTag();
+    const tag = isString(props.tag) || isObject$1(props.tag) ? props.tag : getFragmentableTag();
     return h$4(tag, assignedAttrs, children);
   };
 }
-const NumberFormat = (
-  /* defineComponent */
-  {
-    /* eslint-disable */
-    name: "i18n-n",
-    props: assign({
-      value: {
-        type: Number,
-        required: true
-      },
-      format: {
-        type: [String, Object]
-      }
-    }, baseFormatProps),
-    /* eslint-enable */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setup(props, context) {
-      const i18n = props.i18n || useI18n({ useScope: "parent", __useComponent: true });
-      return renderFormatter(props, context, NUMBER_FORMAT_OPTIONS_KEYS, (...args) => (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        i18n[NumberPartsSymbol](...args)
-      ));
+const NumberFormatImpl = /* @__PURE__ */ defineComponent({
+  /* eslint-disable */
+  name: "i18n-n",
+  props: assign({
+    value: {
+      type: Number,
+      required: true
+    },
+    format: {
+      type: [String, Object]
     }
+  }, baseFormatProps),
+  /* eslint-enable */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setup(props, context) {
+    const i18n = props.i18n || useI18n({
+      useScope: "parent",
+      __useComponent: true
+    });
+    return renderFormatter(props, context, NUMBER_FORMAT_OPTIONS_KEYS, (...args) => (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      i18n[NumberPartsSymbol](...args)
+    ));
   }
-);
-const DatetimeFormat = (
-  /*defineComponent */
-  {
-    /* eslint-disable */
-    name: "i18n-d",
-    props: assign({
-      value: {
-        type: [Number, Date],
-        required: true
-      },
-      format: {
-        type: [String, Object]
-      }
-    }, baseFormatProps),
-    /* eslint-enable */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setup(props, context) {
-      const i18n = props.i18n || useI18n({ useScope: "parent", __useComponent: true });
-      return renderFormatter(props, context, DATETIME_FORMAT_OPTIONS_KEYS, (...args) => (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        i18n[DatetimePartsSymbol](...args)
-      ));
+});
+const NumberFormat = NumberFormatImpl;
+const DatetimeFormatImpl = /* @__PURE__ */ defineComponent({
+  /* eslint-disable */
+  name: "i18n-d",
+  props: assign({
+    value: {
+      type: [Number, Date],
+      required: true
+    },
+    format: {
+      type: [String, Object]
     }
+  }, baseFormatProps),
+  /* eslint-enable */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setup(props, context) {
+    const i18n = props.i18n || useI18n({
+      useScope: "parent",
+      __useComponent: true
+    });
+    return renderFormatter(props, context, DATETIME_FORMAT_OPTIONS_KEYS, (...args) => (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      i18n[DatetimePartsSymbol](...args)
+    ));
   }
-);
+});
+const DatetimeFormat = DatetimeFormatImpl;
 function getComposer$2(i18n, instance) {
   const i18nInternal = i18n;
   if (i18n.mode === "composition") {
@@ -58435,9 +58522,9 @@ function apply(app, i18n, ...options) {
     }));
   }
   if (globalInstall) {
-    app.component(!useI18nComponentName ? Translation.name : "i18n", Translation);
-    app.component(NumberFormat.name, NumberFormat);
-    app.component(DatetimeFormat.name, DatetimeFormat);
+    [!useI18nComponentName ? Translation.name : "i18n", "I18nT"].forEach((name) => app.component(name, Translation));
+    [NumberFormat.name, "I18nN"].forEach((name) => app.component(name, NumberFormat));
+    [DatetimeFormat.name, "I18nD"].forEach((name) => app.component(name, DatetimeFormat));
   }
   {
     app.directive("t", vTDirective(i18n));
@@ -58452,7 +58539,7 @@ async function enableDevTools(app, i18n) {
         id: "vue-devtools-plugin-vue-i18n",
         label: VueDevToolsLabels[
           "vue-devtools-plugin-vue-i18n"
-          /* PLUGIN */
+          /* VueDevToolsIDs.PLUGIN */
         ],
         packageName: "vue-i18n",
         homepage: "https://vue-i18n.intlify.dev",
@@ -58480,12 +58567,12 @@ async function enableDevTools(app, i18n) {
           id: "vue-i18n-resource-inspector",
           label: VueDevToolsLabels[
             "vue-i18n-resource-inspector"
-            /* CUSTOM_INSPECTOR */
+            /* VueDevToolsIDs.CUSTOM_INSPECTOR */
           ],
           icon: "language",
           treeFilterPlaceholder: VueDevToolsPlaceholders[
             "vue-i18n-resource-inspector"
-            /* CUSTOM_INSPECTOR */
+            /* VueDevToolsIDs.CUSTOM_INSPECTOR */
           ]
         });
         api.on.getInspectorTree((payload) => {
@@ -58519,11 +58606,11 @@ async function enableDevTools(app, i18n) {
           id: "vue-i18n-timeline",
           label: VueDevToolsLabels[
             "vue-i18n-timeline"
-            /* TIMELINE */
+            /* VueDevToolsIDs.TIMELINE */
           ],
           color: VueDevToolsTimelineColors[
             "vue-i18n-timeline"
-            /* TIMELINE */
+            /* VueDevToolsIDs.TIMELINE */
           ]
         });
         resolve2(true);
@@ -58603,7 +58690,9 @@ function getLocaleMessageValue(messages) {
     const v2 = messages[key];
     if (isFunction(v2) && "source" in v2) {
       value[key] = getMessageFunctionDetails(v2);
-    } else if (isObject(v2)) {
+    } else if (isMessageAST(v2) && v2.loc && v2.loc.source) {
+      value[key] = v2.loc.source;
+    } else if (isObject$1(v2)) {
       value[key] = getLocaleMessageValue(v2);
     } else {
       value[key] = v2;
@@ -58770,7 +58859,7 @@ function editScope(payload, i18n) {
     const [field] = payload.path;
     if (field === "locale" && isString(payload.state.value)) {
       composer.locale.value = payload.state.value;
-    } else if (field === "fallbackLocale" && (isString(payload.state.value) || isArray(payload.state.value) || isObject(payload.state.value))) {
+    } else if (field === "fallbackLocale" && (isString(payload.state.value) || isArray(payload.state.value) || isObject$1(payload.state.value))) {
       composer.fallbackLocale.value = payload.state.value;
     } else if (field === "inheritLocale" && isBoolean(payload.state.value)) {
       composer.inheritLocale = payload.state.value;
@@ -58783,7 +58872,7 @@ function createI18n(options = {}, VueI18nLegacy) {
   const __allowComposition = true;
   const __instances = /* @__PURE__ */ new Map();
   const [globalScope, __global] = createGlobal(options);
-  const symbol = makeSymbol("vue-i18n");
+  const symbol = /* @__PURE__ */ makeSymbol("vue-i18n");
   function __getInstance(component) {
     return __instances.get(component) || null;
   }
@@ -58810,14 +58899,21 @@ function createI18n(options = {}, VueI18nLegacy) {
         }
         app.__VUE_I18N_SYMBOL__ = symbol;
         app.provide(app.__VUE_I18N_SYMBOL__, i18n);
+        if (isPlainObject(options2[0])) {
+          const opts = options2[0];
+          i18n.__composerExtend = opts.__composerExtend;
+          i18n.__vueI18nExtend = opts.__vueI18nExtend;
+        }
+        let globalReleaseHandler = null;
         if (__globalInjection) {
-          injectGlobalFields(app, i18n.global);
+          globalReleaseHandler = injectGlobalFields(app, i18n.global);
         }
         {
           apply(app, i18n, ...options2);
         }
         const unmountApp = app.unmount;
         app.unmount = () => {
+          globalReleaseHandler && globalReleaseHandler();
           i18n.dispose();
           unmountApp();
         };
@@ -58859,15 +58955,15 @@ function useI18n(options = {}) {
     throw createI18nError(I18nErrorCodes.MUST_BE_CALL_SETUP_TOP);
   }
   if (!instance.isCE && instance.appContext.app != null && !instance.appContext.app.__VUE_I18N_SYMBOL__) {
-    throw createI18nError(I18nErrorCodes.NOT_INSLALLED);
+    throw createI18nError(I18nErrorCodes.NOT_INSTALLED);
   }
   const i18n = getI18nInstance(instance);
-  const global2 = getGlobalComposer(i18n);
+  const gl2 = getGlobalComposer(i18n);
   const componentOptions = getComponentOptions(instance);
   const scope = getScope(options, componentOptions);
   if (scope === "global") {
-    adjustI18nResources(global2, options, componentOptions);
-    return global2;
+    adjustI18nResources(gl2, options, componentOptions);
+    return gl2;
   }
   if (scope === "parent") {
     let composer2 = getComposer(i18n, instance, options.__useComponent);
@@ -58875,7 +58971,7 @@ function useI18n(options = {}) {
       {
         warn(getWarnMessage(I18nWarnCodes.NOT_FOUND_PARENT_SCOPE));
       }
-      composer2 = global2;
+      composer2 = gl2;
     }
     return composer2;
   }
@@ -58886,10 +58982,13 @@ function useI18n(options = {}) {
     if ("__i18n" in componentOptions) {
       composerOptions.__i18n = componentOptions.__i18n;
     }
-    if (global2) {
-      composerOptions.__root = global2;
+    if (gl2) {
+      composerOptions.__root = gl2;
     }
     composer = createComposer(composerOptions);
+    if (i18nInternal.__composerExtend) {
+      composer[DisposeSymbol] = i18nInternal.__composerExtend(composer);
+    }
     setupLifeCycle(i18nInternal, instance, composer);
     i18nInternal.__setInstance(instance, composer);
   }
@@ -58909,7 +59008,7 @@ function getI18nInstance(instance) {
   {
     const i18n = inject(!instance.isCE ? instance.appContext.app.__VUE_I18N_SYMBOL__ : I18nInjectionKey);
     if (!i18n) {
-      throw createI18nError(!instance.isCE ? I18nErrorCodes.UNEXPECTED_ERROR : I18nErrorCodes.NOT_INSLALLED_WITH_PROVIDE);
+      throw createI18nError(!instance.isCE ? I18nErrorCodes.UNEXPECTED_ERROR : I18nErrorCodes.NOT_INSTALLED_WITH_PROVIDE);
     }
     return i18n;
   }
@@ -58923,7 +59022,7 @@ function getGlobalComposer(i18n) {
 function getComposer(i18n, target, useComponent = false) {
   let composer = null;
   const root = target.root;
-  let current = target.parent;
+  let current = getParentComponentInstance(target, useComponent);
   while (current != null) {
     const i18nInternal = i18n;
     if (i18n.mode === "composition") {
@@ -58939,6 +59038,14 @@ function getComposer(i18n, target, useComponent = false) {
   }
   return composer;
 }
+function getParentComponentInstance(target, useComponent = false) {
+  if (target == null) {
+    return null;
+  }
+  {
+    return !useComponent ? target.parent : target.vnode.ctx || target.parent;
+  }
+}
 function setupLifeCycle(i18n, target, composer) {
   let emitter = null;
   {
@@ -58952,13 +59059,18 @@ function setupLifeCycle(i18n, target, composer) {
       }
     }, target);
     onUnmounted(() => {
+      const _composer = composer;
       if (target.vnode.el && target.vnode.el.__VUE_I18N__) {
         emitter && emitter.off("*", addTimelineEvent);
-        const _composer = composer;
         _composer[DisableEmitter] && _composer[DisableEmitter]();
         delete target.vnode.el.__VUE_I18N__;
       }
       i18n.__deleteInstance(target);
+      const dispose = _composer[DisposeSymbol];
+      if (dispose) {
+        dispose();
+        delete _composer[DisposeSymbol];
+      }
     }, target);
   }
 }
@@ -58967,7 +59079,7 @@ const globalExportProps = [
   "fallbackLocale",
   "availableLocales"
 ];
-const globalExportMethods = ["t", "rt", "d", "n", "tm"];
+const globalExportMethods = ["t", "rt", "d", "n", "tm", "te"];
 function injectGlobalFields(app, composer) {
   const i18n = /* @__PURE__ */ Object.create(null);
   globalExportProps.forEach((prop) => {
@@ -58998,12 +59110,19 @@ function injectGlobalFields(app, composer) {
     }
     Object.defineProperty(app.config.globalProperties, `$${method}`, desc);
   });
+  const dispose = () => {
+    delete app.config.globalProperties.$i18n;
+    globalExportMethods.forEach((method) => {
+      delete app.config.globalProperties[`$${method}`];
+    });
+  };
+  return dispose;
 }
-registerMessageResolver(resolveValue);
-registerLocaleFallbacker(fallbackWithLocaleChain);
 {
   initFeatureFlags();
 }
+registerMessageResolver(resolveValue);
+registerLocaleFallbacker(fallbackWithLocaleChain);
 {
   const target = getGlobalThis();
   target.__INTLIFY__ = true;
@@ -59354,9 +59473,9 @@ var main$1 = {
           return false;
         }
         V2(B2 = "onig.wasm") || (B2 = l2(B2)), H3 = "undefined" != typeof dateNow ? dateNow : () => performance.now();
-        var X = [null, [], []];
+        var X2 = [null, [], []];
         function Z2(t5, n5) {
-          var e3 = X[t5];
+          var e3 = X2[t5];
           0 === n5 || 10 === n5 ? ((1 === t5 ? d2 : g2)(A3(e3, 0)), e3.length = 0) : e3.push(n5);
         }
         function $3(t5, n5, e3, r3) {
@@ -64631,8 +64750,8 @@ flexsearch_bundle.exports;
             const y2 = [];
             let H3 = 0;
             n2 && (y2[0] = [p2]);
-            for (let X = 0, pa, R2; X < m2.length; X++)
-              if (pa = m2[X], B2 = (R2 = this.l[pa]) && R2.length)
+            for (let X2 = 0, pa, R2; X2 < m2.length; X2++)
+              if (pa = m2[X2], B2 = (R2 = this.l[pa]) && R2.length)
                 H3++, y2[y2.length] = n2 ? [R2] : R2;
             H3 && (p2 = n2 ? ma(y2, b3 || 100, w2 || 0) : na(p2, y2), B2 = p2.length);
           }
@@ -66970,7 +67089,7 @@ export {
   normalizeClass as aM,
   renderSlot as aN,
   createCommentVNode as aO,
-  Ie as aP,
+  ze as aP,
   ye as aQ,
   je$1 as aR,
   We as aS,
