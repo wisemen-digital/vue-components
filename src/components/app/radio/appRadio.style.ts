@@ -1,5 +1,5 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
+import type { VariantProps } from '@/utils/tailwind/cva'
+import { cva } from '@/utils/tailwind/cva'
 
 export const variantOptions = {
   default: 'bg-background text-foreground hover:bg-secondary border-border',
@@ -8,8 +8,8 @@ export const variantOptions = {
 }
 
 export const radioVariants = cva(
-  'relative flex cursor-pointer items-center justify-between gap-6 rounded border-2 px-5 py-4 transition focus:outline-none',
   {
+    base: 'relative flex cursor-pointer items-center justify-between gap-6 rounded border-2 px-5 py-4 transition focus:outline-none',
     variants: {
       variant: variantOptions,
       isChecked: {
@@ -31,8 +31,8 @@ export const radioVariants = cva(
   },
 )
 export const radioButtonVariants = cva(
-  'rounded-full border-2 border-border bg-transparent text-transparent',
   {
+    base: 'rounded-full border-2 border-border bg-transparent text-transparent',
     variants: {
       isChecked: {
         true: 'border-primary bg-primary text-white',

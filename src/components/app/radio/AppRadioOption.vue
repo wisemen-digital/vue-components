@@ -5,6 +5,7 @@ import {
   RadioGroupLabel,
 } from '@headlessui/vue'
 import { twMerge } from 'tailwind-merge'
+import AppIcon from '../icon/AppIcon.vue'
 import type { RadioProps } from './appRadio.style'
 import { radioButtonVariants, radioVariants } from './appRadio.style'
 
@@ -43,23 +44,10 @@ const {
     <div
       :class="twMerge(radioButtonVariants({ isChecked: checked, isActive: active && !checked }))"
     >
-      <!-- TODO: Update svg once AppIcon is merged -->
-      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none">
-        <circle
-          cx="12"
-          cy="12"
-          r="12"
-          fill="currentColor"
-          fill-opacity="0.2"
-        />
-        <path
-          d="M7 13l3 3 7-7"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <AppIcon
+        size="default"
+        icon="cirlcedCheckmark"
+      />
     </div>
   </div>
 </template>
