@@ -5,6 +5,7 @@ import {
   RadioGroupLabel,
   RadioGroupOption,
 } from '@headlessui/vue'
+import type { IconProps } from '../icon/appIcon.style'
 import type { RadioProps } from './appRadio.style'
 import AppRadioOption from './AppRadioOption.vue'
 
@@ -16,6 +17,8 @@ interface Props {
   optionDescription?: TValue
   optionDisabled?: TValue
   variant?: RadioProps['variant']
+  optionIcon?: TValue
+  iconSize?: IconProps['size']
 }
 
 const {
@@ -67,6 +70,8 @@ const model = defineModel<T[keyof T]>()
                 checked,
                 active,
                 disabled,
+                icon: (option as any)[optionIcon],
+                iconSize,
               }"
             />
           </slot>

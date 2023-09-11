@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import AppRadioGroup from './AppRadioGroup.vue'
-import { type RadioProps, radioVariantOptions } from './appRadio.style'
+import type { IconProps } from '@/components/app/icon/appIcon.style'
+import type { Icon } from '@/icons'
+import { type RadioProps, radioVariantOptions } from '@/components/app/radio/appRadio.style'
+import AppRadioGroup from '@/components/app/radio/AppRadioGroup.vue'
 
 interface Option {
   label: string
   description: string
   value: number
   isDisabled: boolean
+  icon?: Icon
 }
 
 interface State {
@@ -19,6 +22,8 @@ interface State {
   optionDescription?: keyof Option
   optionDisabled?: keyof Option
   variant?: RadioProps['variant']
+  optionIcon?: keyof Option
+  iconSize?: IconProps['size']
 }
 
 const model = ref<number>(0)
@@ -32,12 +37,14 @@ const state: State = reactive({
       description: 'Description regarding option n°1. Best option to choose.',
       value: 1,
       isDisabled: false,
+      icon: 'download',
     },
     {
       label: 'Option n°2',
       description: 'Description regarding option n°2. Second best option to choose.',
       value: 2,
       isDisabled: false,
+      icon: 'edit',
     },
     {
       label: 'Option n°3',
@@ -51,6 +58,8 @@ const state: State = reactive({
   optionDescription: 'description',
   optionDisabled: 'isDisabled',
   variant: 'default',
+  optionIcon: 'icon',
+  iconSize: 'default',
 })
 </script>
 

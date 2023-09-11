@@ -4,12 +4,15 @@ import {
   RadioGroupDescription,
   RadioGroupLabel,
 } from '@headlessui/vue'
-import { twMerge } from 'tailwind-merge'
-import AppIcon from '../icon/AppIcon.vue'
-import type { RadioProps } from './appRadio.style'
-import { radioButtonVariants, radioVariants } from './appRadio.style'
+import type { Icon } from '@/icons'
+import type { IconProps } from '@/components/app/icon/appIcon.style'
+import type { RadioProps } from '@/components/app/radio/appRadio.style'
+import { radioButtonVariants, radioVariants } from '@/components/app/radio/appRadio.style'
+import AppIcon from '@/components/app/icon/AppIcon.vue'
 
 interface Props {
+  icon: Icon
+  iconSize: IconProps['size']
   option: T
   optionLabel?: TValue
   optionValue?: TValue
@@ -29,20 +32,26 @@ const {
 
 <template>
   <div
-    :class="twMerge(radioVariants({ variant, isChecked: checked, isActive: active, isDisabled: disabled }))"
+    :class="radioVariants({ variant, isChecked: checked, isActive: active, isDisabled: disabled })"
   >
-    <div>
-      <RadioGroupLabel class="text-body font-medium">
-        {{ (option as any)[optionLabel] }}
-      </RadioGroupLabel>
+    <div class="flex items-center gap-4">
+      <AppIcon
+        v-if="icon"
+        :size="iconSize"
+        :icon="icon"
+      />
+      <div>
+        <RadioGroupLabel class="text-body font-medium">
+          {{ (option as any)[optionLabel] }}
+        </RadioGroupLabel>
 
-      <RadioGroupDescription class="text-subtext">
-        {{ (option as any)[optionDescription] }}
-      </RadioGroupDescription>
+        <RadioGroupDescription class="text-subtext">
+          {{ (option as any)[optionDescription] }}
+        </RadioGroupDescription>
+      </div>
     </div>
-
     <div
-      :class="twMerge(radioButtonVariants({ isChecked: checked, isActive: active && !checked }))"
+      :class="radioButtonVariants({ isChecked: checked, isActive: active && !checked })"
     >
       <AppIcon
         size="default"
