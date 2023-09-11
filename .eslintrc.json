@@ -13,6 +13,7 @@
                     "HstInput",
                     "HstSelect",
                     "HstCheckbox",
+                    "HstJson",
                     "Story",
                     "Variant"
                 ]
