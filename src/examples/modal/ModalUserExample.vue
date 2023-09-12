@@ -1,22 +1,13 @@
 <script setup lang="ts">
-import RenderedExample from '@/examples/modal/RenderedExample.vue'
 import { useModal } from '@/composables/app/modal/useModal'
+import CustomModal from '@/examples/modal/CustomModal.vue'
 
 const { open, close, onClose, onOpen } = useModal({
-  // any Component
-  component: RenderedExample,
-  modalTitle: 'Example',
-  // Props and emits typed
+  component: CustomModal,
   attrs: {
     name: 'John Doe',
-    onClickedName: (name: string) => {
-      console.error(name)
-    },
     onCancel: () => {
       close()
-    },
-    onConfirm: () => {
-      // Do confirm stuff
     },
   },
 })

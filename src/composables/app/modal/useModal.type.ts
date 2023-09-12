@@ -22,8 +22,7 @@ export type RawProps = VNodeProps & {
 export interface ModalSlotOptions { component: Raw<Component>; attrs?: Record<string, any> }
 export type ModalSlot = string | Component | ModalSlotOptions
 export interface UseModalOptions<P> {
-  modalTitle?: string
-  component?: Constructor<P>
+  component: Constructor<P>
   attrs?: (RawProps & P) | (object extends P ? null : never)
 }
 

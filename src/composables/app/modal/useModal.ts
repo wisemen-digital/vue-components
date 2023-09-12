@@ -11,7 +11,7 @@ export function useModalContainer(): {
   return { modals: renderedModals }
 }
 
-export function useModal<P>({ component, attrs, modalTitle }: UseModalOptions<P>): UseModalReturnType {
+export function useModal<P>({ component, attrs }: UseModalOptions<P>): UseModalReturnType {
   const id = generateUuid()
   let onOpenCb: (() => void) | null = null
   let onCloseCb: (() => void) | null = null
@@ -26,7 +26,6 @@ export function useModal<P>({ component, attrs, modalTitle }: UseModalOptions<P>
 
   const modal = ref<RenderedModal>({
     id,
-    title: modalTitle,
     component,
     attrs,
     isOpen: false,

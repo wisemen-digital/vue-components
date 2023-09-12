@@ -5,7 +5,7 @@
     "build:components": "ts-node --experimental-specifier-resolution=node --project ./tsconfig.scripts.json ./src/scripts/generateRegistry.ts",
     "dev": "vite",
     "build": "pnpm lint && pnpm ts-check && pnpm build:components && vite build && pnpm story:build",
-    "ts-check": "vue-tsc --noEmit --skipLibCheck",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck",
     "serve": "vite preview",
     "lint": "eslint \"**/*.{vue,ts,js}\"",
     "production": "vite build --mode production",
@@ -16,7 +16,8 @@
     "story:preview": "histoire preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "color-generator:dev": "vite color-generator"
+    "color-generator:dev": "vite color-generator",
+    "prerelease": "pnpm typecheck && pnpm lint && pnpm test run && pnpm build:components && pnpm story:build && pnpm production"
   },
   "dependencies": {
     "@changesets/cli": "^2.26.2",

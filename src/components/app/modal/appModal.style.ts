@@ -10,7 +10,7 @@ export const sizeOptions = {
 
 export const modalVariants = cva(
   {
-    base: 'flex flex-col gap-4 rounded-modal bg-popover p-6 text-left text-popover-foreground shadow-modal-shadow',
+    base: 'flex flex-col rounded-modal bg-popover text-left text-popover-foreground shadow-modal-shadow',
     variants: {
       size: sizeOptions,
     },

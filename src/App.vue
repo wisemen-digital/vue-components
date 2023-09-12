@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { ref } from 'vue'
 import AppModalContainer from '@/components/app/modal/AppModalContainer.vue'
+import ModalUserExample from '@/examples/modal/ModalUserExample.vue'
 </script>
 
 <template>
-  <RouterView />
+  <ModalUserExample />
+
   <AppModalContainer />
 </template>

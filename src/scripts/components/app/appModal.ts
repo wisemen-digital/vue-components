@@ -11,6 +11,32 @@ export const appModal = {
     },
     {
       type: ComponentType.COMPONENTS,
+      path: './src/components/app/modal/AppModalContent.vue',
+      folder: 'app/modal',
+    },
+    {
+      type: ComponentType.COMPONENTS,
+      path: './src/components/app/modal/AppModalFooter.vue',
+      folder: 'app/modal',
+
+    },
+    {
+      type: ComponentType.COMPONENTS,
+      path: './src/components/app/modal/AppModalHeader.vue',
+      folder: 'app/modal',
+    },
+    {
+      type: ComponentType.COMPONENTS,
+      path: './src/components/app/modal/AppModalTitle.vue',
+      folder: 'app/modal',
+    },
+    {
+      type: ComponentType.COMPONENTS,
+      path: './src/components/app/modal/AppModalDescription.vue',
+      folder: 'app/modal',
+    },
+    {
+      type: ComponentType.COMPONENTS,
       path: './src/components/app/modal/appModal.style.ts',
       folder: 'app/modal',
     },
@@ -21,10 +47,19 @@ export const appModal = {
     },
     {
       type: ComponentType.COMPOSABLES,
+      path: './src/composables/app/modal/useModalContext.ts',
+      folder: 'app/modal',
+    },
+    {
+      type: ComponentType.COMPOSABLES,
       path: './src/composables/app/modal/useModal.type.ts',
       folder: 'app/modal',
     },
-
+    {
+      type: ComponentType.COMPONENTS,
+      path: './src/components/app/modal/AppModal.story.vue',
+      folder: 'app/modal',
+    },
   ],
   dependencies: ['@headlessui/vue'],
   internalDependencies: [
