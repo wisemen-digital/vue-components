@@ -21,8 +21,7 @@ const {
 } = defineProps<Props>()
 
 defineSlots<{
-  default?: (props: { close: () => void }) => any
-  footer?: (props: { close: () => void }) => any
+  default: (props: { close: () => void }) => any
 }>()
 
 useProvideModalContext({

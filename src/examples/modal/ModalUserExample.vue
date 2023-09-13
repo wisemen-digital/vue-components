@@ -9,6 +9,9 @@ const { open, close, onClose, onOpen } = useModal({
     onCancel: () => {
       close()
     },
+    onConfirm: () => {
+      close()
+    },
   },
 })
 
