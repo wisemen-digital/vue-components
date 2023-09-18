@@ -15,8 +15,8 @@ dependencies:
     specifier: ^0.11.3
     version: 0.11.3(vue@3.3.4)
   '@headlessui/vue':
-    specifier: ^1.7.16
-    version: 1.7.16(vue@3.3.4)
+    specifier: 0.0.0-insiders.f2179f3
+    version: 0.0.0-insiders.f2179f3(vue@3.3.4)
   '@intlify/unplugin-vue-i18n':
     specifier: ^1.2.0
     version: 1.2.0(vue-i18n@9.3.0)
@@ -807,8 +807,8 @@ packages:
       - '@vue/composition-api'
     dev: false
 
-  /@headlessui/vue@1.7.16(vue@3.3.4):
-    resolution: {integrity: sha512-nKT+nf/q6x198SsyK54mSszaQl/z+QxtASmgMEJtpxSX2Q0OPJX0upS/9daDyiECpeAsvjkoOrm2O/6PyBQ+Qg==}
+  /@headlessui/vue@0.0.0-insiders.f2179f3(vue@3.3.4):
+    resolution: {integrity: sha512-2ucpdbmQwGWpl6nbW2//zTpO5Xgeg0ksbZEi+ur2lxpAz7e2UWT5XLcBgoZkcUEUu9i9CRl6w1tcQK/9ddF7Vg==}
     engines: {node: '>=10'}
     peerDependencies:
       vue: ^3.2.0
@@ -2282,7 +2282,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   /config-chain@1.1.13:
     resolution: {integrity: sha512-qj+f8APARXHrM0hraqXYb2/bOVSV4PvJQlNZ/DVj0QrmNM2q2euizkeuVckQ57J+W0mRH6Hvi+k50M4Jul2VRQ==}

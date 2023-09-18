@@ -35,7 +35,7 @@ const state: State = {
       </template>
 
       <div class="flex flex-col justify-start gap-20 py-20">
-        <FormSelect v-model="selectedPerson" :items="people" class="w-80" v-bind="state" />
+        <FormSelect v-model="selectedPerson" :items="people" :display-function="(person: string) => person" class="w-80" />
       </div>
     </Variant>
   </Story>

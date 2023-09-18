@@ -2,13 +2,13 @@
 import { computed } from 'vue'
 import { formSelectOptionVariants } from '@/components/form/select/formSelect.style'
 import type { FormSelectOptionProps } from '@/components/form/select/formSelect.style'
+import { useFormSelectContext } from '@/composables/form/select/useFormSelectContext'
 
 interface Props {
   value: T
   isActive?: boolean
   isSelected?: boolean
   isDisabled?: boolean
-  displayFunction: (value: T) => string
 }
 
 const {
@@ -16,7 +16,6 @@ const {
   isActive = false,
   isSelected = false,
   isDisabled = false,
-  displayFunction,
 } = defineProps<Props>()
 
 const optionStatus = computed<FormSelectOptionProps['variant']>(() => {
@@ -25,10 +24,12 @@ const optionStatus = computed<FormSelectOptionProps['variant']>(() => {
   else
     return 'default'
 })
+
+const { getDisplayValue } = useFormSelectContext()
 </script>
 
 <template>
   <button :class="formSelectOptionVariants({ variant: optionStatus, selected: isSelected, active: isActive })">
-    {{ displayFunction(value as T) }}
+    {{ getDisplayValue(value) }}
   </button>
 </template>
