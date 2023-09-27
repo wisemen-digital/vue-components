@@ -37,9 +37,9 @@ function getBlobUrl(file: File): string {
           </div>
           <a v-for="file in files" :key="file.name" download :href="file.blobUrl" class="flex flex-col rounded p-4" style="background: #00000020;">
             <span>{{ file.name }}</span>
-            <span>{{ file.size }}</span>
+            <span>{{ file.size }} bytes</span>
             <span>{{ file.type }}</span>
-            <span>{{ file.lastModified }} bytes</span>
+            <span>{{ file.lastModified }}</span>
           </a>
         </div>
       </FormDropzone>
