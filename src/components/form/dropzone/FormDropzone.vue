@@ -39,6 +39,6 @@ const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
   @apply relative h-full
 }
 .dropzone-overlay {
-  @apply z-10 absolute inset-0 grid items-center justify-center rounded border-2 border-dashed;
+  @apply z-10 absolute inset-0 flex items-center justify-center rounded border-2 border-dashed;
 }
 </style>
