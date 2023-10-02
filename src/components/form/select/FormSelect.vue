@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T, TModel extends T[] | T | undefined">
+<script setup lang="ts" generic="T">
 import FormSelectContainer from './FormSelectContainer.vue'
 import FormSelectInput from './FormSelectInput.vue'
 import FormSelectOption from './FormSelectOption.vue'
@@ -17,7 +17,7 @@ const {
   },
 } = defineProps<Props>()
 
-const model = defineModel<TModel>('modelValue', { required: true })
+const model = defineModel<T | T[]>('modelValue')
 </script>
 
 <template>
