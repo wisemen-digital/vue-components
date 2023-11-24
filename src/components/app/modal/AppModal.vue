@@ -6,9 +6,11 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { twMerge } from 'tailwind-merge'
-import type { ModalProps } from '@/components/app/modal/appModalVariants'
-import { modalVariants } from '@/components/app/modal/appModalVariants'
+import AppButton from '@/components/app/button/AppButton.vue'
+import AppText from '@/components/app/text/AppText.vue'
+import AppIcon from '@/components/app/icon/AppIcon.vue'
+import type { ModalProps } from '@/components/app/modal/appModal.style'
+import { modalVariants } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
 
 interface Props {
@@ -67,14 +69,14 @@ const handleClickCloseButton = (): void => {
           leave-from="opacity-100 scale-100"
           leave-to="opacity-0 scale-0"
         >
-          <DialogPanel :class="twMerge(modalVariants({ size }))">
+          <DialogPanel :class="modalVariants({ size })">
             <div class="flex justify-between gap-4">
               <DialogTitle class="flex flex-col items-start justify-start gap-8">
                 <slot name="icon">
                   <AppButton v-if="icon" :front-icon="icon" size="icon" variant="outline" is-rounded />
                 </slot>
                 <slot name="title">
-                  <AppText variant="large">
+                  <AppText variant="heading">
                     {{ title }}
                   </AppText>
                 </slot>

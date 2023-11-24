@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import type { ModalProps } from '@/components/app/modal/appModalVariants'
-import { modalSizeOptions } from '@/components/app/modal/appModalVariants'
+import { reactive } from 'vue'
+import AppModal from '@/components/app/modal/AppModal.vue'
+import AppText from '@/components/app/text/AppText.vue'
+import AppButton from '@/components/app/button/AppButton.vue'
+import type { ModalProps } from '@/components/app/modal/appModal.style'
+import { modalSizeOptions } from '@/components/app/modal/appModal.style'
 import type { Icon } from '@/icons'
 import { iconNames } from '@/icons'
 
@@ -52,21 +56,19 @@ const handleClick = (): void => {
         v-model:is-open="state.isOpen"
       >
         <template #content>
-          <AppText variant="small">
+          <AppText variant="subtext">
             {{ state.content }}
           </AppText>
         </template>
         <template #footer>
-          <AppButtonGroup>
-            <template #default="{ bindings }">
-              <AppButton variant="outline" v-bind="bindings" @component:click="handleClick">
-                Cancel
-              </AppButton>
-              <AppButton v-bind="bindings" @component:click="handleClick">
-                Confirm
-              </AppButton>
-            </template>
-          </AppButtonGroup>
+          <div class="flex gap-2">
+            <AppButton variant="outline" @component:click="handleClick">
+              Cancel
+            </AppButton>
+            <AppButton @component:click="handleClick">
+              Confirm
+            </AppButton>
+          </div>
         </template>
       </AppModal>
     </Variant>

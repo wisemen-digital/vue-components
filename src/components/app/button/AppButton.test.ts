@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render } from '@testing-library/vue'
-import AppButton from './AppButton.vue'
+import { describe, expect, it } from 'vitest'
+import AppButton from '@/components/app/button/AppButton.vue'
 
 describe('AppButton click events', () => {
   it('AppButton emits component:click', async () => {

@@ -1,14 +1,10 @@
-import path, { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
 import type { UserConfigExport } from 'vite'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
-export default ({ mode }): UserConfigExport => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+export default (): UserConfigExport => {
   return defineConfig({
     plugins: [
       vue({
@@ -18,40 +14,12 @@ export default ({ mode }): UserConfigExport => {
         },
       }),
       VueI18nPlugin({
-        include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**'),
-      }),
-      Components({
-        dts: true,
-        deep: true,
-        dirs: ['./src/components', './src/modules'],
-      }),
-      AutoImport({
-        dts: true,
-        include: [
-          /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-          /\.vue$/, /\.vue\?vue/, // .vue
-          /\.md$/, // .md
-        ],
-        imports: [
-          'vue',
-          'vue-router',
-          'pinia',
-          'vue-i18n',
-          'vitest',
-          {
-            axios: [
-              ['default', 'axios'],
-            ],
-          },
-        ],
-        resolvers: [
-          /* ... */
-        ],
+        include: resolve(__dirname, './src/locales/**'),
       }),
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': resolve(__dirname, './src'),
       },
     },
   })

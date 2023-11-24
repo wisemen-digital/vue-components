@@ -5,6 +5,7 @@ export enum ComponentName {
   APP_ICON = 'AppIcon',
   APP_TEXT = 'AppText',
   APP_MODAL = 'AppModal',
+  APP_POPOVER = 'AppPopover',
 
   FORM_INPUT_FIELD = 'FormInputField',
   FORM_ERROR = 'FormError',
@@ -13,7 +14,12 @@ export enum ComponentName {
   TRANSITIONS = 'Transitions',
   TRANSITION_EXPAND = 'TransitionExpand',
   ICONS = 'Icons',
+
   UTILS_GENERATE_UUID = 'UtilsGenerateUuid',
+  UTILS_TAILWIND_HELPERS = 'UtilsTailwindHelpers',
+
+  CONFIG_TAILWIND = 'TailwindConfig',
+  CONFIG_PACKAGES = 'GlobalPackages',
 }
 
 export enum ComponentType {
@@ -22,6 +28,8 @@ export enum ComponentType {
   TRANSITIONS = 'transitions',
   ICONS = 'icons',
   UTILS = 'utils',
+  CONFIG = 'config',
+  STYLES = 'styles',
 }
 
 export interface ComponentFile {

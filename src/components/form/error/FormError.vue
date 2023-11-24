@@ -6,7 +6,7 @@ const { errorMessage } = defineProps<Props>()
 </script>
 
 <template>
-  <p class="text-sm text-destructive">
+  <p class="text-subtext text-destructive">
     <slot>
       {{ errorMessage }}
     </slot>
