@@ -1,13 +1,18 @@
 // histoire.config.js
-import { defineConfig } from 'histoire'
+import { defaultColors, defineConfig } from 'histoire'
 import { HstVue } from '@histoire/plugin-vue'
 
 export default defineConfig({
+
   tree: {
     groups: [
       {
         id: 'top',
         title: '', // No toggle
+      },
+      {
+        id: 'contributing',
+        title: 'Contributing',
       },
       {
         title: 'Components',
@@ -25,8 +30,22 @@ export default defineConfig({
   plugins: [
     HstVue(),
   ],
+  vite: {
+    base: '/vue-components/',
+  },
   setupFile: './histoire.setup.ts',
   theme: {
-    title: 'Wisemen',
+    title: 'Wisemen Components',
+    logo: {
+      square: '/logo-square.svg',
+      light: '/logo-light.svg',
+      dark: '/logo-dark.svg',
+    },
+    colors: {
+      primary: {
+        ...defaultColors.cyan,
+      },
+    },
+
   },
 })

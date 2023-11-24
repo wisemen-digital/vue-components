@@ -1,4 +1,4 @@
-export const mapCssVariableToHsl = ({ name, value }: { name: string; value: string }): { name: string; value: string } => {
+export function mapCssVariableToHsl({ name, value }: { name: string; value: string }): { name: string; value: string } {
   const cssVariableArray = value.split(' ')
   const hue = cssVariableArray[0]
   const saturation = cssVariableArray[1]
@@ -10,7 +10,7 @@ export const mapCssVariableToHsl = ({ name, value }: { name: string; value: stri
   }
 }
 
-const hslToHex = (h: number, s: number, l: number): string => {
+function hslToHex(h: number, s: number, l: number): string {
   l /= 100
   const a = s * Math.min(l, 1 - l) / 100
   const f = (n: number): string => {
@@ -21,11 +21,11 @@ const hslToHex = (h: number, s: number, l: number): string => {
   return `#${f(0)}${f(8)}${f(4)}`
 }
 
-const getHslValues = (hsl: string): {
+function getHslValues(hsl: string): {
   h: number
   s: number
   l: number
-} => {
+} {
   // hsl looks like this hsl(0, 0%, 0%)
   const hslArray = hsl.split(',')
   const hue = hslArray[0]
@@ -41,7 +41,7 @@ const getHslValues = (hsl: string): {
   }
 }
 
-export const mapHslToHex = ({ name, value }: { name: string; value: string }): { name: string; value: string } => {
+export function mapHslToHex({ name, value }: { name: string; value: string }): { name: string; value: string } {
   const { h, s, l } = getHslValues(value)
   const hex = hslToHex(h, s, l)
   return {
@@ -97,7 +97,7 @@ function hexToHSL(H: string): string {
   return `hsl(${h},${s}%,${l}%)`
 }
 
-export const hexToCssVar = (hex: string): string => {
+export function hexToCssVar(hex: string): string {
   const hsl = hexToHSL(hex)
   const hslArray = hsl.split(',')
   const hue = hslArray[0]

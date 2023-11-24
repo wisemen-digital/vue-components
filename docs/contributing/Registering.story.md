@@ -1,31 +1,12 @@
-# Reusable Vue components
+---
+group: 'contributing'
+icon: 'carbon:task-add'
+title: 'Registering Components'
+---
 
-## Finished components
+# Registering components
 
-- [x] AppButton
-- [x] FormInputField
-- [ ] AppModal
-  
-## Usage
-
-### Add components to project using the following commands
-```
-npx @wisemen/vue-cli init
-npx @wisemen/vue-cli add
-npx @wisemen/vue-cli add all
-```
-
-Init installs global dependencies and components such as your tailwind config, transitions and icons.\
-With the add command you can install specific components, which will install all their relevant dependencies.\
-Use add all to install all possible components.
-
-## Adding components
-
-### Making component
-
-Inside the ```modules/ui``` folder, add your relevant components / composables / other dependencies.
-
-### Registering components
+## Adding to components registry
 
 Once the code is made, inside the ```componentsTypes.ts``` file inside the ```/scripts``` folder, add your component name.\
 After add a corresponding file inside the ```scripts/components``` folder.\
@@ -58,27 +39,28 @@ export const appButton = {
   files: [
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButton.vue',
+      path: './src/components/app/buttons/app-button/AppButton.vue',
       folder: 'app/buttons',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/appButtonVariants.ts',
+      path: './src/components/app/buttons/app-button/appButtonVariants.ts',
       folder: 'app/buttons',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/modules/ui/components/app/buttons/app-button/AppButtonLoader.vue',
+      path: './src/components/app/buttons/app-button/AppButtonLoader.vue',
       folder: 'app/buttons',
     },
   ],
   internalDependencies: [ComponentName.TRANSITIONS, ComponentName.APP_ICON],
+  dependencies: ['random-package'],
 }
 ```
 
 Finally add the component to the ```components.ts``` file
 
-### Building components.json
+## Building components.json
 
 Run the command
 ```

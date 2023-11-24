@@ -4,7 +4,7 @@ import process from 'node:process'
 
 import type { Component } from '../componentsTypes'
 
-export const generateRegistryFile = async (components: Component[], fileName: string): Promise<void> => {
+export async function generateRegistryFile(components: Component[], fileName: string): Promise<void> {
   const payload = components
     .map((component) => {
       const files = component.files?.map((file) => {

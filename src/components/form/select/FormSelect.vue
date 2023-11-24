@@ -38,7 +38,7 @@ const model = defineModel<TModel>('modelValue', { required: true })
 const isMultiple = computed<boolean>(() => Array.isArray(model.value))
 const search = ref<string>('')
 
-const getKeyValue = (value: T): string => {
+function getKeyValue(value: T): string {
   if (keyValue)
     return String(value[keyValue])
   else
@@ -52,7 +52,7 @@ const hasValue = computed<boolean>(() => {
     return model.value !== null && model.value !== undefined && model.value !== ''
 })
 
-const getDisplayValue = (value: T | T[] | undefined): string => {
+function getDisplayValue(value: T | T[] | undefined): string {
   if (value === undefined)
     return ''
 
@@ -69,7 +69,7 @@ const filteredItems = computed(() => {
   })
 })
 
-const handleSearchChange = (event: Event): void => {
+function handleSearchChange(event: Event): void {
   search.value = (event.target as HTMLInputElement).value
 }
 
