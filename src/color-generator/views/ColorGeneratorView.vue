@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import { convertCssIntoVariables } from '../utils/convertCssIntoVariables'
 import { hexToCssVar } from '../utils/colors'
 
-import FormInputField from '@/components/form/field/FormInputField.vue'
-import AppButton from '@/components/app/button/AppButton.vue'
+import FormInputField from '@/components/input/AppInput.vue'
+import AppButton from '@/components/button/AppButton.vue'
 
 async function getGlobalConfig(): Promise<any> {
   const response = await fetch('https://wisemen-digital.github.io/vue-components/api/globalConfig.json')
@@ -119,7 +119,7 @@ function handleCssUpload(event: Event): void {
           <FormInputField v-model="cssVariable.value" />
         </div>
       </div>
-      <AppButton @component:click="handleDownloadCss">
+      <AppButton @click="handleDownloadCss">
         Download CSS
       </AppButton>
     </div>

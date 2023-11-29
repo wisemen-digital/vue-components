@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useModal } from '@/composables/app/modal/useModal'
+import { useModal } from '@/composables/modal/useModal'
 import CustomModal from '@/examples/modal/CustomModal.vue'
 
 const { open, close, onClose, onOpen } = useModal({
