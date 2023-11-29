@@ -7,7 +7,7 @@ export const appPopover = {
     {
       type: ComponentType.COMPONENTS,
       path: './src/components/app/popover/AppPopover.vue',
-      folder: 'app/popover',
+      folder: 'popover',
     },
   ],
   dependencies: ['@headlessui/vue', '@headlessui-float/vue'],

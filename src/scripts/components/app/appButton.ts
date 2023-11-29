@@ -7,17 +7,17 @@ export const appButton = {
     {
       type: ComponentType.COMPONENTS,
       path: './src/components/app/button/AppButton.vue',
-      folder: 'app/button',
+      folder: 'button',
     },
     {
       type: ComponentType.COMPONENTS,
       path: './src/components/app/button/appButton.style.ts',
-      folder: 'app/button',
+      folder: 'button',
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/components/app/button/AppButtonLoader.vue',
-      folder: 'app/button',
+      path: './src/components/app/button/AppButtonIconOrLoader.vue',
+      folder: 'button',
     },
   ],
   internalDependencies: [],

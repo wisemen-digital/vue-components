@@ -17,30 +17,38 @@ export const sizeOptions = {
   lg: 'h-11 rounded px-8',
 }
 
-export const loaderVariantOptions = {
-  white: 'bg-white',
-  primary: 'bg-primary',
-}
-
-export const buttonVariants = cva(
-  {
-    base: 'relative inline-flex items-center justify-center rounded text-subtext font-medium text-destructive-foreground transition-colors disabled:pointer-events-none disabled:opacity-50',
-    variants: {
-      variant: variantOptions,
-      size: sizeOptions,
-      isRounded: {
-        true: 'rounded-full',
-        false: null,
-      },
+export const button = cva({
+  base: 'relative inline-flex flex-shrink-0 items-center justify-center gap-x-2 rounded-button border border-solid text-subtext font-medium ring-offset-background duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+  variants: {
+    variant: variantOptions,
+    size: sizeOptions,
+    isLoading: {
+      true: 'opacity-100',
     },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default',
+    isRounded: {
+      true: 'rounded-full',
     },
   },
-)
+  defaultVariants: {
+    variant: 'default',
+    size: 'default',
+  },
+})
 
-export type ButtonProps = VariantProps<typeof buttonVariants>
+export const buttonIcon = cva({
+  variants: {
+    size: {
+      default: 'h-3.5 w-3.5',
+      sm: 'h-3.5 w-3.5',
+      lg: 'h-4 w-4',
+      icon: 'h-3.5 w-3.5',
+    },
+  },
+  defaultVariants: {
+    size: 'default',
+  },
+})
 
 export const buttonVariantOptions = Object.keys(variantOptions)
 export const buttonSizeOptions = Object.keys(sizeOptions)
+export type ButtonProps = VariantProps<typeof button>

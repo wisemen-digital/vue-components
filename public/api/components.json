@@ -6,23 +6,23 @@
       {
         "name": "AppButton.vue",
         "dir": "./src/components/app/button",
-        "placementDir": "app/button",
+        "placementDir": "button",
         "type": "components",
-        "content": "<script setup lang=\"ts\">\nimport AppIcon from '@/components/app/icon/AppIcon.vue'\nimport AppButtonLoader from '@/components/app/button/AppButtonLoader.vue'\nimport { buttonVariants } from '@/components/app/button/appButton.style'\nimport type { ButtonProps } from '@/components/app/button/appButton.style'\nimport type { Icon } from '@/icons'\n\ninterface Props {\n  isDisabled?: boolean\n  isLoading?: boolean\n  isRounded?: boolean\n  variant?: ButtonProps['variant']\n  size?: ButtonProps['size']\n  prefixIcon?: Icon\n  suffixIcon?: Icon\n}\n\nconst {\n  variant = 'default',\n  size = 'default',\n  isDisabled = false,\n  isLoading = false,\n  prefixIcon,\n  suffixIcon,\n} = defineProps<Props>()\n\nconst emits = defineEmits(['component:click'])\n\nfunction handleClick(): void {\n  if (!isDisabled && !isLoading)\n    emits('component:click')\n}\n</script>\n\n<template>\n  <button :class=\"buttonVariants({ variant, size, isRounded })\" @click=\"handleClick\">\n    <div :class=\"{ 'opacity-30': isLoading }\" class=\"flex items-center gap-2 whitespace-nowrap transition-opacity\">\n      <slot name=\"prefix\">\n        <AppIcon v-if=\"prefixIcon\" :icon=\"prefixIcon\" />\n      </slot>\n      <slot />\n      <slot name=\"suffix\">\n        <AppIcon v-if=\"suffixIcon\" :icon=\"suffixIcon\" />\n      </slot>\n    </div>\n    <AppButtonLoader :is-loading=\"isLoading\" />\n  </button>\n</template>\n"
+        "content": "<script setup lang=\"ts\">\nimport type { ButtonHTMLAttributes } from 'vue'\nimport type { RouteLocationRaw, RouteRecordRaw } from 'vue-router'\nimport { RouterLink } from 'vue-router'\nimport { computed, useAttrs } from 'vue'\n\nimport type { ButtonProps } from '@/components/app/button/appButton.style'\nimport { button } from '@/components/app/button/appButton.style'\nimport type { Icon } from '@/icons'\nimport AppButtonIconOrLoader from '@/components/app/button/AppButtonIconOrLoader.vue'\nimport AppLoader from '@/components/app/loader/AppLoader.vue'\n\nexport interface Props extends /* @vue-ignore */ ButtonHTMLAttributes {\n  /**\n   * Whether the button is disabled or not.\n   * If true, the button is disabled and cannot be clicked.\n   */\n  isDisabled?: boolean\n\n  /**\n   * Whether to show a loading indicator and disable the button.\n   * If true, the button is disabled and a loading indicator is displayed.\n   */\n  isLoading?: boolean\n\n  /**\n   * Determines the visual style of the button. Available options are:\n   * Values are 'default', 'secondary', 'outline', 'ghost', 'destructive', 'success', 'warning'\n   */\n  variant?: ButtonProps['variant']\n\n  /**\n   * Determines the size of the button. Available options are:\n   * Values are 'default', 'sm', 'lg'\n   */\n  size?: ButtonProps['size']\n\n  /**\n   * Specifies the icon to display on the left side of the button.\n   */\n  iconLeft?: Icon | null\n\n  /**\n   * Specifies the icon to display on the right side of the button.\n   */\n  iconRight?: Icon | null\n\n  /**\n   * The route to navigate to when the button is clicked.\n   * If defined, renders a `<RouterLink>` element instead of an `<a>` element.\n   */\n  to?: RouteRecordRaw | null\n\n  /**\n   * The URL to navigate to when the button is clicked.\n   * If defined, renders an `<a>` element instead of a `button` element.\n   */\n  href?: string | null\n\n  /**\n   * The type of the native button element. Defaults to 'button'.\n   * Values are 'button', 'reset', and 'submit'.\n   */\n  type?: 'button' | 'reset' | 'submit'\n}\n\nconst {\n  isDisabled = false,\n  isLoading = false,\n\n  variant = 'default',\n  size = 'default',\n\n  iconLeft = null,\n  iconRight = null,\n\n  to = null,\n  href = null,\n\n  type = 'button',\n} = defineProps<Props>()\n\nconst attrs = useAttrs()\n\nconst buttonClasses = computed<string>(() =>\n  button({\n    size,\n    variant,\n    isLoading,\n    class: attrs.class as string,\n  }),\n)\n\nconst componentType = computed<string | typeof RouterLink>(() => {\n  if (to !== null)\n    return RouterLink\n\n  else if (href !== null)\n    return 'a'\n\n  return 'button'\n})\n\nconst componentProps = computed<Record<string, unknown>>(() => {\n  if (componentType.value === 'a') {\n    return {\n      href: href as string,\n      target: '_blank',\n      rel: 'noopener noreferrer',\n      class: buttonClasses.value,\n    }\n  }\n\n  if (componentType.value === RouterLink) {\n    return {\n      to: to as RouteLocationRaw,\n      class: buttonClasses.value,\n    }\n  }\n\n  return {\n    type,\n    disabled: isDisabled || isLoading,\n    class: buttonClasses.value,\n  }\n})\n</script>\n\n<template>\n  <!-- Not casting `componentProps` to `any` throws a ts error on build -->\n  <Component\n    :is=\"componentType\"\n    v-bind=\"componentProps\"\n  >\n    <AppButtonIconOrLoader\n      v-if=\"iconLeft !== null\"\n      :icon=\"iconLeft\"\n      :is-loading=\"isLoading\"\n      :size=\"size\"\n      :variant=\"variant\"\n    />\n\n    <span\n      class=\"whitespace-nowrap\"\n      :class=\"{\n        'opacity-0': isLoading && iconLeft === null && iconRight === null,\n      }\"\n    >\n      <slot />\n    </span>\n\n    <div\n      v-if=\"isLoading && iconLeft === null && iconRight === null\"\n      class=\"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2\"\n    >\n      <AppLoader class=\"h-5 w-5\" />\n    </div>\n\n    <AppButtonIconOrLoader\n      v-if=\"iconRight !== null\"\n      :icon=\"iconRight\"\n      :is-loading=\"isLoading\"\n      :size=\"size\"\n      :variant=\"variant\"\n    />\n  </Component>\n</template>\n"
       },
       {
         "name": "appButton.style.ts",
         "dir": "./src/components/app/button",
-        "placementDir": "app/button",
+        "placementDir": "button",
         "type": "components",
-        "content": "import type { VariantProps } from '@/utils/tailwind/cva'\nimport { cva } from '@/utils/tailwind/cva'\n\nexport const variantOptions = {\n  default: 'bg-primary text-primary-foreground hover:bg-primary/90',\n  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-focus-destructive',\n  outline: 'border border-primary hover:bg-secondary text-secondary-foreground',\n  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',\n  ghost: 'hover:bg-secondary text-secondary-foreground',\n  link: 'text-primary underline-offset-4 hover:underline',\n}\n\nexport const sizeOptions = {\n  icon: 'h-10 p-3 w-10',\n  default: 'h-10 px-4 py-2',\n  sm: 'h-9 rounded px-3',\n  lg: 'h-11 rounded px-8',\n}\n\nexport const loaderVariantOptions = {\n  white: 'bg-white',\n  primary: 'bg-primary',\n}\n\nexport const buttonVariants = cva(\n  {\n    base: 'relative inline-flex items-center justify-center rounded text-subtext font-medium text-destructive-foreground transition-colors disabled:pointer-events-none disabled:opacity-50',\n    variants: {\n      variant: variantOptions,\n      size: sizeOptions,\n      isRounded: {\n        true: 'rounded-full',\n        false: null,\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n      size: 'default',\n    },\n  },\n)\n\nexport type ButtonProps = VariantProps<typeof buttonVariants>\n\nexport const buttonVariantOptions = Object.keys(variantOptions)\nexport const buttonSizeOptions = Object.keys(sizeOptions)\n"
+        "content": "import type { VariantProps } from '@/utils/tailwind/cva'\nimport { cva } from '@/utils/tailwind/cva'\n\nexport const variantOptions = {\n  default: 'bg-primary text-primary-foreground hover:bg-primary/90',\n  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-focus-destructive',\n  outline: 'border border-primary hover:bg-secondary text-secondary-foreground',\n  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',\n  ghost: 'hover:bg-secondary text-secondary-foreground',\n  link: 'text-primary underline-offset-4 hover:underline',\n}\n\nexport const sizeOptions = {\n  icon: 'h-10 p-3 w-10',\n  default: 'h-10 px-4 py-2',\n  sm: 'h-9 rounded px-3',\n  lg: 'h-11 rounded px-8',\n}\n\nexport const button = cva({\n  base: 'relative inline-flex flex-shrink-0 items-center justify-center gap-x-2 rounded-button border border-solid text-subtext font-medium ring-offset-background duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',\n  variants: {\n    variant: variantOptions,\n    size: sizeOptions,\n    isLoading: {\n      true: 'opacity-100',\n    },\n    isRounded: {\n      true: 'rounded-full',\n    },\n  },\n  defaultVariants: {\n    variant: 'default',\n    size: 'default',\n  },\n})\n\nexport const buttonIcon = cva({\n  variants: {\n    size: {\n      default: 'h-3.5 w-3.5',\n      sm: 'h-3.5 w-3.5',\n      lg: 'h-4 w-4',\n      icon: 'h-3.5 w-3.5',\n    },\n  },\n  defaultVariants: {\n    size: 'default',\n  },\n})\n\nexport const buttonVariantOptions = Object.keys(variantOptions)\nexport const buttonSizeOptions = Object.keys(sizeOptions)\nexport type ButtonProps = VariantProps<typeof button>\n"
       },
       {
-        "name": "AppButtonLoader.vue",
+        "name": "AppButtonIconOrLoader.vue",
         "dir": "./src/components/app/button",
-        "placementDir": "app/button",
+        "placementDir": "button",
         "type": "components",
-        "content": "<script setup lang=\"ts\">\nimport { fadeTransition } from '@/transitions'\n\ninterface Props {\n  isLoading: boolean\n}\nconst {\n  isLoading,\n} = defineProps<Props>()\n</script>\n\n<template>\n  <!-- eslint-disable tailwindcss/no-custom-classname -->\n  <Transition v-bind=\"fadeTransition\">\n    <div v-if=\"isLoading\" class=\"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2\">\n      <div class=\"relative inline-block h-2.5 w-10\">\n        <div\n          v-for=\"i in 4\" :key=\"i\" class=\"orb bg-current shadow-focus absolute top-[1px] h-2 w-2 rounded-full\"\n        />\n      </div>\n    </div>\n  </Transition>\n</template>\n\n<style lang=\"scss\" scoped>\n.orb:nth-child(1) {\n  left: 4px;\n  animation: lds-ellipsis1 0.6s infinite;\n}\n\n.orb:nth-child(2) {\n  left: 4px;\n  animation: lds-ellipsis2 0.6s infinite;\n}\n\n.orb:nth-child(3) {\n  left: 16px;\n  animation: lds-ellipsis2 0.6s infinite;\n}\n\n.orb:nth-child(4) {\n  left: 28px;\n  animation: lds-ellipsis3 0.6s infinite;\n}\n\n@keyframes lds-ellipsis1 {\n  0% {\n    transform: scale(0);\n  }\n\n  100% {\n    transform: scale(1);\n  }\n}\n\n@keyframes lds-ellipsis3 {\n  0% {\n    transform: scale(1);\n  }\n\n  100% {\n    transform: scale(0);\n  }\n}\n\n@keyframes lds-ellipsis2 {\n  0% {\n    transform: translate(0, 0);\n  }\n\n  100% {\n    transform: translate(12px, 0);\n  }\n}\n</style>\n"
+        "content": "<script setup lang=\"ts\">\nimport { computed } from 'vue'\nimport type { ButtonProps } from '@/components/app/button/appButton.style'\nimport { buttonIcon } from '@/components/app/button/appButton.style'\nimport AppLoader from '@/components/app/loader/AppLoader.vue'\nimport AppIcon from '@/components/app/icon/AppIcon.vue'\nimport type { Icon } from '@/icons'\n\ninterface Props {\n  icon: Icon\n  isLoading: boolean\n  size: ButtonProps['size']\n  variant: ButtonProps['variant']\n}\n\nconst { isLoading, size } = defineProps<Props>()\n\nconst buttonIconClasses = computed<string>(() =>\n  buttonIcon({\n    size,\n  }),\n)\n</script>\n\n<template>\n  <div\n    v-if=\"isLoading\"\n    class=\"relative\"\n    :class=\"buttonIconClasses\"\n  >\n    <div class=\"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2\">\n      <AppLoader class=\"h-4 w-4\" />\n    </div>\n  </div>\n\n  <AppIcon\n    v-else\n    :class=\"buttonIconClasses\"\n    :icon=\"icon\"\n  />\n</template>\n"
       }
     ],
     "internalDependencies": []
@@ -34,56 +34,56 @@
       {
         "name": "AppCard.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n\ninterface Props {\n  content?: string\n  title?: string\n  subtitle?: string\n  footer?: string\n  headerImage?: string\n}\n\ndefineProps<Props>()\n\ndefineSlots<{\n  content?: () => any\n  header?: () => any\n  default?: () => any\n  footer?: () => any\n  headerImage?: () => any\n}>()\n</script>\n\n<template>\n  <section\n    class=\"\n    flex flex-col overflow-hidden\n    rounded-card border bg-card\n    text-card-foreground shadow-card-shadow\n    transition-shadow duration-300\n    hover:shadow-card-hover-shadow\n    focus:shadow-card-hover-shadow\"\n  >\n    <slot>\n      <slot name=\"headerImage\">\n        <img\n          v-if=\"headerImage\"\n          :src=\"headerImage\"\n          class=\"h-48 w-full object-cover\"\n        >\n      </slot>\n      <div class=\"flex flex-col gap-4 p-4\">\n        <slot name=\"header\">\n          <div v-if=\"title || subtitle\">\n            <AppText\n              v-if=\"title\"\n              boldness=\"semibold\"\n              variant=\"heading\"\n            >\n              {{ title }}\n            </AppText>\n            <AppText\n              v-if=\"subtitle\"\n              class=\"text-muted-foreground\"\n            >\n              {{ subtitle }}\n            </AppText>\n          </div>\n        </slot>\n        <slot name=\"content\">\n          <AppText v-if=\"content\">\n            {{ content }}\n          </AppText>\n        </slot>\n        <slot name=\"footer\">\n          <AppText v-if=\"footer\">\n            {{ footer }}\n          </AppText>\n        </slot>\n      </div>\n    </slot>\n  </section>\n</template>\n"
       },
       {
         "name": "AppCardContent.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col gap-1 p-4 pt-0', props.class)\">\n    <slot />\n  </div>\n</template>\n"
       },
       {
         "name": "AppCardDescription.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n</script>\n\n<template>\n  <AppText\n    class=\"text-muted-foreground\"\n  >\n    <slot />\n  </AppText>\n</template>\n"
       },
       {
         "name": "AppCardFooter.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col gap-1 p-4 pt-0', props.class)\">\n    <slot />\n  </div>\n</template>\n"
       },
       {
         "name": "AppCardHeader.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col p-4', props.class)\">\n    <slot />\n  </div>\n</template>\n"
       },
       {
         "name": "AppCardHeaderImage.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  src: string\n  class?: string\n}>()\n</script>\n\n<template>\n  <img\n    :src=\"src\"\n    :class=\"twMerge('h-48 w-full object-cover', props.class)\"\n  >\n</template>\n"
       },
       {
         "name": "AppCardTitle.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n</script>\n\n<template>\n  <AppText\n    boldness=\"semibold\"\n    variant=\"heading\"\n  >\n    <slot />\n  </AppText>\n</template>\n"
       },
       {
         "name": "AppCard.story.vue",
         "dir": "./src/components/app/card",
-        "placementDir": "app/card",
+        "placementDir": "card",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { reactive } from 'vue'\nimport Image from '@/assets/test-image.jpg'\nimport AppCard from '@/components/app/card/AppCard.vue'\nimport AppButton from '@/components/app/button/AppButton.vue'\nimport AppCardHeaderImage from '@/components/app/card/AppCardHeaderImage.vue'\nimport AppCardHeader from '@/components/app/card/AppCardHeader.vue'\nimport AppCardTitle from '@/components/app/card/AppCardTitle.vue'\nimport AppCardDescription from '@/components/app/card/AppCardDescription.vue'\nimport AppCardContent from '@/components/app/card/AppCardContent.vue'\nimport AppCardFooter from '@/components/app/card/AppCardFooter.vue'\n\ninterface State {\n  title?: string\n  subtitle?: string\n  content?: string\n  footer?: string\n  headerImage: string\n\n  hasFooterButton?: boolean\n  hasHeaderImage?: boolean\n  hasHeader?: boolean\n  hasFooter?: boolean\n  hasContent?: boolean\n  isCustom?: boolean\n}\n\nconst state = reactive<State>({\n  title: 'Modal title',\n  subtitle: 'Modal subtitle',\n  content: 'Modal content',\n  headerImage: Image,\n  hasHeaderImage: true,\n  hasContent: true,\n  hasFooter: true,\n  hasHeader: true,\n  isCustom: false,\n})\n</script>\n\n<template>\n  <Story\n    title=\"App/Card/AppCard\"\n  >\n    <Variant title=\"Default\" auto-props-disabled>\n      <template #controls>\n        <HstText v-model=\"state.title\" title=\"Title\" />\n        <HstText v-model=\"state.subtitle\" title=\"Subtitle\" />\n        <HstText v-model=\"state.footer\" title=\"Footer\" />\n        <HstTextarea v-model=\"state.content\" title=\"Content\" />\n\n        <HstCheckbox v-model=\"state.hasHeader\" title=\"Has header\" />\n        <HstCheckbox v-model=\"state.hasHeaderImage\" title=\"Has header image\" />\n        <HstCheckbox v-model=\"state.hasContent\" title=\"Has content\" />\n        <HstCheckbox v-model=\"state.hasFooter\" title=\"Has footer\" />\n      </template>\n\n      <div class=\"w-96 p-12\">\n        <AppCard>\n          <AppCardHeaderImage v-if=\"state.hasHeaderImage\" :src=\"state.headerImage\" />\n          <AppCardHeader v-if=\"state.hasHeader\">\n            <AppCardTitle>\n              {{ state.title }}\n            </AppCardTitle>\n            <AppCardDescription>\n              {{ state.subtitle }}\n            </AppCardDescription>\n          </AppCardHeader>\n          <AppCardContent v-if=\"state.hasContent\">\n            <p>{{ state.content }}</p>\n          </AppCardContent>\n          <AppCardFooter v-if=\"state.hasFooter\">\n            <AppButton class=\"w-full\">\n              Button\n            </AppButton>\n          </AppCardFooter>\n        </AppCard>\n      </div>\n    </Variant>\n  </Story>\n</template>\n"
       }
@@ -173,14 +173,14 @@
       {
         "name": "AppIcon.vue",
         "dir": "./src/components/app/icon",
-        "placementDir": "app/icon",
+        "placementDir": "icon",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { twMerge } from 'tailwind-merge'\nimport { computed, useAttrs } from 'vue'\nimport { icons } from '@/icons'\nimport type { Icon } from '@/icons'\nimport type { IconProps } from '@/components/app/icon/appIcon.style'\nimport { iconVariants } from '@/components/app/icon/appIcon.style'\n\ninterface Props {\n  icon: Icon\n  size?: IconProps['size']\n}\n\nconst { icon, size = 'default' } = defineProps<Props>()\n\nconst attrs = useAttrs()\n\nconst iconComponent = computed(() => icons[icon])\n</script>\n\n<template>\n  <Component :is=\"iconComponent\" :class=\"twMerge(iconVariants({ size }), attrs?.class as string)\" />\n</template>\n"
       },
       {
         "name": "appIcon.style.ts",
         "dir": "./src/components/app/icon",
-        "placementDir": "app/icon",
+        "placementDir": "icon",
         "type": "components",
         "content": "import type { VariantProps } from '@/utils/tailwind/cva'\nimport { cva } from '@/utils/tailwind/cva'\n\nexport const sizeOptions = {\n  default: 'h-6',\n  sm: 'h-4',\n  lg: 'h-8',\n}\n\nexport const iconVariants = cva(\n  {\n    base: null,\n    variants: {\n      size: sizeOptions,\n    },\n    defaultVariants: {\n      size: 'default',\n    },\n  },\n)\n\nexport type IconProps = VariantProps<typeof iconVariants>\n\nexport const iconSizeOptions = Object.keys(sizeOptions)\n"
       }
@@ -194,77 +194,77 @@
       {
         "name": "AppModal.vue",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport {\n  Dialog,\n  DialogPanel,\n  TransitionChild,\n  TransitionRoot,\n} from '@headlessui/vue'\nimport type { ModalProps } from '@/components/app/modal/appModal.style'\nimport { modalVariants } from '@/components/app/modal/appModal.style'\nimport { modalBackgroundTransition, modalTransition } from '@/transitions'\nimport { useProvideModalContext } from '@/composables/app/modal/useModalContext'\n\ninterface Props {\n  hasIrremovableMask?: boolean\n  size?: ModalProps['size']\n}\n\nconst {\n  hasIrremovableMask = false,\n  size = 'default',\n} = defineProps<Props>()\n\ndefineSlots<{\n  default: (props: { close: () => void }) => any\n}>()\n\nuseProvideModalContext({\n  close: handleCloseModal,\n})\n\nconst isOpen = defineModel<boolean>('isOpen', {\n  required: true,\n})\n\nfunction handleCloseModal(): void {\n  isOpen.value = false\n}\n\nfunction handleClickOutside(): void {\n  if (!hasIrremovableMask)\n    handleCloseModal()\n}\n</script>\n\n<template>\n  <TransitionRoot appear :show=\"isOpen\" as=\"template\">\n    <Dialog class=\"relative z-[999]\" @close=\"handleClickOutside\">\n      <TransitionChild\n        as=\"template\"\n        v-bind=\"modalBackgroundTransition\"\n      >\n        <div class=\"fixed inset-0 bg-black/25\" />\n      </TransitionChild>\n\n      <div class=\"fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto\">\n        <TransitionChild\n          as=\"template\"\n          v-bind=\"modalTransition\"\n        >\n          <DialogPanel :class=\"modalVariants({ size })\">\n            <slot :close=\"handleCloseModal\" />\n          </DialogPanel>\n        </TransitionChild>\n      </div>\n    </Dialog>\n  </TransitionRoot>\n</template>\n"
       },
       {
         "name": "AppModalContent.vue",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col gap-1 p-4 pt-0', props.class)\">\n    <slot />\n  </div>\n</template>\n"
       },
       {
         "name": "AppModalFooter.vue",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col gap-1 p-4 pt-0', props.class)\">\n    <slot />\n  </div>\n</template>\n"
       },
       {
         "name": "AppModalHeader.vue",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { DialogTitle } from '@headlessui/vue'\nimport AppIcon from '@/components/app/icon/AppIcon.vue'\nimport { twMerge } from '@/utils//tailwind/twMerge'\nimport { useModalContext } from '@/composables/app/modal/useModalContext'\n\ninterface Props {\n  hideCloseButton?: boolean\n  class?: string\n}\n\nconst props = defineProps<Props>()\nconst { close } = useModalContext()\n\nfunction handleClickCloseButton(): void {\n  close()\n}\n</script>\n\n<template>\n  <div :class=\"twMerge('flex p-4 justify-between gap-4', props.class)\">\n    <DialogTitle>\n      <slot />\n    </DialogTitle>\n    <div v-if=\"!hideCloseButton\">\n      <button @click=\"handleClickCloseButton\">\n        <AppIcon icon=\"close\" />\n      </button>\n    </div>\n  </div>\n</template>\n"
       },
       {
         "name": "AppModalTitle.vue",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n</script>\n\n<template>\n  <AppText variant=\"heading\">\n    <slot />\n  </AppText>\n</template>\n"
       },
       {
         "name": "AppModalDescription.vue",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n</script>\n\n<template>\n  <AppText variant=\"body\" class=\"text-muted-foreground\">\n    <slot />\n  </AppText>\n</template>\n"
       },
       {
         "name": "appModal.style.ts",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "import type { VariantProps } from '@/utils/tailwind/cva'\nimport { cva } from '@/utils/tailwind/cva'\n\nexport const sizeOptions = {\n  default: 'w-[80ch] ',\n  sm: 'w-[60ch]',\n  full: 'w-full',\n  lg: 'w-[120ch]',\n}\n\nexport const modalVariants = cva(\n  {\n    base: 'flex flex-col rounded-modal bg-popover text-left text-popover-foreground shadow-modal-shadow',\n    variants: {\n      size: sizeOptions,\n    },\n    defaultVariants: {\n      size: 'default',\n    },\n  },\n)\n\nexport type ModalProps = VariantProps<typeof modalVariants>\nexport const modalSizeOptions = Object.keys(sizeOptions)\n"
       },
       {
         "name": "useModal.ts",
         "dir": "./src/composables/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "composables",
         "content": "import type { Ref } from 'vue'\nimport { onUnmounted, ref, watch } from 'vue'\nimport type { RenderedModal, UseModalOptions, UseModalReturnType } from '@/composables/app/modal/useModal.type'\nimport { generateUuid } from '@/utils/uuid/generateUuid'\n\nconst renderedModals = ref<RenderedModal[]>([])\n\nexport function useModalContainer(): {\n  modals: Ref<RenderedModal[]>\n} {\n  return { modals: renderedModals }\n}\n\nexport function useModal<P>({ component, attrs }: UseModalOptions<P>): UseModalReturnType {\n  const id = generateUuid()\n  let onOpenCb: (() => void) | null = null\n  let onCloseCb: (() => void) | null = null\n\n  const onOpen = (cb: () => void): void => {\n    onOpenCb = cb\n  }\n\n  const onClose = (cb: () => void): void => {\n    onCloseCb = cb\n  }\n\n  const modal = ref<RenderedModal>({\n    id,\n    component,\n    attrs,\n    isOpen: false,\n  })\n\n  renderedModals.value.push(modal.value)\n\n  const open = (): void => {\n    modal.value.isOpen = true\n    onOpenCb?.()\n  }\n\n  const close = (): void => {\n    modal.value.isOpen = false\n    onCloseCb?.()\n  }\n\n  const moveToTop = (): void => {\n    renderedModals.value = renderedModals.value.filter(modal => modal.id !== id).concat(modal.value)\n  }\n\n  const moveToBottom = (): void => {\n    renderedModals.value = [modal.value].concat(renderedModals.value.filter(modal => modal.id !== id))\n  }\n\n  const destroy = (): void => {\n    renderedModals.value = renderedModals.value.filter(modal => modal.id !== id)\n  }\n\n  watch(() => modal.value.isOpen, (isOpen) => {\n    if (isOpen)\n      onOpenCb?.()\n    else\n      onCloseCb?.()\n  })\n\n  onUnmounted(() => {\n    destroy()\n  })\n\n  return {\n    open,\n    close,\n    destroy,\n    moveToTop,\n    moveToBottom,\n    onOpen,\n    onClose,\n  }\n}\n"
       },
       {
         "name": "useModalContext.ts",
         "dir": "./src/composables/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "composables",
         "content": "import { inject, provide } from 'vue'\n\nimport type { InjectionKey } from 'vue'\n\ninterface ModalContext {\n  close: () => void\n}\n\nexport const modalContext = Symbol('ModalContext') as InjectionKey<{\n  close: () => void\n}>\n\nexport function useModalContext(): ModalContext {\n  const context = inject(modalContext, null)\n\n  if (context === null) {\n    const err = new Error('Component is missing a parent <AppModal /> component.')\n    throw err\n  }\n\n  return context\n}\n\nexport function useProvideModalContext(context: ModalContext): void {\n  provide(modalContext, context)\n}\n"
       },
       {
         "name": "useModal.type.ts",
         "dir": "./src/composables/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "composables",
         "content": "export interface Constructor<P = any> {\n  __isFragment?: never\n  __isTeleport?: never\n  __isSuspense?: never\n  new (...args: any[]): { $props: P }\n}\n\nexport interface UseModalOptions<P> {\n  component: Constructor<P>\n  attrs?: (Omit<P, 'isOpen'>) | (object extends P ? null : never)\n}\n\nexport interface UseModalReturnType {\n  open: () => void\n  close: () => void\n  moveToTop: () => void\n  moveToBottom: () => void\n  destroy: () => void\n  onOpen: (cb: () => void) => void\n  onClose: (cb: () => void) => void\n}\n\nexport interface RenderedModal extends UseModalOptions<any> {\n  id: string\n  isOpen: boolean\n}\n"
       },
       {
         "name": "AppModal.story.vue",
         "dir": "./src/components/app/modal",
-        "placementDir": "app/modal",
+        "placementDir": "modal",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { reactive } from 'vue'\nimport AppModal from '@/components/app/modal/AppModal.vue'\nimport AppButton from '@/components/app/button/AppButton.vue'\nimport type { ModalProps } from '@/components/app/modal/appModal.style'\nimport { modalSizeOptions } from '@/components/app/modal/appModal.style'\n\nimport AppModalHeader from '@/components/app/modal/AppModalHeader.vue'\nimport AppModalTitle from '@/components/app/modal/AppModalTitle.vue'\nimport AppModalDescription from '@/components/app/modal/AppModalDescription.vue'\nimport AppModalContent from '@/components/app/modal/AppModalContent.vue'\nimport AppModalFooter from '@/components/app/modal/AppModalFooter.vue'\n\ninterface State {\n  isOpen: boolean\n  hideCloseButton?: boolean\n  hasIrremovableMask?: boolean\n  title?: string\n  content?: string\n  description?: string\n  size?: ModalProps['size']\n}\n\nconst state = reactive<State>({\n  isOpen: false,\n  hideCloseButton: false,\n  hasIrremovableMask: false,\n  title: 'Modal title',\n  description: 'Description here',\n  content: 'Content here Lorem ipsum dolor sit amet consectetur adipisicing elit. Error temporibus nulla ab eius enim similique atque officia? Porro consectetur, ea iusto perspiciatis ullam nisi minus, inventore iste quisquam placeat nemo?Lorem ipsum dolor sit amet consectetur adipisicing elit. In quidem ullam ipsam minima, vitae commodi expedita corporis aliquid illum quis laudantium adipisci laboriosam est maxime quae enim aliquam sed ipsa.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam iste, adipisci sapiente odit beatae architecto aspernatur perferendis quis. Esse dicta, minima non aperiam sunt ad veniam ab velit officiis magni.',\n})\n\nfunction handleClick(): void {\n  state.isOpen = true\n}\n</script>\n\n<template>\n  <Story\n    title=\"App/Modals/AppModal\"\n  >\n    <Variant title=\"Default\" auto-props-disabled>\n      <template #controls>\n        <HstCheckbox v-model=\"state.isOpen\" title=\"Open\" />\n        <HstCheckbox v-model=\"state.hideCloseButton\" title=\"No close button\" />\n        <HstCheckbox v-model=\"state.hasIrremovableMask\" title=\"Not dismissable\" />\n        <HstSelect v-model=\"state.size\" title=\"Size\" :options=\"modalSizeOptions\" />\n\n        <HstText v-model=\"state.title\" title=\"Title\" />\n        <HstText v-model=\"state.description\" title=\"Description\" />\n\n        <HstTextarea v-model=\"state.content\" title=\"Content\" />\n      </template>\n\n      <AppButton @component:click=\"handleClick\">\n        Click me\n      </AppButton>\n      <AppModal\n        v-model:is-open=\"state.isOpen\" :size=\"state.size\"\n        :has-irremovable-mask=\"state.hasIrremovableMask\"\n      >\n        <template #default=\"{ close }\">\n          <AppModalHeader :close=\"close\" :hide-close-button=\"state.hideCloseButton\">\n            <AppModalTitle>\n              {{ state.title }}\n            </AppModalTitle>\n            <AppModalDescription>\n              {{ state.content }}\n            </AppModalDescription>\n          </AppModalHeader>\n          <AppModalContent>\n            {{ state.content }}\n          </AppModalContent>\n          <AppModalFooter>\n            <div class=\"flex justify-end gap-2\">\n              <AppButton variant=\"ghost\" @click=\"close\">\n                Cancel\n              </AppButton>\n              <AppButton @click=\"close\">\n                Confirm\n              </AppButton>\n            </div>\n          </AppModalFooter>\n        </template>\n      </AppModal>\n    </Variant>\n  </Story>\n</template>\n"
       }
@@ -285,7 +285,7 @@
       {
         "name": "AppPopover.vue",
         "dir": "./src/components/app/popover",
-        "placementDir": "app/popover",
+        "placementDir": "popover",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport type { FloatProps } from '@headlessui-float/vue'\nimport { Float } from '@headlessui-float/vue'\nimport { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'\nimport { popoverTransition } from '@/transitions'\n\nexport interface Props {\n  placement?: FloatProps['placement']\n\n  hasAdaptiveWidth?: FloatProps['adaptiveWidth']\n  hasNoOffset?: boolean\n  hasNoShift?: boolean\n  hasNoFlip?: boolean\n  hasAutoPlacement?: boolean\n}\n\nconst {\n  placement = 'bottom',\n\n  hasAdaptiveWidth = false,\n  hasAutoPlacement = false,\n  hasNoFlip = false,\n  hasNoOffset = false,\n  hasNoShift = false,\n} = defineProps<Props>()\n\nconst SHIFT_VALUE = 8\nconst OFFSET_VALUE = 4\nconst FLIP_VALUE = 8\n</script>\n\n<template>\n  <Popover>\n    <Float\n      :placement=\"placement\"\n      :adaptive-width=\"hasAdaptiveWidth\"\n      :auto-placement=\"hasAutoPlacement\"\n\n      :flip=\"hasNoFlip ? undefined : FLIP_VALUE\"\n      :shift=\"hasNoShift ? undefined : SHIFT_VALUE\"\n      :offset=\"hasNoOffset ? undefined : OFFSET_VALUE\"\n\n      portal\n      v-bind=\"popoverTransition\"\n      tailwindcss-origin-class\n    >\n      <PopoverButton as=\"div\" class=\"max-w-max\">\n        <slot name=\"activator\" />\n      </PopoverButton>\n\n      <PopoverPanel\n        v-slot=\"{ close }\"\n        class=\"rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow\"\n      >\n        <slot name=\"panel\" :close=\"close\" />\n      </PopoverPanel>\n    </Float>\n  </Popover>\n</template>\n"
       }
@@ -302,14 +302,14 @@
       {
         "name": "AppText.vue",
         "dir": "./src/components/app/text",
-        "placementDir": "app/text",
+        "placementDir": "text",
         "type": "components",
         "content": "<script setup lang=\"ts\">\nimport { useAttrs } from 'vue'\nimport { textVariants } from '@/components/app/text/appText.style'\nimport type { TextProps } from '@/components/app/text/appText.style'\n\ntype TextType = 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'blockquote'\n\ninterface Props {\n  variant?: TextProps['variant']\n  boldness?: TextProps['boldness']\n  numberOfLines?: TextProps['truncate']\n  as?: TextType\n}\n\nconst {\n  variant = 'body',\n  numberOfLines,\n  boldness,\n  as = 'p',\n} = defineProps<Props>()\n\nconst attrs = useAttrs()\n</script>\n\n<template>\n  <Component :is=\"as\" :class=\"textVariants({ variant, boldness, truncate: numberOfLines, class: attrs?.class as string })\">\n    <slot />\n  </Component>\n</template>\n"
       },
       {
         "name": "appText.style.ts",
         "dir": "./src/components/app/text",
-        "placementDir": "app/text",
+        "placementDir": "text",
         "type": "components",
         "content": "import type { VariantProps } from '@/utils/tailwind/cva'\nimport { cva } from '@/utils/tailwind/cva'\n\nexport const variantOptions = {\n  hero: 'text-hero',\n  title: 'text-title',\n  subtitle: 'text-subtitle',\n  heading: 'text-heading',\n  body: 'text-body',\n  subtext: 'text-subtext',\n  caption: 'text-caption',\n}\n\nexport const boldnessOptions = {\n  bold: 'font-bold',\n  normal: 'font-normal',\n  light: 'font-light',\n  thin: 'font-thin',\n  extrabold: 'font-extrabold',\n  semibold: 'font-semibold',\n  none: null,\n}\n\nexport const truncateOptions = {\n  1: 'line-clamp-1',\n  2: 'line-clamp-2',\n  3: 'line-clamp-3',\n  4: 'line-clamp-4',\n  5: 'line-clamp-5',\n  6: 'line-clamp-6',\n}\n\nexport const textVariants = cva(\n  {\n    base: null,\n    variants: {\n      variant: variantOptions,\n      boldness: boldnessOptions,\n      truncate: truncateOptions,\n    },\n    defaultVariants: {\n      variant: 'body',\n      boldness: 'none',\n      truncate: undefined,\n    },\n  },\n)\n\nexport type TextProps = VariantProps<typeof textVariants>\n\nexport const textVariantOptions = Object.keys(variantOptions)\nexport const textBoldnessOptions = Object.keys(boldnessOptions)\nexport const textTruncateOptions = Object.keys(truncateOptions)\n"
       }

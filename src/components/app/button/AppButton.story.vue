@@ -11,8 +11,8 @@ interface State {
   isLoading: boolean
   size: ButtonProps['size']
   variant: ButtonProps['variant']
-  prefixIcon?: Icon
-  subfixIcon?: Icon
+  iconLeft?: Icon
+  iconRight?: Icon
   content: string
 }
 
@@ -21,8 +21,8 @@ const state: State = reactive({
   isLoading: false,
   size: 'default',
   variant: 'default',
-  prefixIcon: undefined,
-  subfixIcon: undefined,
+  iconLeft: undefined,
+  iconRight: undefined,
   content: 'Click me',
 })
 </script>
@@ -37,8 +37,8 @@ const state: State = reactive({
         <HstCheckbox v-model="state.isLoading" title="Loading" />
         <HstSelect v-model="state.size" title="Size" :options="buttonSizeOptions" />
         <HstSelect v-model="state.variant" title="Variant" :options="buttonVariantOptions" />
-        <HstSelect v-model="state.prefixIcon" title="Front Icon" :options="['none', ...iconNames]" />
-        <HstSelect v-model="state.subfixIcon" title="Back Icon" :options="['none', ...iconNames]" />
+        <HstSelect v-model="state.iconLeft" title="Front Icon" :options="['none', ...iconNames]" />
+        <HstSelect v-model="state.iconRight" title="Back Icon" :options="['none', ...iconNames]" />
         <HstText v-model="state.content" title="Text" />
       </template>
 
