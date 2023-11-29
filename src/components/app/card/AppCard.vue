@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AppText from '../text/AppText.vue'
+
 interface Props {
   content?: string
   title?: string

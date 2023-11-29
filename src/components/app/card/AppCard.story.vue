@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
 import Image from '@/assets/test-image.jpg'
+import AppButton from '@/components/app/button/AppButton.vue'
+import AppCard from '@/components/app/card/AppCard.vue'
 
 interface State {
   title?: string

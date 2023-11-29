@@ -1,5 +1,6 @@
 {
   "prettier.enable": false,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "i18n-ally.localesPaths": [
     "src/locales"
   ],
