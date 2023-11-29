@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import Image from '@/assets/test-image.jpg'
-import AppButton from '@/components/app/button/AppButton.vue'
 import AppCard from '@/components/app/card/AppCard.vue'
+import AppButton from '@/components/app/button/AppButton.vue'
+import AppCardHeaderImage from '@/components/app/card/AppCardHeaderImage.vue'
+import AppCardHeader from '@/components/app/card/AppCardHeader.vue'
+import AppCardTitle from '@/components/app/card/AppCardTitle.vue'
+import AppCardDescription from '@/components/app/card/AppCardDescription.vue'
+import AppCardContent from '@/components/app/card/AppCardContent.vue'
+import AppCardFooter from '@/components/app/card/AppCardFooter.vue'
 
 interface State {
   title?: string
   subtitle?: string
   content?: string
   footer?: string
-  headerImage?: string
+  headerImage: string
 
   hasFooterButton?: boolean
   hasHeaderImage?: boolean
@@ -23,10 +29,7 @@ const state = reactive<State>({
   title: 'Modal title',
   subtitle: 'Modal subtitle',
   content: 'Modal content',
-  footer: 'Modal footer',
   headerImage: Image,
-
-  hasFooterButton: true,
   hasHeaderImage: true,
   hasContent: true,
   hasFooter: true,
@@ -50,27 +53,27 @@ const state = reactive<State>({
         <HstCheckbox v-model="state.hasHeaderImage" title="Has header image" />
         <HstCheckbox v-model="state.hasContent" title="Has content" />
         <HstCheckbox v-model="state.hasFooter" title="Has footer" />
-        <HstCheckbox v-model="state.hasFooterButton" title="Has footer button" />
-        <HstCheckbox v-model="state.isCustom" title="Is custom" />
       </template>
 
       <div class="w-96 p-12">
-        <AppCard
-          :header-image="state.hasHeaderImage ? state.headerImage : undefined"
-          :title="state.hasHeader ? state.title : undefined"
-          :subtitle="state.hasHeader ? state.subtitle : undefined"
-          :footer="state.hasFooter ? state.footer : undefined"
-          :content="state.hasContent ? state.content : undefined"
-        >
-          <template v-if="state.hasFooterButton" #footer>
+        <AppCard>
+          <AppCardHeaderImage v-if="state.hasHeaderImage" :src="state.headerImage" />
+          <AppCardHeader v-if="state.hasHeader">
+            <AppCardTitle>
+              {{ state.title }}
+            </AppCardTitle>
+            <AppCardDescription>
+              {{ state.subtitle }}
+            </AppCardDescription>
+          </AppCardHeader>
+          <AppCardContent v-if="state.hasContent">
+            <p>{{ state.content }}</p>
+          </AppCardContent>
+          <AppCardFooter v-if="state.hasFooter">
             <AppButton class="w-full">
               Button
             </AppButton>
-          </template>
-
-          <p v-if="state.isCustom">
-            This is a custom card slot
-          </p>
+          </AppCardFooter>
         </AppCard>
       </div>
     </Variant>
