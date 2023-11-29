@@ -8,14 +8,9 @@ export const sizeOptions = {
   lg: 'w-[120ch]',
 }
 
-export const loaderVariantOptions = {
-  white: 'bg-white',
-  primary: 'bg-primary',
-}
-
 export const modalVariants = cva(
   {
-    base: 'flex flex-col gap-4 rounded-modal bg-white p-6 text-left',
+    base: 'flex flex-col rounded-modal bg-popover text-left text-popover-foreground shadow-modal-shadow',
     variants: {
       size: sizeOptions,
     },

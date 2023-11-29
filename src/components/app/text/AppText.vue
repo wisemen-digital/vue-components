@@ -13,7 +13,7 @@ interface Props {
 }
 
 const {
-  variant = 'p',
+  variant = 'body',
   numberOfLines,
   boldness,
   as = 'p',

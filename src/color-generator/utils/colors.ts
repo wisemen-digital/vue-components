@@ -1,4 +1,4 @@
-export function mapCssVariableToHsl({ name, value }: { name: string; value: string }): { name: string; value: string } {
+export function mapCssVariableToHsl({ name, value }: { name: string, value: string }): { name: string, value: string } {
   const cssVariableArray = value.split(' ')
   const hue = cssVariableArray[0]
   const saturation = cssVariableArray[1]
@@ -41,7 +41,7 @@ function getHslValues(hsl: string): {
   }
 }
 
-export function mapHslToHex({ name, value }: { name: string; value: string }): { name: string; value: string } {
+export function mapHslToHex({ name, value }: { name: string, value: string }): { name: string, value: string } {
   const { h, s, l } = getHslValues(value)
   const hex = hslToHex(h, s, l)
   return {

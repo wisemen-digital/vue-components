@@ -1,26 +1,26 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
     "jsx": "preserve",
-    "sourceMap": false,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipDefaultLibCheck": true,
     "lib": [
       "esnext",
       "dom"
     ],
+    "useDefineForClassFields": true,
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
-    "baseUrl": ".",
-    "allowJs": false
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "strict": true,
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true
   },
   "include": [
     "components.d.ts",

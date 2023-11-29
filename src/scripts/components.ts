@@ -1,6 +1,7 @@
 import { appButton } from './components/app/appButton'
 import { appModal } from './components/app/appModal'
 import { appText } from './components/app/appText'
+import { appCard } from './components/app/appCard'
 import { appPopover } from './components/app/appPopover'
 import { appIcon } from './components/app/appIcon'
 
@@ -15,6 +16,7 @@ export const components: Component[] = [
   appButton,
   appModal,
   appText,
+  appCard,
   appPopover,
   appIcon,
 
