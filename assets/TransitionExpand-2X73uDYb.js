@@ -1,6 +1,5 @@
-import { as as defineComponent, be as useCssVars, a_ as computed, av as openBlock, aw as createBlock, ax as withCtx, aN as renderSlot, aW as Transition } from "./vendor-d13bc8dc.js";
-import { _ as _export_sfc } from "./cva-cc64827e.js";
-const TransitionExpand_vue_vue_type_style_index_0_scoped_a5b2af37_lang = "";
+import { au as defineComponent, bg as useCssVars, b0 as computed, ax as openBlock, ay as createBlock, az as withCtx, aQ as renderSlot, aY as Transition } from "./vendor-dC_up0ZP.js";
+import { _ as _export_sfc } from "./cva-buL8-oqa.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "TransitionExpand",
   props: {
@@ -8,10 +7,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { expose: __expose }) {
     __expose();
-    const props = __props;
     useCssVars((_ctx) => ({
       "a5b2af37-durationString": durationString.value
     }));
+    const props = __props;
     const durationString = computed(() => `${props.duration}s`);
     function enter(element) {
       const htmlElement = element;

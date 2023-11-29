@@ -1,5 +1,5 @@
-import { as as defineComponent, aX as useAttrs, av as openBlock, aw as createBlock, ax as withCtx, aN as renderSlot, aM as normalizeClass, aY as resolveDynamicComponent } from "./vendor-d13bc8dc.js";
-import { c as cva, _ as _export_sfc } from "./cva-cc64827e.js";
+import { au as defineComponent, aZ as useAttrs, ax as openBlock, ay as createBlock, az as withCtx, aQ as renderSlot, aO as normalizeClass, a_ as resolveDynamicComponent } from "./vendor-dC_up0ZP.js";
+import { c as cva, _ as _export_sfc } from "./cva-buL8-oqa.js";
 const variantOptions = {
   hero: "text-hero",
   title: "text-title",
@@ -47,7 +47,7 @@ const textTruncateOptions = Object.keys(truncateOptions);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "AppText",
   props: {
-    variant: { type: null, required: false, default: "p" },
+    variant: { type: null, required: false, default: "body" },
     boldness: { type: null, required: false },
     numberOfLines: { type: null, required: false },
     as: { type: String, required: false, default: "p" }

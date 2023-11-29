@@ -1,8 +1,9 @@
-import { a as useRoute, c as computed, d as defineComponent, u as useCssVars, g as unref, a1 as toRefs, r as ref, o as openBlock, b as createElementBlock, e as createVNode, w as withCtx, I as Icon, n as normalizeClass, f as createBaseVNode, t as toDisplayString, i as defineStore, j as useStorage, a2 as unindent, x as resolveDirective, y as withDirectives, a3 as useRouter, a4 as useResizeObserver, l as resolveComponent, q as createBlock, a5 as nm, h as createCommentVNode, G as normalizeStyle, a6 as withModifiers, A as pushScopeId, B as popScopeId, k as watch, a7 as renderSlot, m as withKeys, z as createTextVNode, F as Fragment, p as renderList, J as onMounted, a8 as vModelText, a9 as onUnmounted, aa as VTooltip, ab as createStaticVNode, s as useEventListener, E as reactive, P as applyState, ac as toRaw, $ as mergeProps, ad as Dropdown, ae as clone, af as omit, ag as useTimeoutFn, ah as onClickOutside, v as isRef, ai as nextTick, aj as om, ak as Ug, al as Yg, am as Jg, a0 as resolveDynamicComponent, _ as __vitePreload, Z as watchEffect, Y as markRaw, an as shallowRef, ao as getHighlighter, T as Transition, O as h, ap as onBeforeUnmount } from "./vendor-d13bc8dc.js";
-import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, a as useStoryStore, i as isMobile, c as BaseSplitPane, b as _sfc_main$y } from "./MobileOverlay.vue2-278413cb.js";
-import { B as BaseEmpty } from "./BaseEmpty.vue-5a3cf4ca.js";
-import { g as getContrastColor, _ as _sfc_main$x, b as SANDBOX_READY, E as EVENT_SEND, S as STATE_SYNC, t as toRawDeep, P as PREVIEW_SETTINGS_SYNC } from "./state-65fc7219.js";
-import { b as clientSupportPlugins, d as base, h as histoireConfig, i as isDark } from "./GenericMountStory.vue2-1392145a.js";
+import { a as useRoute, c as computed, d as defineComponent, u as useCssVars, f as unref, a1 as toRefs, r as ref, o as openBlock, b as createElementBlock, e as createVNode, w as withCtx, I as Icon, n as normalizeClass, t as toDisplayString, g as createBaseVNode, i as defineStore, j as useStorage, a4 as unindent, x as resolveDirective, y as withDirectives, a5 as useRouter, a6 as useResizeObserver, l as resolveComponent, q as createBlock, a7 as Am, h as createCommentVNode, G as normalizeStyle, a8 as withModifiers, A as pushScopeId, B as popScopeId, k as watch, a9 as renderSlot, m as withKeys, z as createTextVNode, F as Fragment, p as renderList, J as onMounted, aa as vModelText, ab as onUnmounted, ac as VTooltip, ad as createStaticVNode, s as useEventListener, E as reactive, P as applyState, ae as toRaw, $ as mergeProps, af as Dropdown, ag as clone, ah as omit, ai as useTimeoutFn, aj as onClickOutside, v as isRef, ak as nextTick, al as Mm, am as gm, an as ym, ao as wm, a0 as resolveDynamicComponent, _ as __vitePreload, Z as watchEffect, Y as markRaw, ap as shallowRef, aq as getHighlighter, T as Transition, O as h, ar as onBeforeUnmount } from "./vendor-dC_up0ZP.js";
+import { u as useStoryStore } from "./story-Dje1OvOq.js";
+import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, i as isMobile, b as BaseSplitPane, a as _sfc_main$y } from "./MobileOverlay.vue2-fNANBSiT.js";
+import { B as BaseEmpty } from "./BaseEmpty.vue-MRiH1N3g.js";
+import { g as getContrastColor, _ as _sfc_main$x, b as SANDBOX_READY, E as EVENT_SEND, S as STATE_SYNC, t as toRawDeep, P as PREVIEW_SETTINGS_SYNC } from "./state-YzCZNbQ7.js";
+import { b as clientSupportPlugins, d as base, h as histoireConfig, i as isDark } from "./GenericMountStory.vue2-tfFuwpud.js";
 function useCurrentVariantRoute(variant) {
   const route = useRoute();
   const isActive = computed(() => route.query.variantId === variant.value.id);
@@ -28,10 +29,10 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     }
   },
   setup(__props) {
-    const props = __props;
     useCssVars((_ctx) => ({
       "89126aaa": unref(variant).iconColor
     }));
+    const props = __props;
     const { variant } = toRefs(props);
     const { isActive, targetRoute } = useCurrentVariantRoute(variant);
     const el = ref();
@@ -196,12 +197,13 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     resize: (width, height) => true
   },
-  setup(__props, { emit }) {
-    const props = __props;
+  setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
       "29d8c174": unref(variant).iconColor,
       "0eff7465": unref(settings).backgroundColor
     }));
+    const props = __props;
+    const emit = __emit;
     const { variant } = toRefs(props);
     const { isActive, targetRoute } = useCurrentVariantRoute(variant);
     Object.assign(props.variant, {
@@ -260,7 +262,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
             [_directive_tooltip, unref(variant).title]
           ]),
           createBaseVNode("div", _hoisted_3$d, [
-            createVNode(unref(nm), {
+            createVNode(unref(Am), {
               content: () => unref(getSourceCode)(__props.story, unref(variant))
             }, null, 8, ["content"]),
             createVNode(_sfc_main$v, {
@@ -327,8 +329,9 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     "update:modelValue": (newValue) => true
   },
-  setup(__props, { emit }) {
+  setup(__props, { emit: __emit }) {
     const props = __props;
+    const emit = __emit;
     function toggle() {
       emit("update:modelValue", !props.modelValue);
       animationEnabled.value = true;
@@ -788,10 +791,10 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     variant: {}
   },
   setup(__props) {
-    const props = __props;
     useCssVars((_ctx) => ({
       "03d1950e": unref(settings).backgroundColor
     }));
+    const props = __props;
     const settings = usePreviewSettingsStore().currentSettings;
     const resizing = ref(false);
     const onUnmountedCleanupFns = [];
@@ -1367,8 +1370,9 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     options: {}
   },
   emits: ["update:modelValue", "select"],
-  setup(__props, { emit }) {
+  setup(__props, { emit: __emit }) {
     const props = __props;
+    const emit = __emit;
     const formattedOptions = computed(() => {
       if (Array.isArray(props.options)) {
         return Object.fromEntries(props.options.map((value) => [value, value]));
@@ -1621,14 +1625,14 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
       var _a;
       switch ((_a = props.definition.types) == null ? void 0 : _a[0]) {
         case "string":
-          return Jg;
+          return wm;
         case "number":
-          return Yg;
+          return ym;
         case "boolean":
-          return Ug;
+          return gm;
         case "object":
         default:
-          return om;
+          return Mm;
       }
     });
     const model = computed({
@@ -1783,7 +1787,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const markdownFiles = reactive({ "docs/Introduction.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-introduction-story-md-33b42a9a.js"), true ? [] : void 0), "docs/contributing/Changeset.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-contributing-changeset-story-md-047e394a.js"), true ? [] : void 0), "docs/contributing/Components.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-contributing-components-story-md-24db4a1e.js"), true ? [] : void 0), "docs/contributing/Registering.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-contributing-registering-story-md-7f4dc2e1.js"), true ? [] : void 0) });
+const markdownFiles = reactive({ "docs/Introduction.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-introduction-story-md-uZdXoEV6.js"), true ? __vite__mapDeps([]) : void 0), "docs/contributing/Changeset.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-contributing-changeset-story-md-0zi4wCV_.js"), true ? __vite__mapDeps([]) : void 0), "docs/contributing/Components.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-contributing-components-story-md-31ut-NW2.js"), true ? __vite__mapDeps([]) : void 0), "docs/contributing/Registering.story.md": () => __vitePreload(() => import("./__resolved__virtual_md_docs-contributing-registering-story-md-GztFd5c7.js"), true ? __vite__mapDeps([]) : void 0) });
 const _hoisted_1$9 = ["innerHTML"];
 function useStoryDoc(story) {
   const renderedDoc = ref("");
@@ -1830,8 +1834,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     }
   },
   emits: ["scroll-top"],
-  setup(__props, { emit }) {
+  setup(__props, { emit: __emit }) {
     const props = __props;
+    const emit = __emit;
     const { story } = toRefs(props);
     const { renderedDoc } = useStoryDoc(story);
     const router = useRouter();
@@ -2187,7 +2192,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
               [_directive_tooltip, !staticSourceCode.value ? "Static source code is not available" : displayedSource.value !== "static" ? "Switch to static source" : null]
             ])
           ]),
-          createVNode(unref(nm), {
+          createVNode(unref(Am), {
             content: displayedSourceCode.value,
             class: "htw-flex-none"
           }, null, 8, ["content"])
@@ -2674,3 +2679,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 export {
   _sfc_main as default
 };
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = []
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}

@@ -1,8 +1,7 @@
-import { d as defineComponent, u as useCssVars, c as computed, a as useRoute, r as ref, o as openBlock, b as createElementBlock, e as createVNode, w as withCtx, f as createBaseVNode, g as unref, I as Icon, n as normalizeClass, t as toDisplayString, h as createCommentVNode, i as defineStore, j as useStorage, k as watch, l as resolveComponent, m as withKeys, F as Fragment, p as renderList, q as createBlock, s as useEventListener, v as isRef, x as resolveDirective, y as withDirectives, z as createTextVNode, A as pushScopeId, B as popScopeId, C as defineAsyncComponent, D as vShow, _ as __vitePreload, E as reactive, G as normalizeStyle, T as Transition, H as useTitle, J as onMounted, K as createApp, L as createPinia, M as plugin } from "./vendor-d13bc8dc.js";
-import { i as isDark, h as histoireConfig, c as customLogos, t as toggleDark, r as router, f as files, m as mapFile, a as tree, _ as _sfc_main$c } from "./GenericMountStory.vue2-1392145a.js";
-import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, a as useStoryStore, b as _sfc_main$b, i as isMobile, c as BaseSplitPane } from "./MobileOverlay.vue2-278413cb.js";
-const style = "";
-const __resolved__virtual_$histoireTheme = "";
+import { d as defineComponent, u as useCssVars, c as computed, a as useRoute, r as ref, o as openBlock, b as createElementBlock, e as createVNode, w as withCtx, I as Icon, f as unref, n as normalizeClass, t as toDisplayString, g as createBaseVNode, h as createCommentVNode, i as defineStore, j as useStorage, k as watch, l as resolveComponent, m as withKeys, F as Fragment, p as renderList, q as createBlock, s as useEventListener, v as isRef, x as resolveDirective, y as withDirectives, z as createTextVNode, A as pushScopeId, B as popScopeId, C as vShow, D as defineAsyncComponent, _ as __vitePreload, E as reactive, G as normalizeStyle, T as Transition, H as useTitle, J as onMounted, K as createApp, L as createPinia, M as plugin } from "./vendor-dC_up0ZP.js";
+import { i as isDark, h as histoireConfig, c as customLogos, t as toggleDark, r as router, f as files, m as mapFile, a as tree, _ as _sfc_main$c } from "./GenericMountStory.vue2-tfFuwpud.js";
+import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, a as _sfc_main$b, i as isMobile, b as BaseSplitPane } from "./MobileOverlay.vue2-fNANBSiT.js";
+import { u as useStoryStore } from "./story-Dje1OvOq.js";
 const _hoisted_1$a = { class: "bind-tree-margin htw-flex htw-items-center htw-gap-2 htw-pl-4 htw-min-w-0" };
 const _hoisted_2$6 = { class: "htw-truncate" };
 const _hoisted_3$5 = {
@@ -16,11 +15,11 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     depth: { default: 0 }
   },
   setup(__props) {
-    const props = __props;
     useCssVars((_ctx) => ({
       "444efc12": filePadding.value,
       "ae892164": _ctx.story.iconColor
     }));
+    const props = __props;
     const filePadding = computed(() => {
       return props.depth * 12 + "px";
     });
@@ -128,10 +127,10 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     depth: { default: 0 }
   },
   setup(__props) {
-    const props = __props;
     useCssVars((_ctx) => ({
       "6851b0a7": folderPadding.value
     }));
+    const props = __props;
     const folderStore = useFolderStore();
     const folderPath = computed(() => [...props.path, props.folder.title]);
     const isFolderOpen = computed(() => folderStore.isFolderOpened(folderPath.value));
@@ -607,12 +606,13 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   emits: {
     close: () => true
   },
-  setup(__props, { emit }) {
+  setup(__props, { emit: __emit }) {
     const SearchPane = defineAsyncComponent({
-      loader: () => __vitePreload(() => import("./SearchPane.vue-69a648c7.js"), true ? ["assets/SearchPane.vue-69a648c7.js","assets/vendor-d13bc8dc.js","assets/MobileOverlay.vue2-278413cb.js","assets/GenericMountStory.vue2-1392145a.js","assets/BaseEmpty.vue-5a3cf4ca.js"] : void 0),
+      loader: () => __vitePreload(() => import("./SearchPane.vue-VDYDbfoL.js"), true ? __vite__mapDeps([0,1,2,3,4,5]) : void 0),
       loadingComponent: _sfc_main$3,
       delay: 0
     });
+    const emit = __emit;
     function close() {
       emit("close");
     }
@@ -820,3 +820,9 @@ export {
   onKeyboardShortcut as o,
   useCommandStore as u
 };
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = ["assets/SearchPane.vue-VDYDbfoL.js","assets/vendor-dC_up0ZP.js","assets/story-Dje1OvOq.js","assets/GenericMountStory.vue2-tfFuwpud.js","assets/BaseEmpty.vue-MRiH1N3g.js","assets/MobileOverlay.vue2-fNANBSiT.js"]
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}

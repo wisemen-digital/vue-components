@@ -1,8 +1,8 @@
-import { as as defineComponent, aF as mergeModels, aG as useModel, aH as Ue, aI as Ge, aJ as Ve, aK as he, aL as Se, av as openBlock, aw as createBlock, ax as withCtx, ay as createVNode, az as createBaseVNode, aM as normalizeClass, aN as renderSlot, aO as createCommentVNode, aC as createTextVNode, aD as toDisplayString, at as reactive, au as resolveComponent, aE as mergeProps } from "./vendor-d13bc8dc.js";
-import { A as AppButton } from "./AppButton-9c2affdf.js";
-import { A as AppText } from "./AppText-42e2f3da.js";
-import { A as AppIcon, i as iconNames } from "./AppIcon-5b9b744d.js";
-import { c as cva, _ as _export_sfc } from "./cva-cc64827e.js";
+import { au as defineComponent, aH as mergeModels, aI as useModel, aJ as _e, aK as Ye, aL as ze, aM as he, aN as Se, ax as openBlock, ay as createBlock, az as withCtx, aA as createVNode, aO as normalizeClass, aP as createCommentVNode, aQ as renderSlot, aF as toDisplayString, aE as createTextVNode, aB as createBaseVNode, av as reactive, aw as resolveComponent, aG as mergeProps } from "./vendor-dC_up0ZP.js";
+import { A as AppButton } from "./AppButton-aX8bNIjx.js";
+import { A as AppText } from "./AppText-ZY8J2na1.js";
+import { A as AppIcon, i as iconNames } from "./AppIcon-wqAnmqIA.js";
+import { c as cva, _ as _export_sfc } from "./cva-buL8-oqa.js";
 const sizeOptions = {
   default: "w-[80ch] ",
   sm: "w-[60ch]",
@@ -47,11 +47,11 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
         isOpen.value = false;
     }
     const __returned__ = { isOpen, handleClickOutside, handleClickCloseButton, get Dialog() {
-      return Ue;
+      return _e;
     }, get DialogPanel() {
-      return Ge;
+      return Ye;
     }, get DialogTitle() {
-      return Ve;
+      return ze;
     }, get TransitionChild() {
       return he;
     }, get TransitionRoot() {

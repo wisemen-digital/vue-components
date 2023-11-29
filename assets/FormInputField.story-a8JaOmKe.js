@@ -1,7 +1,7 @@
-import { as as defineComponent, av as openBlock, aT as createElementBlock, aN as renderSlot, aC as createTextVNode, aD as toDisplayString, aZ as inject, a_ as computed, a$ as ref, b0 as watch, b1 as onMounted, b2 as onUnmounted, aF as mergeModels, b3 as useSlots, aG as useModel, b4 as useClipboard, aO as createCommentVNode, az as createBaseVNode, aM as normalizeClass, b5 as withDirectives, b6 as vModelDynamic, ay as createVNode, ax as withCtx, aw as createBlock, at as reactive, au as resolveComponent, aE as mergeProps } from "./vendor-d13bc8dc.js";
-import { _ as _export_sfc, c as cva } from "./cva-cc64827e.js";
-import { A as AppIcon, i as iconNames } from "./AppIcon-5b9b744d.js";
-import { T as TransitionExpand } from "./TransitionExpand-65d49bc4.js";
+import { au as defineComponent, ax as openBlock, aV as createElementBlock, aQ as renderSlot, aE as createTextVNode, aF as toDisplayString, a$ as inject, b0 as computed, b1 as ref, b2 as watch, b3 as onMounted, b4 as onUnmounted, aH as mergeModels, b5 as useSlots, aI as useModel, b6 as useClipboard, aP as createCommentVNode, aB as createBaseVNode, aO as normalizeClass, b7 as withDirectives, b8 as vModelDynamic, aA as createVNode, az as withCtx, ay as createBlock, av as reactive, aw as resolveComponent, aG as mergeProps } from "./vendor-dC_up0ZP.js";
+import { _ as _export_sfc, c as cva } from "./cva-buL8-oqa.js";
+import { A as AppIcon, i as iconNames } from "./AppIcon-wqAnmqIA.js";
+import { T as TransitionExpand } from "./TransitionExpand-2X73uDYb.js";
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "FormError",
   props: {
@@ -160,8 +160,9 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     "modelValue": {}
   }),
   emits: mergeModels(["blur"], ["update:modelValue"]),
-  setup(__props, { expose: __expose, emit: emits }) {
+  setup(__props, { expose: __expose, emit: __emit }) {
     __expose();
+    const emits = __emit;
     const slots = useSlots();
     const model = useModel(__props, "modelValue");
     const uuid = generateUuid();

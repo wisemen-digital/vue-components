@@ -1,4 +1,4 @@
-import { bf as extendTailwindMerge, bg as defineConfig } from "./vendor-d13bc8dc.js";
+import { bh as extendTailwindMerge, bi as defineConfig } from "./vendor-dC_up0ZP.js";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -7,8 +7,10 @@ const _export_sfc = (sfc, props) => {
   return target;
 };
 const twMerge = extendTailwindMerge({
-  classGroups: {
-    "font-size": [{ text: ["subtext", "caption", "hero", "title", "subtitle", "heading", "body"] }]
+  extend: {
+    classGroups: {
+      "font-size": [{ text: ["subtext", "caption", "hero", "title", "subtitle", "heading", "body"] }]
+    }
   }
 });
 const { cva, cx, compose } = defineConfig({

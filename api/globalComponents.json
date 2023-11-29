@@ -175,7 +175,7 @@
         "dir": "./src/utils/tailwind",
         "placementDir": "tailwind",
         "type": "utils",
-        "content": "import { extendTailwindMerge } from 'tailwind-merge'\n\nexport const twMerge = extendTailwindMerge({\n  classGroups: {\n    'font-size': [{ text: ['subtext', 'caption', 'hero', 'title', 'subtitle', 'heading', 'body'] }],\n  },\n})\n"
+        "content": "import { extendTailwindMerge } from 'tailwind-merge'\n\nexport const twMerge = extendTailwindMerge({\n  extend: {\n    classGroups: {\n      'font-size': [{ text: ['subtext', 'caption', 'hero', 'title', 'subtitle', 'heading', 'body'] }],\n    },\n  },\n})\n"
       }
     ]
   },

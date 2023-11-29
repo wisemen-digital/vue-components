@@ -1,6 +1,6 @@
 const __resolved__virtual_storySource_tailwind = `import 'histoire-style'
 import './style.css'
-import { createApp, h, markRaw, ref } from "/home/runner/work/vue-components/vue-components/node_modules/.pnpm/histoire@0.17.0_@types+node@20.6.0_sass@1.66.1_vite@4.4.9/node_modules/histoire/dist/node/vendors/vue.js"
+import { createApp, h, markRaw, ref } from "/home/runner/work/vue-components/vue-components/node_modules/.pnpm/histoire@0.17.6_@types+node@20.10.0_sass@1.69.5_vite@5.0.3/node_modules/histoire/dist/node/vendors/vue.js"
 import {
   HstColorShades,
   HstTokenList,
@@ -8,7 +8,7 @@ import {
   HstText,
   HstTextarea,
   HstNumber,
-} from "/home/runner/work/vue-components/vue-components/node_modules/.pnpm/histoire@0.17.0_@types+node@20.6.0_sass@1.66.1_vite@4.4.9/node_modules/histoire/dist/node/vendors/controls.js"
+} from "/home/runner/work/vue-components/vue-components/node_modules/.pnpm/histoire@0.17.6_@types+node@20.10.0_sass@1.69.5_vite@5.0.3/node_modules/histoire/dist/node/vendors/controls.js"
 
 const config = markRaw({
   "theme": {

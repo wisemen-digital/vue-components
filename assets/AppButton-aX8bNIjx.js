@@ -1,13 +1,12 @@
-import { as as defineComponent, av as openBlock, aT as createElementBlock, aO as createCommentVNode, ay as createVNode, ax as withCtx, az as createBaseVNode, aU as Fragment, aV as renderList, aA as normalizeProps, aB as guardReactiveProps, aW as Transition, aN as renderSlot, aM as normalizeClass, aw as createBlock } from "./vendor-d13bc8dc.js";
-import { A as AppIcon } from "./AppIcon-5b9b744d.js";
-import { _ as _export_sfc, c as cva } from "./cva-cc64827e.js";
+import { au as defineComponent, ax as openBlock, aV as createElementBlock, aP as createCommentVNode, aA as createVNode, az as withCtx, aW as Fragment, aB as createBaseVNode, aX as renderList, aC as normalizeProps, aD as guardReactiveProps, aY as Transition, aQ as renderSlot, aO as normalizeClass, ay as createBlock } from "./vendor-dC_up0ZP.js";
+import { A as AppIcon } from "./AppIcon-wqAnmqIA.js";
+import { _ as _export_sfc, c as cva } from "./cva-buL8-oqa.js";
 const fadeTransition = {
   enterActiveClass: "transition-opacity ease duration-300",
   leaveActiveClass: "transition-opacity ease duration-300",
   enterFromClass: "opacity-0",
   leaveToClass: "opacity-0"
 };
-const AppButtonLoader_vue_vue_type_style_index_0_scoped_9d806c6b_lang = "";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "AppButtonLoader",
   props: {
@@ -113,8 +112,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     suffixIcon: { type: null, required: false }
   },
   emits: ["component:click"],
-  setup(__props, { expose: __expose, emit: emits }) {
+  setup(__props, { expose: __expose, emit: __emit }) {
     __expose();
+    const emits = __emit;
     function handleClick() {
       if (!__props.isDisabled && !__props.isLoading)
         emits("component:click");

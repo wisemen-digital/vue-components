@@ -1,5 +1,4 @@
-import { d as defineComponent, l as resolveComponent, o as openBlock, q as createBlock, w as withCtx, f as createBaseVNode, n as normalizeClass, m as withKeys, a7 as renderSlot, $ as mergeProps, k as watch, aq as scrollIntoView, J as onMounted, i as defineStore, r as ref, c as computed, a9 as onUnmounted, b as createElementBlock, a6 as withModifiers, G as normalizeStyle, ar as useMediaQuery, t as toDisplayString, e as createVNode, g as unref, I as Icon, h as createCommentVNode, T as Transition } from "./vendor-d13bc8dc.js";
-import { r as router } from "./GenericMountStory.vue2-1392145a.js";
+import { d as defineComponent, l as resolveComponent, o as openBlock, q as createBlock, w as withCtx, n as normalizeClass, m as withKeys, a9 as renderSlot, g as createBaseVNode, $ as mergeProps, k as watch, as as scrollIntoView, J as onMounted, r as ref, c as computed, ab as onUnmounted, b as createElementBlock, a8 as withModifiers, G as normalizeStyle, at as useMediaQuery, t as toDisplayString, I as Icon, f as unref, e as createVNode, h as createCommentVNode, T as Transition } from "./vendor-dC_up0ZP.js";
 const _sfc_main$2 = defineComponent({
   inheritAttrs: false,
   props: {
@@ -79,45 +78,6 @@ function useScrollOnActive(active, el) {
     autoScroll
   };
 }
-const useStoryStore = defineStore("story", () => {
-  const stories = ref([]);
-  function setStories(value) {
-    stories.value = value;
-  }
-  const currentStory = computed(() => stories.value.find((s) => s.id === router.currentRoute.value.params.storyId));
-  const currentVariant = computed(() => {
-    var _a;
-    return (_a = currentStory.value) == null ? void 0 : _a.variants.find((v) => v.id === router.currentRoute.value.query.variantId);
-  });
-  const maps = computed(() => {
-    const storyMap = /* @__PURE__ */ new Map();
-    const variantMap = /* @__PURE__ */ new Map();
-    for (const story of stories.value) {
-      storyMap.set(story.id, story);
-      for (const variant of story.variants) {
-        variantMap.set(`${story.id}:${variant.id}`, variant);
-      }
-    }
-    return {
-      stories: storyMap,
-      variants: variantMap
-    };
-  });
-  function getStoryById(id) {
-    return maps.value.stories.get(id);
-  }
-  function getVariantById(idWithStoryId) {
-    return maps.value.variants.get(idWithStoryId);
-  }
-  return {
-    stories,
-    setStories,
-    currentStory,
-    currentVariant,
-    getStoryById,
-    getVariantById
-  };
-});
 const _hoisted_1$1 = ["onMousedown"];
 const SAVE_PREFIX = "__histoire";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
@@ -162,8 +122,9 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     "update:split": (value) => true
   },
-  setup(__props, { emit }) {
+  setup(__props, { emit: __emit }) {
     const props = __props;
+    const emit = __emit;
     const currentSplit = ref(props.defaultSplit);
     watch(() => props.split, (value) => {
       if (value !== void 0) {
@@ -312,7 +273,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     opened: { type: Boolean }
   },
   emits: ["close"],
-  setup(__props, { emit }) {
+  setup(__props, { emit: __emit }) {
+    const emit = __emit;
     return (_ctx, _cache) => {
       return openBlock(), createBlock(Transition, { name: "__histoire-fade-bottom" }, {
         default: withCtx(() => [
@@ -340,9 +302,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 export {
   BaseListItemLink as B,
   _export_sfc as _,
-  useStoryStore as a,
-  _sfc_main as b,
-  BaseSplitPane as c,
+  _sfc_main as a,
+  BaseSplitPane as b,
   isMobile as i,
   useScrollOnActive as u
 };
