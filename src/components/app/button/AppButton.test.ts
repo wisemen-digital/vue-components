@@ -1,8 +1,9 @@
 import { cleanup, fireEvent, render } from '@testing-library/vue'
-import AppButton from './AppButton.vue'
+import { describe, expect, it } from 'vitest'
+import AppButton from '@/components/app/button/AppButton.vue'
 
-describe('AppButton click events', () => {
-  it('AppButton emits component:click', async () => {
+describe('appButton click events', () => {
+  it('appButton emits component:click', async () => {
     const button = render(AppButton)
     const clickable = await button.findByRole('button')
     await fireEvent.click(clickable)
@@ -10,7 +11,7 @@ describe('AppButton click events', () => {
     cleanup()
   })
 
-  it('AppButton doesnt emit component:click when disabled', async () => {
+  it('appButton doesnt emit component:click when disabled', async () => {
     const button = render(AppButton, {
       props: {
         isDisabled: true,
@@ -22,7 +23,7 @@ describe('AppButton click events', () => {
     cleanup()
   })
 
-  it('AppButton doesnt emit component:click when loading', async () => {
+  it('appButton doesnt emit component:click when loading', async () => {
     const button = render(AppButton, {
       props: {
         isLoading: true,

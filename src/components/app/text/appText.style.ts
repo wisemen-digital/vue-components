@@ -1,5 +1,5 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
+import type { VariantProps } from '@/utils/tailwind/cva'
+import { cva } from '@/utils/tailwind/cva'
 
 export const variantOptions = {
   hero: 'text-hero',
@@ -18,7 +18,7 @@ export const boldnessOptions = {
   thin: 'font-thin',
   extrabold: 'font-extrabold',
   semibold: 'font-semibold',
-  none: '',
+  none: null,
 }
 
 export const truncateOptions = {
@@ -31,8 +31,8 @@ export const truncateOptions = {
 }
 
 export const textVariants = cva(
-  '',
   {
+    base: null,
     variants: {
       variant: variantOptions,
       boldness: boldnessOptions,

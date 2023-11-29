@@ -1,7 +1,7 @@
 import { inject } from 'vue'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
-export type Option = Ref<{ id: string; element: HTMLElement | undefined; propsRef: { value: number; disabled: boolean } }>
+export type Option = Ref<{ id: string, element: HTMLElement | undefined, propsRef: { value: number, disabled: boolean } }>
 
 export interface FormInputGroupStateDefinition {
   // State
@@ -22,7 +22,7 @@ export interface FormInputGroupStateDefinition {
 
 export const FormInputGroupContext = Symbol('FormGroupContext') as InjectionKey<FormInputGroupStateDefinition>
 
-export const useFormInputGroupContext = (): FormInputGroupStateDefinition | null => {
+export function useFormInputGroupContext(): FormInputGroupStateDefinition | null {
   const context = inject(FormInputGroupContext, null)
   return context
 }

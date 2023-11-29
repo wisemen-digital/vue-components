@@ -10,9 +10,9 @@
 
 ### Add components to project using the following commands
 ```
-npx wisemen-frontend-cli init
-npx wisemen-frontend-cli add
-npx wisemen-frontend-cli add all
+npx @wisemen/vue-cli init
+npx @wisemen/vue-cli add
+npx @wisemen/vue-cli add all
 ```
 
 Init installs global dependencies and components such as your tailwind config, transitions and icons.\
@@ -73,7 +73,6 @@ export const appButton = {
     },
   ],
   internalDependencies: [ComponentName.TRANSITIONS, ComponentName.APP_ICON],
-  dependencies: ['class-variance-authority'],
 }
 ```
 

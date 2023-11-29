@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { twMerge } from 'tailwind-merge'
-import { textVariants } from '@/components/app/text/appTextVariants'
-import type { TextProps } from '@/components/app/text/appTextVariants'
+import { useAttrs } from 'vue'
+import { textVariants } from '@/components/app/text/appText.style'
+import type { TextProps } from '@/components/app/text/appText.style'
 
 type TextType = 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'blockquote'
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const {
-  variant = 'p',
+  variant = 'body',
   numberOfLines,
   boldness,
   as = 'p',
@@ -23,7 +23,7 @@ const attrs = useAttrs()
 </script>
 
 <template>
-  <Component :is="as" :class="twMerge(textVariants({ variant, boldness, truncate: numberOfLines }), attrs?.class as string)">
+  <Component :is="as" :class="textVariants({ variant, boldness, truncate: numberOfLines, class: attrs?.class as string })">
     <slot />
   </Component>
 </template>

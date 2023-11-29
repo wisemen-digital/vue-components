@@ -7,7 +7,7 @@ export const globalPackages = {
   dependencies: [
     'tailwindcss',
     '@appwise/forms',
-    'class-variance-authority',
+    'cva',
     'tailwind-merge',
     'zod',
   ],

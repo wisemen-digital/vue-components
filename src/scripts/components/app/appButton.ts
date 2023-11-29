@@ -11,7 +11,7 @@ export const appButton = {
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/components/app/button/appButtonVariants.ts',
+      path: './src/components/app/button/appButton.style.ts',
       folder: 'app/button',
     },
     {
@@ -21,5 +21,4 @@ export const appButton = {
     },
   ],
   internalDependencies: [],
-  dependencies: ['class-variance-authority'],
 }

@@ -11,7 +11,7 @@ export const formInputField = {
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/components/form/field/formInputFieldVariants.ts',
+      path: './src/components/form/field/formInputField.style.ts',
       folder: 'form/field',
     },
   ],
