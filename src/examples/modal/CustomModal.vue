@@ -15,7 +15,7 @@ const emits = defineEmits<{
   confirm: []
 }>()
 
-const isOpen = defineModel('isOpen')
+const isOpen = defineModel<boolean>('isOpen', { required: true })
 </script>
 
 <template>
