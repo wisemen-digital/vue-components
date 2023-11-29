@@ -28,6 +28,70 @@
     "internalDependencies": []
   },
   {
+    "component": "AppCard",
+    "name": "Card",
+    "files": [
+      {
+        "name": "AppCard.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n\ninterface Props {\n  content?: string\n  title?: string\n  subtitle?: string\n  footer?: string\n  headerImage?: string\n}\n\ndefineProps<Props>()\n\ndefineSlots<{\n  content?: () => any\n  header?: () => any\n  default?: () => any\n  footer?: () => any\n  headerImage?: () => any\n}>()\n</script>\n\n<template>\n  <section\n    class=\"\n    flex flex-col overflow-hidden\n    rounded-card border bg-card\n    text-card-foreground shadow-card-shadow\n    transition-shadow duration-300\n    hover:shadow-card-hover-shadow\n    focus:shadow-card-hover-shadow\"\n  >\n    <slot>\n      <slot name=\"headerImage\">\n        <img\n          v-if=\"headerImage\"\n          :src=\"headerImage\"\n          class=\"h-48 w-full object-cover\"\n        >\n      </slot>\n      <div class=\"flex flex-col gap-4 p-4\">\n        <slot name=\"header\">\n          <div v-if=\"title || subtitle\">\n            <AppText\n              v-if=\"title\"\n              boldness=\"semibold\"\n              variant=\"heading\"\n            >\n              {{ title }}\n            </AppText>\n            <AppText\n              v-if=\"subtitle\"\n              class=\"text-muted-foreground\"\n            >\n              {{ subtitle }}\n            </AppText>\n          </div>\n        </slot>\n        <slot name=\"content\">\n          <AppText v-if=\"content\">\n            {{ content }}\n          </AppText>\n        </slot>\n        <slot name=\"footer\">\n          <AppText v-if=\"footer\">\n            {{ footer }}\n          </AppText>\n        </slot>\n      </div>\n    </slot>\n  </section>\n</template>\n"
+      },
+      {
+        "name": "AppCardContent.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col gap-1 p-4 pt-0', props.class)\">\n    <slot />\n  </div>\n</template>\n"
+      },
+      {
+        "name": "AppCardDescription.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n</script>\n\n<template>\n  <AppText\n    class=\"text-muted-foreground\"\n  >\n    <slot />\n  </AppText>\n</template>\n"
+      },
+      {
+        "name": "AppCardFooter.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col gap-1 p-4 pt-0', props.class)\">\n    <slot />\n  </div>\n</template>\n"
+      },
+      {
+        "name": "AppCardHeader.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  class?: string\n}>()\n</script>\n\n<template>\n  <div :class=\"twMerge('flex flex-col p-4', props.class)\">\n    <slot />\n  </div>\n</template>\n"
+      },
+      {
+        "name": "AppCardHeaderImage.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { twMerge } from '@/utils//tailwind/twMerge'\n\nconst props = defineProps<{\n  src: string\n  class?: string\n}>()\n</script>\n\n<template>\n  <img\n    :src=\"src\"\n    :class=\"twMerge('h-48 w-full object-cover', props.class)\"\n  >\n</template>\n"
+      },
+      {
+        "name": "AppCardTitle.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport AppText from '@/components/app/text/AppText.vue'\n</script>\n\n<template>\n  <AppText\n    boldness=\"semibold\"\n    variant=\"heading\"\n  >\n    <slot />\n  </AppText>\n</template>\n"
+      },
+      {
+        "name": "AppCard.story.vue",
+        "dir": "./src/components/app/card",
+        "placementDir": "app/card",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { reactive } from 'vue'\nimport Image from '@/assets/test-image.jpg'\nimport AppCard from '@/components/app/card/AppCard.vue'\nimport AppButton from '@/components/app/button/AppButton.vue'\nimport AppCardHeaderImage from '@/components/app/card/AppCardHeaderImage.vue'\nimport AppCardHeader from '@/components/app/card/AppCardHeader.vue'\nimport AppCardTitle from '@/components/app/card/AppCardTitle.vue'\nimport AppCardDescription from '@/components/app/card/AppCardDescription.vue'\nimport AppCardContent from '@/components/app/card/AppCardContent.vue'\nimport AppCardFooter from '@/components/app/card/AppCardFooter.vue'\n\ninterface State {\n  title?: string\n  subtitle?: string\n  content?: string\n  footer?: string\n  headerImage: string\n\n  hasFooterButton?: boolean\n  hasHeaderImage?: boolean\n  hasHeader?: boolean\n  hasFooter?: boolean\n  hasContent?: boolean\n  isCustom?: boolean\n}\n\nconst state = reactive<State>({\n  title: 'Modal title',\n  subtitle: 'Modal subtitle',\n  content: 'Modal content',\n  headerImage: Image,\n  hasHeaderImage: true,\n  hasContent: true,\n  hasFooter: true,\n  hasHeader: true,\n  isCustom: false,\n})\n</script>\n\n<template>\n  <Story\n    title=\"App/Card/AppCard\"\n  >\n    <Variant title=\"Default\" auto-props-disabled>\n      <template #controls>\n        <HstText v-model=\"state.title\" title=\"Title\" />\n        <HstText v-model=\"state.subtitle\" title=\"Subtitle\" />\n        <HstText v-model=\"state.footer\" title=\"Footer\" />\n        <HstTextarea v-model=\"state.content\" title=\"Content\" />\n\n        <HstCheckbox v-model=\"state.hasHeader\" title=\"Has header\" />\n        <HstCheckbox v-model=\"state.hasHeaderImage\" title=\"Has header image\" />\n        <HstCheckbox v-model=\"state.hasContent\" title=\"Has content\" />\n        <HstCheckbox v-model=\"state.hasFooter\" title=\"Has footer\" />\n      </template>\n\n      <div class=\"w-96 p-12\">\n        <AppCard>\n          <AppCardHeaderImage v-if=\"state.hasHeaderImage\" :src=\"state.headerImage\" />\n          <AppCardHeader v-if=\"state.hasHeader\">\n            <AppCardTitle>\n              {{ state.title }}\n            </AppCardTitle>\n            <AppCardDescription>\n              {{ state.subtitle }}\n            </AppCardDescription>\n          </AppCardHeader>\n          <AppCardContent v-if=\"state.hasContent\">\n            <p>{{ state.content }}</p>\n          </AppCardContent>\n          <AppCardFooter v-if=\"state.hasFooter\">\n            <AppButton class=\"w-full\">\n              Button\n            </AppButton>\n          </AppCardFooter>\n        </AppCard>\n      </div>\n    </Variant>\n  </Story>\n</template>\n"
+      }
+    ],
+    "internalDependencies": [],
+    "dependencies": []
+  },
+  {
     "component": "FormError",
     "name": "FormError",
     "files": [
