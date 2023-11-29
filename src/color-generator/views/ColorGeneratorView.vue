@@ -119,7 +119,7 @@ function handleCssUpload(event: Event): void {
           <FormInputField v-model="cssVariable.value" />
         </div>
       </div>
-      <AppButton @component:click="handleDownloadCss">
+      <AppButton @click="handleDownloadCss">
         Download CSS
       </AppButton>
     </div>

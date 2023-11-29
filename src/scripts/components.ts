@@ -26,5 +26,4 @@ export const components: Component[] = [
   appLoader,
 
   appHeightTransition,
-  utilsGenerateUuid,
 ]
