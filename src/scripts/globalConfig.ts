@@ -1,5 +1,5 @@
-import { tailwindConfig } from './components/config/tailwindConfig'
-import { globalPackages } from './components/config/globalPackages'
+import { tailwindConfig } from './files/config/tailwindConfig'
+import { globalPackages } from './files/config/globalPackages'
 
 import type { Component } from './componentsTypes'
 

@@ -144,11 +144,18 @@
         "content": "<template>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n    <path\n      fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\"\n      d=\"m15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z\"\n    />\n  </svg>\n</template>\n"
       },
       {
+        "name": "WarningIcon.vue",
+        "dir": "./src/icons",
+        "placementDir": "",
+        "type": "icons",
+        "content": "<template>\n  <svg fill=\"none\" shape-rendering=\"geometricPrecision\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\">\n    <path d=\"M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z\" fill=\"var(--geist-fill)\" />\n    <path d=\"M12 9v4\" stroke=\"var(--geist-stroke)\" /><path d=\"M12 17h.01\" stroke=\"var(--geist-stroke)\" />\n  </svg>\n</template>\n"
+      },
+      {
         "name": "iconCollection.ts",
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "export { default as CheckmarkIcon } from '@/icons/CheckmarkIcon.vue'\nexport { default as ChevronDownIcon } from '@/icons/ChevronDownIcon.vue'\nexport { default as ChevronLeftIcon } from '@/icons/ChevronLeftIcon.vue'\nexport { default as ChevronRightIcon } from '@/icons/ChevronRightIcon.vue'\nexport { default as ChevronUpIcon } from '@/icons/ChevronUpIcon.vue'\nexport { default as CloseIcon } from '@/icons/CloseIcon.vue'\nexport { default as DownloadIcon } from '@/icons/DownloadIcon.vue'\nexport { default as EditIcon } from '@/icons/EditIcon.vue'\nexport { default as EyeIcon } from '@/icons/EyeIcon.vue'\nexport { default as EyeSlashIcon } from '@/icons/EyeSlashIcon.vue'\nexport { default as FilterIcon } from '@/icons/FilterIcon.vue'\nexport { default as InfoIcon } from '@/icons/InfoIcon.vue'\nexport { default as MinusIcon } from '@/icons/MinusIcon.vue'\nexport { default as PlusIcon } from '@/icons/PlusIcon.vue'\nexport { default as SearchIcon } from '@/icons/SearchIcon.vue'\nexport { default as SortIcon } from '@/icons/SortIcon.vue'\nexport { default as SortAscendingIcon } from '@/icons/SortAscendingIcon.vue'\nexport { default as SortDescendingIcon } from '@/icons/SortDescendingIcon.vue'\nexport { default as ThreeDotsIcon } from '@/icons/ThreeDotsIcon.vue'\nexport { default as UploadIcon } from '@/icons/UploadIcon.vue'\n"
+        "content": "export { default as CheckmarkIcon } from '@/icons/CheckmarkIcon.vue'\nexport { default as ChevronDownIcon } from '@/icons/ChevronDownIcon.vue'\nexport { default as ChevronLeftIcon } from '@/icons/ChevronLeftIcon.vue'\nexport { default as ChevronRightIcon } from '@/icons/ChevronRightIcon.vue'\nexport { default as ChevronUpIcon } from '@/icons/ChevronUpIcon.vue'\nexport { default as CloseIcon } from '@/icons/CloseIcon.vue'\nexport { default as DownloadIcon } from '@/icons/DownloadIcon.vue'\nexport { default as EditIcon } from '@/icons/EditIcon.vue'\nexport { default as EyeIcon } from '@/icons/EyeIcon.vue'\nexport { default as EyeSlashIcon } from '@/icons/EyeSlashIcon.vue'\nexport { default as FilterIcon } from '@/icons/FilterIcon.vue'\nexport { default as InfoIcon } from '@/icons/InfoIcon.vue'\nexport { default as MinusIcon } from '@/icons/MinusIcon.vue'\nexport { default as PlusIcon } from '@/icons/PlusIcon.vue'\nexport { default as SearchIcon } from '@/icons/SearchIcon.vue'\nexport { default as SortIcon } from '@/icons/SortIcon.vue'\nexport { default as SortAscendingIcon } from '@/icons/SortAscendingIcon.vue'\nexport { default as SortDescendingIcon } from '@/icons/SortDescendingIcon.vue'\nexport { default as ThreeDotsIcon } from '@/icons/ThreeDotsIcon.vue'\nexport { default as UploadIcon } from '@/icons/UploadIcon.vue'\nexport { default as WarningIcon } from '@/icons/WarningIcon.vue'\n"
       },
       {
         "name": "index.ts",

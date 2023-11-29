@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import AppCard from '@/components/app/card/AppCard.vue'
-import AppCardHeader from '@/components/app/card/AppCardHeader.vue'
-import AppCardTitle from '@/components/app/card/AppCardTitle.vue'
-import AppCardDescription from '@/components/app/card/AppCardDescription.vue'
-import AppCardContent from '@/components/app/card/AppCardContent.vue'
-import AppCardFooter from '@/components/app/card/AppCardFooter.vue'
-import AppCardHeaderImage from '@/components/app/card/AppCardHeaderImage.vue'
+import AppCard from '@/components/card/AppCard.vue'
+import AppCardHeader from '@/components/card/AppCardHeader.vue'
+import AppCardTitle from '@/components/card/AppCardTitle.vue'
+import AppCardDescription from '@/components/card/AppCardDescription.vue'
+import AppCardContent from '@/components/card/AppCardContent.vue'
+import AppCardFooter from '@/components/card/AppCardFooter.vue'
+import AppCardHeaderImage from '@/components/card/AppCardHeaderImage.vue'
 import Image from '@/assets/test-image.jpg'
 </script>
 

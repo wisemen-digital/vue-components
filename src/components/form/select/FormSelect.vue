@@ -11,7 +11,7 @@ import { Float } from '@headlessui-float/vue'
 import { useI18n } from 'vue-i18n'
 import FormSelectOption from '@/components/form/select/FormSelectOption.vue'
 import { scaleBounceTransition } from '@/transitions'
-import TransitionExpand from '@/components/app/transitions/TransitionExpand.vue'
+import AppHeightTransition from '@/components/transitions/AppHeightTransition.vue'
 
 interface Props {
   hasSearch?: boolean
@@ -115,7 +115,7 @@ const isEmpty = computed<boolean>(() => {
 
         <ComboboxOptions class="rounded bg-card p-2">
           <slot name="items" :items="items" :is-empty="isEmpty">
-            <TransitionExpand>
+            <AppHeightTransition>
               <div v-if="isLoading">
                 {{ t('labels.loading') }}
               </div>
@@ -150,7 +150,7 @@ const isEmpty = computed<boolean>(() => {
                   </slot>
                 </ComboboxOption>
               </div>
-            </TransitionExpand>
+            </AppHeightTransition>
           </slot>
         </ComboboxOptions>
       </Float>
