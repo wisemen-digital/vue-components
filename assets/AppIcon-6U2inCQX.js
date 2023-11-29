@@ -542,7 +542,7 @@ function _sfc_render$1(_ctx, _cache) {
 }
 _sfc_main$1.__file = "src/icons/UploadIcon.vue";
 const UploadIcon = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "/home/runner/work/vue-components/vue-components/src/icons/UploadIcon.vue"]]);
-const allIcons = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const iconCollection = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   CheckmarkIcon,
   ChevronDownIcon,
@@ -569,9 +569,9 @@ function convertIconName(iconName) {
   const name = iconName.replace("Icon", "");
   return name.charAt(0).toLowerCase() + name.slice(1);
 }
-const iconNames = Object.keys(allIcons).map(convertIconName);
-const iconComponents = Object.keys(allIcons).reduce((acc, key) => {
-  const iconComponent = allIcons[key];
+const iconNames = Object.keys(iconCollection).map(convertIconName);
+const iconComponents = Object.keys(iconCollection).reduce((acc, key) => {
+  const iconComponent = iconCollection[key];
   return {
     ...acc,
     [convertIconName(key)]: iconComponent

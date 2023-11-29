@@ -1,5 +1,5 @@
 import { au as defineComponent, ax as openBlock, aG as createElementBlock, aI as createCommentVNode, aA as createVNode, az as withCtx, aY as Fragment, aB as createBaseVNode, aZ as renderList, aC as normalizeProps, aD as guardReactiveProps, a_ as Transition, aH as renderSlot, aJ as normalizeClass, ay as createBlock } from "./vendor-tZ123Fjd.js";
-import { A as AppIcon } from "./AppIcon-SYHRmxf5.js";
+import { A as AppIcon } from "./AppIcon-6U2inCQX.js";
 import { _ as _export_sfc, c as cva } from "./cva-5nzO3gv_.js";
 const fadeTransition = {
   enterActiveClass: "transition-opacity ease duration-300",

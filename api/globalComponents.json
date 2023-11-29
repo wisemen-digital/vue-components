@@ -144,7 +144,7 @@
         "content": "<template>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n    <path\n      fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\"\n      d=\"m15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z\"\n    />\n  </svg>\n</template>\n"
       },
       {
-        "name": "icons.ts",
+        "name": "iconCollection.ts",
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
@@ -155,7 +155,7 @@
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "import * as allIcons from '@/icons/icons'\n\nfunction convertIconName(iconName: string): Icon {\n  const name = iconName.replace('Icon', '')\n  return name.charAt(0).toLowerCase() + name.slice(1) as Icon\n}\n\nexport const iconNames = Object.keys(allIcons)\n  .map(convertIconName)\n\nexport const iconComponents = Object.keys(allIcons).reduce((acc, key) => {\n  const iconComponent = allIcons[key as keyof typeof allIcons]\n  return {\n    ...acc,\n    [convertIconName(key)]: iconComponent,\n  }\n}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)\n\nexport type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never\nexport type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>\n\nexport const icons = iconComponents\n"
+        "content": "import * as iconCollection from '@/icons/iconCollection'\n\nfunction convertIconName(iconName: string): Icon {\n  const name = iconName.replace('Icon', '')\n  return name.charAt(0).toLowerCase() + name.slice(1) as Icon\n}\n\nexport const iconNames = Object.keys(iconCollection)\n  .map(convertIconName)\n\nexport const iconComponents = Object.keys(iconCollection).reduce((acc, key) => {\n  const iconComponent = iconCollection[key as keyof typeof iconCollection]\n  return {\n    ...acc,\n    [convertIconName(key)]: iconComponent,\n  }\n}, {} as Record<Icon, typeof iconCollection[keyof typeof iconCollection]>)\n\nexport type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never\nexport type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof iconCollection>>\n\nexport const icons = iconComponents\n"
       }
     ]
   },
