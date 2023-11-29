@@ -27,7 +27,8 @@ export function useFormInputGroup({ model, uuid, isDisabled, element }: UseFormI
   }
 
   watch(
-    () => model.value, (value) => {
+    () => model.value,
+    (value) => {
       if (!value)
         return
       change(value)
