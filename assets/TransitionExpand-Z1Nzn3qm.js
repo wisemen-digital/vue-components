@@ -1,5 +1,5 @@
-import { au as defineComponent, bg as useCssVars, b0 as computed, ax as openBlock, ay as createBlock, az as withCtx, aQ as renderSlot, aY as Transition } from "./vendor-dC_up0ZP.js";
-import { _ as _export_sfc } from "./cva-buL8-oqa.js";
+import { au as defineComponent, bh as useCssVars, b1 as computed, ax as openBlock, ay as createBlock, az as withCtx, aQ as renderSlot, a_ as Transition } from "./vendor-1hHDFphO.js";
+import { _ as _export_sfc } from "./cva-Sxt47TAL.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "TransitionExpand",
   props: {

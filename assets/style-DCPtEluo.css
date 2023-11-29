@@ -3715,7 +3715,7 @@ video {
   }
 }
 .transition-scale-bounce {
-    transition: cubic-bezier(.8, .16, 0, 1.3) 0.5s transform, 0.2s opacity
+    transition: cubic-bezier(.57, .27, .11, 1.48) 0.25s transform, 0.2s opacity
   }
 .fixed {
   position: fixed;
@@ -3744,9 +3744,6 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-.mt-4 {
-  margin-top: 1rem;
 }
 .line-clamp-1 {
   overflow: hidden;
@@ -3909,6 +3906,10 @@ video {
   --tw-translate-x: 2rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+.translate-y-20 {
+  --tw-translate-y: 5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
 .scale-0 {
   --tw-scale-x: 0;
   --tw-scale-y: 0;
@@ -3931,20 +3932,23 @@ video {
 .place-items-center {
   place-items: center;
 }
-.items-start {
-  align-items: flex-start;
-}
 .items-center {
   align-items: center;
 }
 .justify-start {
   justify-content: flex-start;
 }
+.justify-end {
+  justify-content: flex-end;
+}
 .justify-center {
   justify-content: center;
 }
 .justify-between {
   justify-content: space-between;
+}
+.gap-1 {
+  gap: 0.25rem;
 }
 .gap-2 {
   gap: 0.5rem;
@@ -3954,9 +3958,6 @@ video {
 }
 .gap-4 {
   gap: 1rem;
-}
-.gap-8 {
-  gap: 2rem;
 }
 .overflow-hidden {
   overflow: hidden;
@@ -4056,9 +4057,6 @@ video {
 .p-4 {
   padding: 1rem;
 }
-.p-6 {
-  padding: 1.5rem;
-}
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -4094,6 +4092,9 @@ video {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+.pt-0 {
+  padding-top: 0px;
 }
 .text-left {
   text-align: left;
@@ -4192,6 +4193,11 @@ video {
 .opacity-60 {
   opacity: 0.6;
 }
+.shadow-modal-shadow {
+  --tw-shadow: var(--shadow-modal);;
+  --tw-shadow-colored: var(--shadow-modal);;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .shadow-popover-shadow {
   --tw-shadow: var(--shadow-popover);;
   --tw-shadow-colored: var(--shadow-popover);;
@@ -4238,9 +4244,6 @@ video {
 .duration-500 {
   transition-duration: 500ms;
 }
-.ease-\[cubic-bezier\(\.8\2c _\.16\2c _0\2c _1\.3\)\] {
-  transition-timing-function: cubic-bezier(.8, .16, 0, 1.3);
-}
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
@@ -4252,6 +4255,11 @@ video {
 }
 
 /* Cant do this in tailwind, so I define it here */
+@media (min-width: 768px) {
+  .md\:transition-scale-bounce {
+    transition: cubic-bezier(.57, .27, .11, 1.48) 0.25s transform, 0.2s opacity
+  }
+}
 .placeholder\:transition-all::-moz-placeholder {
   -moz-transition-property: all;
   transition-property: all;
@@ -4305,6 +4313,17 @@ video {
   opacity: 0.5;
 }
 @media (min-width: 768px) {
+
+  .md\:translate-y-0 {
+    --tw-translate-y: 0px;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .md\:scale-95 {
+    --tw-scale-x: .95;
+    --tw-scale-y: .95;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
 
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
