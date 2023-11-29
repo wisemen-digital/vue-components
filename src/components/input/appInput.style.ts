@@ -20,7 +20,7 @@ export const inputWrapper = cva({
 })
 
 export const input = cva({
-  base: 'h-full w-full truncate bg-transparent px-3 py-2 text-subtext text-input-foreground outline-none placeholder:text-input-foreground/50 disabled:cursor-not-allowed',
+  base: 'h-full w-full truncate bg-transparent px-3 py-2 text-subtext text-input-foreground outline-none placeholder:text-input-foreground/50 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0 disabled:cursor-not-allowed',
 })
 
 export const inputIcon = cva({

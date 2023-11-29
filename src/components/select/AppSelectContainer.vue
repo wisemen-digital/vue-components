@@ -4,13 +4,14 @@ import {
   Combobox,
 } from '@headlessui/vue'
 import { Float } from '@headlessui-float/vue'
-import { scaleBounceTransition } from '@/transitions'
-import { useProvideFormSelectContext } from '@/composables/form/select/useFormSelectContext'
+import { popoverTransition, scaleBounceTransition } from '@/transitions'
+import { useProvideAppSelectContext } from '@/composables/select/useAppSelectContext'
 
 interface Props {
   displayFunction?: (value: T) => string
   keyValue?: keyof T
   items: T[]
+  isDisabled?: boolean
 }
 
 const {
@@ -18,12 +19,16 @@ const {
   displayFunction = (value: T): string => {
     return String(value)
   },
+  isDisabled = false,
 } = defineProps<Props>()
 
+const emits = defineEmits<{
+  hide: []
+  show: []
+}>()
 const model = defineModel<TModel>('modelValue', { required: true })
 const isMultiple = computed<boolean>(() => Array.isArray(model.value))
 const search = ref<string>('')
-
 function getDisplayValue(value: T | T[] | undefined): string {
   if (value === undefined)
     return ''
@@ -41,24 +46,32 @@ const filteredItems = computed(() => {
   })
 })
 
-useProvideFormSelectContext({
+useProvideAppSelectContext({
   value: model,
   search,
   getDisplayValue,
 })
+
+function onHide(): void {
+  emits('hide')
+}
+
+function onShow(): void {
+  emits('show')
+}
 </script>
 
 <template>
   <!-- eslint-disable vue/no-extra-parens -->
   <!-- eslint-disable vue/valid-v-model -->
-
   <div class="text-left">
     <Combobox
       v-model="(model as any)"
+      :disabled="isDisabled"
       immediate
       :multiple="isMultiple"
     >
-      <Float placement="bottom-start" adaptive-width :offset="4" flip v-bind="scaleBounceTransition">
+      <Float placement="bottom-start" adaptive-width :offset="4" flip v-bind="popoverTransition" @hide="onHide" @show="onShow">
         <slot :items="filteredItems" />
       </Float>
     </Combobox>

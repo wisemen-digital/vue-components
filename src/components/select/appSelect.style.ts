@@ -8,15 +8,13 @@ export const variantOptions = {
 
 export const active = {
   true: 'bg-secondary text-secondary-foreground bg-secondary/80',
-  false: null,
 }
 
 export const selected = {
   true: 'text-primary underline-offset-4 underline hover:bg-secondary/80',
-  false: null,
 }
 
-export const formSelectOptionVariants = cva(
+export const AppSelectOptionVariants = cva(
   {
     base: 'flex w-full gap-2 rounded border border-transparent bg-white px-2 py-1 text-left text-black transition-all',
     variants: {
@@ -26,11 +24,9 @@ export const formSelectOptionVariants = cva(
     },
     defaultVariants: {
       variant: 'default',
-      active: false,
-      selected: false,
     },
   },
 )
 
-export type FormSelectOptionProps = VariantProps<typeof formSelectOptionVariants>
-export const formSelectOptionVariantOptions = Object.keys(variantOptions)
+export type AppSelectOptionProps = VariantProps<typeof AppSelectOptionVariants>
+export const AppSelectOptionVariantOptions = Object.keys(variantOptions)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import FormSelect from '@/components/form/select/FormSelect.vue'
+import AppSelect from '@/components/select/AppSelect.vue'
 
 const people = [
   'Durward Reynolds',
@@ -26,7 +26,7 @@ const state: State = {
 </script>
 
 <template>
-  <Story title="Forms/Input/Select">
+  <Story title="Select/AppSelect">
     <Variant title="Default">
       <template #controls>
         <HstCheckbox v-model="state.hasSearch" title="Search" />
@@ -35,7 +35,7 @@ const state: State = {
       </template>
 
       <div class="flex flex-col justify-start gap-20 py-20">
-        <FormSelect v-model="selectedPerson" :items="people" :display-function="(person: string) => person" class="w-80" />
+        <AppSelect v-model="selectedPerson" :items="people" :display-function="(person: string) => person" class="w-80" />
       </div>
     </Variant>
   </Story>

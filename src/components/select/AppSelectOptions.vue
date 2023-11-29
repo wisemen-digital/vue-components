@@ -3,7 +3,7 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from '@headlessui/vue'
-import TransitionExpand from '@/components/app/transitions/TransitionExpand.vue'
+import AppHeightTransition from '@/components/transitions/AppHeightTransition.vue'
 
 interface Props {
   items: T[]
@@ -14,7 +14,7 @@ defineProps<Props>()
 <template>
   <!-- eslint-disable vue/no-extra-parens -->
   <ComboboxOptions class="rounded bg-card p-2">
-    <TransitionExpand>
+    <AppHeightTransition>
       <div>
         <ComboboxOption
           v-for="(item, index) in items" v-slot="{ active, selected, disabled }" :key="index"
@@ -23,6 +23,6 @@ defineProps<Props>()
           <slot :item="item" :active="active" :selected="selected" :disabled="disabled" />
         </ComboboxOption>
       </div>
-    </TransitionExpand>
+    </AppHeightTransition>
   </ComboboxOptions>
 </template>
