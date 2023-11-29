@@ -1,5 +1,18 @@
 [
   {
+    "component": "UtilsGenerateUuid",
+    "name": "GenerateUuid",
+    "files": [
+      {
+        "name": "generateUuid.ts",
+        "dir": "./src/utils/uuid",
+        "placementDir": "uuid",
+        "type": "utils",
+        "content": "export function generateUuid(): string { // Public Domain/MIT\n  let d = new Date().getTime()// Timestamp\n  let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0// Time in microseconds since page-load or 0 if unsupported\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {\n    let r = Math.random() * 16// random number between 0 and 16\n    if (d > 0) { // Use timestamp until depleted\n      r = (d + r) % 16 | 0\n      d = Math.floor(d / 16)\n    }\n    else { // Use microseconds since page-load if supported\n      r = (d2 + r) % 16 | 0\n      d2 = Math.floor(d2 / 16)\n    }\n    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16)\n  })\n}\n"
+      }
+    ]
+  },
+  {
     "component": "Icons",
     "name": "Icons",
     "files": [

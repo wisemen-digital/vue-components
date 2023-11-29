@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import AppButton from '@/components/button/AppButton.vue'
-import { buttonSizeOptions, buttonVariantOptions } from '@/components/button/appButton.style'
-import type { ButtonProps } from '@/components/button/appButton.style'
 import { iconNames } from '@/icons'
 import type { Icon } from '@/icons'
 import AppInput from '@/components/input/AppInput.vue'

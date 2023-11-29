@@ -11,7 +11,6 @@ import { appHeightTransition } from './files/transitions/appHeightTransition'
 import { appLoader } from './files/components/appLoader'
 
 import type { Component } from './componentsTypes'
-import { utilsGenerateUuid } from './files/utils/utilsGenerateUuid'
 
 export const components: Component[] = [
   appButton,
