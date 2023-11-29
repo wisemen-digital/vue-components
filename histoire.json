@@ -1,7 +1,30 @@
 {
   "stories": [
     {
-      "id": "src-components-app-button-appbutton-story-vue",
+      "id": "src-color-generator-views-colorgenerator-story-vue",
+      "title": "Color Generator",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/color-generator/views/ColorGenerator.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Color Generator"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-button-appbutton-story-vue",
       "title": "AppButton",
       "layout": {
         "type": "grid",
@@ -10,15 +33,14 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-components-app-button-appbutton-story-vue-0",
+          "id": "src-components-button-appbutton-story-vue-0",
           "title": "Default"
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/components/app/button/AppButton.story.vue",
+      "relativePath": "src/components/button/AppButton.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "App",
         "Buttons",
         "AppButton"
       ],
@@ -26,7 +48,7 @@
       "markdownFile": null
     },
     {
-      "id": "src-components-app-card-appcard-story-vue",
+      "id": "src-components-card-appcard-story-vue",
       "title": "AppCard",
       "layout": {
         "type": "grid",
@@ -35,15 +57,14 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-components-app-card-appcard-story-vue-0",
+          "id": "src-components-card-appcard-story-vue-0",
           "title": "Default"
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/components/app/card/AppCard.story.vue",
+      "relativePath": "src/components/card/AppCard.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "App",
         "Card",
         "AppCard"
       ],
@@ -51,7 +72,7 @@
       "markdownFile": null
     },
     {
-      "id": "src-components-app-icon-appicon-story-vue",
+      "id": "src-components-icon-appicon-story-vue",
       "title": "AppIcon",
       "layout": {
         "type": "grid",
@@ -60,15 +81,14 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-components-app-icon-appicon-story-vue-0",
+          "id": "src-components-icon-appicon-story-vue-0",
           "title": "Default"
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/components/app/icon/AppIcon.story.vue",
+      "relativePath": "src/components/icon/AppIcon.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "App",
         "Icon",
         "AppIcon"
       ],
@@ -76,7 +96,79 @@
       "markdownFile": null
     },
     {
-      "id": "src-components-app-modal-appmodal-story-vue",
+      "id": "src-components-input-appforminput-story-vue",
+      "title": "AppFormInput",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-input-appforminput-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/input/AppFormInput.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Input",
+        "AppFormInput"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-input-appformtextarea-story-vue",
+      "title": "AppFormTextarea",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-input-appformtextarea-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/input/AppFormTextarea.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Input",
+        "AppFormTextarea"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-input-appinput-story-vue",
+      "title": "AppInput",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-input-appinput-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/input/AppInput.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Input",
+        "AppInput"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-modal-appmodal-story-vue",
       "title": "AppModal",
       "layout": {
         "type": "grid",
@@ -85,15 +177,14 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-components-app-modal-appmodal-story-vue-0",
+          "id": "src-components-modal-appmodal-story-vue-0",
           "title": "Default"
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/components/app/modal/AppModal.story.vue",
+      "relativePath": "src/components/modal/AppModal.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "App",
         "Modals",
         "AppModal"
       ],
@@ -101,7 +192,7 @@
       "markdownFile": null
     },
     {
-      "id": "src-components-app-popover-apppopover-story-vue",
+      "id": "src-components-popover-apppopover-story-vue",
       "title": "AppPopover",
       "layout": {
         "type": "grid",
@@ -110,15 +201,14 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-components-app-popover-apppopover-story-vue-0",
+          "id": "src-components-popover-apppopover-story-vue-0",
           "title": "Default"
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/components/app/popover/AppPopover.story.vue",
+      "relativePath": "src/components/popover/AppPopover.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "App",
         "Popover",
         "AppPopover"
       ],
@@ -126,7 +216,7 @@
       "markdownFile": null
     },
     {
-      "id": "src-components-app-text-apptext-story-vue",
+      "id": "src-components-text-apptext-story-vue",
       "title": "AppText",
       "layout": {
         "type": "grid",
@@ -135,42 +225,16 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-components-app-text-apptext-story-vue-0",
+          "id": "src-components-text-apptext-story-vue-0",
           "title": "Default"
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/components/app/text/AppText.story.vue",
+      "relativePath": "src/components/text/AppText.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "App",
         "Text",
         "AppText"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-components-form-field-forminputfield-story-vue",
-      "title": "Field",
-      "layout": {
-        "type": "grid",
-        "width": "100%"
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "src-components-form-field-forminputfield-story-vue-0",
-          "title": "Default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/components/form/field/FormInputField.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "Forms",
-        "Input",
-        "Field"
       ],
       "virtual": false,
       "markdownFile": null
