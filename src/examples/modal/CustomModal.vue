@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import AppButton from '@/components/app/button/AppButton.vue'
-import AppModalContent from '@/components/app/modal/AppModalContent.vue'
-import AppModalFooter from '@/components/app/modal/AppModalFooter.vue'
-import AppModalHeader from '@/components/app/modal/AppModalHeader.vue'
-import AppModal from '@/components/app/modal/AppModal.vue'
-import AppModalTitle from '@/components/app/modal/AppModalTitle.vue'
-import AppModalDescription from '@/components/app/modal/AppModalDescription.vue'
+import AppButton from '@/components/button/AppButton.vue'
+import AppModalContent from '@/components/modal/AppModalContent.vue'
+import AppModalFooter from '@/components/modal/AppModalFooter.vue'
+import AppModalHeader from '@/components/modal/AppModalHeader.vue'
+import AppModal from '@/components/modal/AppModal.vue'
+import AppModalTitle from '@/components/modal/AppModalTitle.vue'
+import AppModalDescription from '@/components/modal/AppModalDescription.vue'
 
 const { name } = defineProps<{ name: string }>()
 

@@ -1,4 +1,3 @@
-import process from 'node:process'
 import { createPinia } from 'pinia'
 import { defineSetupVue3 } from '@histoire/plugin-vue'
 import { createI18n } from 'vue-i18n'
@@ -9,7 +8,8 @@ import nl from './src/locales/nl.json'
 export const setupVue3 = defineSetupVue3(async ({ app }) => {
   const isIframe = window.self !== window.top
 
-  if (isIframe || process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line node/prefer-global/process
+  if (isIframe || process?.env.NODE_ENV === 'development') {
     // @ts-expect-error - this is a hack to make the iframe work
     await import('./src/assets/styles/globals.css')
     // @ts-expect-error - this is a hack to make the iframe work
