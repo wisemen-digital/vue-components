@@ -1,51 +1,49 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import AppButton from '@/components/button/AppButton.vue'
 import { buttonSizeOptions, buttonVariantOptions } from '@/components/button/appButton.style'
 import type { ButtonProps } from '@/components/button/appButton.style'
 import { iconNames } from '@/icons'
 import type { Icon } from '@/icons'
+import AppInput from '@/components/input/AppInput.vue'
+import type { InputType } from '@/types/input.type'
 
 interface State {
+  isInvalid: boolean
   isDisabled: boolean
-  isLoading: boolean
-  size: ButtonProps['size']
-  variant: ButtonProps['variant']
+  type: InputType
   iconLeft?: Icon
   iconRight?: Icon
-  content: string
+  placeholder: string
 }
 
 const state: State = reactive({
   isDisabled: false,
-  isLoading: false,
-  size: 'default',
-  variant: 'default',
+  isInvalid: false,
+  type: 'text',
   iconLeft: undefined,
   iconRight: undefined,
-  content: 'Click me',
+  placeholder: 'Placeholder',
 })
+
+const value = ref('hey')
 </script>
 
 <template>
   <Story
-    title="Buttons/AppButton"
+    title="Input/AppInput"
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>
         <HstCheckbox v-model="state.isDisabled" title="Disabled" />
-        <HstCheckbox v-model="state.isLoading" title="Loading" />
-        <HstSelect v-model="state.size" title="Size" :options="buttonSizeOptions" />
-        <HstSelect v-model="state.variant" title="Variant" :options="buttonVariantOptions" />
+        <HstCheckbox v-model="state.isInvalid" title="Invalid" />
+        <HstSelect v-model="state.type" title="type" :options="['number', 'date', 'datetime-local', 'email', 'password', 'text', 'time']" />
         <HstSelect v-model="state.iconLeft" title="Front Icon" :options="['none', ...iconNames]" />
         <HstSelect v-model="state.iconRight" title="Back Icon" :options="['none', ...iconNames]" />
-        <HstText v-model="state.content" title="Text" />
       </template>
 
-      <div class="grid h-20 w-20 place-items-center">
-        <AppButton v-bind="state">
-          {{ state.content }}
-        </AppButton>
+      <div class="grid place-items-center">
+        <AppInput v-bind="state" v-model="value" />
       </div>
     </Variant>
   </Story>

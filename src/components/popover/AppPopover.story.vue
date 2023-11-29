@@ -33,7 +33,7 @@ const placementOptions = [
 
 <template>
   <Story
-    title="App/Popover/AppPopover"
+    title="Popover/AppPopover"
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>

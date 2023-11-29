@@ -37,7 +37,7 @@ function handleClick(): void {
 
 <template>
   <Story
-    title="App/Modals/AppModal"
+    title="Modals/AppModal"
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>

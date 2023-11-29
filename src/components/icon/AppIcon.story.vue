@@ -21,7 +21,7 @@ const state: State = reactive({
 
 <template>
   <Story
-    title="App/Icon/AppIcon"
+    title="Icon/AppIcon"
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>

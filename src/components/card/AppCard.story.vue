@@ -40,7 +40,7 @@ const state = reactive<State>({
 
 <template>
   <Story
-    title="App/Card/AppCard"
+    title="Card/AppCard"
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>
