@@ -11,7 +11,6 @@ const people = [
 ]
 
 const selectedPerson = ref<string>()
-const selectedPeople = ref<string[]>([])
 
 interface State {
   hasSearch?: boolean
@@ -37,13 +36,6 @@ const state: State = {
 
       <div class="flex flex-col justify-start gap-20 py-20">
         <FormSelect v-model="selectedPerson" :items="people" class="w-80" v-bind="state" />
-        <FormSelect
-          v-bind="state"
-          v-model="selectedPeople"
-          class="w-80"
-          :items="people"
-          :display-function="(value) => value"
-        />
       </div>
     </Variant>
   </Story>
