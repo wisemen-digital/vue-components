@@ -40,5 +40,6 @@ export const appInput: Component = {
     ComponentName.APP_FORM_ERROR,
     ComponentName.APP_BUTTON,
     ComponentName.APP_FORM_LABEL,
+    ComponentName.APP_TEXT,
   ],
 }

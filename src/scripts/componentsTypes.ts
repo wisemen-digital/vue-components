@@ -11,6 +11,7 @@ export enum ComponentName {
   APP_INPUT = 'AppInput',
   APP_FORM_ERROR = 'AppFormError',
   APP_LOADER = 'AppLoader',
+  APP_SELECT = 'AppSelect',
 
   TRANSITIONS = 'Transitions',
   TRANSITION_HEIGHT = 'TransitionHeight',

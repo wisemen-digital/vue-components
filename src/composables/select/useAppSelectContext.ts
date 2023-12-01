@@ -1,4 +1,3 @@
-import { ReadonlyRefOrGetter } from '@vueuse/core'
 import { inject, provide } from 'vue'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 

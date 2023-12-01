@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import AppSelect from '@/components/select/AppSelect.vue'
-import AppInput from '@/components/input/AppInput.vue'
 
 const people = [
   'Durward Reynolds',

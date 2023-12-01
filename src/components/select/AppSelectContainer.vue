@@ -5,7 +5,7 @@ import {
   Listbox,
 } from '@headlessui/vue'
 import { Float } from '@headlessui-float/vue'
-import { popoverTransition, scaleBounceTransition } from '@/transitions'
+import { popoverTransition } from '@/transitions'
 import { useProvideAppSelectContext } from '@/composables/select/useAppSelectContext'
 
 interface Props {

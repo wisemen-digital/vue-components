@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { z } from 'zod'
-import { computed, ref, useAttrs } from 'vue'
+import { computed, useAttrs } from 'vue'
 import type { AppSelectProps } from '@/components/select/AppSelect.vue'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'

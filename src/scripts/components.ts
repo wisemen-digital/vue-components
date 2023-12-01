@@ -9,6 +9,7 @@ import { appFormLabel } from './files/components/appFormLabel'
 import { appFormError } from './files/components/appFormError'
 import { appHeightTransition } from './files/transitions/appHeightTransition'
 import { appLoader } from './files/components/appLoader'
+import { appSelect } from './files/components/appSelect'
 
 import type { Component } from './componentsTypes'
 
@@ -23,6 +24,7 @@ export const components: Component[] = [
   appFormLabel,
   appFormError,
   appLoader,
+  appSelect,
 
   appHeightTransition,
 ]

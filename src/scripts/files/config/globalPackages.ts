@@ -6,7 +6,7 @@ export const globalPackages = {
   files: [],
   dependencies: [
     'tailwindcss',
-    '@appwise/forms',
+    'formango',
     'cva',
     'tailwind-merge',
     'zod',
