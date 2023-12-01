@@ -216,6 +216,54 @@
       "markdownFile": null
     },
     {
+      "id": "src-components-select-appformselect-story-vue",
+      "title": "AppFormSelect",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-select-appformselect-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/select/AppFormSelect.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Select",
+        "AppFormSelect"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-select-appselect-story-vue",
+      "title": "AppSelect",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-select-appselect-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/select/AppSelect.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Select",
+        "AppSelect"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-components-text-apptext-story-vue",
       "title": "AppText",
       "layout": {
@@ -235,31 +283,6 @@
       "treePath": [
         "Text",
         "AppText"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-components-form-select-formselect-story-vue",
-      "title": "Select",
-      "layout": {
-        "type": "grid",
-        "width": "100%"
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "src-components-form-select-formselect-story-vue-0",
-          "title": "Default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/components/form/select/FormSelect.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "Forms",
-        "Input",
-        "Select"
       ],
       "virtual": false,
       "markdownFile": null
