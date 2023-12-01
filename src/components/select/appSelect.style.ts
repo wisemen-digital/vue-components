@@ -14,7 +14,7 @@ export const selected = {
   true: 'text-primary underline-offset-4 underline hover:bg-secondary/80',
 }
 
-export const AppSelectOptionVariants = cva(
+export const appSelectOptionVariants = cva(
   {
     base: 'flex w-full gap-2 rounded border border-transparent bg-white px-2 py-1 text-left text-black transition-all',
     variants: {
@@ -28,5 +28,5 @@ export const AppSelectOptionVariants = cva(
   },
 )
 
-export type AppSelectOptionProps = VariantProps<typeof AppSelectOptionVariants>
+export type AppSelectOptionProps = VariantProps<typeof appSelectOptionVariants>
 export const AppSelectOptionVariantOptions = Object.keys(variantOptions)

@@ -9,6 +9,9 @@ export interface AppSelectProps<T> {
   keyValue?: keyof T
   items: T[]
   isDisabled?: boolean
+  placeholder?: string
+  isFilterable?: boolean
+  isInvalid?: boolean
 }
 
 const {
@@ -16,14 +19,19 @@ const {
   displayFunction = (value: T): string => {
     return String(value)
   },
+  isFilterable = false,
+  isInvalid = false,
 } = defineProps<AppSelectProps<T>>()
 
 const emits = defineEmits<{
   hide: []
   show: []
+  'update:search': [string]
 }>()
 
-const model = defineModel<T | T[]>('modelValue')
+const model = defineModel<T | T[]>({
+  required: true,
+})
 
 function onHide(): void {
   emits('hide')
@@ -32,20 +40,34 @@ function onHide(): void {
 function onShow(): void {
   emits('show')
 }
+
+function onUpdateSearch(search: string): void {
+  emits('update:search', search)
+}
 </script>
 
 <template>
   <AppSelectContainer
-    v-slot="{ items: slotItems }"
+    v-slot="{ items: slotItems, isOpen }"
     v-model="model"
     :items="items"
     :is-disabled="isDisabled"
     :display-function="displayFunction"
+    :is-filterable="isFilterable"
+    :is-invalid="isInvalid"
     @hide="onHide"
     @show="onShow"
+    @update:search="onUpdateSearch"
   >
-    <AppSelectInput />
-    <AppSelectOptions v-slot="{ item, active, disabled, selected }" :items="slotItems">
+    <AppSelectInput
+      :placeholder="placeholder"
+      :is-open="isOpen"
+    />
+    <AppSelectOptions
+      v-slot="{ item, active, disabled, selected }"
+      :items="slotItems"
+      :is-open="isOpen"
+    >
       <slot>
         <AppSelectOption
           :value="item"

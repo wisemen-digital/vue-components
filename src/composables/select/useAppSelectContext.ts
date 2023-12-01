@@ -1,3 +1,4 @@
+import { ReadonlyRefOrGetter } from '@vueuse/core'
 import { inject, provide } from 'vue'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
@@ -5,6 +6,9 @@ export interface AppSelectContext<T> {
   getDisplayValue: (value: T) => string
   value: Ref<T>
   search: Ref<string>
+  isFilterable: ComputedRef<boolean>
+  isInvalid: ComputedRef<boolean>
+  isDisabled: ComputedRef<boolean>
 }
 
 export const appSelectContext = Symbol('AppSelectContext') as InjectionKey<AppSelectContext<any>>

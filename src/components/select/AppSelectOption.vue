@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 import { computed } from 'vue'
-import { AppSelectOptionVariants } from '@/components/select/appSelect.style'
+import { appSelectOptionVariants } from '@/components/select/appSelect.style'
 import type { AppSelectOptionProps } from '@/components/select/appSelect.style'
 import { useAppSelectContext } from '@/composables/select/useAppSelectContext'
 
@@ -29,7 +29,7 @@ const { getDisplayValue } = useAppSelectContext()
 </script>
 
 <template>
-  <button :class="AppSelectOptionVariants({ variant: optionStatus, selected: isSelected, active: isActive })">
+  <button :class="appSelectOptionVariants({ variant: optionStatus, selected: isSelected, active: isActive })">
     {{ getDisplayValue(value) }}
   </button>
 </template>

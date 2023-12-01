@@ -17,10 +17,18 @@ export const inputWrapper = cva({
       false: 'h-10',
     },
   },
+  defaultVariants: {
+    isCompact: false,
+  },
 })
 
 export const input = cva({
   base: 'h-full w-full truncate bg-transparent px-3 py-2 text-subtext text-input-foreground outline-none placeholder:text-input-foreground/50 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0 disabled:cursor-not-allowed',
+  variants: {
+    isSelect: {
+      true: 'focus:placeholder:translate-x-0 focus:placeholder:opacity-100',
+    },
+  },
 })
 
 export const inputIcon = cva({

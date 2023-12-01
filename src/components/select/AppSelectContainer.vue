@@ -1,7 +1,8 @@
 <script setup lang="ts" generic="T, TModel extends T[] | T | undefined">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import {
   Combobox,
+  Listbox,
 } from '@headlessui/vue'
 import { Float } from '@headlessui-float/vue'
 import { popoverTransition, scaleBounceTransition } from '@/transitions'
@@ -12,6 +13,8 @@ interface Props {
   keyValue?: keyof T
   items: T[]
   isDisabled?: boolean
+  isFilterable?: boolean
+  isInvalid?: boolean
 }
 
 const {
@@ -20,19 +23,23 @@ const {
     return String(value)
   },
   isDisabled = false,
+  isFilterable = false,
+  isInvalid = false,
 } = defineProps<Props>()
 
 const emits = defineEmits<{
   hide: []
   show: []
+  'update:search': [string]
 }>()
+
 const model = defineModel<TModel>('modelValue', { required: true })
 const isMultiple = computed<boolean>(() => Array.isArray(model.value))
 const search = ref<string>('')
-function getDisplayValue(value: T | T[] | undefined): string {
-  if (value === undefined)
-    return ''
 
+function getDisplayValue(value: T | T[] | undefined): string {
+  if (value == null)
+    return ''
   else
     if (Array.isArray(value))
       return value.map(value => displayFunction(value)).join(', ')
@@ -41,6 +48,9 @@ function getDisplayValue(value: T | T[] | undefined): string {
 }
 
 const filteredItems = computed(() => {
+  if (!isFilterable)
+    return items
+
   return items.filter((item) => {
     return getDisplayValue(item)?.toLowerCase().includes(search.value.toLowerCase())
   })
@@ -50,7 +60,17 @@ useProvideAppSelectContext({
   value: model,
   search,
   getDisplayValue,
+  isFilterable: computed(() => isFilterable),
+  isInvalid: computed(() => isInvalid),
+  isDisabled: computed(() => isDisabled),
 })
+watch(search, () => {
+  onSearchChange(search.value)
+})
+
+function onSearchChange(search: string): void {
+  emits('update:search', search)
+}
 
 function onHide(): void {
   emits('hide')
@@ -62,18 +82,47 @@ function onShow(): void {
 </script>
 
 <template>
-  <!-- eslint-disable vue/no-extra-parens -->
   <!-- eslint-disable vue/valid-v-model -->
   <div class="text-left">
     <Combobox
+      v-if="isFilterable"
+      v-slot="{ open }"
       v-model="(model as any)"
       :disabled="isDisabled"
       immediate
       :multiple="isMultiple"
     >
-      <Float placement="bottom-start" adaptive-width :offset="4" flip v-bind="popoverTransition" @hide="onHide" @show="onShow">
-        <slot :items="filteredItems" />
+      <Float
+        placement="bottom-start"
+        adaptive-width
+        :offset="4"
+        flip
+        v-bind="popoverTransition"
+        @hide="onHide"
+        @show="onShow"
+      >
+        <slot :items="filteredItems" :is-open="open" />
       </Float>
     </Combobox>
+    <Listbox
+      v-else
+      v-slot="{ open }"
+      v-model="(model as any)"
+      :disabled="isDisabled"
+      immediate
+      :multiple="isMultiple"
+    >
+      <Float
+        placement="bottom-start"
+        adaptive-width
+        :offset="4"
+        flip
+        v-bind="popoverTransition"
+        @hide="onHide"
+        @show="onShow"
+      >
+        <slot :items="filteredItems" :is-open="open" />
+      </Float>
+    </ListBox>
   </div>
 </template>

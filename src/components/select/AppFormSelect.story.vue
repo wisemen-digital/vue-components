@@ -12,10 +12,13 @@ const people = [
 ]
 
 const selectedPerson = ref<string>('')
+const selectedPersons = ref<string[]>([])
 
 interface State {
+  isFilterable: boolean
   isInvalid: boolean
   isDisabled: boolean
+  hasMultiple: boolean
   placeholder: string
   description: string
   label: string
@@ -25,7 +28,9 @@ interface State {
 }
 
 const state: State = reactive({
+  isFilterable: false,
   isDisabled: false,
+  hasMultiple: false,
   isInvalid: false,
   placeholder: 'Placeholder',
   description: 'Description',
@@ -46,6 +51,8 @@ function onBlur(): void {
   <Story title="Select/AppFormSelect">
     <Variant title="Default">
       <template #controls>
+        <HstCheckbox v-model="state.hasMultiple" title="Has Multiple" />
+        <HstCheckbox v-model="state.isFilterable" title="Filterable" />
         <HstCheckbox v-model="state.isDisabled" title="Disabled" />
         <HstCheckbox v-model="state.isInvalid" title="Invalid" />
         <HstCheckbox v-model="state.isRequired" title="Required" />
@@ -57,7 +64,17 @@ function onBlur(): void {
 
       <div class="flex flex-col justify-start gap-20 py-20">
         <AppFormSelect
+          v-if="!state.hasMultiple"
           v-model="selectedPerson"
+          :items="people"
+          v-bind="state"
+          :display-function="(person: string) => person"
+          class="w-80"
+          @blur="onBlur"
+        />
+        <AppFormSelect
+          v-else
+          v-model="selectedPersons"
           :items="people"
           v-bind="state"
           :display-function="(person: string) => person"

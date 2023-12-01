@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { z } from 'zod'
-import { ref, useAttrs } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import type { AppSelectProps } from '@/components/select/AppSelect.vue'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
@@ -52,7 +52,7 @@ const emits = defineEmits<{
   blur: []
 }>()
 
-const value = defineModel<T>({
+const value = defineModel<T | T[]>({
   required: true,
 })
 
@@ -67,6 +67,10 @@ const attrs = useAttrs()
 function onHide(): void {
   emits('blur')
 }
+
+const isInvalid = computed<boolean>(() => {
+  return isTouched && errors != null
+})
 </script>
 
 <template>
@@ -83,10 +87,13 @@ function onHide(): void {
       :id="id"
       v-model="value"
       :items="items"
+      :placeholder="placeholder"
+      :is-filterable="isFilterable"
       :key-value="(keyValue as keyof T)"
       :is-disabled="isDisabled"
       :display-function="displayFunction"
       :is-touched="isTouched"
+      :is-invalid="isInvalid"
       v-bind="{
         ...attrs,
         class: undefined,

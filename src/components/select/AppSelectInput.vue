@@ -1,23 +1,35 @@
 <script setup lang="ts">
-import { ComboboxButton, ComboboxInput } from '@headlessui/vue'
-import { computed } from 'vue'
+import { ComboboxButton, ComboboxInput, ListboxButton } from '@headlessui/vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAppSelectContext } from '@/composables/select/useAppSelectContext'
 import AppIcon from '@/components/icon/AppIcon.vue'
+import { input, inputIcon, inputWrapper } from '@/components/input/appInput.style'
+import type { Icon } from '@/icons'
 
 interface Props {
-  isDisabled?: boolean
+  placeholder?: string
+  iconLeft?: Icon
+  isOpen: boolean
 }
+const { isOpen } = defineProps<Props>()
 
-defineProps<Props>()
+const emits = defineEmits<{
+  blur: []
+}>()
+
 const { t } = useI18n()
 
 const {
   getDisplayValue,
   search,
   value,
+  isFilterable,
+  isDisabled,
+  isInvalid,
 } = useAppSelectContext()
 
+const isFocused = ref<boolean>(false)
 const hasValue = computed<boolean>(() => {
   if (Array.isArray(value.value))
     return value.value.length > 0
@@ -28,32 +40,110 @@ const hasValue = computed<boolean>(() => {
 function handleSearchChange(event: Event): void {
   search.value = (event.target as HTMLInputElement).value
 }
+
+function onFocus(): void {
+  isFocused.value = true
+}
+
+function onBlur(): void {
+  isFocused.value = false
+  if (!isOpen)
+    emits('blur')
+}
 </script>
 
 <template>
   <div
-    class="relative text-input-foreground"
+    v-if="isFilterable"
   >
-    <ComboboxInput
-      :display-value="(item: any) => getDisplayValue(item as any)"
-      :placeholder="hasValue ? getDisplayValue(value) : t('labels.select') "
-      :disabled="isDisabled"
-      class="w-full rounded border border-border bg-input px-4 py-2 text-left placeholder:text-input-foreground/50 placeholder:transition-all placeholder:duration-300 focus:placeholder:translate-x-1 focus:placeholder:opacity-0"
-      @change="handleSearchChange"
-    />
-    <ComboboxButton
-      v-slot="{ open }"
-      class="absolute inset-y-0 right-0 flex items-center pr-2"
+    <div
+      :class=" inputWrapper({
+        isDisabled,
+        isFocused: isFocused || isOpen,
+        isInvalid,
+      })
+      "
     >
-      <AppIcon
-        class="transition-transform duration-200"
-        :class="{
-          'rotate-180': open,
-        }"
-
-        icon="chevronDown"
-        aria-hidden="true"
+      <slot name="left">
+        <AppIcon
+          v-if="iconLeft != null"
+          class="ml-3"
+          :icon="iconLeft"
+          :class="inputIcon()"
+        />
+      </slot>
+      <ComboboxInput
+        :class="input({ isSelect: true })"
+        :display-value="hasValue && !isOpen ? (getDisplayValue as any) : () => undefined"
+        :placeholder="hasValue ? getDisplayValue(value) : (placeholder ?? t('label.select'))"
+        :disabled="isDisabled"
+        @change="handleSearchChange"
+        @blur="onBlur"
+        @focus="onFocus"
       />
-    </ComboboxButton>
+      <ComboboxButton
+        v-slot="{ open }"
+        class="inset-y-0 right-0 flex items-center pr-2"
+      >
+        <AppIcon
+          class="h-3 w-3 shrink-0 transition-transform duration-200"
+          :class="[{
+            'rotate-180': open,
+          }, inputIcon()]"
+          icon="chevronDown"
+          aria-hidden="true"
+        />
+      </ComboboxButton>
+    </div>
+  </div>
+  <div v-else>
+    <ListboxButton
+      :class="
+        inputWrapper({
+          isFocused: isFocused || isOpen,
+          isDisabled,
+          isInvalid,
+        })
+      "
+      @blur="onBlur"
+      @focus="onFocus"
+    >
+      <slot name="left">
+        <AppIcon
+          v-if="iconLeft != null"
+          class="ml-3"
+          :icon="iconLeft"
+          :class="inputIcon()"
+        />
+      </slot>
+
+      <div
+        class="flex w-full items-center justify-between"
+        :class="input({ isSelect: true })"
+      >
+        <span class="truncate">
+          <template v-if="hasValue">
+            {{ getDisplayValue(value) }}
+          </template>
+
+          <span
+            v-else-if="placeholder != null"
+            class="text-input-foreground/50"
+          >
+            {{ placeholder }}
+          </span>
+        </span>
+      </div>
+      <div class="inset-y-0 right-0 flex items-center pr-2">
+        <AppIcon
+          class="h-3 w-3 shrink-0 transition-transform duration-200"
+          icon="chevronDown"
+          :class="[{
+            'rotate-180': isOpen,
+          }, inputIcon()]"
+          aria-hidden="true"
+        />
+      </div>
+    </ListboxButton>
   </div>
 </template>
