@@ -1,32 +1,21 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { ZodFormattedError } from 'zod'
-import { iconNames } from '@/icons'
-import type { Icon } from '@/icons'
-import type { InputType } from '@/types/input.type'
-import AppFormInput from '@/components/input/AppFormInput.vue'
+import AppFormSwitch from '@/components/switch/AppFormSwitch.vue'
 
 interface State {
-  isInvalid: boolean
   isDisabled: boolean
-  type: InputType
-  iconLeft?: Icon
-  iconRight?: Icon
-  placeholder: string
   description: string
   label: string
   isTouched: boolean
   isRequired: boolean
+  isCheckbox: boolean
+  selectedBackgroundClass: string
   errors: ZodFormattedError<string>
 }
 
 const state: State = reactive({
   isDisabled: false,
-  isInvalid: false,
-  type: 'text',
-  iconLeft: undefined,
-  iconRight: undefined,
-  placeholder: 'Placeholder',
   description: 'Description',
   label: 'Label',
   isTouched: false,
@@ -34,6 +23,8 @@ const state: State = reactive({
   errors: {
     _errors: ['This is an error'],
   },
+  isCheckbox: false,
+  selectedBackgroundClass: 'bg-primary',
 })
 
 const value = ref('hey')
@@ -41,24 +32,22 @@ const value = ref('hey')
 
 <template>
   <Story
-    title="Input/AppFormInput"
+    title="Switch/AppFormSwitch"
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>
         <HstCheckbox v-model="state.isDisabled" title="Disabled" />
-        <HstCheckbox v-model="state.isInvalid" title="Invalid" />
         <HstCheckbox v-model="state.isRequired" title="Required" />
         <HstCheckbox v-model="state.isTouched" title="Is Touched" />
-        <HstSelect v-model="state.type" title="type" :options="['number', 'date', 'datetime-local', 'email', 'password', 'text', 'time']" />
-        <HstSelect v-model="state.iconLeft" title="Front Icon" :options="['none', ...iconNames]" />
-        <HstSelect v-model="state.iconRight" title="Back Icon" :options="['none', ...iconNames]" />
-        <HstText v-model="state.placeholder" title="Placeholder" />
+        <HstCheckbox v-model="state.isCheckbox" title="Is Checkbox" />
+        <HstText v-model="state.selectedBackgroundClass" title="Selected Background Class" />
+
         <HstText v-model="state.description" title="Description" />
         <HstText v-model="state.label" title="Label" />
       </template>
 
       <div class="grid w-full place-items-center">
-        <AppFormInput v-bind="state" v-model="value" class="w-full" @blur="state.isTouched = true" />
+        <AppFormSwitch v-bind="state" v-model="value" class="w-full" @blur="state.isTouched = true" />
       </div>
     </Variant>
   </Story>

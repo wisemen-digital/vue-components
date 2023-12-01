@@ -5,6 +5,7 @@ export const sizeOptions = {
   default: 'h-6',
   sm: 'h-4',
   lg: 'h-8',
+  full: 'h-full',
 }
 
 export const iconVariants = cva(

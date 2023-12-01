@@ -10,6 +10,7 @@ import { appFormError } from './files/components/appFormError'
 import { appHeightTransition } from './files/transitions/appHeightTransition'
 import { appLoader } from './files/components/appLoader'
 import { appSelect } from './files/components/appSelect'
+import { appSwitch } from './files/components/appSwitch'
 
 import type { Component } from './componentsTypes'
 
@@ -25,6 +26,7 @@ export const components: Component[] = [
   appFormError,
   appLoader,
   appSelect,
+  appSwitch,
 
   appHeightTransition,
 ]
