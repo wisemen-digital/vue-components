@@ -264,6 +264,54 @@
       "markdownFile": null
     },
     {
+      "id": "src-components-switch-appformswitch-story-vue",
+      "title": "AppFormSwitch",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-switch-appformswitch-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/switch/AppFormSwitch.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Switch",
+        "AppFormSwitch"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-switch-appswitch-story-vue",
+      "title": "AppSwitch",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-switch-appswitch-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/switch/AppSwitch.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Switch",
+        "AppSwitch"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-components-text-apptext-story-vue",
       "title": "AppText",
       "layout": {
