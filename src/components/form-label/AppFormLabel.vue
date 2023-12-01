@@ -21,7 +21,7 @@ interface Props {
   /**
    *
    */
-  isInvalid: boolean
+  isInvalid?: boolean
 
   /**
    *
@@ -29,7 +29,7 @@ interface Props {
   isRequired: boolean
 }
 
-const { label, id, isDisabled, isInvalid, isRequired } = defineProps<Props>()
+const { label, id, isDisabled, isInvalid = false, isRequired } = defineProps<Props>()
 
 const formLabelClasses = computed<string>(() =>
   formLabel({

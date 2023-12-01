@@ -12,6 +12,7 @@ module.exports = antfu(
         'ts/explicit-function-return-type': 'error',
       },
       vue: {
+        'vue/no-extra-parens': 'off',
         'vue/custom-event-name-casing': [
           'error',
           'camelCase',

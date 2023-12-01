@@ -5,7 +5,7 @@
     "files": [],
     "dependencies": [
       "tailwindcss",
-      "@appwise/forms",
+      "formango",
       "cva",
       "tailwind-merge",
       "zod"
