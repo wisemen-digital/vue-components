@@ -23,6 +23,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     keyValue: { type: null, required: false },
     items: { type: Array, required: true },
     isDisabled: { type: Boolean, required: false, default: false },
+    placeholder: { type: String, required: false },
     isFilterable: { type: Boolean, required: false, default: false },
     isInvalid: { type: Boolean, required: false, default: false }
   }, {

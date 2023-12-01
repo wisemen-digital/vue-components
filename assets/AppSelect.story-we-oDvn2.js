@@ -1,5 +1,5 @@
 import { au as defineComponent, av as ref, aK as reactive, aJ as resolveComponent, aw as openBlock, aI as createBlock, aE as withCtx, aD as createVNode, ay as createBaseVNode, aQ as mergeProps } from "./vendor-eGJvRIAJ.js";
-import { A as AppSelect } from "./AppSelect-M_M1o0OL.js";
+import { A as AppSelect } from "./AppSelect-2tDUHuzr.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-n42I04JX.js";
 import "./popover.transition-z0jVcmyM.js";
 import "./AppIcon-0BVF7wuw.js";

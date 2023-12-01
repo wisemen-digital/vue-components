@@ -1,6 +1,6 @@
 import { au as defineComponent, aR as mergeModels, aS as useModel, aT as useAttrs, aU as computed, aw as openBlock, ax as createElementBlock, aI as createBlock, aO as createCommentVNode, aD as createVNode, aQ as mergeProps, aE as withCtx, aG as toDisplayString, aF as createTextVNode, aP as normalizeClass, av as ref, aK as reactive, aJ as resolveComponent, ay as createBaseVNode } from "./vendor-eGJvRIAJ.js";
 import { g as generateUuid, a as AppFormLabel, A as AppFormError } from "./AppFormLabel--TOJH8Mh.js";
-import { A as AppSelect } from "./AppSelect-M_M1o0OL.js";
+import { A as AppSelect } from "./AppSelect-2tDUHuzr.js";
 import { A as AppText } from "./AppText-YE5baG2E.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-n42I04JX.js";
 import "./AppIcon-0BVF7wuw.js";
