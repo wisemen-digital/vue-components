@@ -5,7 +5,14 @@ import { twMerge } from '@/utils//tailwind/twMerge'
 import { useModalContext } from '@/composables/modal/useModalContext'
 
 interface Props {
+  /**
+   * Determines if there is a close button on the modal.
+   */
   hideCloseButton?: boolean
+
+  /**
+   * The class to be applied to the modal header.
+   */
   class?: string
 }
 

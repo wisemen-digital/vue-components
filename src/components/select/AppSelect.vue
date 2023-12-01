@@ -5,12 +5,39 @@ import AppSelectOption from '@/components/select/AppSelectOption.vue'
 import AppSelectOptions from '@/components/select/AppSelectOptions.vue'
 
 export interface AppSelectProps<T> {
+  /**
+   * Function that determines the output of an item.
+   */
   displayFunction?: (value: T) => string
+
+  /**
+   * Key of the value for comparing.
+   */
   keyValue?: keyof T
+
+  /**
+   * List of possible items.
+   */
   items: T[]
+
+  /**
+   * Determines if the select is disabled.
+   */
   isDisabled?: boolean
+
+  /**
+   * Placeholder text inside the select.
+   */
   placeholder?: string
+
+  /**
+   * Determines if you can filter inside the input.
+   */
   isFilterable?: boolean
+
+  /**
+   * Determines if is invalid or valid.
+   */
   isInvalid?: boolean
 }
 

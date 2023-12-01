@@ -8,8 +8,19 @@ import { input, inputIcon, inputWrapper } from '@/components/input/appInput.styl
 import type { Icon } from '@/icons'
 
 interface Props {
+  /**
+   * Placeholder text inside the select.
+   */
   placeholder?: string
+
+  /**
+   * The icon to display on the left side of the input.
+   */
   iconLeft?: Icon
+
+  /**
+   * Determines if the select is open.
+   */
   isOpen: boolean
 }
 const { isOpen } = defineProps<Props>()

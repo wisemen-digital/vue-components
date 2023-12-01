@@ -5,9 +5,24 @@ import type { AppSelectOptionProps } from '@/components/select/appSelect.style'
 import { useAppSelectContext } from '@/composables/select/useAppSelectContext'
 
 interface Props {
+  /**
+   * The value of the option.
+   */
   value: T
+
+  /**
+   * Determines if the option is active.
+   */
   isActive?: boolean
+
+  /**
+   * Determines if the option is selected.
+   */
   isSelected?: boolean
+
+  /**
+   * Determines if the option is disabled.
+   */
   isDisabled?: boolean
 }
 

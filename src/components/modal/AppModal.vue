@@ -11,7 +11,14 @@ import { modalBackgroundTransition, modalTransition } from '@/transitions'
 import { useProvideModalContext } from '@/composables/modal/useModalContext'
 
 interface Props {
+  /**
+   * Determines if the can close when clicking outside.
+   */
   hasIrremovableMask?: boolean
+
+  /**
+   * The size of the modal.
+   */
   size?: ModalProps['size']
 }
 

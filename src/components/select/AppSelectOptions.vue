@@ -9,7 +9,14 @@ import AppHeightTransition from '@/components/transitions/AppHeightTransition.vu
 import { useAppSelectContext } from '@/composables/select/useAppSelectContext'
 
 interface Props {
+  /**
+   * List of possible items.
+   */
   items: T[]
+
+  /**
+   * Determines if the select is open.
+   */
   isOpen: boolean
 }
 defineProps<Props>()

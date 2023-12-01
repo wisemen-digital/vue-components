@@ -2,10 +2,29 @@
 import AppText from '@/components/text/AppText.vue'
 
 interface Props {
+  /**
+   * The main content of the card.
+   */
   content?: string
+
+  /**
+   * The title of the card.
+   */
   title?: string
+
+  /**
+   * The subtitle of the card.
+   */
   subtitle?: string
+
+  /**
+   * The footer of the card.
+   */
   footer?: string
+
+  /**
+   * The image to display on the header of the card.
+   */
   headerImage?: string
 }
 

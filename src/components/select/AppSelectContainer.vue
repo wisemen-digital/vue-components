@@ -8,12 +8,40 @@ import { Float } from '@headlessui-float/vue'
 import { popoverTransition } from '@/transitions'
 import { useProvideAppSelectContext } from '@/composables/select/useAppSelectContext'
 
-interface Props {
+export interface AppSelectProps<T> {
+  /**
+   * Function that determines the output of an item.
+   */
   displayFunction?: (value: T) => string
+
+  /**
+   * Key of the value for comparing.
+   */
   keyValue?: keyof T
+
+  /**
+   * List of possible items.
+   */
   items: T[]
+
+  /**
+   * Determines if the select is disabled.
+   */
   isDisabled?: boolean
+
+  /**
+   * Placeholder text inside the select.
+   */
+  placeholder?: string
+
+  /**
+   * Determines if you can filter inside the input.
+   */
   isFilterable?: boolean
+
+  /**
+   * Determines if is invalid or valid.
+   */
   isInvalid?: boolean
 }
 
@@ -25,7 +53,7 @@ const {
   isDisabled = false,
   isFilterable = false,
   isInvalid = false,
-} = defineProps<Props>()
+} = defineProps<AppSelectProps<T>>()
 
 const emits = defineEmits<{
   hide: []

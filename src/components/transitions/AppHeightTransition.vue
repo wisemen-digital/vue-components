@@ -2,6 +2,9 @@
 import { computed } from 'vue'
 
 interface Props {
+  /**
+   * The duration of the transition in seconds.
+   */
   duration?: number
 }
 

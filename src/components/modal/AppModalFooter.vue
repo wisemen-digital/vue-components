@@ -2,6 +2,9 @@
 import { twMerge } from '@/utils//tailwind/twMerge'
 
 const props = defineProps<{
+  /**
+   * The class to be applied to the modal footer.
+   */
   class?: string
 }>()
 </script>

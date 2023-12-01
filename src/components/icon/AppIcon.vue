@@ -7,7 +7,14 @@ import type { IconProps } from '@/components/icon/appIcon.style'
 import { iconVariants } from '@/components/icon/appIcon.style'
 
 interface Props {
+  /**
+   * The icon to display.
+   */
   icon: Icon
+
+  /**
+   * The size of the icon.
+   */
   size?: IconProps['size']
 }
 
