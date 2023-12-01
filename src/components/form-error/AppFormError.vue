@@ -15,7 +15,7 @@ const { errors, isTouched = true } = defineProps<Props>()
 <template>
   <AppHeightTransition :duration="0.2">
     <div v-if="errors != null && isTouched">
-      <div class="mt-1 flex items-center gap-x-2">
+      <div class="flex items-center gap-x-2">
         <AppIcon
           class="w-3.5 shrink-0 text-destructive"
           icon="warning"

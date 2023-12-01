@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { formLabel } from '@/components/form-label/appFormLabel.style'
 
-interface Props {
+export interface AppFormLabelProps {
   /**
    * The label text to be displayed.
    */
@@ -29,7 +29,7 @@ interface Props {
   isRequired: boolean
 }
 
-const { label, id, isDisabled, isInvalid = false, isRequired } = defineProps<Props>()
+const { label, id, isDisabled, isInvalid = false, isRequired } = defineProps<AppFormLabelProps>()
 
 const formLabelClasses = computed<string>(() =>
   formLabel({
