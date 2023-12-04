@@ -16,7 +16,7 @@ export const appSwitch = {
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/components/switch/AppFormIndicator.vue',
+      path: './src/components/switch/AppSwitchIndicator.vue',
       folder: 'switch',
     },
     {

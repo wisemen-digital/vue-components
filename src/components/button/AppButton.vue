@@ -62,6 +62,11 @@ export interface Props extends /* @vue-ignore */ ButtonHTMLAttributes {
    * Values are 'button', 'reset', and 'submit'.
    */
   type?: 'button' | 'reset' | 'submit'
+
+  /**
+   * The tag to use for the button.
+   */
+  as?: string
 }
 
 const {
@@ -78,6 +83,7 @@ const {
   href = null,
 
   type = 'button',
+  as,
 } = defineProps<Props>()
 
 const attrs = useAttrs()
@@ -92,6 +98,9 @@ const buttonClasses = computed<string>(() =>
 )
 
 const componentType = computed<string | typeof RouterLink>(() => {
+  if (as !== undefined)
+    return as
+
   if (to !== null)
     return RouterLink
 

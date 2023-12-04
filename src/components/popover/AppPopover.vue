@@ -35,7 +35,6 @@ const FLIP_VALUE = 8
       :placement="placement"
       :adaptive-width="hasAdaptiveWidth"
       :auto-placement="hasAutoPlacement"
-
       :flip="hasNoFlip ? undefined : FLIP_VALUE"
       :shift="hasNoShift ? undefined : SHIFT_VALUE"
       :offset="hasNoOffset ? undefined : OFFSET_VALUE"
@@ -44,12 +43,13 @@ const FLIP_VALUE = 8
       v-bind="popoverTransition"
       tailwindcss-origin-class
     >
-      <PopoverButton as="div" class="max-w-max">
+      <PopoverButton class="max-w-max rounded-button">
         <slot name="activator" />
       </PopoverButton>
 
       <PopoverPanel
         v-slot="{ close }"
+        :focus="true"
         class="rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow"
       >
         <slot name="panel" :close="close" />
