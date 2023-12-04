@@ -1,8 +1,7 @@
 <script setup lang="ts" generic="TValue">
 import { Switch } from '@headlessui/vue'
 import { computed } from 'vue'
-import { switchWrapper } from './appSwitch.style'
-import AppIcon from '@/components/icon/AppIcon.vue'
+import AppSwitchIndicator from '@/components/switch/AppSwitchIndicator.vue'
 
 export interface AppSwitchProps<TValue> {
   /**
@@ -65,10 +64,6 @@ const isSelected = computed<boolean>({
   },
 })
 
-const wrapperClasses = computed<string>(() => {
-  return isSelected.value ? selectedBackgroundClass : 'bg-neutral-200'
-})
-
 function onFocus(): void {
   emits('focus')
 }
@@ -85,22 +80,22 @@ function onBlur(): void {
     :value="(value as any)"
     :name="name"
     :disabled="isDisabled"
-    :class="switchWrapper({ isCheckbox, isInvalid, isDisabled, class: wrapperClasses })"
+    class="flex justify-start"
     @blur="onBlur"
     @focus="onFocus"
   >
-    <AppIcon
-      v-if="isCheckbox"
-      size="full"
-      icon="checkmark" class="p-0.5 text-white duration-200" :class="{
-        'opacity-100': isSelected,
-        'opacity-0': !isSelected,
-      }"
-    />
-    <span
-      v-else
-      class="inline-block h-5 w-5 rounded-full bg-white duration-100"
-      :class="isSelected ? 'translate-x-[1.15rem]' : 'translate-x-0.5'"
-    />
+    <slot
+      :is-selected="isSelected"
+      :is-checkbox="isCheckbox"
+      :is-disabled="isDisabled"
+      :selected-background-class="selectedBackgroundClass"
+    >
+      <AppSwitchIndicator
+        :is-selected="isSelected"
+        :is-checkbox="isCheckbox"
+        :is-disabled="isDisabled"
+        :selected-background-class="selectedBackgroundClass"
+      />
+    </slot>
   </Switch>
 </template>
