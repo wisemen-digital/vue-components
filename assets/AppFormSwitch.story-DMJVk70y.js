@@ -1,7 +1,7 @@
 import { au as defineComponent, aR as mergeModels, aS as useModel, aU as computed, aw as openBlock, ax as createElementBlock, aI as createBlock, aO as createCommentVNode, aD as createVNode, aQ as mergeProps, aE as withCtx, aG as toDisplayString, aF as createTextVNode, aK as reactive, av as ref, aJ as resolveComponent, ay as createBaseVNode } from "./vendor-KTSXO9NW.js";
 import { g as generateUuid, A as AppFormError, a as AppFormLabel } from "./AppFormLabel-pCSSH1wV.js";
 import { A as AppText } from "./AppText-_dDa9kVT.js";
-import { A as AppSwitch } from "./AppSwitch-uXtah9U5.js";
+import { A as AppSwitch } from "./AppSwitch-T7GA753g.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-vAs4t3X_.js";
 import "./AppIcon-JFrWzaqr.js";
 import "./AppHeightTransition-nJ1Xozk9.js";
@@ -110,7 +110,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1 = { class: "grid w-full place-items-center" };
+const _hoisted_1 = { class: "grid w-full max-w-max place-items-center" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_HstCheckbox = resolveComponent("HstCheckbox");
   const _component_HstText = resolveComponent("HstText");

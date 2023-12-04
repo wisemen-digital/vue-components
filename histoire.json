@@ -299,6 +299,10 @@
         {
           "id": "src-components-switch-appswitch-story-vue-0",
           "title": "Default"
+        },
+        {
+          "id": "src-components-switch-appswitch-story-vue-1",
+          "title": "Custom"
         }
       ],
       "autoPropsDisabled": true,

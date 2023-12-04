@@ -46,7 +46,7 @@ const value = ref('hey')
         <HstText v-model="state.label" title="Label" />
       </template>
 
-      <div class="grid w-full place-items-center">
+      <div class="grid w-full max-w-max place-items-center">
         <AppFormSwitch v-bind="state" v-model="value" class="w-full" @blur="state.isTouched = true" />
       </div>
     </Variant>
