@@ -1,5 +1,5 @@
 import { au as defineComponent, aK as reactive, aJ as resolveComponent, aw as openBlock, aI as createBlock, aE as withCtx, aD as createVNode, ay as createBaseVNode, aL as normalizeProps, aM as guardReactiveProps, aF as createTextVNode, aG as toDisplayString } from "./vendor-KTSXO9NW.js";
-import { A as AppButton, b as buttonSizeOptions, a as buttonVariantOptions } from "./AppButton-FH_U3_oI.js";
+import { A as AppButton, b as buttonSizeOptions, a as buttonVariantOptions } from "./AppButton-466i6Cd8.js";
 import { i as iconNames } from "./AppIcon-JFrWzaqr.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-vAs4t3X_.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({

@@ -48,11 +48,17 @@ const placementOptions = [
       <div>
         <AppPopover v-bind="state">
           <template #activator>
-            <AppButton variant="default">
+            <AppButton as="div" variant="default">
               Button
             </AppButton>
           </template>
           <template #panel>
+            <AppButton>
+              Interactable element
+            </AppButton>
+            <AppButton>
+              Second interactable element
+            </AppButton>
             <div class="max-w-[60ch]">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda velit quo cumque soluta, repudiandae impedit at vitae culpa iste ad placeat quaerat nihil? Velit, eligendi ullam molestiae eum ipsum totam?
             </div>

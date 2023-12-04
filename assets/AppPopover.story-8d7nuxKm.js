@@ -1,7 +1,7 @@
 import { au as defineComponent, b1 as $e, b2 as ye, b3 as Ge, b4 as je, aw as openBlock, aI as createBlock, aE as withCtx, aQ as mergeProps, aN as renderSlot, aD as createVNode, aK as reactive, aJ as resolveComponent, ay as createBaseVNode, aL as normalizeProps, aM as guardReactiveProps, aF as createTextVNode } from "./vendor-KTSXO9NW.js";
 import { p as popoverTransition } from "./popover.transition-z0jVcmyM.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-vAs4t3X_.js";
-import { A as AppButton } from "./AppButton-FH_U3_oI.js";
+import { A as AppButton } from "./AppButton-466i6Cd8.js";
 import "./AppIcon-JFrWzaqr.js";
 const SHIFT_VALUE = 8;
 const OFFSET_VALUE = 4;
@@ -46,17 +46,17 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         portal: ""
       }, $setup.popoverTransition, { "tailwindcss-origin-class": "" }), {
         default: withCtx(() => [
-          createVNode($setup["PopoverButton"], {
-            as: "div",
-            class: "max-w-max"
-          }, {
+          createVNode($setup["PopoverButton"], { class: "max-w-max rounded-button" }, {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "activator")
             ]),
             _: 3
             /* FORWARDED */
           }),
-          createVNode($setup["PopoverPanel"], { class: "rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow" }, {
+          createVNode($setup["PopoverPanel"], {
+            focus: true,
+            class: "rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow"
+          }, {
             default: withCtx(({ close }) => [
               renderSlot(_ctx.$slots, "panel", { close })
             ]),
@@ -171,7 +171,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               normalizeProps(guardReactiveProps($setup.state)),
               {
                 activator: withCtx(() => [
-                  createVNode($setup["AppButton"], { variant: "default" }, {
+                  createVNode($setup["AppButton"], {
+                    as: "div",
+                    variant: "default"
+                  }, {
                     default: withCtx(() => [
                       createTextVNode(" Button ")
                     ]),
@@ -180,6 +183,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                   })
                 ]),
                 panel: withCtx(() => [
+                  createVNode($setup["AppButton"], null, {
+                    default: withCtx(() => [
+                      createTextVNode(" Interactable element ")
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  }),
+                  createVNode($setup["AppButton"], null, {
+                    default: withCtx(() => [
+                      createTextVNode(" Second interactable element ")
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  }),
                   _hoisted_1
                 ]),
                 _: 1

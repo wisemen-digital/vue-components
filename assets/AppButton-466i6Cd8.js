@@ -128,7 +128,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     iconRight: { type: null, required: false, default: null },
     to: { type: [Object, null], required: false, default: null },
     href: { type: [String, null], required: false, default: null },
-    type: { type: String, required: false, default: "button" }
+    type: { type: String, required: false, default: "button" },
+    as: { type: String, required: false }
   },
   setup(__props, { expose: __expose }) {
     __expose();
@@ -142,6 +143,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       })
     );
     const componentType = computed(() => {
+      if (__props.as !== void 0)
+        return __props.as;
       if (__props.to !== null)
         return RouterLink;
       else if (__props.href !== null)
