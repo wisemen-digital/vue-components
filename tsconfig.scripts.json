@@ -5,9 +5,9 @@
     "target": "ESNext",
     "module": "CommonJS", // "module": "CommonJS" should work too
     "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
-    "allowSyntheticDefaultImports": true
+    "isolatedModules": true
   },
   "include": [
     "/src/scripts/**/*.ts"
