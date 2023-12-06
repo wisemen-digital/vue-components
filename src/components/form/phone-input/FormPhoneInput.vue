@@ -4,6 +4,7 @@ import { AsYouType } from 'libphonenumber-js'
 import { computed } from 'vue'
 import countries from 'i18n-iso-countries'
 import { useI18n } from 'vue-i18n'
+import FormInputField from '@/components/form/field/FormInputField.vue'
 
 interface Props {
   modelValue: string
@@ -13,21 +14,21 @@ interface Props {
   defaultCountry?: CountryCode
 }
 
-const { isDisabled = false, defaultCountry = 'BE' as CountryCode } = defineProps<Props>()
+const { isDisabled = false, defaultCountry } = defineProps<Props>()
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: string): void
-  (event: 'update:phoneNumber', value: PhoneNumber | undefined): void
+  'update:modelValue': [string]
+  'update:phoneNumber': [PhoneNumber | undefined]
 }>()
 
 const { locale } = useI18n()
 
 const model = defineModel<string>()
 
-const phoneNumber = ref<AsYouType>(new AsYouType(defaultCountry))
+const phoneNumber = computed<AsYouType>(() => new AsYouType(defaultCountry))
 
 const input = computed({
-  get: () => model.value,
+  get: () => String(model.value),
   set: (value: string) => {
     phoneNumber.value.reset()
     phoneNumber.value.input(value)
@@ -37,20 +38,34 @@ const input = computed({
   },
 })
 
-const getCountryName = (iso2: string): string => {
-  return countries.getName(iso2, locale.value)
+const currentCountryName = computed<string | undefined>(() => {
+  if (!phoneNumber.value.country)
+    return
+
+  return getCountryName(phoneNumber.value.country)
+})
+
+const currentCountryFlagUrl = computed<string | undefined>(() => {
+  if (!phoneNumber.value.country)
+    return
+
+  return getCountryFlagUrl(phoneNumber.value.country)
+})
+
+function getCountryName(iso2: string): string {
+  return countries.getName(iso2, locale.value) ?? iso2
 }
 
-const getCountryFlagUrl = (iso2: CountryCode): string => {
+function getCountryFlagUrl(iso2: CountryCode): string {
   return `https://purecatamphetamine.github.io/country-flag-icons/3x2/${iso2}.svg`
 }
 </script>
 
 <template>
   <FormInputField v-model="input" :is-disabled="isDisabled" :label="label" :placeholder="placeholder">
-    <template #front-content>
-      <img v-if="phoneNumber.country" class="w-6" :src="getCountryFlagUrl(phoneNumber.country)" :alt="getCountryName(phoneNumber.country)">
-      <p v-else class="w-6 text-center text-gray-400">
+    <template #frontContent>
+      <img v-if="currentCountryFlagUrl" class="w-6" :src="currentCountryFlagUrl" :alt="currentCountryName">
+      <p v-else class="w-6 text-center text-input-placeholder">
         ?
       </p>
     </template>

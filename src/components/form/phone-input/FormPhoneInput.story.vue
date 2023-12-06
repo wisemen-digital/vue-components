@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import countries from 'i18n-iso-countries'
 import type { CountryCode } from 'libphonenumber-js'
+import { reactive, ref } from 'vue'
+import FormPhoneInput from '@/components/form/phone-input/FormPhoneInput.vue'
 
 interface State {
   isDisabled: boolean
   placeholder: string
   label: string
-  defaultCountry: CountryCode
+  defaultCountry?: CountryCode
 }
 
 const state = reactive<State>({
@@ -26,6 +29,17 @@ const phoneNumber = ref<string>('(555) 555-5555')
         <HstCheckbox v-model="state.isDisabled" title="Disabled" />
         <HstText v-model="state.label" title="Label" />
         <HstText v-model="state.placeholder" title="Placeholder" />
+        <HstSelect
+          v-model="state.defaultCountry"
+          :options="countries.getAlpha2Codes()"
+          title="Default country"
+        />
+        <HstButton
+          v-if="state.defaultCountry"
+          @click="state.defaultCountry = undefined"
+        >
+          Clear default country
+        </HstButton>
       </template>
       <FormPhoneInput v-model="phoneNumber" v-bind="state" />
     </Variant>
