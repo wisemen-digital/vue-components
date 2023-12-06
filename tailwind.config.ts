@@ -49,6 +49,7 @@ export default {
       'button-hover-shadow': 'var(--shadow-button-hover);',
       'popover-shadow': 'var(--shadow-popover);',
       'modal-shadow': 'var(--shadow-modal);',
+      'input-shadow': 'var(--shadow-input);',
     },
 
     borderRadius: {
@@ -58,6 +59,7 @@ export default {
       modal: 'var(--radius-modal)',
       popover: 'var(--radius-popover)',
       full: 'var(--radius-full)',
+      input: 'var(--radius-input)',
     },
 
     colors: {

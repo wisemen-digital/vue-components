@@ -1,22 +1,22 @@
-import * as allIcons from '@/icons/icons'
+import * as iconCollection from '@/icons/iconCollection'
 
 function convertIconName(iconName: string): Icon {
   const name = iconName.replace('Icon', '')
   return name.charAt(0).toLowerCase() + name.slice(1) as Icon
 }
 
-export const iconNames = Object.keys(allIcons)
+export const iconNames = Object.keys(iconCollection)
   .map(convertIconName)
 
-export const iconComponents = Object.keys(allIcons).reduce((acc, key) => {
-  const iconComponent = allIcons[key as keyof typeof allIcons]
+export const iconComponents = Object.keys(iconCollection).reduce((acc, key) => {
+  const iconComponent = iconCollection[key as keyof typeof iconCollection]
   return {
     ...acc,
     [convertIconName(key)]: iconComponent,
   }
-}, {} as Record<Icon, typeof allIcons[keyof typeof allIcons]>)
+}, {} as Record<Icon, typeof iconCollection[keyof typeof iconCollection]>)
 
 export type WithoutIconSuffix<TFullIconName extends string> = TFullIconName extends `${infer IconName}Icon` ? IconName : never
-export type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof allIcons>>
+export type Icon = WithoutIconSuffix<Uncapitalize<keyof typeof iconCollection>>
 
 export const icons = iconComponents

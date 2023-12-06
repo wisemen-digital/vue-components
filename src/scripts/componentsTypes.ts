@@ -5,14 +5,17 @@ export enum ComponentName {
   APP_ICON = 'AppIcon',
   APP_TEXT = 'AppText',
   APP_MODAL = 'AppModal',
+  APP_CARD = 'AppCard',
   APP_POPOVER = 'AppPopover',
-
-  FORM_INPUT_FIELD = 'FormInputField',
-  FORM_ERROR = 'FormError',
-  FORM_INPUT_GROUP_COMPOSABLE = 'FormInputGroupComposable',
+  APP_FORM_LABEL = 'AppFormLabel',
+  APP_INPUT = 'AppInput',
+  APP_FORM_ERROR = 'AppFormError',
+  APP_LOADER = 'AppLoader',
+  APP_SELECT = 'AppSelect',
+  APP_SWITCH = 'AppSwitch',
 
   TRANSITIONS = 'Transitions',
-  TRANSITION_EXPAND = 'TransitionExpand',
+  TRANSITION_HEIGHT = 'TransitionHeight',
   ICONS = 'Icons',
 
   UTILS_GENERATE_UUID = 'UtilsGenerateUuid',
@@ -25,6 +28,7 @@ export enum ComponentName {
 export enum ComponentType {
   COMPONENTS = 'components',
   COMPOSABLES = 'composables',
+  TYPES = 'types',
   TRANSITIONS = 'transitions',
   ICONS = 'icons',
   UTILS = 'utils',

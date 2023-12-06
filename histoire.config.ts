@@ -4,6 +4,11 @@ import { HstVue } from '@histoire/plugin-vue'
 
 export default defineConfig({
 
+  storyMatch: [
+    '**/*.story.vue',
+    '**/*.utilities.vue',
+  ],
+
   tree: {
     groups: [
       {
@@ -13,6 +18,11 @@ export default defineConfig({
       {
         id: 'contributing',
         title: 'Contributing',
+      },
+      {
+        id: 'utilities',
+        title: 'Utilities',
+        include: (file): boolean => file.title.includes('Color'),
       },
       {
         title: 'Components',

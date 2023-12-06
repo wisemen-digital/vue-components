@@ -8,15 +8,20 @@ export async function generateRegistryFile(components: Component[], fileName: st
   const payload = components
     .map((component) => {
       const files = component.files?.map((file) => {
-        const content = fs.readFileSync(path.join(process.cwd(), file.path), 'utf8')
-
-        return {
-          name: basename(file.path),
-          dir: dirname(file.path),
-          placementDir: file.folder,
-          type: file.type,
-          content,
+        try {
+          const content = fs.readFileSync(path.join(process.cwd(), file.path), 'utf8')
+          return {
+            name: basename(file.path),
+            dir: dirname(file.path),
+            placementDir: file.folder,
+            type: file.type,
+            content,
+          }
         }
+        catch (error) {
+          console.error(`Error reading file ${file.path} in component \'${component.name}\'`)
+        }
+        return null
       })
 
       return {

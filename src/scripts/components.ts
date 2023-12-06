@@ -1,27 +1,32 @@
-import { appButton } from './components/app/appButton'
-import { appModal } from './components/app/appModal'
-import { appText } from './components/app/appText'
-import { appPopover } from './components/app/appPopover'
-import { appIcon } from './components/app/appIcon'
+import { appButton } from './files/components/appButton'
+import { appModal } from './files/components/appModal'
+import { appText } from './files/components/appText'
+import { appCard } from './files/components/appCard'
+import { appPopover } from './files/components/appPopover'
+import { appIcon } from './files/components/appIcon'
+import { appInput } from './files/components/appInput'
+import { appFormLabel } from './files/components/appFormLabel'
+import { appFormError } from './files/components/appFormError'
+import { appHeightTransition } from './files/transitions/appHeightTransition'
+import { appLoader } from './files/components/appLoader'
+import { appSelect } from './files/components/appSelect'
+import { appSwitch } from './files/components/appSwitch'
 
-import { formError } from './components/form/formError'
-import { formInputField } from './components/form/formInputField'
-import { formInputGroupComposable } from './components/form/formInputGroupComposable'
-import { transitionExpand } from './components/transitions/transitionExpand'
 import type { Component } from './componentsTypes'
-import { utilsGenerateUuid } from './components/utils/utilsGenerateUuid'
 
 export const components: Component[] = [
   appButton,
   appModal,
   appText,
+  appCard,
   appPopover,
   appIcon,
+  appInput,
+  appFormLabel,
+  appFormError,
+  appLoader,
+  appSelect,
+  appSwitch,
 
-  formError,
-  formInputField,
-  formInputGroupComposable,
-
-  transitionExpand,
-  utilsGenerateUuid,
+  appHeightTransition,
 ]
