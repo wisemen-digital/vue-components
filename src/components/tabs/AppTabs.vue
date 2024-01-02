@@ -44,7 +44,6 @@ interface Props<THasRoutes> {
 const { isRouter = false, tabs, tabId = 'default' } = defineProps<Props<TRouter>>()
 
 const selectedTab = defineModel<number>({
-  local: true,
   default: 0,
 })
 

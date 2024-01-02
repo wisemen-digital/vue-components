@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import type { TabWithoutRoutes } from '@/components/tabs/AppTabs.vue'
 import AppTabs from '@/components/tabs/AppTabs.vue'
 import AppTabsPanel from '@/components/tabs/AppTabsPanel.vue'
-
-const selectedTab = ref(2)
 
 const tabs = computed<TabWithoutRoutes[]>(() => [
   {
@@ -24,7 +22,6 @@ const tabs = computed<TabWithoutRoutes[]>(() => [
 
 <template>
   <AppTabs
-    v-model="selectedTab"
     :tabs="tabs"
   >
     <AppTabsPanel>

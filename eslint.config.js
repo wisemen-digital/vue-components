@@ -12,6 +12,7 @@ module.exports = antfu(
         'ts/explicit-function-return-type': 'error',
       },
       vue: {
+        'no-extra-parens': 'off',
         'vue/no-extra-parens': 'off',
         'vue/custom-event-name-casing': [
           'error',
@@ -37,6 +38,13 @@ module.exports = antfu(
           },
         ],
       },
+    },
+  },
+  {
+    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+    files: ['**/*.vue'],
+    rules: {
+      'vue/no-extra-parens': 'off',
     },
   },
   ...compat.config({
