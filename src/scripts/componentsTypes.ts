@@ -13,6 +13,7 @@ export enum ComponentName {
   APP_LOADER = 'AppLoader',
   APP_SELECT = 'AppSelect',
   APP_SWITCH = 'AppSwitch',
+  APP_TABS = 'AppTabs',
 
   TRANSITIONS = 'Transitions',
   TRANSITION_HEIGHT = 'TransitionHeight',

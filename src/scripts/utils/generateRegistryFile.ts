@@ -19,7 +19,7 @@ export async function generateRegistryFile(components: Component[], fileName: st
           }
         }
         catch (error) {
-          console.error(`Error reading file ${file.path} in component \'${component.name}\'`)
+          console.error(`\x1B[31mError reading file ${file.path} in component \'${component.name}\'`)
         }
         return null
       })

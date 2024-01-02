@@ -11,6 +11,7 @@ import { appHeightTransition } from './files/transitions/appHeightTransition'
 import { appLoader } from './files/components/appLoader'
 import { appSelect } from './files/components/appSelect'
 import { appSwitch } from './files/components/appSwitch'
+import { appTabs } from './files/components/appTabs'
 
 import type { Component } from './componentsTypes'
 
@@ -27,6 +28,7 @@ export const components: Component[] = [
   appLoader,
   appSelect,
   appSwitch,
+  appTabs,
 
   appHeightTransition,
 ]
