@@ -8,6 +8,7 @@ import AppTabsList from '@/components/tabs/AppTabsList.vue'
 import AppTabsTab from '@/components/tabs/AppTabsTab.vue'
 import type { Icon } from '@/icons'
 import AppTabsPanels from '@/components/tabs/AppTabsPanels.vue'
+import { useTabQuery } from '@/composables/tab/useTabQuery'
 
 export interface TabWithRoutes {
   label: string
@@ -69,6 +70,9 @@ watch(() => route.path, () => {
   if (tab)
     selectedTab.value = (allTabs.value as TabWithRoutes[]).indexOf(tab)
 })
+
+if (!isUsingRouter.value)
+  useTabQuery({ selectedTab, tabId: 'default' })
 </script>
 
 <template>

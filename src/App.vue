@@ -41,7 +41,7 @@ const tabs = computed<TabWithoutRoutes[]>(() => [
     </AppTabsPanel>
     <AppTabsPanel>
       <div class="p-4">
-        Tab 3
+        Tab 2
       </div>
     </AppTabsPanel>
   </AppTabs>

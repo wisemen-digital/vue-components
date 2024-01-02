@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Tab } from '@headlessui/vue'
 import { computed } from 'vue'
-import { RouteLocationRaw, RouterLink } from 'vue-router'
+import type { RouteLocationRaw } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { tabVariants } from '@/components/tabs/appTabs.style'
 import { fadeTransition } from '@/transitions'
 
