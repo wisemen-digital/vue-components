@@ -477,6 +477,72 @@
     ]
   },
   {
+    "component": "AppTabs",
+    "name": "Tabs",
+    "files": [
+      {
+        "name": "AppTabs.vue",
+        "dir": "./src/components/tabs",
+        "placementDir": "tabs",
+        "type": "components",
+        "content": "<script setup lang=\"ts\" generic=\"TRouter  extends true | false | undefined = false\">\nimport { computed, watch } from 'vue'\nimport type { RouteLocationRaw } from 'vue-router'\nimport { RouterLink, RouterView, useRoute } from 'vue-router'\nimport AppIcon from '@/components/icon/AppIcon.vue'\nimport AppTabsGroup from '@/components/tabs/AppTabsGroup.vue'\nimport AppTabsList from '@/components/tabs/AppTabsList.vue'\nimport AppTabsTab from '@/components/tabs/AppTabsTab.vue'\nimport type { Icon } from '@/icons'\nimport AppTabsPanels from '@/components/tabs/AppTabsPanels.vue'\nimport { useTabQuery } from '@/composables/tabs/useTabsQuery'\n\nexport interface TabWithRoutes {\n  label: string\n  icon?: Icon\n  to: RouteLocationRaw\n}\n\nexport interface TabWithoutRoutes {\n  label: string\n  icon?: Icon\n  to?: never\n}\n\ninterface Props<THasRoutes> {\n  /**\n   * If true, the tabs will use the router to determine which tab is active, to with a route is required.\n   * If false, the tabs will use query params to determine which tab is active.\n   * If undefined, the tabs will use query params if the router is not available.\n   */\n  isRouter?: THasRoutes\n  /**\n   * The tabs to display.\n   * If using the router, the tabs must have a `to` property.\n   * If not using the router, the tabs must not have a `to` property.\n   */\n  tabs: THasRoutes extends true ? TabWithRoutes[] : TabWithoutRoutes[]\n  /**\n   * The name of the tab query param, in case you use multiple tabs on the page.\n   */\n  tabId?: string\n}\n\nconst { isRouter = false, tabs, tabId = 'default' } = defineProps<Props<TRouter>>()\n\nconst selectedTab = defineModel<number>({\n  local: true,\n  default: 0,\n})\n\n// Need this or it errors because of bad generics\nconst allTabs = computed(() => {\n  return tabs\n})\n\nconst isUsingRouter = computed<boolean>(() => {\n  // @ts-expect-error Generics in Vue SFCs are not supported yet\n  return !!isRouter || isRouter === ''\n})\n\nfunction changeTab(index: number): void {\n  selectedTab.value = index\n}\n\nfunction isActive(index: number): boolean {\n  return selectedTab.value === index\n}\n\nconst tabComponent = computed(() => {\n  return isUsingRouter.value ? RouterLink : 'button'\n})\n\n// Router logic\nconst route = useRoute()\nwatch(() => route.path, () => {\n  if (!isUsingRouter.value)\n    return\n\n  const tab = (allTabs.value as TabWithRoutes[]).find((tab) => {\n    return route.matched.find((route) => {\n      return tab.to === route.path\n    })\n  })\n  if (tab)\n    selectedTab.value = (allTabs.value as TabWithRoutes[]).indexOf(tab)\n})\n\n// Tab logic in query params\nif (!isUsingRouter.value)\n  useTabQuery({ selectedTab, tabId })\n</script>\n\n<template>\n  <AppTabsGroup :selected-index=\"selectedTab\" as=\"div\" @change=\"changeTab\">\n    <AppTabsList>\n      <AppTabsTab\n        :is=\"tabComponent\"\n        v-for=\"(tab, index) in allTabs\"\n        :key=\"index\"\n        :to=\"(tab as TabWithRoutes)?.to ?? undefined\"\n        :is-active=\"isActive(index)\"\n      >\n        <div class=\"flex w-full min-w-max items-center justify-center space-x-2 text-center\">\n          <span class=\"flex-none\">{{ tab.label }}</span>\n          <AppIcon v-if=\"tab.icon\" class=\"flex-none\" :icon=\"tab.icon\" />\n        </div>\n      </AppTabsTab>\n    </AppTabsList>\n    <AppTabsPanels>\n      <slot v-if=\"!isUsingRouter\" />\n      <RouterView v-else />\n    </AppTabsPanels>\n  </AppTabsGroup>\n</template>\n"
+      },
+      {
+        "name": "AppTabsGroup.vue",
+        "dir": "./src/components/tabs",
+        "placementDir": "tabs",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { TabGroup } from '@headlessui/vue'\n\ndefineSlots<{\n  /**\n   * Slot inside of TabGroup, should contain all Tab logic.\n   */\n  default: void\n}>()\n</script>\n\n<template>\n  <TabGroup>\n    <slot />\n  </TabGroup>\n</template>\n"
+      },
+      {
+        "name": "AppTabsList.vue",
+        "dir": "./src/components/tabs",
+        "placementDir": "tabs",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { TabList } from '@headlessui/vue'\n\ndefineSlots<{\n  /**\n   * Slot inside of TabList, should contain Tab elements.\n   */\n  default: void\n}>()\n</script>\n\n<template>\n  <TabList class=\"flex w-full flex-wrap justify-stretch\">\n    <slot />\n  </TabList>\n</template>\n"
+      },
+      {
+        "name": "AppTabsPanel.vue",
+        "dir": "./src/components/tabs",
+        "placementDir": "tabs",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { TabPanel } from '@headlessui/vue'\n\ndefineSlots<{\n  /**\n   * Slot inside of TabPanel, should contain panel content.\n   */\n  default: void\n}>()\n</script>\n\n<template>\n  <TabPanel class=\"text-foreground\">\n    <slot />\n  </TabPanel>\n</template>\n"
+      },
+      {
+        "name": "AppTabsPanels.vue",
+        "dir": "./src/components/tabs",
+        "placementDir": "tabs",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { TabPanels } from '@headlessui/vue'\n\ndefineSlots<{\n  /**\n   * Slot inside of TabPanel, should contain TabPanels.\n   */\n  default: void\n}>()\n</script>\n\n<template>\n  <TabPanels>\n    <slot />\n  </TabPanels>\n</template>\n"
+      },
+      {
+        "name": "AppTabsTab.vue",
+        "dir": "./src/components/tabs",
+        "placementDir": "tabs",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { Tab } from '@headlessui/vue'\nimport { computed } from 'vue'\nimport type { RouteLocationRaw } from 'vue-router'\nimport { RouterLink } from 'vue-router'\nimport { tabVariants } from '@/components/tabs/appTabs.style'\nimport { fadeTransition } from '@/transitions'\n\nconst { to } = defineProps<{\n  /**\n   * Whether the tab is active.\n   */\n  isActive: boolean\n  /**\n   * Route name to link to.\n   */\n  to?: RouteLocationRaw\n\n}>()\ndefineSlots<{\n  /**\n   * Slot inside of Tab, should contain Tab.\n   */\n  default: void\n}>()\n\nconst isRouter = computed(() => !!to)\n</script>\n\n<template>\n  <Component\n    :is=\"isRouter ? RouterLink : Tab\"\n    :to=\"to\"\n    class=\"relative flex flex-1\"\n    :class=\"tabVariants()\"\n  >\n    <slot />\n    <Transition v-bind=\"fadeTransition\">\n      <div v-if=\"isActive\" class=\"absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-primary\" />\n    </Transition>\n  </Component>\n</template>\n"
+      },
+      {
+        "name": "appTabs.style.ts",
+        "dir": "./src/components/tabs",
+        "placementDir": "tabs",
+        "type": "components",
+        "content": "import type { VariantProps } from '@/utils/tailwind/cva'\nimport { cva } from '@/utils/tailwind/cva'\n\nexport const tabVariants = cva(\n  {\n    base: 'rounded-t-button border border-transparent border-b-neutral-200  px-4 py-2 text-foreground outline-none duration-100 first-letter:rounded-t-button focus-visible:border-primary',\n    variants: {\n    },\n  },\n)\n\nexport type TabProps = VariantProps<typeof tabVariants>\n"
+      },
+      {
+        "name": "useTabsQuery.ts",
+        "dir": "./src/composables/tabs",
+        "placementDir": "tabs",
+        "type": "composables",
+        "content": "import type { Ref } from 'vue'\nimport { watch } from 'vue'\nimport { useRouteQuery } from '@vueuse/router'\n\nexport interface TabQueryParams {\n  tabId?: string | null\n  selectedTab: Ref<number | null>\n}\n\nexport function useTabQuery({ tabId = null, selectedTab }: TabQueryParams): void {\n  const query = useRouteQuery<string>(`tab-${tabId ?? 'default'}`)\n  let isInitialized = false\n  if (query !== null)\n    selectedTab.value = Number(query.value)\n\n  const setTabQuery = (value: number | null): void => {\n    query.value = value?.toString() ?? ''\n  }\n\n  watch(query, (value) => {\n    if (value === null)\n      return\n    isInitialized = true\n    selectedTab.value = Number(value)\n  }, { immediate: true })\n\n  watch(selectedTab, (value) => {\n    if (!isInitialized)\n      return\n    setTabQuery(value)\n  })\n}\n"
+      }
+    ],
+    "internalDependencies": [],
+    "dependencies": [
+      "@vueuse/router"
+    ]
+  },
+  {
     "component": "AppText",
     "name": "Text",
     "files": [

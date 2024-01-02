@@ -316,6 +316,30 @@
       "markdownFile": null
     },
     {
+      "id": "src-components-tabs-apptabs-story-vue",
+      "title": "AppTabs",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-tabs-apptabs-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/tabs/AppTabs.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Tabs",
+        "AppTabs"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-components-text-apptext-story-vue",
       "title": "AppText",
       "layout": {
