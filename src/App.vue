@@ -1,45 +1,26 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { TabWithoutRoutes } from '@/components/tabs/AppTabs.vue'
-import AppTabs from '@/components/tabs/AppTabs.vue'
-import AppTabsPanel from '@/components/tabs/AppTabsPanel.vue'
+import { Toaster, toast } from 'vue-sonner'
+import AppButton from '@/components/button/AppButton.vue'
+import { useToast } from '@/composables/toast/useToast'
 
-const tabs = computed<TabWithoutRoutes[]>(() => [
-  {
-    label: 'Tab 1',
-    icon: 'eye',
-  },
-  {
-    label: 'Tab 2',
-    icon: 'eye',
-  },
-  {
-    label: 'Tab 3',
-    icon: 'eye',
-  },
-])
+const { showToastError } = useToast()
+function handleToast(): void {
+  showToastError({
+    action: {
+      label: 'Undo',
+      onClick: () => {
+        console.warn('test')
+      },
+    },
+    title: 'test',
+  })
+}
 </script>
 
 <template>
-  <AppTabs
-    :tabs="tabs"
-  >
-    <AppTabsPanel>
-      <div class="p-4">
-        Tab 1
-      </div>
-    </AppTabsPanel>
-    <AppTabsPanel>
-      <div class="p-4">
-        Tab 2
-      </div>
-    </AppTabsPanel>
-    <AppTabsPanel>
-      <div class="p-4">
-        Tab 2
-      </div>
-    </AppTabsPanel>
-  </AppTabs>
-
+  <AppButton @click="handleToast">
+    test
+  </AppButton>
+  <Toaster />
   <!-- <RouterView /> -->
 </template>

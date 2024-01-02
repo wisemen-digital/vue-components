@@ -50,6 +50,7 @@ export default {
       'popover-shadow': 'var(--shadow-popover);',
       'modal-shadow': 'var(--shadow-modal);',
       'input-shadow': 'var(--shadow-input);',
+      'toast-shadow': 'var(--shadow-toast);',
     },
 
     borderRadius: {
