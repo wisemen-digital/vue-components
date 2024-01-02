@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="TRouter  extends true | false | undefined = false">
 import { computed, watch } from 'vue'
-import type { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import AppIcon from '@/components/icon/AppIcon.vue'
 import AppTabsGroup from '@/components/tabs/AppTabsGroup.vue'
@@ -8,7 +8,7 @@ import AppTabsList from '@/components/tabs/AppTabsList.vue'
 import AppTabsTab from '@/components/tabs/AppTabsTab.vue'
 import type { Icon } from '@/icons'
 import AppTabsPanels from '@/components/tabs/AppTabsPanels.vue'
-import { useTabQuery } from '@/composables/tab/useTabQuery'
+import { useTabQuery } from '@/composables/tabs/useTabsQuery'
 
 export interface TabWithRoutes {
   label: string
@@ -22,21 +22,40 @@ export interface TabWithoutRoutes {
   to?: never
 }
 
-const { isRouter = false, tabs } = defineProps<Props<TRouter>>()
-
 interface Props<THasRoutes> {
+  /**
+   * If true, the tabs will use the router to determine which tab is active, to with a route is required.
+   * If false, the tabs will use query params to determine which tab is active.
+   * If undefined, the tabs will use query params if the router is not available.
+   */
   isRouter?: THasRoutes
+  /**
+   * The tabs to display.
+   * If using the router, the tabs must have a `to` property.
+   * If not using the router, the tabs must not have a `to` property.
+   */
   tabs: THasRoutes extends true ? TabWithRoutes[] : TabWithoutRoutes[]
+  /**
+   * The name of the tab query param, in case you use multiple tabs on the page.
+   */
+  tabId?: string
 }
+
+const { isRouter = false, tabs, tabId = 'default' } = defineProps<Props<TRouter>>()
+
+const selectedTab = defineModel<number>({
+  local: true,
+  default: 0,
+})
 
 // Need this or it errors because of bad generics
 const allTabs = computed(() => {
   return tabs
 })
 
-const selectedTab = defineModel<number>({
-  local: true,
-  default: 0,
+const isUsingRouter = computed<boolean>(() => {
+  // @ts-expect-error Generics in Vue SFCs are not supported yet
+  return !!isRouter || isRouter === ''
 })
 
 function changeTab(index: number): void {
@@ -48,12 +67,7 @@ function isActive(index: number): boolean {
 }
 
 const tabComponent = computed(() => {
-  return isRouter ? RouterLink : 'button'
-})
-
-const isUsingRouter = computed<boolean>(() => {
-  // @ts-expect-error Generics in Vue SFCs are not supported yet
-  return !!isRouter || isRouter === ''
+  return isUsingRouter.value ? RouterLink : 'button'
 })
 
 // Router logic
@@ -71,8 +85,9 @@ watch(() => route.path, () => {
     selectedTab.value = (allTabs.value as TabWithRoutes[]).indexOf(tab)
 })
 
+// Tab logic in query params
 if (!isUsingRouter.value)
-  useTabQuery({ selectedTab, tabId: 'default' })
+  useTabQuery({ selectedTab, tabId })
 </script>
 
 <template>

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { TabWithRoutes, TabWithoutRoutes } from '@/components/tabs/AppTabs.vue'
+import type { TabWithRoutes } from '@/components/tabs/AppTabs.vue'
 import AppTabs from '@/components/tabs/AppTabs.vue'
-import type { Icon } from '@/icons'
 import AppTabsPanel from '@/components/tabs/AppTabsPanel.vue'
 
 const selectedTab = ref(2)
