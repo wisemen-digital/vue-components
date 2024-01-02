@@ -1,7 +1,48 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { computed, ref } from 'vue'
+import type { TabWithoutRoutes } from '@/components/tabs/AppTabs.vue'
+import AppTabs from '@/components/tabs/AppTabs.vue'
+import AppTabsPanel from '@/components/tabs/AppTabsPanel.vue'
+
+const selectedTab = ref(2)
+
+const tabs = computed<TabWithoutRoutes[]>(() => [
+  {
+    label: 'Tab 1',
+    icon: 'eye',
+  },
+  {
+    label: 'Tab 2',
+    icon: 'eye',
+  },
+  {
+    label: 'Tab 3',
+    icon: 'eye',
+  },
+])
 </script>
 
 <template>
-  <RouterView />
+  <AppTabs
+    v-model="selectedTab"
+    :tabs="tabs"
+  >
+    <AppTabsPanel>
+      <div class="p-4">
+        Tab 1
+      </div>
+    </AppTabsPanel>
+    <AppTabsPanel>
+      <div class="p-4">
+        Tab 2
+      </div>
+    </AppTabsPanel>
+    <AppTabsPanel>
+      <div class="p-4">
+        Tab 2
+      </div>
+    </AppTabsPanel>
+  </AppTabs>
+
+  <!-- <RouterView /> -->
 </template>
