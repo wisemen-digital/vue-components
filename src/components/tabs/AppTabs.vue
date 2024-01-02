@@ -67,7 +67,7 @@ watch(() => route.path, () => {
     })
   })
   if (tab)
-    selectedTab.value = allTabs.value.indexOf(tab)
+    selectedTab.value = (allTabs.value as TabWithRoutes[]).indexOf(tab)
 })
 </script>
 
