@@ -4,17 +4,13 @@ import { createI18n } from 'vue-i18n'
 
 import en from './src/locales/en.json'
 import nl from './src/locales/nl.json'
+import router from './src/router/router'
 
 export const setupVue3 = defineSetupVue3(async ({ app }) => {
-  const isIframe = window.self !== window.top
-
-  // eslint-disable-next-line node/prefer-global/process
-  if (isIframe || process?.env.NODE_ENV === 'development') {
-    // @ts-expect-error - this is a hack to make the iframe work
-    await import('./src/assets/styles/globals.css')
-    // @ts-expect-error - this is a hack to make the iframe work
-    await import('./src/assets/styles/transitions.scss')
-  }
+  // @ts-expect-error - this is a hack to make the iframe work
+  await import('./src/assets/styles/globals.css')
+  // @ts-expect-error - this is a hack to make the iframe work
+  await import('./src/assets/styles/transitions.scss')
 
   const pinia = createPinia()
   const i18n = createI18n({
@@ -27,5 +23,6 @@ export const setupVue3 = defineSetupVue3(async ({ app }) => {
     },
   })
   app.use(pinia) // Add Pinia store
+    .use(router)
     .use(i18n)
 })

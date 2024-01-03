@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="TValue">
+<script setup lang="ts" generic="TValue extends string | boolean">
 import { Switch } from '@headlessui/vue'
 import { computed } from 'vue'
 import AppSwitchIndicator from '@/components/switch/AppSwitchIndicator.vue'
@@ -77,7 +77,7 @@ function onBlur(): void {
   <!-- eslint-disable vue/valid-v-model -->
   <Switch
     v-model="isSelected"
-    :value="(value as any)"
+    :value="(typeof value === 'string') ? value : undefined"
     :name="name"
     :disabled="isDisabled"
     class="flex justify-start"

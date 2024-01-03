@@ -9,7 +9,7 @@ export async function generateRegistryFile(components: Component[], fileName: st
     .map((component) => {
       const files = component.files?.map((file) => {
         try {
-          const content = fs.readFileSync(path.join(process.cwd(), file.path), 'utf8')
+          const content = fs.readFileSync(path.join(process?.cwd(), file.path), 'utf8')
           return {
             name: basename(file.path),
             dir: dirname(file.path),
@@ -39,12 +39,12 @@ export async function generateRegistryFile(components: Component[], fileName: st
       return 0
     })
 
-  const writeDir = path.join(process.cwd(), 'public/api')
+  const writeDir = path.join(process?.cwd(), 'public/api')
   if (!existsSync(path.resolve(writeDir)))
     fs.mkdirSync(path.resolve(writeDir), { recursive: true })
 
   fs.writeFileSync(
-    path.join(process.cwd(), `public/api/${fileName}.json`),
+    path.join(process?.cwd(), `public/api/${fileName}.json`),
 
     JSON.stringify(payload, null, 2),
   )
