@@ -25,6 +25,12 @@ export const appToast: Component = {
       path: './src/composables/toast/useToast.vue',
       folder: 'toast',
     },
+    {
+      type: ComponentType.COMPOSABLES,
+      path: './src/composables/toast/useToastSwipe.vue',
+      folder: 'toast',
+    },
+
   ],
   internalDependencies: [ComponentName.APP_BUTTON, ComponentName.APP_LOADER],
   dependencies: ['vue-sonner'],

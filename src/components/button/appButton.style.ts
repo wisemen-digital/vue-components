@@ -43,6 +43,7 @@ export const buttonIcon = cva({
       sm: 'h-3.5 w-3.5',
       lg: 'h-4 w-4',
       icon: 'h-3.5 w-3.5',
+      xs: 'h-3 w-3',
     },
   },
   defaultVariants: {

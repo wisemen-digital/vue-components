@@ -70,7 +70,7 @@ export interface ToastParams<TPromise> {
 export type ToastParamsWithoutVariant<TPromise> = Omit<ToastParams<TPromise>, 'variant'>
 
 export function useToast() {
-  const renderToast = <TPromise>({ title, action, duration = 5000, icon, variant, promise }: ToastParams<TPromise>) => {
+  const renderToast = <TPromise>({ title, action, duration = Number.POSITIVE_INFINITY, icon, variant, promise }: ToastParams<TPromise>) => {
     const toastComponent = h(AppToast<TPromise>, { title, action, icon, variant, promise })
     toast.custom(markRaw(toastComponent), { duration })
   }

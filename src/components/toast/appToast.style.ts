@@ -28,7 +28,7 @@ export const toast = cva({
 })
 
 export const toastContainer = cva({
-  base: 'w-80 overflow-hidden rounded border bg-white shadow-card-shadow',
+  base: 'w-full overflow-hidden rounded border bg-white shadow-card-shadow lg:w-80',
   variants: {
     variant: containerVariantOptions,
   },
