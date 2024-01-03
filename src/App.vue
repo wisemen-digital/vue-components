@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Toaster, toast } from 'vue-sonner'
 import AppButton from '@/components/button/AppButton.vue'
 import { useToast } from '@/composables/toast/useToast'
+import AppToastContainer from '@/components/toast/AppToastContainer.vue'
 
 const { showToastSuccess } = useToast()
 function handleToast(): void {
@@ -25,6 +25,6 @@ function handleToast(): void {
   <AppButton @click="handleToast">
     test
   </AppButton>
-  <Toaster />
+  <AppToastContainer />
   <!-- <RouterView /> -->
 </template>

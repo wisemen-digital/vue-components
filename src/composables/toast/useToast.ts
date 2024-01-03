@@ -1,6 +1,5 @@
 import { toast } from 'vue-sonner'
 import { h, markRaw } from 'vue'
-import type { T } from 'vitest/dist/reporters-O4LBziQ_'
 import AppToast from '@/components/toast/AppToast.vue'
 import type { Icon } from '@/icons'
 import type { ToastProps } from '@/components/toast/appToast.style'
