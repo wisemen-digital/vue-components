@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { TabWithRoutes, TabWithoutRoutes } from '@/components/tabs/AppTabs.vue'
+import type { TabWithoutRoutes } from '@/components/tabs/AppTabs.vue'
 import AppTabs from '@/components/tabs/AppTabs.vue'
 import AppTabsPanel from '@/components/tabs/AppTabsPanel.vue'
 

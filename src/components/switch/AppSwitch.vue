@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="TValue extends string | boolean">
+<script setup lang="ts" generic="TValue">
 import { Switch } from '@headlessui/vue'
 import { computed } from 'vue'
 import AppSwitchIndicator from '@/components/switch/AppSwitchIndicator.vue'
