@@ -364,6 +364,30 @@
       "markdownFile": null
     },
     {
+      "id": "src-components-toast-apptoast-story-vue",
+      "title": "AppToast",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-toast-apptoast-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/toast/AppToast.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Toast",
+        "AppToast"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "docs-introduction-story-js",
       "title": "Introduction",
       "group": "top",
