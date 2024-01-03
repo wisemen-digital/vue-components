@@ -6,19 +6,20 @@ export const variantOptions = {
   destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-focus-destructive',
   outline: 'border border-primary hover:bg-secondary text-secondary-foreground',
   secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-  ghost: 'hover:bg-secondary text-secondary-foreground',
+  ghost: 'hover:bg-black/5 border-transparent',
   link: 'text-primary underline-offset-4 hover:underline',
 }
 
 export const sizeOptions = {
-  icon: 'h-10 p-3 w-10',
+  icon: 'h-10 p-1 w-10',
   default: 'h-10 px-4 py-2',
   sm: 'h-9 rounded px-3',
+  xs: 'h-8 rounded px-2',
   lg: 'h-11 rounded px-8',
 }
 
 export const button = cva({
-  base: 'relative inline-flex flex-shrink-0 items-center justify-center gap-x-2 rounded-button border border-solid text-subtext font-medium ring-offset-background duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+  base: 'relative inline-flex flex-shrink-0 items-center justify-center gap-x-2 rounded-button border border-solid text-subtext font-medium ring-offset-background transition-colors duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
   variants: {
     variant: variantOptions,
     size: sizeOptions,
@@ -42,6 +43,7 @@ export const buttonIcon = cva({
       sm: 'h-3.5 w-3.5',
       lg: 'h-4 w-4',
       icon: 'h-3.5 w-3.5',
+      xs: 'h-3 w-3',
     },
   },
   defaultVariants: {

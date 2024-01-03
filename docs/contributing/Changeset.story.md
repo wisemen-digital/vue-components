@@ -6,7 +6,6 @@ title: 'Changeset'
 
 # Changeset
 
-
 ## What is changeset?
 
 Changeset is a tool to control versioning of a package and maintain it's CHANGELOG.md file.
@@ -21,4 +20,3 @@ The <b>major</b> version will only be relevant whenever we release the 1.0 versi
 
 When you are done with your branch and make a pull request, you run the command ```pnpm changeset version```\
 This will automatically update the CHANGELOG.md file and update the version of the package.
-

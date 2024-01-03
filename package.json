@@ -43,6 +43,7 @@
     "vue": "^3.4.3",
     "vue-i18n": "^9.8.0",
     "vue-router": "^4.2.5",
+    "vue-sonner": "^1.0.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {

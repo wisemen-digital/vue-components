@@ -1,28 +1,24 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { TabWithRoutes } from '@/components/tabs/AppTabs.vue'
+import type { TabWithoutRoutes } from '@/components/tabs/AppTabs.vue'
 import AppTabs from '@/components/tabs/AppTabs.vue'
 import AppTabsPanel from '@/components/tabs/AppTabsPanel.vue'
 
 const selectedTab = ref(2)
 
-const tabs = computed<TabWithRoutes[]>(() => [
+const tabs = computed<TabWithoutRoutes[]>(() => [
   {
     label: 'Tab 1',
     icon: 'eye',
-    to: '/tab1',
   },
   {
     label: 'Tab 2',
     icon: 'eye',
-    to: '/tab1',
 
   },
   {
     label: 'Tab 3',
     icon: 'eye',
-    to: '/tab1',
-
   },
 ])
 </script>
@@ -35,7 +31,6 @@ const tabs = computed<TabWithRoutes[]>(() => [
       <div class="p-8">
         <AppTabs
           v-model="selectedTab"
-          is-router
           :tabs="tabs"
         >
           <AppTabsPanel>

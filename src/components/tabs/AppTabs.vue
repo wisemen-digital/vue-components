@@ -71,13 +71,13 @@ const tabComponent = computed(() => {
 
 // Router logic
 const route = useRoute()
-watch(() => route.path, () => {
+watch(() => route?.path, () => {
   if (!isUsingRouter.value)
     return
 
   const tab = (allTabs.value as TabWithRoutes[]).find((tab) => {
-    return route.matched.find((route) => {
-      return tab.to === route.path
+    return route?.matched.find((route) => {
+      return tab.to === route?.path
     })
   })
   if (tab)

@@ -5,7 +5,7 @@
 - [x] AppButton
 - [x] FormInputField
 - [ ] AppModal
-  
+
 ## Usage
 
 ### Add components to project using the following commands
@@ -47,7 +47,6 @@ Each file has a type of file, a path and a folder.
 | `path` | Location of the file in this project |
 | `folder` | Location of the file inside the project you are installing the component |
 
-
 E.g appButton.ts
 ```typescript
 import { ComponentName, ComponentType } from '../../componentsTypes'
@@ -84,4 +83,3 @@ Run the command
 ```
 pnpm build:components
 ```
-

@@ -40,6 +40,7 @@ export default defineConfig({
   plugins: [
     HstVue(),
   ],
+  viteNodeInlineDeps: [/vue-sonner/],
   vite: {
     base: '/vue-components/',
   },
