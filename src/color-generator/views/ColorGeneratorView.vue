@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { convertCssIntoVariables } from '../utils/convertCssIntoVariables'
+import { ref, watch } from 'vue'
+import type { CssVariable, CssVariables } from '../utils/convertCssIntoVariables'
+import { combineStyles, convertCssIntoVariables } from '../utils/convertCssIntoVariables'
 import { hexToCssVar } from '../utils/colors'
 
 import FormInputField from '@/components/input/AppInput.vue'
 import AppButton from '@/components/button/AppButton.vue'
+import { getBodyCssVariables, setBodyCssVariables } from '@/color-generator/utils/setBodyCssVariables'
 
 async function getGlobalConfig(): Promise<any> {
   const response = await fetch('https://wisemen-digital.github.io/vue-components/api/globalConfig.json')
@@ -13,25 +15,10 @@ async function getGlobalConfig(): Promise<any> {
 }
 
 const globalsCss = ref<string>()
-const defaultValues = ref<{
-  hslCssVariables: {
-    name: string
-    value: string
-  }[]
-  otherValues: {
-    name: string
-    value: string
-  }[]
-}>()
+const defaultValues = ref<CssVariables>()
 
-const hslCssVariables = ref<{
-  name: string
-  value: string
-}[]>()
-const otherValues = ref<{
-  name: string
-  value: string
-}[]>()
+const hslCssVariables = ref<CssVariable[]>()
+const otherValues = ref<CssVariable[]>()
 
 async function init(): Promise<void> {
   const response = await getGlobalConfig()
@@ -40,7 +27,10 @@ async function init(): Promise<void> {
     ?.files
     ?.find((item: any) => item.name === 'globals.css')
     ?.content
-  defaultValues.value = convertCssIntoVariables(globalsCss.value)
+  const bodyCssVariables = getBodyCssVariables()
+  const bodyStyles = bodyCssVariables || { hslCssVariables: [], otherValues: [] }
+
+  defaultValues.value = combineStyles(convertCssIntoVariables(globalsCss.value), bodyStyles)
   hslCssVariables.value = defaultValues.value.hslCssVariables
   otherValues.value = defaultValues.value.otherValues
 }
@@ -72,7 +62,6 @@ function handleDownloadCss(): void {
   document.body.appendChild(element)
 
   element.click()
-
   document.body.removeChild(element)
 }
 
@@ -88,6 +77,18 @@ function handleCssUpload(event: Event): void {
   if (file)
     reader.readAsText(file)
 }
+
+function setCss(): void {
+  if (!hslCssVariables.value || !otherValues.value)
+    return
+  const allCss = [...hslCssVariables.value.map(hsl => ({
+    name: hsl.name,
+    value: hexToCssVar(hsl.value),
+  })), ...otherValues.value]
+  setBodyCssVariables(allCss)
+}
+
+watch(() => [hslCssVariables.value, otherValues.value], () => setCss(), { deep: true })
 </script>
 
 <template>
@@ -121,6 +122,9 @@ function handleCssUpload(event: Event): void {
       </div>
       <AppButton @click="handleDownloadCss">
         Download CSS
+      </AppButton>
+      <AppButton @click="setCss">
+        Set CSS
       </AppButton>
     </div>
   </div>

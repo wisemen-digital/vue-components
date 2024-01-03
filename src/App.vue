@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppButton from '@/components/button/AppButton.vue'
 import { useToast } from '@/composables/toast/useToast'
-import AppToastContainer from '@/components/toast/AppToastContainer.vue'
+import ColorGeneratorView from '@/color-generator/views/ColorGeneratorView.vue'
 
 const { showToastSuccess } = useToast()
 function handleToast(): void {
@@ -15,6 +15,6 @@ function handleToast(): void {
   <AppButton @click="handleToast">
     test
   </AppButton>
-  <AppToastContainer />
+  <ColorGeneratorView />
   <!-- <RouterView /> -->
 </template>
