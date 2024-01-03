@@ -9,6 +9,14 @@ export const variantOptions = {
   default: 'bg-background text-foreground',
 }
 
+export const containerVariantOptions = {
+  warn: 'border-warn',
+  error: 'border-destructive',
+  info: 'border-info',
+  success: 'border-success',
+  default: 'border-border',
+}
+
 export const toast = cva({
   base: 'flex items-center justify-between gap-2 px-2 py-1',
   variants: {
@@ -19,4 +27,15 @@ export const toast = cva({
   },
 })
 
+export const toastContainer = cva({
+  base: 'w-80 overflow-hidden rounded border bg-white shadow-card-shadow',
+  variants: {
+    variant: containerVariantOptions,
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
+
 export type ToastProps = VariantProps<typeof toast>
+export type ToastContainerProps = VariantProps<typeof toastContainer>

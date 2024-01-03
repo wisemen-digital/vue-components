@@ -3,16 +3,20 @@ import { Toaster, toast } from 'vue-sonner'
 import AppButton from '@/components/button/AppButton.vue'
 import { useToast } from '@/composables/toast/useToast'
 
-const { showToastError } = useToast()
+const { showToastSuccess } = useToast()
 function handleToast(): void {
-  showToastError({
-    action: {
-      label: 'Undo',
-      onClick: () => {
-        console.warn('test')
-      },
+  showToastSuccess({
+    promise: {
+      action: new Promise<string>((resolve) => {
+        setTimeout(() => {
+          resolve('It worked!')
+        }, 2000)
+      }),
+      loadingMessage: 'Saving...',
+      successMessage: test => `Success! ${test}`,
+      errorMessage: test => `Error! ${test}`,
     },
-    title: 'test',
+    title: 'Saving user',
   })
 }
 </script>
