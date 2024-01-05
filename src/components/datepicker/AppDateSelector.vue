@@ -95,7 +95,7 @@ function handleClose(): void {
     :year-range="yearRange"
     :clearable="false"
 
-    teleport
+    teleport="body"
     is-24
     auto-apply
     no-disabled-range
@@ -162,40 +162,40 @@ function handleClose(): void {
   </VueDatePicker>
 </template>
 
-<style scoped lang="scss">
-:deep(.dp__arrow_top) {
+<style lang="scss">
+.dp__arrow_top {
   @apply hidden;
 }
 
-:deep(.dp__menu) {
-  @apply rounded-card border-border bg-card text-card-foreground;
+.dp__menu {
+  @apply rounded-card border-border bg-popover text-popover-foreground;
 }
 
-:deep(.dp__calendar_item) {
+.dp__calendar_item {
   @apply rounded-button;
 }
 
-:deep(.dp__cell_inner) {
+.dp__cell_inner {
   @apply rounded-button hover:bg-neutral-100;
 }
 
-:deep(.dp__active_date), :deep(.dp__overlay_cell_active), :deep(.dp__range_start), :deep(.dp__range_end) {
+.dp__active_date, .dp__overlay_cell_active, .dp__range_start, .dp__range_end {
   @apply bg-primary text-primary-foreground hover:bg-primary;
 }
 
-:deep(.dp__range_between) {
+.dp__range_between {
   @apply bg-primary/20 text-black rounded-button;
 }
 
-:deep(.dp__today) {
+.dp__today {
   @apply border-primary;
 }
 
-:deep(.dp__btn), :deep(.dp__inner_nav) {
+.dp__btn, .dp__inner_nav {
   @apply hover:bg-neutral-100 text-black rounded-button;
 }
 
-:deep(.dp__cell_offset) {
+.dp__cell_offset {
   @apply hover:bg-neutral-100 text-neutral-300;
 }
 </style>

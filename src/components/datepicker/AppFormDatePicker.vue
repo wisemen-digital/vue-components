@@ -71,7 +71,7 @@ function handleClose(): void {
 </script>
 
 <template>
-  <div :class="attrs.class">
+  <div class="w-full" :class="attrs.class">
     <AppFormLabel
       v-if="label !== null"
       :id="id"
