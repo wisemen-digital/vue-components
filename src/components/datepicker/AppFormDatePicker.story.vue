@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { ZodFormattedError } from 'zod'
-import AppDatePicker from '@/components/datepicker/AppDatePicker.vue'
 import AppFormDatePicker from '@/components/datepicker/AppFormDatePicker.vue'
 
 const date = ref<Date | null>(null)
