@@ -12,6 +12,9 @@ export interface Props {
   hasNoShift?: boolean
   hasNoFlip?: boolean
   hasAutoPlacement?: boolean
+
+  isManual?: boolean
+  isDiv?: boolean
 }
 
 const {
@@ -22,11 +25,22 @@ const {
   hasNoFlip = false,
   hasNoOffset = false,
   hasNoShift = false,
+
+  isDiv = false,
+  isManual = false,
 } = defineProps<Props>()
 
 const SHIFT_VALUE = 8
 const OFFSET_VALUE = 4
 const FLIP_VALUE = 8
+
+const isOpen = defineModel<boolean>({
+  default: false,
+})
+
+function closeManual(): void {
+  isOpen.value = false
+}
 </script>
 
 <template>
@@ -43,17 +57,27 @@ const FLIP_VALUE = 8
       v-bind="popoverTransition"
       tailwindcss-origin-class
     >
-      <PopoverButton class="max-w-max rounded-button">
+      <PopoverButton :as="isDiv ? 'template' : 'button'" class="max-w-max rounded-button">
         <slot name="activator" />
       </PopoverButton>
 
       <PopoverPanel
+        v-if="!isManual"
         v-slot="{ close }"
         :focus="true"
         class="rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow"
       >
         <slot name="panel" :close="close" />
       </PopoverPanel>
+      <div v-else-if="isOpen">
+        <PopoverPanel
+          :focus="true"
+          static
+          class="rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow"
+        >
+          <slot name="panel" :close="closeManual" />
+        </PopoverPanel>
+      </div>
     </Float>
   </Popover>
 </template>
