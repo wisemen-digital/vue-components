@@ -17,6 +17,13 @@
     "name": "Icons",
     "files": [
       {
+        "name": "CalendarIcon.vue",
+        "dir": "./src/icons",
+        "placementDir": "",
+        "type": "icons",
+        "content": "<template>\n  <svg fill=\"none\" shape-rendering=\"geometricPrecision\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\">\n    <rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\" /><path d=\"M16 2v4\" /><path d=\"M8 2v4\" /><path d=\"M3 10h18\" />\n  </svg>\n</template>\n"
+      },
+      {
         "name": "CheckmarkIcon.vue",
         "dir": "./src/icons",
         "placementDir": "",
@@ -50,6 +57,13 @@
         "placementDir": "",
         "type": "icons",
         "content": "<template>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n    <path\n      fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\"\n      d=\"m4.5 15.75l7.5-7.5l7.5 7.5\"\n    />\n  </svg>\n</template>\n"
+      },
+      {
+        "name": "ClockIcon.vue",
+        "dir": "./src/icons",
+        "placementDir": "",
+        "type": "icons",
+        "content": "<template>\n  <svg data-testid=\"geist-icon\" fill=\"none\" shape-rendering=\"geometricPrecision\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\">\n    <circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 6v6l4 2\" />\n  </svg>\n</template>\n"
       },
       {
         "name": "CloseIcon.vue",
@@ -168,7 +182,7 @@
         "dir": "./src/icons",
         "placementDir": "",
         "type": "icons",
-        "content": "export { default as CheckmarkIcon } from '@/icons/CheckmarkIcon.vue'\nexport { default as ChevronDownIcon } from '@/icons/ChevronDownIcon.vue'\nexport { default as ChevronLeftIcon } from '@/icons/ChevronLeftIcon.vue'\nexport { default as ChevronRightIcon } from '@/icons/ChevronRightIcon.vue'\nexport { default as ChevronUpIcon } from '@/icons/ChevronUpIcon.vue'\nexport { default as CloseIcon } from '@/icons/CloseIcon.vue'\nexport { default as DownloadIcon } from '@/icons/DownloadIcon.vue'\nexport { default as EditIcon } from '@/icons/EditIcon.vue'\nexport { default as EyeIcon } from '@/icons/EyeIcon.vue'\nexport { default as EyeSlashIcon } from '@/icons/EyeSlashIcon.vue'\nexport { default as FilterIcon } from '@/icons/FilterIcon.vue'\nexport { default as InfoIcon } from '@/icons/InfoIcon.vue'\nexport { default as MinusIcon } from '@/icons/MinusIcon.vue'\nexport { default as PlusIcon } from '@/icons/PlusIcon.vue'\nexport { default as SearchIcon } from '@/icons/SearchIcon.vue'\nexport { default as SortIcon } from '@/icons/SortIcon.vue'\nexport { default as SortAscendingIcon } from '@/icons/SortAscendingIcon.vue'\nexport { default as SortDescendingIcon } from '@/icons/SortDescendingIcon.vue'\nexport { default as ThreeDotsIcon } from '@/icons/ThreeDotsIcon.vue'\nexport { default as UploadIcon } from '@/icons/UploadIcon.vue'\nexport { default as WarningIcon } from '@/icons/WarningIcon.vue'\n"
+        "content": "export { default as CheckmarkIcon } from '@/icons/CheckmarkIcon.vue'\nexport { default as ChevronDownIcon } from '@/icons/ChevronDownIcon.vue'\nexport { default as ChevronLeftIcon } from '@/icons/ChevronLeftIcon.vue'\nexport { default as ChevronRightIcon } from '@/icons/ChevronRightIcon.vue'\nexport { default as ChevronUpIcon } from '@/icons/ChevronUpIcon.vue'\nexport { default as CloseIcon } from '@/icons/CloseIcon.vue'\nexport { default as DownloadIcon } from '@/icons/DownloadIcon.vue'\nexport { default as EditIcon } from '@/icons/EditIcon.vue'\nexport { default as EyeIcon } from '@/icons/EyeIcon.vue'\nexport { default as EyeSlashIcon } from '@/icons/EyeSlashIcon.vue'\nexport { default as FilterIcon } from '@/icons/FilterIcon.vue'\nexport { default as InfoIcon } from '@/icons/InfoIcon.vue'\nexport { default as MinusIcon } from '@/icons/MinusIcon.vue'\nexport { default as PlusIcon } from '@/icons/PlusIcon.vue'\nexport { default as SearchIcon } from '@/icons/SearchIcon.vue'\nexport { default as SortIcon } from '@/icons/SortIcon.vue'\nexport { default as SortAscendingIcon } from '@/icons/SortAscendingIcon.vue'\nexport { default as SortDescendingIcon } from '@/icons/SortDescendingIcon.vue'\nexport { default as ThreeDotsIcon } from '@/icons/ThreeDotsIcon.vue'\nexport { default as UploadIcon } from '@/icons/UploadIcon.vue'\nexport { default as WarningIcon } from '@/icons/WarningIcon.vue'\nexport { default as CalendarIcon } from '@/icons/CalendarIcon.vue'\nexport { default as ClockIcon } from '@/icons/ClockIcon.vue'\n"
       },
       {
         "name": "index.ts",

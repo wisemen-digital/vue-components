@@ -72,6 +72,78 @@
       "markdownFile": null
     },
     {
+      "id": "src-components-datepicker-appdatepicker-story-vue",
+      "title": "AppDatepicker",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-datepicker-appdatepicker-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/datepicker/AppDatePicker.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "DatePicker",
+        "AppDatepicker"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-datepicker-appdateselector-story-vue",
+      "title": "AppDateSelector",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-datepicker-appdateselector-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/datepicker/AppDateSelector.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "DatePicker",
+        "AppDateSelector"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-components-datepicker-appformdatepicker-story-vue",
+      "title": "AppFormDatePicker",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-datepicker-appformdatepicker-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/datepicker/AppFormDatePicker.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "DatePicker",
+        "AppFormDatePicker"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-components-icon-appicon-story-vue",
       "title": "AppIcon",
       "layout": {
