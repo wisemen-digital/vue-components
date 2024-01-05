@@ -60,3 +60,20 @@
 .list-static-leave-active {
   position: absolute;
 }
+
+.popover {
+  &-enter-active,
+  &-leave-active {
+    @apply ease-native duration-200;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    @apply opacity-0 -translate-y-2;
+  }
+
+  &-enter-to,
+  &-leave-from {
+    @apply opacity-100;
+  }
+}

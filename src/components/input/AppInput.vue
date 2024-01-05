@@ -1,60 +1,19 @@
 <!-- eslint-disable-next-line vue/max-len -->
 <script setup lang="ts" generic="T extends InputType">
-import { type InputHTMLAttributes, computed } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 
-import { ref, useAttrs } from 'vue'
 import { input, inputIcon, inputWrapper } from './appInput.style'
-import type { Icon } from '@/icons'
-import type { InputType, InputValue } from '@/types/input.type'
+import type { InputProps, InputType, InputValue } from '@/types/input.type'
 import AppIcon from '@/components/icon/AppIcon.vue'
 
-export interface Props<T extends InputType>
-  extends /* @vue-ignore */ Omit<InputHTMLAttributes, 'disabled'> {
-  /**
-   * The type of input for the component. Can be one of:
-   * 'date', 'email', 'number', 'password', 'text', 'time', 'datetime-local'
-   * Defaults to 'text'.
-   */
-  type?: T
-
-  /**
-   * Whether the input is disabled or not.
-   * If true, the input is disabled and cannot be focused.
-   */
-  isDisabled?: boolean
-
-  /**
-   * Whether the input border should be red.
-   */
-  isInvalid?: boolean
-
-  /**
-   * The icon to display on the left side of the input.
-   */
-  iconLeft?: Icon | null
-
-  /**
-   * The icon to display on the right side of the input.
-   */
-  iconRight?: Icon | null
-
-  /**
-   *
-   */
-  isCompact?: boolean
-
-  /**
-   *
-   */
-  dataMaska?: string | null
-}
-
-const props = withDefaults(defineProps<Props<T>>(), {
+const props = withDefaults(defineProps<InputProps<T>>(), {
   // @ts-expect-error Yet another vue ts error
   type: 'text',
+  isOutsideFocused: false,
   isDisabled: false,
   isInvalid: false,
   isCompact: false,
+  isReadonly: false,
   iconLeft: null,
   iconRight: null,
 })
@@ -85,12 +44,12 @@ const inputWrapperClasses = computed<string>(() => {
     isDisabled,
     isInvalid,
     isCompact,
-    isFocused: isFocused.value,
+    isFocused: isFocused.value || props.isOutsideFocused,
     class: attrs.class as string,
   })
 })
 
-const inputClasses = computed<string>(() => input())
+const inputClasses = computed<string>(() => input({ isReadonly: props.isReadonly }))
 
 const inputIconClasses = computed<string>(() => {
   const { isInvalid } = props
@@ -130,6 +89,7 @@ function onBlur(): void {
       v-model="computedValue"
       v-bind="inputAttrs"
       :class="inputClasses"
+      :readonly="isReadonly"
       :disabled="isDisabled"
       :type="type as string"
       @blur="onBlur"

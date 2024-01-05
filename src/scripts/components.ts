@@ -12,6 +12,7 @@ import { appLoader } from './files/components/appLoader'
 import { appSelect } from './files/components/appSelect'
 import { appSwitch } from './files/components/appSwitch'
 import { appTabs } from './files/components/appTabs'
+import { appDatePicker } from './files/components/appDatePicker'
 
 import type { Component } from './componentsTypes'
 
@@ -29,6 +30,7 @@ export const components: Component[] = [
   appSelect,
   appSwitch,
   appTabs,
+  appDatePicker,
 
   appHeightTransition,
 ]

@@ -31,6 +31,11 @@ export const appInput: Component = {
       folder: 'input',
     },
     {
+      type: ComponentType.COMPOSABLES,
+      path: './src/composables/form/useFormInput.ts',
+      folder: 'form',
+    },
+    {
       type: ComponentType.TYPES,
       path: './src/types/input.type.ts',
       folder: 'input',

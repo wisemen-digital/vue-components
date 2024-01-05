@@ -1,56 +1,23 @@
-<script setup lang="ts" generic="T extends InputType">
-import type { z } from 'zod'
-
-import { computed, ref, useAttrs } from 'vue'
-import type { Props as AppInputProps } from '@/components/input/AppInput.vue'
-import type { InputType, InputValue } from '@/types/input.type'
-import { generateUuid } from '@/utils/uuid/generateUuid'
+<script setup lang="ts" generic="TInputType extends InputType">
+import { ref, useAttrs } from 'vue'
+import type { InputFormProps, InputType, InputValue } from '@/types/input.type'
 import AppInput from '@/components/input/AppInput.vue'
 import AppButton from '@/components/button/AppButton.vue'
 import AppText from '@/components/text/AppText.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
+import { useFormInput } from '@/composables/form/useFormInput'
 
-export interface Props<T extends InputType> extends Omit<AppInputProps<T>, 'isInvalid'> {
-  /**
-   * The error messages associated with the component, if any.
-   * It should be an object with an "_errors" property containing an array of strings.
-   */
-  errors?: z.ZodFormattedError<string> | undefined | null
-
-  /**
-   * The label to be displayed above the component.
-   */
-  label?: string | null
-
-  /**
-   * Extra information to be displayed below the input.
-   */
-  description?: string | null
-
-  /**
-   * Determines if the component has emitted a `blur` event.
-   */
-  isTouched: boolean
-
-  /**
-   * Determines if the input is required.
-   */
-  isRequired?: boolean
-}
-
-const props = withDefaults(defineProps<Props<T>>(), {
+const props = withDefaults(defineProps<InputFormProps<TInputType>>(), {
   errors: null,
   label: null,
   description: null,
   isRequired: false,
 })
 
-const value = defineModel<InputValue<T>>({
+const value = defineModel<InputValue<TInputType>>({
   required: true,
 })
-
-const id = `app-form-input-${generateUuid()}`
 
 const isPasswordVisible = ref<boolean>(false)
 
@@ -60,28 +27,12 @@ const isPasswordVisible = ref<boolean>(false)
  */
 const attrs = useAttrs()
 
-const isInvalid = computed<boolean>(() => {
-  const { errors, isTouched } = props
-
-  return isTouched && errors != null
-})
-
-const computedValue = computed<InputValue<T>>({
-  get: () => value.value,
-  set: (newValue: InputValue<T>) => {
-    if (props.type === 'number')
-      value.value = (newValue === '' ? '' : Number(newValue)) as InputValue<T>
-    else value.value = newValue
-  },
-})
-
-const computedType = computed<InputType>(() => {
-  const { type } = props
-
-  if (type === 'password' && isPasswordVisible.value)
-    return 'text'
-
-  return type ?? 'text'
+const { computedValue, id, isInvalid, computedType } = useFormInput({
+  isTouched: props.isTouched,
+  errors: props.errors,
+  type: props.type ?? 'text',
+  isPasswordVisible,
+  value,
 })
 
 function onTogglePassword(): void {
