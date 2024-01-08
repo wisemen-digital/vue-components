@@ -2,7 +2,7 @@ import type { VariantProps } from '@/utils/tailwind/cva'
 import { cva } from '@/utils/tailwind/cva'
 
 export const variantOptions = {
-  default: 'bg-background text-foreground',
+  default: 'bg-popover text-popover-foreground',
   disabled: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-focus-destructive',
 }
 

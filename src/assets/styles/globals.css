@@ -32,11 +32,14 @@
     --muted: 210 20% 98%;
     --muted-foreground: 221 13% 46%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --info: 198.4 93.2% 59.6%;
+    --info-foreground: 0 0% 100%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
 
     --border: 220 17% 96%;
     --input: 0 0% 100%;

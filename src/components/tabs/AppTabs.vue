@@ -91,7 +91,7 @@ if (!isUsingRouter.value)
 
 <template>
   <AppTabsGroup :selected-index="selectedTab" as="div" @change="changeTab">
-    <AppTabsList>
+    <AppTabsList class="bg-background text-foreground">
       <AppTabsTab
         :is="tabComponent"
         v-for="(tab, index) in allTabs"

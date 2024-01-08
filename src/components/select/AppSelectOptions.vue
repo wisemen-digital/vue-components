@@ -27,7 +27,7 @@ const {
 </script>
 
 <template>
-  <ComboboxOptions v-if="isFilterable" class="rounded bg-card p-2">
+  <ComboboxOptions v-if="isFilterable" class="rounded bg-popover p-2">
     <AppHeightTransition>
       <div>
         <ComboboxOption
@@ -39,9 +39,9 @@ const {
       </div>
     </AppHeightTransition>
   </ComboboxOptions>
-  <ListboxOptions v-else class="rounded bg-card p-2">
+  <ListboxOptions v-else class="rounded bg-popover p-2">
     <AppHeightTransition>
-      <div>
+      <div class="flex flex-col gap-1">
         <ListboxOption
           v-for="(item, index) in items" v-slot="{ active, selected, disabled }" :key="index"
           :value="(item as any)"
