@@ -265,6 +265,13 @@
         "placementDir": "",
         "type": "transitions",
         "content": "import type { TransitionClasses } from '.'\n\nexport const modalTransition: TransitionClasses = {\n  enterFromClass: 'md:scale-95 opacity-0 translate-y-20 md:translate-y-0',\n  enterActiveClass: 'duration-200 md:transition-scale-bounce',\n  enterToClass: 'scale-100 opacity-100',\n  leaveFromClass: 'scale-100 opacity-100',\n  leaveActiveClass: 'duration-200 md:transition-scale-bounce',\n  leaveToClass: 'md:scale-95 opacity-0 translate-y-20 md:translate-y-0',\n\n  enterFrom: 'md:scale-95 opacity-0 translate-y-20 md:translate-y-0',\n  enter: 'duration-200 md:transition-scale-bounce',\n  enterTo: 'scale-100 opacity-100',\n  leaveFrom: 'scale-100 opacity-100',\n  leave: 'duration-200 md:transition-scale-bounce',\n  leaveTo: 'md:scale-95 opacity-0 translate-y-20 md:translate-y-0',\n}\n\nexport const modalBackgroundTransition: TransitionClasses = {\n  enter: 'duration-300 ease-out',\n  enterFrom: 'opacity-0',\n  enterTo: 'opacity-100',\n  leave: 'duration-200 ease-in',\n  leaveFrom: 'opacity-100',\n  leaveTo: 'opacity-0',\n\n  enterActiveClass: 'duration-300 ease-out',\n  enterFromClass: 'opacity-0',\n  enterToClass: 'opacity-100',\n  leaveActiveClass: 'duration-200 ease-in',\n  leaveFromClass: 'opacity-100',\n  leaveToClass: 'opacity-0',\n}\n"
+      },
+      {
+        "name": "popover.transition.ts",
+        "dir": "./src/transitions",
+        "placementDir": "",
+        "type": "transitions",
+        "content": "import type { TransitionClasses } from '.'\n\nexport const popoverTransition: TransitionClasses = {\n  enterFromClass: 'opacity-0 shadow-none -translate-y-2',\n  enterActiveClass: 'ease-native duration-200',\n  enterToClass: 'opacity-100',\n  leaveFromClass: 'opacity-100',\n  leaveActiveClass: 'ease-native duration-200',\n  leaveToClass: 'opacity-0 shadow-none -translate-y-2',\n\n  enterFrom: 'opacity-0 shadow-none -translate-y-2',\n  enter: 'ease-native duration-200',\n  enterTo: 'opacity-100',\n  leaveFrom: 'opacity-100',\n  leave: 'ease-native duration-200',\n  leaveTo: 'opacity-0 shadow-none -translate-y-2',\n}\n"
       }
     ]
   }
