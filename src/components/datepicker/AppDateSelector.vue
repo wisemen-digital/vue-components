@@ -198,4 +198,8 @@ function handleClose(): void {
 .dp__cell_offset {
   @apply hover:bg-neutral-100 text-neutral-300;
 }
+
+.dp__overlay {
+  @apply rounded-card border-border bg-popover text-popover-foreground;
+}
 </style>
