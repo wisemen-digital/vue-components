@@ -11,6 +11,7 @@ import '@/assets/styles/transitions.scss'
 import router from '@/router/router'
 
 const app = createApp(App)
+
 app
   .use(createHead())
   .use(i18n)

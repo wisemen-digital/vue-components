@@ -4,7 +4,7 @@ import { Float } from '@headlessui-float/vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { popoverTransition } from '@/transitions'
 
-export interface Props {
+export interface PopoverProps {
   placement?: FloatProps['placement']
 
   hasAdaptiveWidth?: FloatProps['adaptiveWidth']
@@ -28,7 +28,7 @@ const {
 
   isDiv = false,
   isManual = false,
-} = defineProps<Props>()
+} = defineProps<PopoverProps>()
 
 const SHIFT_VALUE = 8
 const OFFSET_VALUE = 4
@@ -57,8 +57,8 @@ function closeManual(): void {
       v-bind="popoverTransition"
       tailwindcss-origin-class
     >
-      <PopoverButton :as="isDiv ? 'template' : 'button'" class="max-w-max rounded-button">
-        <slot name="activator" />
+      <PopoverButton :as="isDiv ? 'div' : 'button'" class="max-w-max rounded-button">
+        <slot name="element" />
       </PopoverButton>
 
       <PopoverPanel
@@ -69,15 +69,15 @@ function closeManual(): void {
       >
         <slot name="panel" :close="close" />
       </PopoverPanel>
-      <div v-else-if="isOpen">
-        <PopoverPanel
-          :focus="true"
-          static
-          class="rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow"
-        >
-          <slot name="panel" :close="closeManual" />
-        </PopoverPanel>
-      </div>
+      <PopoverPanel
+        v-else
+        v-show="isOpen"
+        :focus="true"
+        static
+        class="rounded-popover border border-border bg-popover px-4 py-3 text-popover-foreground shadow-popover-shadow"
+      >
+        <slot name="panel" :close="closeManual" />
+      </PopoverPanel>
     </Float>
   </Popover>
 </template>
