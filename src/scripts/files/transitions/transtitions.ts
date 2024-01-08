@@ -39,5 +39,10 @@ export const transitions = {
       path: './src/transitions/modal.transition.ts',
       folder: '',
     },
+    {
+      type: ComponentType.TRANSITIONS,
+      path: './src/transitions/popover.transition.ts',
+      folder: '',
+    },
   ],
 }
