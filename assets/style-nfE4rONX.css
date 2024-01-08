@@ -3123,6 +3123,16 @@ body {
 
     background-color: hsl(var(--neutral-100))
 }
+.dp__overlay {
+
+    border-radius: var(--radius-card);
+
+    border-color: hsl(var(--border));
+
+    background-color: hsl(var(--popover));
+
+    color: hsl(var(--popover-foreground))
+}
 .expand-enter-active[data-v-756b8e16],
 .expand-leave-active[data-v-756b8e16] {
   transition: height var(--756b8e16-durationString) cubic-bezier(0.645, 0.045, 0.355, 1), opacity var(--756b8e16-durationString);
