@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import type { PopoverProps } from '@/components/popover/AppPopover.vue'
-import AppPopover from '@/components/popover/AppPopover.vue'
 import AppButton from '@/components/button/AppButton.vue'
+import AppTooltip from '@/components/tooltip/AppTooltip.vue'
 
 defineProps<PopoverProps>()
 
@@ -33,7 +33,7 @@ const placementOptions = [
 
 <template>
   <Story
-    title="Popover/AppPopover"
+    title="Tooltip/AppTooltip"
   >
     <Variant title="Default" auto-props-disabled>
       <template #controls>
@@ -46,24 +46,21 @@ const placementOptions = [
         <HstSelect v-model="state.placement" title="Placement" :options="placementOptions" />
       </template>
       <div>
-        <AppPopover v-bind="state">
+        <AppTooltip v-bind="state">
           <template #element>
-            <AppButton as="div" variant="default">
+            <AppButton variant="default">
               Button
             </AppButton>
           </template>
           <template #panel>
-            <AppButton>
-              Interactable element
-            </AppButton>
-            <AppButton>
-              Second interactable element
-            </AppButton>
-            <div class="max-w-[60ch]">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda velit quo cumque soluta, repudiandae impedit at vitae culpa iste ad placeat quaerat nihil? Velit, eligendi ullam molestiae eum ipsum totam?
+            <div class="max-w-60">
+              <AppButton>
+                Interactable element
+              </AppButton>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea doloribus, saepe excepturi dolor maiores ut molestias sapiente enim corporis animi praesentium dolore ducimus ipsa suscipit, nihil laboriosam autem quam deleniti?
             </div>
           </template>
-        </AppPopover>
+        </AppTooltip>
       </div>
     </Variant>
   </Story>
