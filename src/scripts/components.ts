@@ -14,6 +14,7 @@ import { appSwitch } from './files/components/appSwitch'
 import { appTabs } from './files/components/appTabs'
 import { appDatePicker } from './files/components/appDatePicker'
 import { appTooltip } from './files/components/appTooltip'
+import { appMenu } from './files/components/appMenu'
 
 import type { Component } from './componentsTypes'
 
@@ -33,6 +34,7 @@ export const components: Component[] = [
   appTabs,
   appDatePicker,
   appTooltip,
+  appMenu,
 
   appHeightTransition,
 ]

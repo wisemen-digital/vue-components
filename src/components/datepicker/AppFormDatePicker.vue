@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="TInputType extends InputType, TRange extends boolean = false">
 import { useAttrs } from 'vue'
-import type { DateSelectorProps, ModelDate } from '@/components/datepicker/AppDateSelector.vue'
+import type { DateSelectorProps, ModelDate } from '@/types/datePicker.type'
 import AppDateSelector from '@/components/datepicker/AppDateSelector.vue'
 import { fadeTransition } from '@/transitions'
 import AppIcon from '@/components/icon/AppIcon.vue'

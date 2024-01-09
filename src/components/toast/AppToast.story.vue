@@ -12,42 +12,42 @@ const {
   showToastWarn,
 } = useToast()
 
-function onWarn() {
+function onWarn(): void {
   showToastWarn({
     title: 'Warning',
     desciption: 'This is a warning',
   })
 }
 
-function onInfo() {
+function onInfo(): void {
   showToastInfo({
     title: 'Info',
     desciption: 'This is an info',
   })
 }
 
-function onError() {
+function onError(): void {
   showToastError({
     title: 'Error',
     desciption: 'This is an error',
   })
 }
 
-function onSuccess() {
+function onSuccess(): void {
   showToastSuccess({
     title: 'Success',
     desciption: 'This is a success',
   })
 }
 
-function onToast() {
+function onToast(): void {
   showToast({
     title: 'Toast',
     desciption: 'This is a toast',
   })
 }
 
-function onToastWithAction() {
+function onToastWithAction(): void {
   showToast({
     title: 'Toast',
     desciption: 'This is a toast with an action',
@@ -60,7 +60,7 @@ function onToastWithAction() {
   })
 }
 
-function onToastWithPromise() {
+function onToastWithPromise(): void {
   showToast({
     title: 'Toast',
     desciption: 'This is a toast with a promise',

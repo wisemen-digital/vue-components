@@ -1,6 +1,7 @@
+import type { Component } from '../../componentsTypes'
 import { ComponentName, ComponentType } from '../../componentsTypes'
 
-export const appCard = {
+export const appCard: Component = {
   component: ComponentName.APP_CARD,
   name: 'Card',
   files: [
