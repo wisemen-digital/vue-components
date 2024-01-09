@@ -42,38 +42,38 @@ watch(() => isFocusWithinPanel.value, (value) => {
     handleClose()
 })
 
-function handleOpen() {
+function handleOpen(): void {
   if (!isInPanel.value && !isInElement.value && !isFocusWithinPanel.value)
     return
   isPopoverShown.value = true
 }
 
-function handleClose() {
+function handleClose(): void {
   if (isInPanel.value || isInElement.value || isFocusWithinPanel.value)
     return
   isPopoverShown.value = false
 }
 
-function handleForceClose() {
+function handleForceClose(): void {
   isPopoverShown.value = false
 }
 
-function onElementFocus() {
+function onElementFocus(): void {
   isInElement.value = true
   handleOpen()
 }
 
-function onElementBlur() {
+function onElementBlur(): void {
   isInElement.value = false
   handleClose()
 }
 
-function onElementMouseOver() {
+function onElementMouseOver(): void {
   isInElement.value = true
   handleOpen()
 }
 
-function onElementMouseLeave() {
+function onElementMouseLeave(): void {
   isInElement.value = false
   handleClose()
 }
@@ -92,17 +92,17 @@ const panelEvents = {
   onmouseleave: onPanelMouseLeave,
 }
 
-function onPanelMouseOver() {
+function onPanelMouseOver(): void {
   isInPanel.value = true
   handleOpen()
 }
 
-function onPanelMouseLeave() {
+function onPanelMouseLeave(): void {
   isInPanel.value = false
   handleClose()
 }
 
-function addPanelEvents() {
+function addPanelEvents(): void {
   if (hasManualPanelBinding)
     return
   panelElement.value?.addEventListener('mouseover', onPanelMouseOver)
@@ -116,7 +116,7 @@ watch(() => panelElement.value, () => {
   panelElement.value.addEventListener('mouseleave', onPanelMouseLeave)
 })
 
-function addElementEvents() {
+function addElementEvents(): void {
   if (hasManualElementBinding)
     return
   elementElement.value?.children[0]?.addEventListener('focus', onElementFocus)

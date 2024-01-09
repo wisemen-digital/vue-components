@@ -32,7 +32,7 @@ const emits = defineEmits<{
   click: []
 }>()
 
-function handleClick() {
+function handleClick(): void {
   if (isDisabled)
     return
   onSelect?.()

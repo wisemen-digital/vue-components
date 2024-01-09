@@ -69,29 +69,36 @@ export interface ToastParams<TPromise> {
 }
 export type ToastParamsWithoutVariant<TPromise> = Omit<ToastParams<TPromise>, 'variant'>
 
-export function useToast() {
-  const renderToast = <TPromise>({ title, action, duration = Number.POSITIVE_INFINITY, icon, variant, promise }: ToastParams<TPromise>) => {
+export function useToast(): {
+  showToastError: <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => void
+  showToastSuccess: <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => void
+  showToastInfo: <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => void
+  showToastWarn: <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => void
+  showToast: <TPromise>(toastParams: ToastParams<TPromise>) => void
+
+} {
+  const renderToast = <TPromise>({ title, action, duration = Number.POSITIVE_INFINITY, icon, variant, promise }: ToastParams<TPromise>): void => {
     const toastComponent = h(AppToast<TPromise>, { title, action, icon, variant, promise })
     toast.custom(markRaw(toastComponent), { duration })
   }
 
-  const showToastError = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => {
+  const showToastError = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>): void => {
     renderToast({ variant: 'error', icon: 'warning', ...toastParams })
   }
 
-  const showToastSuccess = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => {
+  const showToastSuccess = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>): void => {
     renderToast({ variant: 'success', icon: 'checkmark', ...toastParams })
   }
 
-  const showToastInfo = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => {
+  const showToastInfo = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>): void => {
     renderToast({ variant: 'info', icon: 'info', ...toastParams })
   }
 
-  const showToastWarn = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>) => {
+  const showToastWarn = <TPromise>(toastParams: ToastParamsWithoutVariant<TPromise>): void => {
     renderToast({ variant: 'warn', icon: 'warning', ...toastParams })
   }
 
-  const showToast = <TPromise>(toastParams: ToastParams<TPromise>) => {
+  const showToast = <TPromise>(toastParams: ToastParams<TPromise>): void => {
     renderToast({ variant: 'default', ...toastParams })
   }
 

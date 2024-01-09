@@ -17,8 +17,8 @@ defineProps<{
    */
   buttonProps?: ButtonProps
 }>()
-
-function getMenuConfigurationItem(type: MenuOption) {
+export type MenuItemComponent = typeof AppMenuItem | typeof AppMenuDivider
+function getMenuConfigurationItem(type: MenuOption): MenuItemComponent {
   switch (type) {
     case 'divider':
       return AppMenuDivider

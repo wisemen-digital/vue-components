@@ -6,7 +6,7 @@ const menuConfiguration: MenuConfiguration = [
   {
     type: 'item',
     text: 'Item 1',
-    onSelect: () => {
+    onSelect: (): void => {
       console.warn('Item 1 clicked')
     },
     isDisabled: true,
@@ -14,7 +14,7 @@ const menuConfiguration: MenuConfiguration = [
   {
     type: 'item',
     text: 'Item 2',
-    onSelect: () => {
+    onSelect: (): void => {
       console.warn('Item 2 clicked')
     },
   },
