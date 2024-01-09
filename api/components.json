@@ -33,7 +33,8 @@
       }
     ],
     "internalDependencies": [
-      "AppInput"
+      "AppInput",
+      "AppText"
     ],
     "dependencies": [
       "@vuepic/vue-datepicker"
@@ -282,7 +283,9 @@
         "content": "<script setup lang=\"ts\">\nimport { reactive } from 'vue'\nimport Image from '@/assets/test-image.jpg'\nimport AppCard from '@/components/card/AppCard.vue'\nimport AppButton from '@/components/button/AppButton.vue'\nimport AppCardHeaderImage from '@/components/card/AppCardHeaderImage.vue'\nimport AppCardHeader from '@/components/card/AppCardHeader.vue'\nimport AppCardTitle from '@/components/card/AppCardTitle.vue'\nimport AppCardDescription from '@/components/card/AppCardDescription.vue'\nimport AppCardContent from '@/components/card/AppCardContent.vue'\nimport AppCardFooter from '@/components/card/AppCardFooter.vue'\n\ninterface State {\n  title?: string\n  subtitle?: string\n  content?: string\n  footer?: string\n  headerImage: string\n\n  hasFooterButton?: boolean\n  hasHeaderImage?: boolean\n  hasHeader?: boolean\n  hasFooter?: boolean\n  hasContent?: boolean\n  isCustom?: boolean\n}\n\nconst state = reactive<State>({\n  title: 'Modal title',\n  subtitle: 'Modal subtitle',\n  content: 'Modal content',\n  headerImage: Image,\n  hasHeaderImage: true,\n  hasContent: true,\n  hasFooter: true,\n  hasHeader: true,\n  isCustom: false,\n})\n</script>\n\n<template>\n  <Story\n    title=\"Card/AppCard\"\n  >\n    <Variant title=\"Default\" auto-props-disabled>\n      <template #controls>\n        <HstText v-model=\"state.title\" title=\"Title\" />\n        <HstText v-model=\"state.subtitle\" title=\"Subtitle\" />\n        <HstText v-model=\"state.footer\" title=\"Footer\" />\n        <HstTextarea v-model=\"state.content\" title=\"Content\" />\n\n        <HstCheckbox v-model=\"state.hasHeader\" title=\"Has header\" />\n        <HstCheckbox v-model=\"state.hasHeaderImage\" title=\"Has header image\" />\n        <HstCheckbox v-model=\"state.hasContent\" title=\"Has content\" />\n        <HstCheckbox v-model=\"state.hasFooter\" title=\"Has footer\" />\n      </template>\n\n      <div class=\"w-96 p-12\">\n        <AppCard>\n          <AppCardHeaderImage v-if=\"state.hasHeaderImage\" :src=\"state.headerImage\" />\n          <AppCardHeader v-if=\"state.hasHeader\">\n            <AppCardTitle>\n              {{ state.title }}\n            </AppCardTitle>\n            <AppCardDescription>\n              {{ state.subtitle }}\n            </AppCardDescription>\n          </AppCardHeader>\n          <AppCardContent v-if=\"state.hasContent\">\n            <p>{{ state.content }}</p>\n          </AppCardContent>\n          <AppCardFooter v-if=\"state.hasFooter\">\n            <AppButton class=\"w-full\">\n              Button\n            </AppButton>\n          </AppCardFooter>\n        </AppCard>\n      </div>\n    </Variant>\n  </Story>\n</template>\n"
       }
     ],
-    "internalDependencies": [],
+    "internalDependencies": [
+      "AppText"
+    ],
     "dependencies": []
   },
   {
@@ -392,7 +395,7 @@
         "dir": "./src/components/menu",
         "placementDir": "menu",
         "type": "components",
-        "content": "<script setup lang=\"ts\">\nimport { MenuItem } from '@headlessui/vue'\nimport { RouterLink } from 'vue-router'\nimport { menuItemVariants } from '@/components/menu/appMenuItem.style'\nimport AppText from '@/components/text/AppText.vue'\nimport AppIcon from '@/components/icon/AppIcon.vue'\nimport type { MenuItemProps } from '@/types/menu.type'\n\ninterface MenuItemSlotProps {\n  /**\n   * If the menu item is active.\n   */\n  active: boolean\n  /**\n   * If the menu item is disabled.\n   */\n  disabled: boolean\n  /**\n   * Close the menu.\n   */\n  close: () => void\n}\n\nconst {\n  iconLeft,\n  isDisabled,\n  text,\n  description,\n  onSelect,\n} = defineProps<MenuItemProps>()\nconst emits = defineEmits<{\n  click: []\n}>()\n\nfunction handleClick(): void {\n  if (isDisabled)\n    return\n  onSelect?.()\n  emits('click')\n}\n</script>\n\n<template>\n  <MenuItem\n    v-slot=\"{ active, disabled, close }: MenuItemSlotProps\"\n    :disabled=\"isDisabled\"\n  >\n    <Component\n      :is=\"to ? RouterLink : 'button'\"\n      :to=\"to\"\n      disabled\n      :class=\"menuItemVariants({\n        isDisabled,\n        isActive: active,\n      })\"\n      @click=\"handleClick\"\n    >\n      <slot\n        name=\"element\"\n        :is-disabled=\"isDisabled\"\n        :active=\"active\"\n        :close=\"close\"\n      >\n        <slot name=\"left\" />\n        <div class=\"flex items-center gap-2\">\n          <slot name=\"icon-left\">\n            <AppIcon\n              v-if=\"iconLeft\"\n              :icon=\"iconLeft\"\n              size=\"sm\"\n              class=\"mr-2\"\n            />\n          </slot>\n          <slot\n            :is-active=\"active\"\n            :is-disabled=\"disabled || isDisabled\"\n            :close=\"close\"\n          >\n            <AppText>\n              {{ text }}\n            </AppText>\n            <AppText\n              variant=\"subtext\"\n              class=\"text-muted\"\n            >\n              {{ description }}\n            </AppText>\n          </slot>\n        </div>\n        <slot name=\"right\" />\n      </slot>\n    </Component>\n  </MenuItem>\n</template>\n"
+        "content": "<script setup lang=\"ts\">\nimport { MenuItem } from '@headlessui/vue'\nimport { RouterLink } from 'vue-router'\nimport { menuItemVariants } from '@/components/menu/appMenuItem.style'\nimport AppText from '@/components/text/AppText.vue'\nimport AppIcon from '@/components/icon/AppIcon.vue'\nimport type { MenuItemProps } from '@/types/menu.type'\nimport AppTextDescription from '@/components/text/AppTextDescription.vue'\n\ninterface MenuItemSlotProps {\n  /**\n   * If the menu item is active.\n   */\n  active: boolean\n  /**\n   * If the menu item is disabled.\n   */\n  disabled: boolean\n  /**\n   * Close the menu.\n   */\n  close: () => void\n}\n\nconst {\n  iconLeft,\n  isDisabled,\n  text,\n  description,\n  onSelect,\n} = defineProps<MenuItemProps>()\nconst emits = defineEmits<{\n  click: []\n}>()\n\nfunction handleClick(): void {\n  if (isDisabled)\n    return\n  onSelect?.()\n  emits('click')\n}\n</script>\n\n<template>\n  <MenuItem\n    v-slot=\"{ active, disabled, close }: MenuItemSlotProps\"\n    :disabled=\"isDisabled\"\n  >\n    <Component\n      :is=\"to ? RouterLink : 'button'\"\n      :to=\"to\"\n      disabled\n      :class=\"menuItemVariants({\n        isDisabled,\n        isActive: active,\n      })\"\n      @click=\"handleClick\"\n    >\n      <slot\n        name=\"element\"\n        :is-disabled=\"isDisabled\"\n        :active=\"active\"\n        :close=\"close\"\n      >\n        <slot name=\"left\" />\n        <div class=\"flex items-center gap-2\">\n          <slot name=\"icon-left\">\n            <AppIcon\n              v-if=\"iconLeft\"\n              :icon=\"iconLeft\"\n              size=\"sm\"\n              class=\"mr-2\"\n            />\n          </slot>\n          <slot\n            :is-active=\"active\"\n            :is-disabled=\"disabled || isDisabled\"\n            :close=\"close\"\n          >\n            <AppTextDescription :text=\"text\" :description=\"description\" />\n          </slot>\n        </div>\n        <slot name=\"right\" />\n      </slot>\n    </Component>\n  </MenuItem>\n</template>\n"
       },
       {
         "name": "AppMenuPanel.vue",
@@ -424,7 +427,8 @@
       }
     ],
     "internalDependencies": [
-      "AppButton"
+      "AppButton",
+      "AppText"
     ],
     "dependencies": [
       "@headlessui/vue",
@@ -689,6 +693,13 @@
         "placementDir": "text",
         "type": "components",
         "content": "import type { VariantProps } from '@/utils/tailwind/cva'\nimport { cva } from '@/utils/tailwind/cva'\n\nexport const variantOptions = {\n  hero: 'text-hero',\n  title: 'text-title',\n  subtitle: 'text-subtitle',\n  heading: 'text-heading',\n  body: 'text-body',\n  subtext: 'text-subtext',\n  caption: 'text-caption',\n}\n\nexport const boldnessOptions = {\n  bold: 'font-bold',\n  normal: 'font-normal',\n  light: 'font-light',\n  thin: 'font-thin',\n  extrabold: 'font-extrabold',\n  semibold: 'font-semibold',\n  none: null,\n}\n\nexport const truncateOptions = {\n  1: 'line-clamp-1',\n  2: 'line-clamp-2',\n  3: 'line-clamp-3',\n  4: 'line-clamp-4',\n  5: 'line-clamp-5',\n  6: 'line-clamp-6',\n}\n\nexport const textVariants = cva(\n  {\n    base: null,\n    variants: {\n      variant: variantOptions,\n      boldness: boldnessOptions,\n      truncate: truncateOptions,\n    },\n    defaultVariants: {\n      variant: 'body',\n      boldness: 'none',\n      truncate: undefined,\n    },\n  },\n)\n\nexport type TextProps = VariantProps<typeof textVariants>\n\nexport const textVariantOptions = Object.keys(variantOptions)\nexport const textBoldnessOptions = Object.keys(boldnessOptions)\nexport const textTruncateOptions = Object.keys(truncateOptions)\n"
+      },
+      {
+        "name": "AppTextDescription.vue",
+        "dir": "./src/components/text",
+        "placementDir": "text",
+        "type": "components",
+        "content": "<script setup lang=\"ts\">\nimport { useAttrs } from 'vue'\nimport { textVariants } from '@/components/text/appText.style'\nimport type { TextProps } from '@/components/text/appText.style'\nimport AppText from '@/components/text/AppText.vue'\n\ninterface Props {\n  /**\n   * The main text.\n   */\n  text: string\n\n  /**\n   * The subtext.\n   */\n  description?: string\n}\n\ndefineProps<Props>()\n</script>\n\n<template>\n  <div class=\"text-left\">\n    <AppText\n      variant=\"body\"\n    >\n      {{ text }}\n    </AppText>\n    <AppText\n      v-if=\"description\"\n      variant=\"subtext\"\n      class=\"text-muted-foreground\"\n    >\n      {{ description }}\n    </AppText>\n  </div>\n</template>\n"
       }
     ],
     "internalDependencies": []

@@ -1,11 +1,11 @@
-import { au as defineComponent, aY as ge, aw as openBlock, ax as createBlock, ay as withCtx, aD as guardReactiveProps, aC as normalizeProps, aH as renderSlot, aJ as normalizeClass, az as createVNode, aB as createBaseVNode, aZ as $e, a_ as Ie, aR as mergeProps, aG as createElementBlock, a$ as be, b0 as RouterLink, b1 as resolveDynamicComponent, aI as createCommentVNode, aF as toDisplayString, aE as createTextVNode, b2 as Se, aP as Fragment, b3 as renderList, av as resolveComponent } from "./vendor-SzL31LEx.js";
+import { au as defineComponent, aY as ge, aw as openBlock, ax as createBlock, ay as withCtx, aD as guardReactiveProps, aC as normalizeProps, aH as renderSlot, aJ as normalizeClass, az as createVNode, aB as createBaseVNode, aZ as $e, a_ as Ie, aR as mergeProps, aG as createElementBlock, aF as toDisplayString, aE as createTextVNode, aI as createCommentVNode, a$ as be, b0 as RouterLink, b1 as resolveDynamicComponent, b2 as Se, aP as Fragment, b3 as renderList, av as resolveComponent } from "./vendor-SzL31LEx.js";
 import { A as AppButton } from "./AppButton-3AH1zsJ6.js";
 import { A as AppIcon } from "./AppIcon-9br4U6Dr.js";
 import { _ as _export_sfc } from "./_plugin-vue_export-helper-yVxbj29m.js";
 import { p as popoverTransition } from "./popover.transition-z0jVcmyM.js";
 import { c as cva } from "./cva-zAQhILdM.js";
 import { A as AppText } from "./AppText-_h4M5YsZ.js";
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "AppMenuButton",
   props: {
     isDisabled: { type: Boolean, required: false },
@@ -29,8 +29,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$3 = { class: "flex items-center gap-2" };
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_1$4 = { class: "flex items-center gap-2" };
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock($setup["MenuButton"], {
     as: "div",
     class: "max-w-max"
@@ -42,7 +42,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
           normalizeProps(guardReactiveProps($setup.props)),
           {
             default: withCtx(() => [
-              createBaseVNode("div", _hoisted_1$3, [
+              createBaseVNode("div", _hoisted_1$4, [
                 renderSlot(_ctx.$slots, "default", { open }),
                 createVNode($setup["AppIcon"], {
                   size: "sm",
@@ -65,12 +65,12 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     /* FORWARDED */
   });
 }
-_sfc_main$6.__file = "src/components/menu/AppMenuButton.vue";
-const AppMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "/home/runner/work/vue-components/vue-components/src/components/menu/AppMenuButton.vue"]]);
+_sfc_main$7.__file = "src/components/menu/AppMenuButton.vue";
+const AppMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "/home/runner/work/vue-components/vue-components/src/components/menu/AppMenuButton.vue"]]);
 const SHIFT_VALUE = 8;
 const OFFSET_VALUE = 4;
 const FLIP_VALUE = 8;
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "AppMenuContainer",
   props: {
     placement: { type: null, required: false, default: "bottom-end" },
@@ -93,7 +93,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock($setup["Menu"], null, {
     default: withCtx(() => [
       createVNode($setup["Float"], mergeProps({
@@ -116,15 +116,15 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     /* FORWARDED */
   });
 }
-_sfc_main$5.__file = "src/components/menu/AppMenuContainer.vue";
-const AppMenuContainer = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "/home/runner/work/vue-components/vue-components/src/components/menu/AppMenuContainer.vue"]]);
-const _sfc_main$4 = {};
-const _hoisted_1$2 = { class: "h-px w-full bg-neutral-300" };
-function _sfc_render$4(_ctx, _cache) {
-  return openBlock(), createElementBlock("div", _hoisted_1$2);
+_sfc_main$6.__file = "src/components/menu/AppMenuContainer.vue";
+const AppMenuContainer = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "/home/runner/work/vue-components/vue-components/src/components/menu/AppMenuContainer.vue"]]);
+const _sfc_main$5 = {};
+const _hoisted_1$3 = { class: "h-px w-full bg-neutral-300" };
+function _sfc_render$5(_ctx, _cache) {
+  return openBlock(), createElementBlock("div", _hoisted_1$3);
 }
-_sfc_main$4.__file = "src/components/menu/AppMenuDivider.vue";
-const AppMenuDivider = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "/home/runner/work/vue-components/vue-components/src/components/menu/AppMenuDivider.vue"]]);
+_sfc_main$5.__file = "src/components/menu/AppMenuDivider.vue";
+const AppMenuDivider = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "/home/runner/work/vue-components/vue-components/src/components/menu/AppMenuDivider.vue"]]);
 const menuItemVariants = cva(
   {
     base: "flex min-w-40 max-w-max items-center justify-between gap-2 px-4 py-2",
@@ -142,6 +142,52 @@ const menuItemVariants = cva(
     }
   }
 );
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  __name: "AppTextDescription",
+  props: {
+    text: { type: String, required: true },
+    description: { type: String, required: false }
+  },
+  setup(__props, { expose: __expose }) {
+    __expose();
+    const __returned__ = { AppText };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const _hoisted_1$2 = { class: "text-left" };
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+    createVNode($setup["AppText"], { variant: "body" }, {
+      default: withCtx(() => [
+        createTextVNode(
+          toDisplayString($props.text),
+          1
+          /* TEXT */
+        )
+      ]),
+      _: 1
+      /* STABLE */
+    }),
+    $props.description ? (openBlock(), createBlock($setup["AppText"], {
+      key: 0,
+      variant: "subtext",
+      class: "text-muted-foreground"
+    }, {
+      default: withCtx(() => [
+        createTextVNode(
+          toDisplayString($props.description),
+          1
+          /* TEXT */
+        )
+      ]),
+      _: 1
+      /* STABLE */
+    })) : createCommentVNode("v-if", true)
+  ]);
+}
+_sfc_main$4.__file = "src/components/text/AppTextDescription.vue";
+const AppTextDescription = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "/home/runner/work/vue-components/vue-components/src/components/text/AppTextDescription.vue"]]);
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "AppMenuItem",
   props: {
@@ -170,7 +216,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       return RouterLink;
     }, get menuItemVariants() {
       return menuItemVariants;
-    }, AppText, AppIcon };
+    }, AppIcon, AppTextDescription };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -209,31 +255,10 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                 isDisabled: disabled || $props.isDisabled,
                 close
               }, () => [
-                createVNode($setup["AppText"], null, {
-                  default: withCtx(() => [
-                    createTextVNode(
-                      toDisplayString($props.text),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  _: 1
-                  /* STABLE */
-                }),
-                createVNode($setup["AppText"], {
-                  variant: "subtext",
-                  class: "text-muted"
-                }, {
-                  default: withCtx(() => [
-                    createTextVNode(
-                      toDisplayString($props.description),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  _: 1
-                  /* STABLE */
-                })
+                createVNode($setup["AppTextDescription"], {
+                  text: $props.text,
+                  description: $props.description
+                }, null, 8, ["text", "description"])
               ])
             ]),
             renderSlot(_ctx.$slots, "right")

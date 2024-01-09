@@ -13,7 +13,7 @@ const Comp6 = defineAsyncComponent(() => __vitePreload(() => import("./AppIcon.s
 const Comp7 = defineAsyncComponent(() => __vitePreload(() => import("./AppFormInput.story-YBBVmcxi.js"), true ? __vite__mapDeps([21,1,6,7,5,3,4,8,11,18,19,17]) : void 0));
 const Comp8 = defineAsyncComponent(() => __vitePreload(() => import("./AppFormTextarea.story-sMTQ9sH_.js"), true ? __vite__mapDeps([22,1,6,7,5,18,11,19]) : void 0));
 const Comp9 = defineAsyncComponent(() => __vitePreload(() => import("./AppInput.story-O2o9_Orv.js"), true ? __vite__mapDeps([23,1,6,7,5,3,4]) : void 0));
-const Comp10 = defineAsyncComponent(() => __vitePreload(() => import("./AppMenu.story-h-x_LwIp.js"), true ? __vite__mapDeps([24,1,8,5,7,6,25,11]) : void 0));
+const Comp10 = defineAsyncComponent(() => __vitePreload(() => import("./AppMenu.story-z8v_tM_q.js"), true ? __vite__mapDeps([24,1,8,5,7,6,25,11]) : void 0));
 const Comp11 = defineAsyncComponent(() => __vitePreload(() => import("./AppModal.story-SjIUvx8d.js"), true ? __vite__mapDeps([26,1,5,7,8,6,11]) : void 0));
 const Comp12 = defineAsyncComponent(() => __vitePreload(() => import("./AppPopover.story-d2rCUHwr.js"), true ? __vite__mapDeps([27,1,28,25,7,8,5,6]) : void 0));
 const Comp13 = defineAsyncComponent(() => __vitePreload(() => import("./AppFormSelect.story-jhQ4-iwI.js"), true ? __vite__mapDeps([29,1,18,5,7,6,11,19,30,25,4]) : void 0));
@@ -76,12 +76,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-L7sSM4ay.js"), true ? __vite__mapDeps([39,40,1]) : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-OUyQeR9V.js"), true ? __vite__mapDeps([39,40,1]) : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-7z9JTlPJ.js"), true ? __vite__mapDeps([41,1,40,42,43,44]) : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-QtpACDFK.js"), true ? __vite__mapDeps([41,1,40,42,43,44]) : void 0)
     }
   ]
 });
@@ -218,7 +218,7 @@ export {
 };
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["assets/ColorGenerator.story-ZwRpvGG7.js","assets/vendor-SzL31LEx.js","assets/ColorGeneratorView-x5-blpKL.js","assets/AppInput-AFEKyk2H.js","assets/appInput.style-6wm4Enpg.js","assets/cva-zAQhILdM.js","assets/AppIcon-9br4U6Dr.js","assets/_plugin-vue_export-helper-yVxbj29m.js","assets/AppButton-3AH1zsJ6.js","assets/AppButton.story-vPCjS-nc.js","assets/AppCard.story-eisuQSXM.js","assets/AppText-_h4M5YsZ.js","assets/AppDatePicker.story-ZPVWYJv3.js","assets/AppDateSelector-YHbWtoUb.js","assets/fade.transition-rZvlSn0c.js","assets/AppDateSelector.story-3-MtjGxc.js","assets/AppFormDatePicker.story-Ii9CvN2d.js","assets/useFormInput-wDIyGwN4.js","assets/AppFormError-1vfrMiaD.js","assets/AppHeightTransition-BelAtwKa.js","assets/AppIcon.story-H9KtgqOy.js","assets/AppFormInput.story-YBBVmcxi.js","assets/AppFormTextarea.story-sMTQ9sH_.js","assets/AppInput.story-O2o9_Orv.js","assets/AppMenu.story-h-x_LwIp.js","assets/popover.transition-z0jVcmyM.js","assets/AppModal.story-SjIUvx8d.js","assets/AppPopover.story-d2rCUHwr.js","assets/AppPopover-JOweJedl.js","assets/AppFormSelect.story-jhQ4-iwI.js","assets/AppSelect-LS2JoW0i.js","assets/AppSelect.story-7fjzLgVY.js","assets/AppFormSwitch.story-76tNLnfm.js","assets/AppSwitch-HwJbaiwv.js","assets/AppSwitch.story-xvsJLPE4.js","assets/AppTabs.story-Lop-ZA7g.js","assets/AppText.story-XwJf4yVT.js","assets/AppToast.story-jLqUvKqG.js","assets/AppTooltip.story-_phpKSS-.js","assets/HomeView.vue-L7sSM4ay.js","assets/story-pYCQwBqD.js","assets/StoryView.vue-7z9JTlPJ.js","assets/MobileOverlay.vue2-iMa2bM1c.js","assets/BaseEmpty.vue-SLLzcPrn.js","assets/state-aWmEPrQ5.js"]
+    __vite__mapDeps.viteFileDeps = ["assets/ColorGenerator.story-ZwRpvGG7.js","assets/vendor-SzL31LEx.js","assets/ColorGeneratorView-x5-blpKL.js","assets/AppInput-AFEKyk2H.js","assets/appInput.style-6wm4Enpg.js","assets/cva-zAQhILdM.js","assets/AppIcon-9br4U6Dr.js","assets/_plugin-vue_export-helper-yVxbj29m.js","assets/AppButton-3AH1zsJ6.js","assets/AppButton.story-vPCjS-nc.js","assets/AppCard.story-eisuQSXM.js","assets/AppText-_h4M5YsZ.js","assets/AppDatePicker.story-ZPVWYJv3.js","assets/AppDateSelector-YHbWtoUb.js","assets/fade.transition-rZvlSn0c.js","assets/AppDateSelector.story-3-MtjGxc.js","assets/AppFormDatePicker.story-Ii9CvN2d.js","assets/useFormInput-wDIyGwN4.js","assets/AppFormError-1vfrMiaD.js","assets/AppHeightTransition-BelAtwKa.js","assets/AppIcon.story-H9KtgqOy.js","assets/AppFormInput.story-YBBVmcxi.js","assets/AppFormTextarea.story-sMTQ9sH_.js","assets/AppInput.story-O2o9_Orv.js","assets/AppMenu.story-z8v_tM_q.js","assets/popover.transition-z0jVcmyM.js","assets/AppModal.story-SjIUvx8d.js","assets/AppPopover.story-d2rCUHwr.js","assets/AppPopover-JOweJedl.js","assets/AppFormSelect.story-jhQ4-iwI.js","assets/AppSelect-LS2JoW0i.js","assets/AppSelect.story-7fjzLgVY.js","assets/AppFormSwitch.story-76tNLnfm.js","assets/AppSwitch-HwJbaiwv.js","assets/AppSwitch.story-xvsJLPE4.js","assets/AppTabs.story-Lop-ZA7g.js","assets/AppText.story-XwJf4yVT.js","assets/AppToast.story-jLqUvKqG.js","assets/AppTooltip.story-_phpKSS-.js","assets/HomeView.vue-OUyQeR9V.js","assets/story-hODqleHv.js","assets/StoryView.vue-QtpACDFK.js","assets/MobileOverlay.vue2-iMa2bM1c.js","assets/BaseEmpty.vue-SLLzcPrn.js","assets/state-fgcDUY4o.js"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }

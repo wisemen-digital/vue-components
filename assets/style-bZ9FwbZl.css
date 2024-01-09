@@ -4469,9 +4469,6 @@ video {
 .text-input-foreground\/50 {
   color: hsl(var(--input-foreground) / 0.5);
 }
-.text-muted {
-  color: hsl(var(--muted));
-}
 .text-muted-foreground {
   color: hsl(var(--muted-foreground));
 }
