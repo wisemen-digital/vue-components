@@ -1,30 +1,17 @@
 <script setup lang="ts">
-import { Float, type FloatProps } from '@headlessui-float/vue'
+import { Float } from '@headlessui-float/vue'
 import { Menu } from '@headlessui/vue'
 import { popoverTransition } from '@/transitions'
-
-export interface MenuProps {
-  placement?: FloatProps['placement']
-
-  hasAdaptiveWidth?: FloatProps['adaptiveWidth']
-  hasNoOffset?: boolean
-  hasNoShift?: boolean
-  hasNoFlip?: boolean
-  hasAutoPlacement?: boolean
-
-  isManual?: boolean
-  isDiv?: boolean
-}
+import type { FloatProps } from '@/types/float.type'
 
 const {
-  placement = 'bottom',
-
+  placement = 'bottom-end',
   hasAdaptiveWidth = false,
   hasAutoPlacement = false,
   hasNoFlip = false,
   hasNoOffset = false,
   hasNoShift = false,
-} = defineProps<MenuProps>()
+} = defineProps<FloatProps>()
 
 const SHIFT_VALUE = 8
 const OFFSET_VALUE = 4

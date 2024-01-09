@@ -1,6 +1,7 @@
+import type { Component } from '../../componentsTypes'
 import { ComponentName, ComponentType } from '../../componentsTypes'
 
-export const appFormLabel = {
+export const appFormLabel: Component = {
   component: ComponentName.APP_FORM_LABEL,
   name: 'FormLabel',
   files: [

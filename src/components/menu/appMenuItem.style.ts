@@ -5,12 +5,16 @@ export const menuItemVariants = cva(
   {
     base: 'flex min-w-40 max-w-max items-center justify-between gap-2 px-4 py-2',
     variants: {
-      active: {
+      isActive: {
         true: 'bg-neutral-100',
+      },
+      isDisabled: {
+        true: 'cursor-not-allowed text-neutral-400',
       },
     },
     defaultVariants: {
-      active: false,
+      isActive: false,
+      isDisabled: false,
     },
   },
 )

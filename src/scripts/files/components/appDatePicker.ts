@@ -20,6 +20,11 @@ export const appDatePicker: Component = {
       path: './src/components/datepicker/AppFormDatePicker.vue',
       folder: 'datepicker',
     },
+    {
+      type: ComponentType.TYPES,
+      path: './src/types/datePicker.type.ts',
+      folder: '',
+    },
   ],
   internalDependencies: [
     ComponentName.APP_INPUT,

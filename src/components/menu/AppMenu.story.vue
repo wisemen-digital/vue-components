@@ -33,14 +33,18 @@ const menuConfiguration: MenuConfiguration = [
 </script>
 
 <template>
-  <div class="p-20">
-    <AppMenu :menu-configuration="menuConfiguration">
-      Im a menu
-      <template #panel-top>
-        <div class="bg-neutral-300 px-4 py-2">
-          Im a user
-        </div>
+  <Story
+    title="Menu/AppMenu"
+  >
+    <Variant title="Default" auto-props-disabled>
+      <template #controls>
+        <HstJson v-model="menuConfiguration" title="Menu configuration" />
       </template>
-    </AppMenu>
-  </div>
+      <div class="p-20">
+        <AppMenu :menu-configuration="menuConfiguration">
+          Im a menu
+        </AppMenu>
+      </div>
+    </Variant>
+  </Story>
 </template>

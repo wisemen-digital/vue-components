@@ -1,30 +1,42 @@
 <script setup lang="ts">
 import { MenuItem } from '@headlessui/vue'
+import { RouterLink } from 'vue-router'
 import { menuItemVariants } from '@/components/menu/appMenuItem.style'
 import type { Icon } from '@/icons'
 import AppText from '@/components/text/AppText.vue'
 import AppIcon from '@/components/icon/AppIcon.vue'
+import type { MenuItemProps } from '@/types/menu.type'
 
 interface MenuItemSlotProps {
+  /**
+   * If the menu item is active.
+   */
   active: boolean
+  /**
+   * If the menu item is disabled.
+   */
   disabled: boolean
+  /**
+   * Close the menu.
+   */
   close: () => void
 }
 
-export interface MenuItemProps {
-  iconLeft?: Icon
-  iconRight?: Icon
-  isDisabled?: boolean
-  text?: string
-  description?: string
-}
-
-defineProps<MenuItemProps>()
+const {
+  iconLeft,
+  isDisabled,
+  text,
+  description,
+  onSelect,
+} = defineProps<MenuItemProps>()
 const emits = defineEmits<{
   click: []
 }>()
 
 function handleClick() {
+  if (isDisabled)
+    return
+  onSelect?.()
   emits('click')
 }
 </script>
@@ -32,48 +44,52 @@ function handleClick() {
 <template>
   <MenuItem
     v-slot="{ active, disabled, close }: MenuItemSlotProps"
+    :disabled="isDisabled"
   >
-    <button
-      :disabled="disabled || isDisabled"
+    <Component
+      :is="to ? RouterLink : 'button'"
+      :to="to"
+      disabled
       :class="menuItemVariants({
-        active,
+        isDisabled,
+        isActive: active,
       })"
       @click="handleClick"
     >
-      <div class="flex items-center gap-2">
-        <slot name="icon-left">
-          <AppIcon
-            v-if="iconLeft"
-            :icon="iconLeft"
-            size="sm"
-            class="mr-2"
-          />
-        </slot>
-        <slot
-          :is-active="active"
-          :is-disabled="disabled || isDisabled"
-          :close="close"
-        >
-          <AppText>
-            {{ text }}
-          </AppText>
-          <AppText
-            variant="subtext"
-            class="text-muted"
+      <slot
+        name="element"
+        :is-disabled="isDisabled"
+        :active="active"
+        :close="close"
+      >
+        <slot name="left" />
+        <div class="flex items-center gap-2">
+          <slot name="icon-left">
+            <AppIcon
+              v-if="iconLeft"
+              :icon="iconLeft"
+              size="sm"
+              class="mr-2"
+            />
+          </slot>
+          <slot
+            :is-active="active"
+            :is-disabled="disabled || isDisabled"
+            :close="close"
           >
-            {{ description }}
-          </AppText>
-        </slot>
-      </div>
-
-      <slot name="icon-right">
-        <AppIcon
-          v-if="iconRight"
-          size="sm"
-          :icon="iconRight"
-          class="ml-2"
-        />
+            <AppText>
+              {{ text }}
+            </AppText>
+            <AppText
+              variant="subtext"
+              class="text-muted"
+            >
+              {{ description }}
+            </AppText>
+          </slot>
+        </div>
+        <slot name="right" />
       </slot>
-    </button>
+    </Component>
   </MenuItem>
 </template>

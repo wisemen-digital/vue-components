@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import type { FloatProps } from '@headlessui-float/vue'
 import { Float } from '@headlessui-float/vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { popoverTransition } from '@/transitions'
+import type { FloatProps } from '@/types/float.type'
 
-export interface PopoverProps {
-  placement?: FloatProps['placement']
-
-  hasAdaptiveWidth?: FloatProps['adaptiveWidth']
-  hasNoOffset?: boolean
-  hasNoShift?: boolean
-  hasNoFlip?: boolean
-  hasAutoPlacement?: boolean
-
+export interface PopoverProps extends FloatProps {
+  /**
+   * Decides if the popover state is managed from the outside.
+   */
   isManual?: boolean
+  /**
+   * Decides if the popover element is a div or a button.
+   */
   isDiv?: boolean
 }
 
 const {
   placement = 'bottom',
-
   hasAdaptiveWidth = false,
   hasAutoPlacement = false,
   hasNoFlip = false,
   hasNoOffset = false,
   hasNoShift = false,
-
   isDiv = false,
   isManual = false,
 } = defineProps<PopoverProps>()

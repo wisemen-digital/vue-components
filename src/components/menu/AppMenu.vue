@@ -1,46 +1,47 @@
 <script setup lang="ts">
-import AppButton from '@/components/button/AppButton.vue'
+import type { Props as ButtonProps } from '@/components/button/AppButton.vue'
 import AppMenuButton from '@/components/menu/AppMenuButton.vue'
 import AppMenuContainer from '@/components/menu/AppMenuContainer.vue'
 import AppMenuDivider from '@/components/menu/AppMenuDivider.vue'
-import type { MenuItemProps } from '@/components/menu/AppMenuItem.vue'
 import AppMenuItem from '@/components/menu/AppMenuItem.vue'
 import AppMenuPanel from '@/components/menu/AppMenuPanel.vue'
+import type { MenuConfiguration, MenuOption } from '@/types/menu.type'
 
-const menuItems: MenuItemProps[] = [
-  {
-    text: 'hey',
-    description: 'blabla',
-    iconLeft: 'checkmark',
-    iconRight: 'clock',
-    isDisabled: false,
-  },
-  {
-    text: 'hey2',
-    description: 'blabla',
-    iconLeft: 'clock',
-    iconRight: 'edit',
-    isDisabled: false,
-  },
-]
+defineProps<{
+  /**
+   * The menu configuration, which is an array of menu options.
+   */
+  menuConfiguration: MenuConfiguration
+  /**
+   * The button props, which are passed to the button component.
+   */
+  buttonProps?: ButtonProps
+}>()
+
+function getMenuConfigurationItem(type: MenuOption) {
+  switch (type) {
+    case 'divider':
+      return AppMenuDivider
+    case 'item':
+      return AppMenuItem
+  }
+}
 </script>
 
 <template>
   <AppMenuContainer>
-    <AppMenuButton>
-      Button
+    <AppMenuButton v-bind="buttonProps">
+      <slot />
     </AppMenuButton>
     <AppMenuPanel>
-      <div class="px-4 py-2">
-        I am user
-      </div>
-      <AppMenuItem v-for="menuItem in menuItems" :key="menuItem.text" v-bind="menuItem">
-        blabla
-      </AppMenuItem>
-      <AppMenuDivider />
-      <AppMenuItem v-for="menuItem in menuItems" :key="menuItem.text" v-bind="menuItem">
-        blabla
-      </AppMenuItem>
+      <slot name="panel-top" />
+      <Component
+        :is="getMenuConfigurationItem(menuItem.type)"
+        v-for="(menuItem, index) in menuConfiguration"
+        :key="index"
+        v-bind="menuItem"
+      />
     </AppMenuPanel>
+    <slot name="panel-bottom" />
   </AppMenuContainer>
 </template>

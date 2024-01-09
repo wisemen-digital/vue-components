@@ -16,6 +16,7 @@ export enum ComponentName {
   APP_TABS = 'AppTabs',
   APP_TOAST = 'AppToast',
   APP_DATE_PICKER = 'AppDatePicker',
+  APP_MENU = 'AppMenu',
 
   TRANSITIONS = 'Transitions',
   TRANSITION_HEIGHT = 'TransitionHeight',

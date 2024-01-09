@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { FloatContent } from '@headlessui-float/vue'
 import { MenuItems } from '@headlessui/vue'
 </script>
 

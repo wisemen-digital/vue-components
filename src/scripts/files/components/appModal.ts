@@ -1,6 +1,7 @@
+import type { Component } from '../../componentsTypes'
 import { ComponentName, ComponentType } from '../../componentsTypes'
 
-export const appModal = {
+export const appModal: Component = {
   component: ComponentName.APP_MODAL,
   name: 'Modal',
   files: [
@@ -53,7 +54,7 @@ export const appModal = {
     {
       type: ComponentType.TYPES,
       path: './src/types/useModal.type.ts',
-      folder: 'modal',
+      folder: '',
     },
     {
       type: ComponentType.COMPONENTS,

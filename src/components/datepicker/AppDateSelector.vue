@@ -4,30 +4,8 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 
 import '@vuepic/vue-datepicker/dist/main.css'
 import AppIcon from '@/components/icon/AppIcon.vue'
+import type { DateSelectorProps } from '@/types/datePicker.type'
 
-export interface DateSelectorProps<TRange extends boolean> {
-  isRange?: TRange
-  isTimePicker?: boolean
-  isMonthPicker?: boolean
-  isYearPicker?: boolean
-  isWeekPicker?: boolean
-  hasTimePicker?: boolean
-  isInput?: boolean
-
-  minRange?: number
-  maxRange?: number
-  autoRange?: number
-  minDate?: Date
-  maxDate?: Date
-  flow?: ('month' | 'year' | 'calendar' | 'time' | 'minutes' | 'hours' | 'seconds')[]
-  startDate?: Date
-  endDate?: Date
-  filters?: VueDatePickerProps['filters']
-  yearRange?: [number, number]
-  allowedDates?: Date[]
-  disabledDates?: Date[]
-  disabledWeekDays?: number[]
-}
 export type ModelDate<TRange> = TRange extends true ? [Date | null, Date | null] : Date | null
 
 const {
