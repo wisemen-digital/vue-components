@@ -240,6 +240,30 @@
       "markdownFile": null
     },
     {
+      "id": "src-components-menu-appmenu-story-vue",
+      "title": "AppMenu",
+      "layout": {
+        "type": "grid",
+        "width": "100%"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-components-menu-appmenu-story-vue-0",
+          "title": "Default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/components/menu/AppMenu.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Menu",
+        "AppMenu"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-components-modal-appmodal-story-vue",
       "title": "AppModal",
       "layout": {
