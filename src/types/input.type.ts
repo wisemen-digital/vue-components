@@ -1,7 +1,7 @@
 import type { ZodFormattedError } from 'zod'
 import type { InputHTMLAttributes } from 'vue'
 import type { Icon } from '@/icons'
-import type { ModelDate } from '@/components/datepicker/AppDateSelector.vue'
+import type { ModelDate } from '@/types/datePicker.type'
 
 export type InputType =
   | 'date'

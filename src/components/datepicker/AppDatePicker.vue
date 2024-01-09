@@ -1,8 +1,8 @@
 <script setup lang="ts" generic="TRange extends boolean">
-import type { DateSelectorProps, ModelDate } from '@/components/datepicker/AppDateSelector.vue'
 import AppDateSelector from '@/components/datepicker/AppDateSelector.vue'
 import AppInput from '@/components/input/AppInput.vue'
 import { fadeTransition } from '@/transitions'
+import type { DateSelectorProps, ModelDate } from '@/types/datePicker.type'
 
 const {
   hasTimePicker = false,

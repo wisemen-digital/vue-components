@@ -83,3 +83,8 @@ export interface DateSelectorProps<TRange extends boolean> {
    */
   disabledWeekDays?: number[]
 }
+
+/**
+ * The type of the date picker, [Date, Date] if range, Date if not.
+ */
+export type ModelDate<TRange> = TRange extends true ? [Date | null, Date | null] : Date | null

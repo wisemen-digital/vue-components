@@ -1,12 +1,9 @@
 <script setup lang="ts" generic="TRange extends boolean">
-import type { VueDatePickerProps } from '@vuepic/vue-datepicker'
 import VueDatePicker from '@vuepic/vue-datepicker'
 
 import '@vuepic/vue-datepicker/dist/main.css'
 import AppIcon from '@/components/icon/AppIcon.vue'
-import type { DateSelectorProps } from '@/types/datePicker.type'
-
-export type ModelDate<TRange> = TRange extends true ? [Date | null, Date | null] : Date | null
+import type { DateSelectorProps, ModelDate } from '@/types/datePicker.type'
 
 const {
   hasTimePicker = false,
