@@ -46,6 +46,6 @@ export const appCard: Component = {
       folder: 'card',
     },
   ],
-  internalDependencies: [],
+  internalDependencies: [ComponentName.APP_TEXT],
   dependencies: [],
 }

@@ -15,6 +15,11 @@ export const appText: Component = {
       path: './src/components/text/appText.style.ts',
       folder: 'text',
     },
+    {
+      type: ComponentType.COMPONENTS,
+      path: './src/components/text/AppTextDescription.vue',
+      folder: 'text',
+    },
   ],
   internalDependencies: [],
 }

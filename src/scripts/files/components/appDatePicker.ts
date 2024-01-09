@@ -28,6 +28,7 @@ export const appDatePicker: Component = {
   ],
   internalDependencies: [
     ComponentName.APP_INPUT,
+    ComponentName.APP_TEXT,
   ],
   dependencies: ['@vuepic/vue-datepicker'],
 }

@@ -51,6 +51,6 @@ export const appMenu: Component = {
       folder: 'menu',
     },
   ],
-  internalDependencies: [ComponentName.APP_BUTTON],
+  internalDependencies: [ComponentName.APP_BUTTON, ComponentName.APP_TEXT],
   dependencies: ['@headlessui/vue', '@headlessui-float/vue'],
 }

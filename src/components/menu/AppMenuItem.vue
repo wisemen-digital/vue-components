@@ -5,6 +5,7 @@ import { menuItemVariants } from '@/components/menu/appMenuItem.style'
 import AppText from '@/components/text/AppText.vue'
 import AppIcon from '@/components/icon/AppIcon.vue'
 import type { MenuItemProps } from '@/types/menu.type'
+import AppTextDescription from '@/components/text/AppTextDescription.vue'
 
 interface MenuItemSlotProps {
   /**
@@ -76,15 +77,7 @@ function handleClick(): void {
             :is-disabled="disabled || isDisabled"
             :close="close"
           >
-            <AppText>
-              {{ text }}
-            </AppText>
-            <AppText
-              variant="subtext"
-              class="text-muted"
-            >
-              {{ description }}
-            </AppText>
+            <AppTextDescription :text="text" :description="description" />
           </slot>
         </div>
         <slot name="right" />

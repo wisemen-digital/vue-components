@@ -6,6 +6,7 @@ const menuConfiguration: MenuConfiguration = [
   {
     type: 'item',
     text: 'Item 1',
+    description: 'Im a description',
     onSelect: (): void => {
       console.warn('Item 1 clicked')
     },
@@ -24,6 +25,8 @@ const menuConfiguration: MenuConfiguration = [
   {
     type: 'item',
     text: 'Item 3',
+    description: 'Im a description',
+
   },
   {
     type: 'item',
@@ -35,7 +38,7 @@ const menuConfiguration: MenuConfiguration = [
 <template>
   <div class="p-20">
     <AppMenu :menu-configuration="menuConfiguration">
-      Im a menu
+      Im a menu woo
       <template #panel-top>
         <div class="bg-neutral-300 px-4 py-2">
           Im a user
