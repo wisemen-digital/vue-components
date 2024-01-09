@@ -37,7 +37,7 @@ export const appMenu: Component = {
     },
     {
       type: ComponentType.TYPES,
-      path: './src/types/menu.type.vue',
+      path: './src/types/menu.type.ts',
       folder: '',
     },
     {
@@ -47,7 +47,7 @@ export const appMenu: Component = {
     },
     {
       type: ComponentType.COMPONENTS,
-      path: './src/components/menu/appMenu.style.ts',
+      path: './src/components/menu/appMenuItem.style.ts',
       folder: 'menu',
     },
   ],
