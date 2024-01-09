@@ -2,7 +2,6 @@
 import { MenuItem } from '@headlessui/vue'
 import { RouterLink } from 'vue-router'
 import { menuItemVariants } from '@/components/menu/appMenuItem.style'
-import AppText from '@/components/text/AppText.vue'
 import AppIcon from '@/components/icon/AppIcon.vue'
 import type { MenuItemProps } from '@/types/menu.type'
 import AppTextDescription from '@/components/text/AppTextDescription.vue'

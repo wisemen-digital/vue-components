@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useAttrs } from 'vue'
-import { textVariants } from '@/components/text/appText.style'
-import type { TextProps } from '@/components/text/appText.style'
 import AppText from '@/components/text/AppText.vue'
 
 interface Props {
