@@ -3,11 +3,11 @@ import type { z } from 'zod'
 
 import { computed } from 'vue'
 import { generateUuid } from '@/utils/uuid/generateUuid'
-import AppText from '@/components/text/AppText.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
 import type { AppSwitchProps } from '@/components/switch/AppSwitch.vue'
 import AppSwitch from '@/components/switch/AppSwitch.vue'
+import AppTextFormDescription from '@/components/text/AppTextFormDescription.vue'
 
 export interface Props<T> extends Omit<AppSwitchProps<T>, 'isInvalid'> {
   /**
@@ -90,13 +90,12 @@ function onFocus(): void {
       @focus="onFocus"
     />
 
-    <AppText
+    <AppTextFormDescription
       v-if="description !== null"
       class="mt-1"
-      variant="caption"
     >
       {{ description }}
-    </AppText>
+    </AppTextFormDescription>
 
     <AppFormError
       :errors="errors"

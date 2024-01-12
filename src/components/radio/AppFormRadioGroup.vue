@@ -1,24 +1,17 @@
 <script setup lang="ts" generic="T">
 import type { z } from 'zod'
 import { computed, useAttrs } from 'vue'
-import type { AppSelectProps } from '@/components/select/AppSelect.vue'
-import { generateUuid } from '@/utils/uuid/generateUuid'
-import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
-import AppSelect from '@/components/select/AppSelect.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
+import type { AppRadioGroupProps } from '@/components/radio/AppRadioGroup.vue'
+import AppRadioGroup from '@/components/radio/AppRadioGroup.vue'
 import AppTextFormDescription from '@/components/text/AppTextFormDescription.vue'
 
-interface AppFormSelectProps extends AppSelectProps<T> {
+interface AppFormRadioGroup extends AppRadioGroupProps<T> {
   /**
    * The error messages associated with the component, if any.
    * It should be an object with an "_errors" property containing an array of strings.
    */
   errors?: z.ZodFormattedError<string> | undefined | null
-
-  /**
-   * The label to be displayed above the component.
-   */
-  label?: string | null
 
   /**
    * Extra information to be displayed below the input.
@@ -38,25 +31,19 @@ interface AppFormSelectProps extends AppSelectProps<T> {
 
 const {
   errors = null,
-  label = null,
   description = null,
-  isRequired = false,
   items,
-  displayFunction,
   isDisabled,
   isTouched,
-  keyValue,
-} = defineProps<AppFormSelectProps>()
+} = defineProps<AppFormRadioGroup>()
 
 const emits = defineEmits<{
   blur: []
 }>()
 
-const value = defineModel<T | T[]>({
+const value = defineModel<T>({
   required: true,
 })
-
-const id = `app-form-select-${generateUuid()}`
 
 /**
  * For some reason, props which are defined in AppInput are parsed as attributes instead of props
@@ -64,7 +51,7 @@ const id = `app-form-select-${generateUuid()}`
  */
 const attrs = useAttrs()
 
-function onHide(): void {
+function onBlur(): void {
   emits('blur')
 }
 
@@ -75,30 +62,23 @@ const isInvalid = computed<boolean>(() => {
 
 <template>
   <div :class="attrs.class">
-    <AppFormLabel
-      v-if="label !== null"
-      :id="id"
-      :is-disabled="isDisabled ?? false"
-      :is-required="isRequired"
-      :label="label"
-    />
-
-    <AppSelect
-      :id="id"
+    <AppRadioGroup
       v-model="value"
+      :label="label"
       :items="items"
-      :placeholder="placeholder"
-      :is-filterable="isFilterable"
-      :key-value="(keyValue as keyof T)"
+      :disabled-key="(disabledKey as unknown as keyof NonNullable<T>)"
+      :description-key="(descriptionKey as unknown as keyof NonNullable<T>)"
+      :label-key="(labelKey as unknown as keyof NonNullable<T>)"
+      :by="(by as unknown as keyof NonNullable<T>)"
       :is-disabled="isDisabled"
-      :display-function="displayFunction"
+      :is-required="isRequired"
       :is-touched="isTouched"
       :is-invalid="isInvalid"
       v-bind="{
         ...attrs,
         class: undefined,
       }"
-      @hide="onHide"
+      @blur="onBlur"
     />
 
     <AppTextFormDescription

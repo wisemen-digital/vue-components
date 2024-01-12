@@ -5,7 +5,7 @@ interface Props {
   /**
    * The main text.
    */
-  text: string
+  text?: string
 
   /**
    * The subtext.
@@ -14,21 +14,29 @@ interface Props {
 }
 
 defineProps<Props>()
+const slots = defineSlots<{
+  description?: []
+  default?: []
+}>()
 </script>
 
 <template>
   <div class="text-left">
     <AppText
-      variant="body"
+      variant="subtext"
     >
-      {{ text }}
+      <slot>
+        {{ text }}
+      </slot>
     </AppText>
     <AppText
-      v-if="description"
-      variant="subtext"
+      v-if="description || slots.default"
+      variant="caption"
       class="text-muted-foreground"
     >
-      {{ description }}
+      <slot name="description">
+        {{ description }}
+      </slot>
     </AppText>
   </div>
 </template>

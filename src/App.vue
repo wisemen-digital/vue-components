@@ -1,49 +1,47 @@
 <script setup lang="ts">
-import AppMenu from '@/components/menu/AppMenu.vue'
-import type { MenuConfiguration } from '@/types/menu.type'
+import { ref } from 'vue'
+import AppFormRadioGroup from '@/components/radio/AppFormRadioGroup.vue'
 
-const menuConfiguration: MenuConfiguration = [
+interface RadioOption {
+  label: string
+  value: string
+  description: string
+  isDisabled?: boolean
+}
+const radioOptions: RadioOption[] = [
   {
-    type: 'item',
-    text: 'Item 1',
-    description: 'Im a description',
-    onSelect: (): void => {
-      console.warn('Item 1 clicked')
-    },
+    label: 'Option 1',
+    value: 'option1',
+    description: 'Description 1',
     isDisabled: true,
   },
   {
-    type: 'item',
-    text: 'Item 2',
-    onSelect: (): void => {
-      console.warn('Item 2 clicked')
-    },
+    label: 'Option 2',
+    value: 'option2',
+    description: 'Description 2',
   },
   {
-    type: 'divider',
-  },
-  {
-    type: 'item',
-    text: 'Item 3',
-    description: 'Im a description',
-
-  },
-  {
-    type: 'item',
-    text: 'Item 4',
+    label: 'Option 3',
+    value: 'option3',
+    description: 'Description 3',
   },
 ]
+const radioOption = ref<RadioOption | null>(null)
 </script>
 
 <template>
   <div class="p-20">
-    <AppMenu :menu-configuration="menuConfiguration">
-      Im a menu woo
-      <template #panel-top>
-        <div class="bg-neutral-300 px-4 py-2">
-          Im a user
-        </div>
-      </template>
-    </AppMenu>
+    <AppFormRadioGroup
+      v-model="radioOption"
+      is-touched
+      :is-required="true"
+      :is-invalid="true"
+      label="dit is een label"
+      :items="radioOptions"
+      disabled-key="isDisabled"
+      description-key="description"
+      label-key="label"
+      by="value"
+    />
   </div>
 </template>
