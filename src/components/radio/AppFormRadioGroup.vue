@@ -4,7 +4,7 @@ import { computed, useAttrs } from 'vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
 import type { AppRadioGroupProps } from '@/components/radio/AppRadioGroup.vue'
 import AppRadioGroup from '@/components/radio/AppRadioGroup.vue'
-import AppTextDescription from '@/components/text/AppTextDescription.vue'
+import AppTextFormDescription from '@/components/text/AppTextFormDescription.vue'
 
 interface AppFormRadioGroup extends AppRadioGroupProps<T> {
   /**
@@ -81,13 +81,12 @@ const isInvalid = computed<boolean>(() => {
       @blur="onBlur"
     />
 
-    <AppTextDescription
+    <AppTextFormDescription
       v-if="description !== null"
-      class="mt-1 text-muted-foreground"
-      variant="caption"
+      class="mt-1"
     >
       {{ description }}
-    </AppTextDescription>
+    </AppTextFormDescription>
 
     <AppFormError
       :errors="errors"

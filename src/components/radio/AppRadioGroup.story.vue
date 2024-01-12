@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { ZodFormattedError } from 'zod'
-import AppFormRadioGroup from '@/components/radio/AppFormRadioGroup.vue'
 import AppRadioGroup from '@/components/radio/AppRadioGroup.vue'
 
 interface RadioOption {

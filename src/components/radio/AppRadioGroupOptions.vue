@@ -2,7 +2,6 @@
 import {
   RadioGroupOption,
 } from '@headlessui/vue'
-import { ref, watch } from 'vue'
 
 interface Props {
   /**

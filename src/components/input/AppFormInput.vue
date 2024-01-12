@@ -3,11 +3,10 @@ import { ref, useAttrs } from 'vue'
 import type { InputFormProps, InputType, InputValue } from '@/types/input.type'
 import AppInput from '@/components/input/AppInput.vue'
 import AppButton from '@/components/button/AppButton.vue'
-import AppText from '@/components/text/AppText.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
 import { useFormInput } from '@/composables/form/useFormInput'
-import AppTextDescription from '@/components/text/AppTextDescription.vue'
+import AppTextFormDescription from '@/components/text/AppTextFormDescription.vue'
 
 const props = withDefaults(defineProps<InputFormProps<TInputType>>(), {
   errors: null,
@@ -81,12 +80,12 @@ function onTogglePassword(): void {
       </template>
     </AppInput>
 
-    <AppTextDescription
+    <AppTextFormDescription
       v-if="description !== null"
       class="mt-1"
     >
       {{ description }}
-    </AppTextDescription>
+    </AppTextFormDescription>
 
     <AppFormError
       :errors="errors"

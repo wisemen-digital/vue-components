@@ -8,9 +8,8 @@ import type { InputFormProps, InputType } from '@/types/input.type'
 import { useFormInput } from '@/composables/form/useFormInput'
 import AppInput from '@/components/input/AppInput.vue'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
-import AppText from '@/components/text/AppText.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
-import AppTextDescription from '@/components/text/AppTextDescription.vue'
+import AppTextFormDescription from '@/components/text/AppTextFormDescription.vue'
 
 export type DateProps<TRange extends boolean> = Omit<DateSelectorProps<TRange>, 'isInput'>
 type Props = DateProps<TRange> & Omit<InputFormProps<TInputType>, 'onBlur'>
@@ -149,12 +148,12 @@ function handleClose(): void {
         </AppInput>
       </template>
     </AppDateSelector>
-    <AppTextDescription
+    <AppTextFormDescription
       v-if="description !== null"
       class="mt-1"
     >
       {{ description }}
-    </AppTextDescription>
+    </AppTextFormDescription>
 
     <AppFormError
       :errors="errors"

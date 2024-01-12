@@ -15,6 +15,7 @@ import { appTabs } from './files/components/appTabs'
 import { appDatePicker } from './files/components/appDatePicker'
 import { appTooltip } from './files/components/appTooltip'
 import { appMenu } from './files/components/appMenu'
+import { appRadioGroup } from './files/components/appRadioGroup'
 
 import type { Component } from './componentsTypes'
 
@@ -35,6 +36,7 @@ export const components: Component[] = [
   appDatePicker,
   appTooltip,
   appMenu,
+  appRadioGroup,
 
   appHeightTransition,
 ]
