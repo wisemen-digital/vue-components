@@ -2,9 +2,21 @@
 import { radioGroupIndicatorContainerVariants, radioGroupIndicatorVariants } from '@/components/radio/appRadioGroup.style'
 
 interface Props {
+  /**
+   *  Whether the radio group indicator is active.
+   */
   isActive?: boolean
+  /**
+   *  Whether the radio group indicator is checked.
+   */
   isChecked?: boolean
+  /**
+   *  Whether the radio group indicator is disabled.
+   */
   isDisabled?: boolean
+  /**
+   *  Whether the radio group indicator is invalid.
+   */
   isInvalid?: boolean
 }
 const {

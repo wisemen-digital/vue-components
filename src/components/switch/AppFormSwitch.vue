@@ -8,6 +8,7 @@ import AppFormError from '@/components/form-error/AppFormError.vue'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
 import type { AppSwitchProps } from '@/components/switch/AppSwitch.vue'
 import AppSwitch from '@/components/switch/AppSwitch.vue'
+import AppTextDescription from '@/components/text/AppTextDescription.vue'
 
 export interface Props<T> extends Omit<AppSwitchProps<T>, 'isInvalid'> {
   /**
@@ -90,13 +91,12 @@ function onFocus(): void {
       @focus="onFocus"
     />
 
-    <AppText
+    <AppTextDescription
       v-if="description !== null"
       class="mt-1"
-      variant="caption"
     >
       {{ description }}
-    </AppText>
+    </AppTextDescription>
 
     <AppFormError
       :errors="errors"

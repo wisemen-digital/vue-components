@@ -23,7 +23,7 @@ const slots = defineSlots<{
 <template>
   <div class="text-left">
     <AppText
-      variant="body"
+      variant="subtext"
     >
       <slot>
         {{ text }}
@@ -31,7 +31,7 @@ const slots = defineSlots<{
     </AppText>
     <AppText
       v-if="description || slots.default"
-      variant="subtext"
+      variant="caption"
       class="text-muted-foreground"
     >
       <slot name="description">

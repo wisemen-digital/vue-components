@@ -26,34 +26,6 @@ function isDisabled(item: NonNullable<T>): boolean {
 
   return false
 }
-
-// Watch if any child of RadioGroupOption is active
-// A child is active if it data-headlessui-state="checked"
-
-// const radioGroupElement = ref<typeof RadioGroupOption[] | null>(null)
-// watch(
-//   () => radioGroupElement.value,
-//   () => {
-//     console.log('radioGroupElement', radioGroupElement.value)
-//     if (radioGroupElement.value) {
-//       const observer = new MutationObserver((mutations) => {
-//         mutations.forEach((mutation) => {
-//           if (mutation.type === 'attributes') {
-//             const { target } = mutation
-//             const { attributes } = target as Element
-//             const isActive = Array.from(attributes).some(
-//               attribute => attribute.name === 'data-headlessui-state' && attribute.value === 'checked',
-//             )
-//             console.log('isActive', isActive)
-//           }
-//         })
-//       })
-//       observer.observe(radioGroupElement.value, {
-//         attributes: true,
-//       })
-//     }
-//   },
-// )
 </script>
 
 <template>

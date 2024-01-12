@@ -5,8 +5,8 @@ import type { AppSelectProps } from '@/components/select/AppSelect.vue'
 import { generateUuid } from '@/utils/uuid/generateUuid'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
 import AppSelect from '@/components/select/AppSelect.vue'
-import AppText from '@/components/text/AppText.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
+import AppTextDescription from '@/components/text/AppTextDescription.vue'
 
 interface AppFormSelectProps extends AppSelectProps<T> {
   /**
@@ -101,13 +101,12 @@ const isInvalid = computed<boolean>(() => {
       @hide="onHide"
     />
 
-    <AppText
+    <AppTextDescription
       v-if="description !== null"
       class="mt-1"
-      variant="caption"
     >
       {{ description }}
-    </AppText>
+    </AppTextDescription>
 
     <AppFormError
       :errors="errors"

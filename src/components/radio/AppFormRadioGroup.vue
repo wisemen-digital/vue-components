@@ -1,14 +1,10 @@
 <script setup lang="ts" generic="T">
 import type { z } from 'zod'
 import { computed, useAttrs } from 'vue'
-import type { AppSelectProps } from '@/components/select/AppSelect.vue'
-import { generateUuid } from '@/utils/uuid/generateUuid'
-import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
-import AppSelect from '@/components/select/AppSelect.vue'
-import AppText from '@/components/text/AppText.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
 import type { AppRadioGroupProps } from '@/components/radio/AppRadioGroup.vue'
 import AppRadioGroup from '@/components/radio/AppRadioGroup.vue'
+import AppTextDescription from '@/components/text/AppTextDescription.vue'
 
 interface AppFormRadioGroup extends AppRadioGroupProps<T> {
   /**
@@ -75,6 +71,7 @@ const isInvalid = computed<boolean>(() => {
       :label-key="(labelKey as unknown as keyof NonNullable<T>)"
       :by="(by as unknown as keyof NonNullable<T>)"
       :is-disabled="isDisabled"
+      :is-required="isRequired"
       :is-touched="isTouched"
       :is-invalid="isInvalid"
       v-bind="{
@@ -84,13 +81,13 @@ const isInvalid = computed<boolean>(() => {
       @blur="onBlur"
     />
 
-    <AppText
+    <AppTextDescription
       v-if="description !== null"
-      class="mt-1"
+      class="mt-1 text-muted-foreground"
       variant="caption"
     >
       {{ description }}
-    </AppText>
+    </AppTextDescription>
 
     <AppFormError
       :errors="errors"

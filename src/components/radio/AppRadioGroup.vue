@@ -93,7 +93,7 @@ function onBlur(): void {
         isDisabled: isItemDisabled,
         item,
       }"
-      class="flex flex-col gap-2"
+      class="flex flex-col gap-1"
       :items="containerItems"
       :disabled-key="(disabledKey as any)"
     >

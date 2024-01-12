@@ -7,6 +7,7 @@ import AppText from '@/components/text/AppText.vue'
 import AppFormError from '@/components/form-error/AppFormError.vue'
 import AppFormLabel from '@/components/form-label/AppFormLabel.vue'
 import { useFormInput } from '@/composables/form/useFormInput'
+import AppTextDescription from '@/components/text/AppTextDescription.vue'
 
 const props = withDefaults(defineProps<InputFormProps<TInputType>>(), {
   errors: null,
@@ -80,13 +81,12 @@ function onTogglePassword(): void {
       </template>
     </AppInput>
 
-    <AppText
+    <AppTextDescription
       v-if="description !== null"
       class="mt-1"
-      variant="caption"
     >
       {{ description }}
-    </AppText>
+    </AppTextDescription>
 
     <AppFormError
       :errors="errors"

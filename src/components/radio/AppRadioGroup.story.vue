@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue'
 import type { ZodFormattedError } from 'zod'
 import AppFormRadioGroup from '@/components/radio/AppFormRadioGroup.vue'
+import AppRadioGroup from '@/components/radio/AppRadioGroup.vue'
 
 interface RadioOption {
   label: string
@@ -34,9 +35,6 @@ interface State {
   isDisabled: boolean
   description: string
   label: string
-  isTouched: boolean
-  isRequired: boolean
-  errors: ZodFormattedError<string>
 }
 
 const state: State = reactive({
@@ -44,31 +42,20 @@ const state: State = reactive({
   isInvalid: false,
   description: 'Description',
   label: 'Label',
-  isTouched: false,
-  isRequired: false,
-  errors: {
-    _errors: ['This is an error'],
-  },
 })
-
-function onBlur(): void {
-  state.isTouched = true
-}
 </script>
 
 <template>
-  <Story title="Radio/AppFormRadioGroup">
+  <Story title="Radio/AppRadioGroup">
     <Variant title="Default">
       <template #controls>
         <HstCheckbox v-model="state.isDisabled" title="Disabled" />
         <HstCheckbox v-model="state.isInvalid" title="Invalid" />
-        <HstCheckbox v-model="state.isRequired" title="Required" />
-        <HstCheckbox v-model="state.isTouched" title="Is Touched" />
         <HstText v-model="state.label" title="Label" />
       </template>
 
       <div class="flex flex-col justify-start gap-20 py-20">
-        <AppFormRadioGroup
+        <AppRadioGroup
           v-model="radioOption"
           v-bind="state"
           :items="radioOptions"
@@ -76,7 +63,6 @@ function onBlur(): void {
           description-key="description"
           label-key="label"
           by="value"
-          @blur="onBlur"
         />
       </div>
     </Variant>

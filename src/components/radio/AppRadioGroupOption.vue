@@ -7,12 +7,33 @@ import AppTextDescription from '@/components/text/AppTextDescription.vue'
 import { radioGroupOptionText } from '@/components/radio/appRadioGroup.style'
 
 interface Props {
+  /**
+   * Whether the radio group option is active.
+   */
   isActive?: boolean
+  /**
+   * Whether the radio group option is checked.
+   */
   isChecked?: boolean
+  /**
+   * Whether the radio group option is disabled.
+   */
   isDisabled?: boolean
+  /**
+   * Whether the radio group option is invalid.
+   */
   isInvalid?: boolean
+  /**
+   * Key of the value for label.
+   */
   labelKey?: keyof NonNullable<T>
+  /**
+   * Key of the value for description.
+   */
   descriptionKey?: keyof NonNullable<T>
+  /**
+   * The item.
+   */
   item: NonNullable<T>
 }
 
