@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="TInputType extends InputType">
-import { ref, useAttrs } from 'vue'
+import { ref, toRefs, useAttrs } from 'vue'
 import type { InputFormProps, InputType, InputValue } from '@/types/input.type'
 import AppInput from '@/components/input/AppInput.vue'
 import AppButton from '@/components/button/AppButton.vue'
@@ -19,6 +19,8 @@ const value = defineModel<InputValue<TInputType>>({
   required: true,
 })
 
+const { errors, isTouched, type } = toRefs(props)
+
 const isPasswordVisible = ref<boolean>(false)
 
 /**
@@ -28,9 +30,9 @@ const isPasswordVisible = ref<boolean>(false)
 const attrs = useAttrs()
 
 const { computedValue, id, isInvalid, computedType } = useFormInput({
-  isTouched: props.isTouched,
-  errors: props.errors,
-  type: props.type ?? 'text',
+  isTouched,
+  errors,
+  type: type.value ?? 'text',
   isPasswordVisible,
   value,
 })
@@ -79,7 +81,6 @@ function onTogglePassword(): void {
         </slot>
       </template>
     </AppInput>
-
     <AppTextFormDescription
       v-if="description !== null"
       class="mt-1"
